@@ -1,0 +1,520 @@
+/* line 1, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+h1, h2, h3, h4, h5, h6 {
+  color: #397faf;
+}
+
+/* line 4, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.entry-content {
+  font-family: "Oxygen";
+  font-size: 14px;
+  font-weight: normal;
+  color: #6b6b6b;
+}
+/* line 9, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.entry-content .lead {
+  font-family: "Roboto";
+  font-size: 1.5em;
+  margin-bottom: 0px;
+}
+
+/* line 14, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.recentcomments {
+  display: inline !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* line 18, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.site-title, .site-description {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+/* line 22, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+#mc_embed_signup input.mce_inline_error {
+  border-color: #6b0505;
+}
+
+/* line 24, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+#mc_embed_signup div.mce_inline_error {
+  margin: 0 0 1em 0;
+  padding: 5px 10px;
+  background-color: #6b0505;
+  font-weight: bold;
+  z-index: 1;
+  color: white;
+}
+
+/* line 32, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.homepage-banner.bg-primary {
+  background-image: url("../img/california-road.jpg"); /* update */
+  background-repeat: no-repeat; 
+  background-position: center -242px; /* update */
+  height: 41em; /* update */
+  background-size: 100% 142%; /* update */
+  background-color: #337ab7; /* update */
+}
+
+/* line 38, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.site-name img.logo {
+  margin-top: 2px;
+}
+
+@media (max-width: 768px) { /* update */
+  /* line 41, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+  .navbar-collapse.navbar-ex1-collapse { 
+      border: solid 1px #dedede; 
+  }
+  .navbar-collapse.navbar-ex1-collapse ul li {  
+      border-bottom: solid 1px #efefef; 
+  }
+}
+.navbar-collapse.navbar-ex1-collapse.collapse.in ul#menu-main-menu {
+  height: auto;
+}
+/* line 43, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+
+@media (max-width: 768px) { /* update */
+  .navbar-collapse.navbar-ex1-collapse.collapse.in ul#menu-main-menu a {
+    height: 37px;
+    line-height: 20px;
+  }
+}
+
+/* line 47, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.nav.navbar-nav.navbar-right li a:hover {
+  background-color: #f8f8f8;
+}
+
+/* line 49, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.nav.navbar-nav.navbar-right li.active a:hover {
+  background-color: #e7e7e7;
+}
+
+/* line 53, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+ul#menu-main-menu {
+  height: 60px;
+}
+/* line 55, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+ul#menu-main-menu a {
+  height: 100%;
+  line-height: 35px;
+}
+
+/* line 59, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.navbar .container {
+  height: 64px;
+}
+
+/* line 62, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.navbar-collapse {
+  background-color: white;
+}
+
+/* line 66, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.textwidget h1 {
+  letter-spacing: 1px;
+}
+/* line 68, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.textwidget #header, .textwidget #subheader {
+  font-family: "Oxygen";
+  text-align: left;
+  text-shadow: 0 3px 10px rgba(0,0,0,0.2); /* update */
+}
+/* line 72, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.textwidget #header {
+  font-size: 3.0em; /* update */
+  line-height: 1.3em;
+  width: 80%;
+}
+/* line 76, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.textwidget #subheader {
+  font-size: 1.4em;
+  line-height: 1.7em;
+  width: 70%;
+}
+
+/* line 81, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+#signUpButton, .signup-button {
+  background: #397faf;
+  color: white;
+  border: solid 1px white;
+}
+/* line 85, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+#signUpButton:hover, .signup-button:hover {
+  background: #204d74;
+  color: white;
+  border: solid 1px white;
+}
+
+@media screen and (max-width: 600px) {
+  /* line 93, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+  .textwidget #subheader {
+    font-size: 14px; /* update */
+    line-height: 1.4em;
+    width: 100%;
+  }
+  /* line 97, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+  .textwidget #header {
+    width: 90%; 
+    font-size: 2em; /* update */
+  }
+}
+/* line 100, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.home-widget-area {
+  font-family: Roboto;
+}
+/* line 103, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.home-widget-area .bg .container .row .home-widget {
+  padding: 0px;
+}
+/* line 105, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.home-widget-area .bg .container .row .home-widget #woocommerce_products-2 {
+  margin: 0 0 4.5em;
+}
+/* line 108, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.home-widget-area .woocommerce ul.product_list_widget {
+  margin: 0 -15px 0px -15px;
+}
+/* line 110, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.home-widget-area .woocommerce ul.product_list_widget li {
+  float: left;
+}
+/* line 113, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.home-widget-area .woocommerce ul.product_list_widget li:last-child {
+  float: none;
+}
+/* line 116, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.home-widget-area .woocommerce ul.product_list_widget li div.product-wrap {
+  background-color: transparent;
+  border: none;
+}
+/* line 120, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.home-widget-area .woocommerce ul.product_list_widget li div.product-wrap div.product-img-wrap img {
+  width: 230px;
+}
+/* line 123, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.home-widget-area .noMoreMailingTickets {
+  font-size: 2em;
+  margin-bottom: 2em;
+  color: #397faf;
+  font-weight: 300;
+}
+
+/* line 129, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.features {
+  font-family: "Roboto";
+  overflow: auto;
+}
+/* line 133, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.features h2 {
+  color: #666666;
+  margin-bottom: 30px;
+  margin-top: -15px;
+  font-weight: 100;
+}
+/* line 139, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.features .feature {
+  width: 33%;
+  float: left;
+  padding-right: 15px;
+  margin-top: 40px;
+  padding-bottom: 30px;
+  color: #444444;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  margin: auto;
+  min-height: 300px;
+}
+/* line 152, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.features .feature:hover .icon-preview, .features .feature:hover .feature-title {
+  color: #397faf;
+}
+/* line 155, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.features .feature .icon-preview {
+  font-size: 5em;
+  color: #888888;
+}
+/* line 159, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.features .feature.first {
+  padding-left: 0;
+}
+/* line 162, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.features .feature .feature-title {
+  font-size: 1.7em;
+  font-weight: 200;
+  color: #428bca;
+}
+/* line 166, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.features .feature .feature-content {
+  padding: 0px 20px;
+  font-weight: 300;
+}
+@media screen and (max-width: 650px) {
+  /* line 171, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+  .features .feature {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 500px) {
+  /* line 174, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+  .features .feature {
+    width: 100%;
+    min-height: inherit;
+  }
+}
+
+/* line 179, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.signup-section {
+  background-color: #ededed;
+  font-family: "Roboto";
+  padding-bottom: 30px;
+  background-image: url(../img/bg-pattern-gray.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+/* line 187, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.signup-section .container .row h2 {
+  font-family: "Roboto";
+  margin-top: 50px;
+  margin-bottom: 30px;
+  color: #dedede;
+}
+/* line 193, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.signup-section .container .row .signup-text {
+  margin-top: -10px;
+  font-size: 1.3em;
+  font-family: "Roboto";
+  font-weight: 100;
+  color: #cccccc;
+}
+/* line 199, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.signup-section .container .row #signupForm {
+  margin: auto;
+  width: 50%;
+}
+/* line 203, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.signup-section .container .row #signupForm label {
+  float: left;
+  color: #999999;
+  font-weight: 100;
+}
+
+/* line 209, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.lawyer-section {
+  background-image: url("../img/lawyer-blue-overlay.jpg");
+  background-size: cover;
+  width: 100%;
+  height: 300px;
+  color: white;
+  display: table;
+  vertical-align: middle;
+}
+/* line 218, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.lawyer-section .container {
+  height: 100%;
+  display: table-cell;
+  width: 100%;
+  vertical-align: middle;
+}
+/* line 224, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.lawyer-section .container:before {
+  content: " ";
+  display: table;
+}
+/* line 228, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.lawyer-section .container section.page-content {
+  padding: 0 20px 20px;
+}
+/* line 231, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.lawyer-section .container section.page-content div.row {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+/* line 235, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.lawyer-section .container section.page-content div.row:after {
+  clear: both;
+}
+/* line 238, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.lawyer-section .container section.page-content div.row .textwidget h3 {
+  color: white;
+  font-family: "Roboto";
+  font-weight: 100;
+  font-size: 2.3em;
+}
+
+/* line 245, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.lawyer-lead-form .modal-footer .btn.btn-default {
+  background-color: #397faf;
+  border-color: #397faf;
+  color: white;
+}
+/* line 249, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.lawyer-lead-form .modal-footer .btn.btn-default:hover {
+  background-color: #204d74;
+  border-color: #204d74;
+}
+
+/* line 254, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.modal-content .modal-header {
+  border-botom: none;
+}
+/* line 256, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.modal-content .modal-header p.signup-text {
+  color: #397faf;
+  font-size: 2em;
+  font-weight: 100;
+  font-family: Roboto;
+  padding-top: 10px;
+  text-align: center;
+}
+
+@media (min-width: 1200px) {
+  /* line 265, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+  #footer #footer-widgets .container {
+    width: 1170px;
+  }
+}
+/* line 268, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+#footer {
+  background: #3b3b3b;
+  clear: both;
+  color: #aaaaaa;
+  font-size: 14px;
+  line-height: 1.42857;
+}
+/* line 275, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+#footer a {
+  color: #aaaaaa;
+  text-decoration: none;
+  background: transparent;
+}
+/* line 279, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+#footer a:hover {
+  color: white;
+}
+/* line 282, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+#footer #footer-widgets {
+  word-wrap: break-word;
+}
+/* line 284, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+#footer #footer-widgets .container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+/* line 290, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+#footer #footer-widgets #footer-wrapper {
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+/* line 293, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+#footer #footer-widgets #footer-wrapper .row {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+/* line 297, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+#footer #footer-widgets #footer-wrapper .row h4 {
+  color: white;
+  font-weight: 300;
+  font-family: "Roboto";
+}
+/* line 302, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+#footer #footer-widgets #footer-wrapper .row h4.widgettitle {
+  margin: 0;
+  padding: 0 0 0px 0;
+  border-bottom: none;
+  font-size: 18px;
+  line-height: 24px;
+}
+/* line 309, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+#footer #footer-widgets #footer-wrapper .row .widgetFooter {
+  padding-bottom: 0;
+}
+/* line 312, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+#footer #footer-widgets #footer-wrapper .row ul {
+  padding: 0;
+  margin: 0;
+  display: block;
+  list-style-type: disc;
+}
+/* line 318, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+#footer #footer-widgets #footer-wrapper .row ul li {
+  padding: 7px 0;
+  border-bottom: 1px dotted rgba(255, 255, 255, 0.2);
+  margin: 0 0;
+  list-style: none;
+  font-size: 14px;
+  line-height: 1.42857;
+}
+/* line 326, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+#footer #footer-widgets #footer-wrapper .row .fa-facebook, #footer #footer-widgets #footer-wrapper .row .fa-tumblr, #footer #footer-widgets #footer-wrapper .row .fa-twitter {
+  margin-right: 10px;
+  font-size: 1.5em;
+}
+/* line 331, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+#footer #subscriber-signup h2.notification-title {
+  color: white;
+  font-size: 1.5em;
+  font-family: "Roboto";
+  margin-bottom: 10px;
+}
+/* line 337, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+#footer #subscriber-signup input[type='submit'] {
+  background-color: #397faf;
+  border-color: white;
+}
+/* line 340, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+#footer #subscriber-signup input[type='submit']:hover {
+  background-color: #204d74;
+}
+/* line 342, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+#footer #subscriber-signup .help-block {
+  color: #d98f9f;
+}
+/* line 344, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+#footer #subscriber-signup .has-error {
+  border: solid 1px #d98f9f;
+}
+/* line 346, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+#footer #subscriber-signup .alert-success {
+  color: #98cc83;
+  background-color: transparent;
+  border-color: transparent;
+  padding: 5px 0px;
+  font-size: 13px;
+}
+/* line 352, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+#footer #subscriber-signup .alert-danger {
+  color: #d98f9f;
+  background-color: transparent;
+  border-color: transparent;
+  padding: 5px 0px;
+  font-size: 11px;
+}
+/* line 360, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+#footer #sub-floor {
+  color: #aaaaaa;
+  background: #292929;
+  padding: 10px 0;
+  font-size: 12px;
+  padding: 2px 0px 10px 0px;
+}
+/* line 367, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+#footer #sub-floor .copyright {
+  width: 80%;
+}
+@media screen and (max-width: 768px) {
+  /* line 371, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+  #footer #sub-floor .copyright {
+    width: 100%;
+  }
+}
+/* line 374, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+#footer .legal-disclaimer {
+  font-size: 11px;
+  color: #666666;
+  font-family: Roboto;
+}

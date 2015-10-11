@@ -1,0 +1,80 @@
+.has-error .checkbox,
+.has-error .checkbox-inline,
+.has-error .control-label,
+.has-error .help-block,
+.has-error .radio,
+.has-error .radio-inline,
+.has-error.checkbox label,
+.has-error.checkbox-inline label,
+.has-error.radio label,
+.has-error.radio-inline label {
+    color: rgb(202, 114, 114);
+}
+
+.has-error .form-control .lawyer-lead-form input {
+    color: red;
+}
+
+section#contact .contact-form-container .has-error input {
+    background-color: rgb(38, 75, 105);
+    border: solid 1px rgb(202, 114, 114);
+    padding: 25px 15px;
+    width: 95%;
+}
+
+.lawyer-lead-form input {
+    margin-bottom: 5px;
+    border-width: 1px;
+}
+.lawyer-lead-form button
+.modal-body {
+    padding-top: 0px;
+}
+
+.alert {
+    margin-bottom: 0px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.has-error .form-control,
+.has-error .form-control:focus {
+    border: 1px solid #e74c3c;
+}
+.faqHeader {
+     font-size: 27px;
+     margin: 20px;
+}
+.panel-heading [data-toggle="collapse"]:after {
+    font-family: 'Glyphicons Halflings';
+    content: "\e072";
+    float: right;
+    color: #F58723;
+    font-size: 18px;
+    line-height: 22px;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+.panel-heading [data-toggle="collapse"].collapsed:after {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    color: #454444;
+}
+.legal-notice {
+    font-size: 10px;
+    color: #445B73;
+    padding-top: 20px;
+    line-height: 14px;
+}
+
+.footer-link  {
+    color: #97B1CD;
+    font-size: 16px;
+    padding: 15px;
+}
