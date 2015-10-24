@@ -11,6 +11,11 @@
     color: rgb(202, 114, 114);
 }
 
+.article-text {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
 .has-error .form-control .lawyer-lead-form input {
     color: red;
 }
