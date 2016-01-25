@@ -2,7 +2,8 @@
     'use strict';
 
     angular.module('brochure', [
-        'ui.bootstrap'
+        'ui.bootstrap',
+        'ngRetina'
     ])
         .run(run)
         .config(config);
