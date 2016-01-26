@@ -375,9 +375,8 @@
                                                 Thank you. Your request has been sent!
                                             </div>
                                             <div class="alert alert-danger ng-hide" ng-show="vm.launchFormResponseReceived &amp;&amp; vm.launchFormSuccess == false">
-                                                Bummer! Something strange is going on and we were not able to save your info.
-                                                Please try again or let us know if this keeps happening!
-                                            </div>
+												{{vm.subscribeErrorMsg}}
+											</div>
                                         </form>
                                     </div>
                                 </div>
@@ -469,7 +468,7 @@
 														Thank you! We've received your info.
 													</div>
 													<div class="alert alert-danger ng-hide" ng-show="vm.subscribeFormResponseReceived && vm.subscribeFormSuccess == false">
-														Something strange is going on an we were not able to save your info. Please email us if this keeps happening!
+														{{vm.subscribeErrorMsg}}
 													</div>
 													
 													<span ng-show="subscribeForm.EMAIL.$invalid && !subscribeForm.ZIP.$invalid && vm.subscribeFormSubmitted" class="help-block ng-hide">Please enter a valid email</span>

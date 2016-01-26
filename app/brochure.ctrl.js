@@ -52,6 +52,8 @@
 
         }
 
+        // This is for drivers/defendants.
+
         function saveContactInfo(isValid) {
             console.log('Attempting to save contact info');
             vm.dataLoading = true;
@@ -72,7 +74,8 @@
                     fullName : vm.fullName,
                     email : vm.email,
                     postalCode : vm.zipcode,
-                    subscriptionType : 'WEB_BROCHURE_LAUNCH_NOTIFICATION'
+                    subscriptionType : 'WEB_BROCHURE_LAUNCH_NOTIFICATION',
+                    roleType: 'DEFENDANT'
                 }
             };
 			
@@ -100,7 +103,8 @@
                     fullname : '',
                     email : vm.subscribeForm_email,
                     postalCode : vm.subscribeForm_zip,
-                    subscriptionType : 'WEB_BROCHURE_LAUNCH_NOTIFICATION'
+                    subscriptionType : 'WEB_BROCHURE_LAUNCH_NOTIFICATION',
+                    roleType: 'DEFENDANT'
                 }
             };
 			
@@ -135,7 +139,6 @@
                     },
                     function (error) {
 						if (vm.formName === "contact") {
-							console.log('failed to subscribe user: ', error);
 							vm.launchFormResponseReceived = true;
 							vm.launchFormSuccess = false;
 							vm.dataLoading = false;
@@ -145,9 +148,12 @@
 							vm.subscribeFormDataLoading = false;
 						}
                         if (error.data && error.data.error) {
+                            vm.subscribeErrorMsg = error.data.error.uiErrorMsg;
                             return $q.reject(error.data.error.uiErrorMsg);
+                        } else {
+                            vm.subscribeErrorMsg = 'Bummer! Something strange is going on and we were not able to save your info. Please try again or let us know if this keeps happening!';
+                            return $q.reject(vm.subscribeErrorMsg);
                         }
-                        return $q.reject('Bummer! Something strange is going on and we were not able to save your info. Please try again or let us know if this keeps happening!');
                     }
                 )
 		}
