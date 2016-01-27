@@ -8,7 +8,6 @@
         .run(run)
         .config(config);
 
-
     config.$inject = [];
     function config() {
 
