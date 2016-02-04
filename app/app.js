@@ -16,10 +16,7 @@
 
     run.$inject = [];
     function run() {
-
     }
-
-
 
 })();
 
