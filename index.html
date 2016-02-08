@@ -151,13 +151,13 @@
 						<li id="menu-item-10" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12 page-scroll active">
 							<a title="Home" href="#page">Home</a>
 						</li>
-						<li id="menu-item-12" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12 page-scroll">
+						<li id="menu-item-11" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12 page-scroll">
 							<a title="How it works" href="#howitworks">How it works</a>
 						</li>
 						<li id="menu-item-12" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12 page-scroll">
 							<a title="Features" href="#features">Features</a>
 						</li>
-						<li id="menu-item-12" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12 page-scroll">
+						<li id="menu-item-13" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12 page-scroll">
 							<a title="Sign up" href="#signup" ng-click="trackFBButtonConversion('SignUp', 'MenuBar')">Sign up</a>
 						</li>
 					</ul>
@@ -167,7 +167,7 @@
 
 		<div class="homepage-banner bg-primary" role="" style="background-color: #f4f4f4;">
 			<div class="container" style="width: 96%;">
-				<div id="text-2" class="widget widget_text">			
+				<div id="text-3" class="widget widget_text">
 					<div class="textwidget" style="margin-top: 55px;  margin-left: 0px;">
 						<h1 id="header">
 							A traffic ticket follows you long after you've paid the fine.
@@ -178,13 +178,13 @@
 						<br>
 						<h1>
 							<a href="https://itunes.apple.com/us/app/off-record-fight-your-traffic/id1032930471?mt=8" style="float: right;">
-                <img src="assets/img/badge_ios.png" style="height:50px;cursor:pointer;"
-                     alt="Download Off the Record from the iOS app store and fight your traffic ticket with lawyer today."
-                        title="Download Off the Record from the iOS app store to start fighting your traffic tickets today">
-              </a>
+                                <img src="assets/img/badge_ios.png" style="height:50px;cursor:pointer;"
+                                     alt="Download Off the Record from the iOS app store and fight your traffic ticket with lawyer today."
+                                     title="Download Off the Record from the iOS app store to start fighting your traffic tickets today">
+                            </a>
 							<a href="#signup" id="signUpButton"
-							   ng-click="trackFBButtonConversion('SignUp', 'BannerImage')"
-							   class="btn btn-default btn-lg">Sign up now</a>
+							   ng-click="trackFBButtonConversion('SignUp', 'BannerImage');fightTicket();"
+							   class="btn btn-default btn-lg">Fight My Ticket</a>
 						</h1>
 					</div>
 				</div>	
@@ -343,8 +343,8 @@
 			<div class="container">
 				<section class="page-content entry-content clearfix">
 
-                    <div class="row" style="display: flex; align-items: center;">
-                        <div class="col-lg-8 text-center">
+                    <div class="row signup-section" style="align-items: center;">
+                        <div class="col-lg-8 text-center signup-form">
 
                             <div class="row">
                                 <div class="text-center">
@@ -406,7 +406,7 @@
 
                         </div>
 
-                        <div class="col-lg-4 text-center">
+                        <div class="col-lg-4 text-center twitter-feed">
                             <div class="row">
                                 <a class="twitter-timeline" href="https://twitter.com/OffTheRecordApp" data-widget-id="657286159777689600">Tweets by @OffTheRecordApp</a>
                                 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>

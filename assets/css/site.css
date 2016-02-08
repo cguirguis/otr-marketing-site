@@ -1,6 +1,7 @@
 /* line 1, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 h1, h2, h3, h4, h5, h6 {
   color: #397faf;
+    font-family: "Roboto";
 }
 
 .homepage-banner h1 {
@@ -21,6 +22,7 @@ h1, h2, h3, h4, h5, h6 {
 /* line 9, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 .entry-content .lead {
   font-family: "Roboto";
+    font-weight: 100;
   font-size: 1.5em;
   margin-bottom: 0px;
 }
@@ -101,11 +103,13 @@ h1, h2, h3, h4, h5, h6 {
 /* line 47, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 .nav.navbar-nav.navbar-right li a:hover {
   background-color: #f8f8f8;
+    color: #333!important;
 }
 
 /* line 49, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 .nav.navbar-nav.navbar-right li.active a:hover {
   background-color: #e7e7e7;
+    color: white;
 }
 
 /* line 53, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
@@ -115,7 +119,7 @@ ul#menu-main-menu {
 /* line 55, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 ul#menu-main-menu a {
   height: 100%;
-  line-height: 35px;
+  line-height: 34px;
 }
 
 /* line 59, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
@@ -149,17 +153,20 @@ ul#menu-main-menu a {
   font-size: 1.4em;
   line-height: 1.7em;
   width: 70%;
+  font-family: inherit;
 }
 
 /* line 81, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 #signUpButton, .signup-button {
-  background: #397faf;
+  background: #2566a6;
+    padding: 12px 50px;
+    border-radius: 2px;
   color: white;
   border: solid 1px white;
 }
 /* line 85, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 #signUpButton:hover, .signup-button:hover {
-  background: #204d74;
+  background: #2C75BD;
   color: white;
   border: solid 1px white;
 }
@@ -317,7 +324,31 @@ ul#menu-main-menu a {
   color: #999999;
   font-weight: 100;
 }
-
+div.signup-section {
+    display: flex;
+}
+div.signup-form {
+    width: 56%;
+}
+.twitter-feed {
+    width: 41%;
+    margin-left: 60px;
+    margin-right: 10px;
+    margin-top: 20px;
+}
+@media (max-width: 682px) {
+    div.signup-section {
+        display: block;
+    }
+    div.signup-form {
+        width: 100%;
+    }
+    .twitter-feed {
+        padding: 0;
+        width: 100%;
+        margin-left:10px;
+    }
+}
 /* line 209, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 .lawyer-section {
   background-image: url("../img/lawyer-blue-overlay.jpg");
