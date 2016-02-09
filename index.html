@@ -174,7 +174,7 @@
 						</h1>
 						<h1 id="subheader">
 							A single speeding ticket will raise your insurance rates by an average of 12%. 
-							That's a whopping $540 over the next 3 years.</h1>
+							That could mean a whopping $540 over the next 3 years.</h1>
 						<br>
 						<h1>
 							<a href="https://itunes.apple.com/us/app/off-record-fight-your-traffic/id1032930471?mt=8" style="float: right;">
@@ -182,9 +182,9 @@
                                      alt="Download Off the Record from the iOS app store and fight your traffic ticket with lawyer today."
                                      title="Download Off the Record from the iOS app store to start fighting your traffic tickets today">
                             </a>
-							<a href="#signup" id="signUpButton"
-							   ng-click="trackFBButtonConversion('SignUp', 'BannerImage');fightTicket();"
-							   class="btn btn-default btn-lg">Fight My Ticket</a>
+                            <a href="javascript:void(0)" id="signUpButton"
+                               ng-click="trackFBButtonConversion('SignUp', 'BannerImage');vm.fightTicket();"
+                               class="btn btn-default btn-lg">Fight My Ticket</a>
 						</h1>
 					</div>
 				</div>	
@@ -286,7 +286,7 @@
 								</ul>
 								<div class="noMoreMailingTickets">You're done.  No mailing in your ticket.  No showing up in court.</div>
 								
-								<a href="#signup" class="btn btn-lg signup-button" title="Sign up now">Sign up now</a>
+								<a href="javascript:void(0)" class="btn btn-lg signup-button" ng-click="vm.fightTicket()" title="Fight My Ticket">Fight My Ticket</a>
 								<a id="features" name="features" style="display:block;margin-top:0px"></a>
 							</div>
 						</div>

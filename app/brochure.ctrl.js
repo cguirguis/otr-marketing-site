@@ -6,8 +6,8 @@
         .controller('BrochureCtrl', BrochureCtrl)
         .controller('LawyerFormModalCtrl', LawyerFormModalCtrl);
 
-    BrochureCtrl.$inject = ['ENV', '$http', '$q', '$modal', '$log', '$location'];
-    function BrochureCtrl(ENV, $http, $q, $modal, $log, $location) {
+    BrochureCtrl.$inject = ['ENV', '$http', '$q', '$modal', '$log', '$timeout', '$window', '$location'];
+    function BrochureCtrl(ENV, $http, $q, $modal, $log, $timeout, $window, $location) {
         var vm = this,
 
             URLS = {
@@ -54,11 +54,13 @@
         }
 
         function fightTicket() {
-            var appUrl = showMobileWebApp() && $location.search.mobile
+            var appUrl = showMobileWebApp() && $location.search().mobile
                 ? "https://m-devo.offtherecord.com"
                 : "https://me.offtherecord.com";
 
-            $location.url(appUrl);
+            $timeout(function() {
+                $window.location.href= appUrl;
+            });
         };
 
         // This is for drivers/defendants.
