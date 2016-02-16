@@ -171,6 +171,22 @@ ul#menu-main-menu a {
   border: solid 1px white;
 }
 
+@media (max-width: 470px) {
+    .app-button {
+        display: none!important;
+    }
+}
+
+.textwidget {
+    margin-top: 25px;
+    margin-left: 0px;
+}
+@media (max-width: 816px) {
+    .textwidget {
+        margin-top: 0px!important;
+    }
+}
+
 @media screen and (max-width: 600px) {
   /* line 93, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
   .textwidget #subheader {

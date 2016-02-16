@@ -26,8 +26,6 @@
         // ----- PUBLIC METHODS -------------------------------------------------------
 
         function openLawyerFormModal(size) {
-            console.log('opening the modal');
-
             var modalInstance = $modal.open({
                 animation:      true,
                 backdrop:       'static',
@@ -50,23 +48,25 @@
                         $log.info('LawyerFormModal dismissed at: ' + new Date() + ' (message: ' + message + ')');
                     }
             );
-
         }
 
         function fightTicket() {
-            var appUrl = showMobileWebApp() && $location.search().mobile
-                ? "https://m-devo.offtherecord.com"
-                : "https://me.offtherecord.com";
+            var appUrl = "https://itunes.apple.com/us/app/off-record-fight-your-traffic/id1032930471?mt=8";
+
+            if (!iOS()) {
+                appUrl = showMobileWebApp() && $location.search().mobile
+                    ? "https://m.offtherecord.com"
+                    : "https://me.offtherecord.com";
+            }
 
             $timeout(function() {
                 $window.location.href= appUrl;
             });
-        };
+        }
 
         // This is for drivers/defendants.
 
         function saveContactInfo(isValid) {
-            console.log('Attempting to save contact info');
             vm.dataLoading = true;
             vm.submitted = true;
             vm.launchFormSuccess = false;
@@ -74,7 +74,6 @@
 
             // Only continue if the login form is valid
             if (!isValid) {
-                console.log('errors on form');
                 vm.dataLoading = false;
                 return;
             }
@@ -103,7 +102,6 @@
 
             // Only continue if the form is valid
             if (!isValid) {
-                console.log('errors on form');
                 vm.subscribeFormDataLoading = false;
                 return;
             }
@@ -129,7 +127,6 @@
                 .then(
                     function (response) {
 						if (vm.formName === "contact") {
-							console.log('successfully subscribed user: ', response);
 							vm.launchFormResponseReceived = true;
 							vm.launchFormSuccess = true;
 							vm.dataLoading = false;
@@ -175,6 +172,25 @@
 
             return isMobileDevice || window.innerWidth <= 800;
         }
+
+        function iOS() {
+            var iDevices = [
+                'iPad Simulator',
+                'iPhone Simulator',
+                'iPod Simulator',
+                'iPad',
+                'iPhone',
+                'iPod'
+            ];
+
+            if (!!navigator.platform) {
+                while (iDevices.length) {
+                    if (navigator.platform === iDevices.pop()){ return true; }
+                }
+            }
+
+            return false;
+        }
     }
 
 
@@ -199,7 +215,6 @@
 
             // Only continue if the form is valid
             if (!isValid) {
-                console.log('errors on form');
                 lawyerFormCtrl.dataLoading = false;
                 return;
             }
@@ -207,7 +222,6 @@
             $http.post(urls.POST_LAWYER_LEAD, lawyerFormCtrl.request)
                 .then(
                     function (response) {
-                        console.log('successfully saved lawyer lead: ', response);
                         lawyerFormCtrl.lawyerLeadFormResponseReceived = true;
                         lawyerFormCtrl.lawyerLeadFormSuccess = true;
                         lawyerFormCtrl.dataLoading = false;
