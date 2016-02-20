@@ -51,16 +51,12 @@
         }
 
         function fightTicket() {
-            var appUrl = "https://itunes.apple.com/us/app/off-record-fight-your-traffic/id1032930471?mt=8";
-
-            if (!iOS()) {
-                appUrl = showMobileWebApp()
-                    ? "https://m.offtherecord.com"
-                    : "https://me.offtherecord.com";
-            }
+            var appUrl = showMobileWebApp()
+                ? "https://m.offtherecord.com"
+                : "https://me.offtherecord.com";
 
             $timeout(function() {
-                $window.location.href= appUrl; 
+                $window.location.href= appUrl;
             });
         }
 
