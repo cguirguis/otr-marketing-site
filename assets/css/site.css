@@ -9,7 +9,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
-  background-color: #41a3e3!important;
+    background-color: #41a3e3!important;
+    color: #aaa;
 }
 
 /* line 4, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
@@ -58,16 +59,40 @@ h1, h2, h3, h4, h5, h6 {
 /* line 32, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 .homepage-banner.bg-primary {
   background-image: url("../img/california-road.jpg"); /* update */
-  background-repeat: no-repeat; 
+  background-repeat: no-repeat;
   background-position: center -242px; /* update */
   height: 37em; /* update */
   background-size: 100% 142%; /* update */
   background-color: #337ab7; /* update */
 }
 
+.content-page-banner {
+    background-image: url("http://drivingschool.net/wp-content/themes/eds/img/road.jpg"); /* update */
+    background-repeat: no-repeat;
+    background-position: center -242px; /* update */
+    height: 37em; /* update */
+    background-size: 100% 142%; /* update */
+    background-color: #337ab7; /* update */
+}
+
 /* line 38, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 .site-name img.logo {
   margin-top: 2px;
+}
+
+@media (max-width: 400px) {
+    .navbar .container {
+        height: 60px!important;
+    }
+    .site-name .navbar-brand img:first-child {
+        width: 30px;
+    }
+
+    .site-name .navbar-brand img:last-child {
+        width: 150px;
+        margin-left: -6px;
+        margin-top: 15px;
+    }
 }
 
 .navbar.navbar-default {
@@ -79,21 +104,33 @@ h1, h2, h3, h4, h5, h6 {
   color: #aaa!important;
 }
 
+.navbar-nav>li {
+    height: 100%;
+}
+
+@media (min-width: 768px) {
+    .navbar-collapse.collapsing {
+        overflow: visible!important;
+    }
+}
+
 @media (max-width: 768px) { /* update */
   /* line 41, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
   .navbar-collapse.navbar-ex1-collapse { 
       border: solid 1px #dedede; 
   }
   .navbar-collapse.navbar-ex1-collapse ul li {  
-      border-bottom: solid 1px #efefef; 
+      border-bottom: solid 1px #efefef;
+      padding-bottom: 10px;
   }
-}
-.navbar-collapse.navbar-ex1-collapse.collapse.in ul#menu-main-menu {
-  height: auto;
-}
-/* line 43, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 
-@media (max-width: 768px) { /* update */
+    ul#menu-main-menu {
+        height: 100%!important;
+        background-color: white;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
   .navbar-collapse.navbar-ex1-collapse.collapse.in ul#menu-main-menu a {
     height: 37px;
     line-height: 20px;
@@ -102,34 +139,34 @@ h1, h2, h3, h4, h5, h6 {
 
 /* line 47, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 .nav.navbar-nav.navbar-right li a:hover {
-  background-color: #f8f8f8;
-    color: #333!important;
+    color: #058ecc!important;
 }
 
 /* line 49, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 .nav.navbar-nav.navbar-right li.active a:hover {
-  background-color: #e7e7e7;
-    color: white;
+    color: white!important;
 }
 
 /* line 53, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
-ul#menu-main-menu {
-  height: 60px;
+@media (min-with: 769px) {
+    ul#menu-main-menu {
+        height: 75px !important;
+    }
 }
 /* line 55, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 ul#menu-main-menu a {
-  height: 100%;
-  line-height: 34px;
+    line-height: 18px;
+    margin-top: 11px;
+    text-transform: uppercase;
+    font-family: Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    font-weight: bolder!important;
+    border-radius: 3px;
 }
 
 /* line 59, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 .navbar .container {
-  height: 64px;
-}
-
-/* line 62, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
-.navbar-collapse {
-  background-color: white;
+  height: 70px;
 }
 
 /* line 66, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
@@ -172,8 +209,14 @@ ul#menu-main-menu a {
 }
 
 @media (max-width: 470px) {
+    .textwidget h1 {
+        text-align: center!important;
+    }
     .app-button {
-        display: none!important;
+        float: none!important;
+    }
+    .app-button img {
+        margin-top: 20px;
     }
 }
 
@@ -250,7 +293,7 @@ ul#menu-main-menu a {
 .features h2 {
   color: #666666;
   margin-bottom: 30px;
-  margin-top: -15px;
+  margin-top: -45px;
   font-weight: 100;
 }
 /* line 139, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
@@ -582,3 +625,286 @@ div.signup-form {
   color: #666666;
   font-family: Roboto;
 }
+
+
+/* STATE INFO VIEW */
+.content-page {
+    margin-top: 39px;
+}
+@media (max-width: 400px) {
+    .content-page {
+        margin-top: 35px;
+    }
+}
+.content-container {
+    display: inline-block;
+    width: 100%!important;
+    height: 400px;
+    text-align: center;
+}
+.content-header {
+    height: 400px;
+    position: relative;
+}
+.content-header .content-background {
+    width: 100%!important;
+    height: 400px;
+    background-size: 100% 100%;
+    background-position: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    opacity: 1;
+}
+.content-header .fighting-text {
+    font-family: "Raleway", sans-serif;
+    position: relative;
+    text-transform: uppercase;
+    font-size: 23px;
+    color: white!important;
+    padding-top: 30px;
+    width: 100%;
+    z-index: 1;
+}
+.content-header h1 {
+    font-family: "Oswald", sans-serif;
+    margin-top: 0px;
+    font-size: 75px;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: white!important;
+    position: absolute;
+    width: 100%;
+}
+.content-header hr {
+    border-color: #aaa;
+    width: 100%;
+}
+.content-nav {
+    width: 100%;
+    height: auto!important;
+    padding: 0 100px;
+    background-color: #333;
+    display: inline-block;
+    color: white;
+    box-sizing: border-box;
+}
+.content-nav ul {
+    width: 90%;
+    margin-bottom: 0;
+    line-height: 20px;
+}
+.content-nav li {
+    list-style: none;
+    cursor: pointer;
+}
+.content-nav ul li.active {
+    background-color: #777;
+    cursor: default;
+}
+.content-nav ul li:hover {
+    background-color: #555;
+}
+.content-nav ul li.active:hover {
+    background-color: #777;
+}
+.content-nav .nav-item {
+    float: left;
+    padding: 10px 28px;
+    height: 40px;
+    cursor: pointer;
+}
+@media (max-width: 515px) {
+    .content-nav {
+        padding: 0 0!important;
+    }
+}
+.content-body {
+    padding: 40px 30px;
+    text-align: center;
+    overflow: auto;
+}
+.content-body .overview-row {
+    padding: 0px 20px;
+    overflow: hidden;
+    margin: auto;
+    vertical-align: top;
+    max-width: 800px;
+    width: 100%;
+}
+.content-body .overview-row h1 {
+    color: #333!important;
+    float: left;
+    font-size: 30px;
+    font-weight: 300;
+    margin: 0;
+    line-height: 60px;
+    width: 60%;
+    text-align: right;
+    padding-right: 10px;
+}
+.content-body p {
+    color: #555!important;
+    float: right;
+    font-weight: 400;
+    font-size: 60px;
+    line-height: 60px;
+    width: 40%;
+    text-align: center;
+}
+.content-body .subtitle {
+    color: #ccc;
+    font-size: 16px;
+    line-height: 16px;
+    clear: both;
+    margin-bottom: 10px;
+}
+.content-body hr {
+    width: 90%;
+    max-width: 650px;
+    margin-top: 15px;
+}
+
+.content-body h1 {
+    float: left;
+    color: #333!important;
+    font-size: 24px;
+    font-weight: 400;
+    margin-top: 0px;
+    margin-bottom: 20px;
+}
+
+.options-comparison {
+    clear: both;
+    width: 100%;
+    text-align: center;
+    padding: 0px 20px;
+    margin-bottom: 40px;
+    margin-top: 40px;
+}
+.content-body table {
+    clear: both;
+    width: 100%;
+    min-width: 600px;
+    border-spacing: 1px;
+    border-collapse: separate;
+}
+
+.content-body table td {
+    padding: 20px 10px;
+    background-color: #fcfcfc;
+    width: 40%;
+}
+
+.content-body table td:nth-child(1) {
+    text-align: right;
+    padding-right: 15px;
+    width: 160px;
+    border: solid 1px #f8f8f8;
+    border-top: none;
+    background-color: #fcfcfc;
+    font-size: 18px;
+}
+
+.content-body table tr:last-child td {
+    border-bottom: solid 1px #fcfcfc;
+}
+
+.content-body table tr:nth-child(1) td {
+    font-weight: 400;
+    font-size: 18px;
+    border-bottom: solid 1px #f8f8f8;
+}
+
+.content-body table tr:last-child td {
+    font-weight: 400;
+}
+
+.content-body table tr:not(:nth-child(1)) td:not(:nth-child(1)) {
+    border-bottom: solid 1px #f8f8f8;
+    border-right: solid 1px #f8f8f8;
+    background-color: white;
+    font-size: 25px;
+    color: #333;
+}
+
+.content-body table td:nth-child(4) {
+    background-color: #f8f8f8;
+}
+
+.content-body table td.white-bg {
+    background-color: white;
+    border: none;
+}
+
+.content-body table td.light-gray {
+    color: #ccc!important;
+}
+
+@media (min-width: 1024px) {
+    .content-body .overview-row {
+        width: 48%;
+        float: left;
+        min-height: 140px;
+    }
+    .content-body .overview-row h1 {
+        line-height: 30px;
+    }
+    .content-body .overview-row .subtitle {
+        margin-top: 10px;
+    }
+    hr {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .content-body .overview-row {
+        max-width: inherit;
+        padding-top: 0px;
+    }
+    .content-body .overview-row h1 {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .content-body .overview-row p {
+        width: 100%;
+        text-align: center;
+        padding-bottom: 20px;
+    }
+}
+
+button.fight-my-ticket {
+    cursor: pointer;
+    height: 60px;
+    font-size: 1.5em!important;
+    border: solid 1px rgb(31, 85, 142);
+    border-radius: 3px;
+    width: 50%;
+    min-width: 250px;
+    color: white;
+    background: #2a81d7;
+    background: -moz-linear-gradient(0% 100% 90deg, #206bcb, #3e9ee5);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#3e9ee5), to(#206bcb));
+    border-top: 1px solid #2a73a6;
+    border-right: 1px solid #165899;
+    border-bottom: 1px solid #07428f;
+    border-left: 1px solid #165899;
+    -moz-box-shadow: inset 0 1px 0 0 #62b1e9;
+    -webkit-box-shadow: inset 0 1px 0 0 #62b1e9;
+    cursor: pointer;
+    text-shadow: 0 -1px 1px #3275bc;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+button.fight-my-ticket:hover {
+    color: white;
+    background-color: #147bd8;
+    -moz-box-shadow: inset 0 1px 0 0 #72b9eb, 0 1px 2px 0 #b3b3b3;
+    -webkit-box-shadow: inset 0 1px 0 0 #72b9eb, 0 1px 2px 0 #b3b3b3;
+    background: -moz-linear-gradient(0% 100% 90deg, #10386a, #3e9ee5);
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#42a8f3), to(#1e64bd));
+}
+
+/* END OF STATE INFO VIEW */

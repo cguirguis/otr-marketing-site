@@ -1,0 +1,354 @@
+
+<div class="content-page" ng-controller="StateInfoCtrl as vm">
+    <div class="content-container text-center">
+        <div class="content-header">
+            <div class="content-background"></div>
+            <div class="fighting-text">fighting your ticket in</div>
+            <h1>Washington state</h1>
+        </div>
+        <div class="content-nav">
+            <ul>
+                <li class="nav-item" ng-class="{ active : stateView == null || stateView == 'Overview' }" ng-click="stateView = 'Overview'">Overview</li>
+                <li class="nav-item" ng-class="{ active : stateView == 'Coverage' }" ng-click="stateView = 'Coverage'">Coverage</li>
+            </ul>
+        </div>
+        <div class="content-body">
+            <div class="overview-row">
+                <h1>
+                    Average success rate
+                    <div class="subtitle">Based on previous experience</div>
+                </h1>
+
+                <p>96%</p>
+            </div>
+            <hr/>
+            <div class="overview-row">
+                <h1>Cost to fight</h1>
+                <p>$250</p>
+            </div>
+            <hr/>
+            <div class="overview-row">
+                <h1>Moneyback guarantee</h1>
+                <p><i class="fa fa-check"></i></p>
+            </div>
+
+            <div class="options-comparison">
+                <h1>How much you can save by fighting your ticket:</h1>
+                <table>
+                    <tr>
+                        <td class="white-bg"></td>
+                        <td>Pay your ticket</td>
+                        <td>Fight with Off the Record</td>
+                    </tr>
+                    <tr>
+                        <td>Fine</td>
+                        <td>$180 (average)</td>
+                        <td>$0</td>
+                    </tr>
+                    <tr>
+                        <td>Legal fee</td>
+                        <td>$0</td>
+                        <td>$250</td>
+                    </tr>
+                    <tr>
+                        <td>Insurance penalty</td>
+                        <td>$540 - $1,800</td>
+                        <td>$0</td>
+                    </tr>
+                    <tr>
+                        <td>Point penalty</td>
+                        <td class="light-gray">N/A</td>
+                        <td class="light-gray">N/A</td>
+                    </tr>
+                    <tr>
+                        <td>Total cost</td>
+                        <td>$720 - $1,980</td>
+                        <td>$250</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="overview-row" style="width: 100%;margin-top: -10px;max-width:inherit">
+                <h1 style="width: 50%;line-height: 50px;">Total estimated savings:</h1>
+                <div style="width:50%;float:left;">
+                    <p style="float:left;width:100%;">$470 - 1720</p>
+                    <div style="font-size: 25px;margin-top:-10px">over the next 3 years</div>
+                </div>
+            </div>
+
+            <button class="fight-my-ticket" ng-click="trackFBButtonConversion('SignUp', 'BannerImage');vm.fightTicket();">Fight My Ticket</button>
+        </div>
+    </div>
+</div>
+
+<style>
+    .content-page {
+        margin-top: 45px;
+    }
+    .content-container {
+        display: inline-block;
+        width: 100%!important;
+        height: 400px;
+        text-align: center;
+    }
+    .content-header {
+        height: 400px;
+        position: relative;
+    }
+    .content-header .content-background {
+        width: 100%!important;
+        background: url('http://www.sustainablecitiesinstitute.org/Images/SCI/City%20Profile/NotResized/SeattleWA.jpg') no-repeat;
+        height: 400px;
+        background-size: 100% 100%;
+        background-position: center;
+        position: absolute;
+        left: 0;
+        right: 0;
+        opacity: 1;
+    }
+    .content-header .fighting-text {
+        font-family: "Raleway", sans-serif;
+        position: relative;
+        text-transform: uppercase;
+        font-size: 18px;
+        color: white!important;
+        padding-top: 30px;
+        width: 100%;
+        z-index: 1;
+    }
+    .content-header h1 {
+        font-family: "Oswald", sans-serif;
+        margin-top: 0px;
+        font-size: 55px;
+        font-weight: 400;
+        text-transform: uppercase;
+        color: white!important;
+        position: absolute;
+        width: 100%;
+    }
+    .content-header hr {
+        border-color: #aaa;
+        width: 100%;
+    }
+    .content-nav {
+        width: 100%;
+        height: auto!important;
+        padding: 0 100px;
+        background-color: #333;
+        display: inline-block;
+        color: white;
+        box-sizing: border-box;
+    }
+    .content-nav ul {
+        width: 90%;
+        display: inline-block;
+        margin-bottom: -7px;
+    }
+    .content-nav li {
+        list-style: none;
+        cursor: pointer;
+    }
+    .content-nav ul li.active {
+        background-color: #555;
+        cursor: default;
+    }
+    .content-nav ul li:hover {
+        background-color: #444;
+    }
+    .content-nav ul li.active:hover {
+        background-color: #555;
+    }
+    .content-nav .nav-item {
+        float: left;
+        padding: 10px 28px;
+        height: 40px;
+        cursor: pointer;
+    }
+    .content-body {
+        padding: 40px 30px;
+        text-align: center;
+        overflow: auto;
+    }
+    .content-body .overview-row {
+        padding: 0px 20px;
+        overflow: auto;
+        margin: auto;
+        vertical-align: top;
+        max-width: 800px;
+        width: 100%;
+    }
+    .content-body .overview-row h1 {
+        color: #333!important;
+        float: left;
+        font-size: 30px;
+        font-weight: 300;
+        margin: 0;
+        line-height: 60px;
+        width: 60%;
+        text-align: right;
+        padding-right: 10px;
+     }
+    .content-body p {
+        color: #555!important;
+        float: right;
+        font-weight: 400;
+        font-size: 60px;
+        line-height: 60px;
+        width: 40%;
+        text-align: center;
+    }
+    .content-body .subtitle {
+        color: #ccc;
+        font-size: 16px;
+        line-height: 16px;
+        clear: both;
+        margin-bottom: 10px;
+    }
+    .content-body hr {
+        width: 90%;
+        max-width: 650px;
+        margin-top: 15px;
+    }
+
+    .content-body h1 {
+        float: left;
+        color: #333!important;
+        font-size: 24px;
+        font-weight: 400;
+        margin-top: 0px;
+        margin-bottom: 20px;
+    }
+
+    .options-comparison {
+        clear: both;
+        width: 100%;
+        text-align: center;
+        padding: 0px 20px;
+        margin-bottom: 40px;
+    }
+    .content-body table {
+        clear: both;
+        width: 100%;
+        min-width: 600px;
+        border-spacing: 1px;
+        border-collapse: separate;
+    }
+
+    .content-body table td {
+        padding: 20px 10px;
+        background-color: #fcfcfc;
+        width: 40%;
+    }
+
+    .content-body table td:nth-child(1) {
+        text-align: right;
+        padding-right: 15px;
+        width: 160px;
+        border: solid 1px #f8f8f8;
+        border-top: none;
+        background-color: #fcfcfc;
+        font-size: 18px;
+    }
+
+    .content-body table tr:last-child td {
+        border-bottom: solid 1px #fcfcfc;
+    }
+
+    .content-body table tr:nth-child(1) td {
+        font-weight: 400;
+        font-size: 18px;
+        border-bottom: solid 1px #f8f8f8;
+    }
+
+    .content-body table tr:last-child td {
+        font-weight: 400;
+    }
+
+    .content-body table tr:not(:nth-child(1)) td:not(:nth-child(1)) {
+        border-bottom: solid 1px #f8f8f8;
+        border-right: solid 1px #f8f8f8;
+        background-color: white;
+        font-size: 25px;
+        color: #333;
+    }
+
+    .content-body table td:nth-child(4) {
+        background-color: #f8f8f8;
+    }
+
+    .content-body table td.white-bg {
+        background-color: white;
+        border: none;
+    }
+
+    .content-body table td.light-gray {
+        color: #ccc!important;
+    }
+
+    @media (min-width: 1024px) {
+        .content-body .overview-row {
+            width: 48%;
+            float: left;
+            min-height: 140px;
+        }
+        .content-body .overview-row h1 {
+            line-height: 30px;
+        }
+        .content-body .overview-row .subtitle {
+            margin-top: 10px;
+        }
+        hr {
+            display: none;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .content-body .overview-row {
+            max-width: inherit;
+            overflow: inherit;
+            padding-top: 0px;
+        }
+        .content-body .overview-row h1 {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .content-body .overview-row p {
+            width: 100%;
+            text-align: center;
+            padding-bottom: 20px;
+        }
+    }
+
+    button.fight-my-ticket {
+        cursor: pointer;
+        height: 60px;
+        font-size: 1.5em!important;
+        border: solid 1px rgb(31, 85, 142);
+        border-radius: 3px;
+        width: 50%;
+        min-width: 250px;
+        color: white;
+        background: #2a81d7;
+        background: -moz-linear-gradient(0% 100% 90deg, #206bcb, #3e9ee5);
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#3e9ee5), to(#206bcb));
+        border-top: 1px solid #2a73a6;
+        border-right: 1px solid #165899;
+        border-bottom: 1px solid #07428f;
+        border-left: 1px solid #165899;
+        -moz-box-shadow: inset 0 1px 0 0 #62b1e9;
+        -webkit-box-shadow: inset 0 1px 0 0 #62b1e9;
+        cursor: pointer;
+        text-shadow: 0 -1px 1px #3275bc;
+        margin-top: 30px;
+        margin-bottom: 50px;
+    }
+    button.fight-my-ticket:hover {
+        color: white;
+        background-color: #147bd8;
+        -moz-box-shadow: inset 0 1px 0 0 #72b9eb, 0 1px 2px 0 #b3b3b3;
+        -webkit-box-shadow: inset 0 1px 0 0 #72b9eb, 0 1px 2px 0 #b3b3b3;
+        background: -moz-linear-gradient(0% 100% 90deg, #10386a, #3e9ee5);
+        background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#42a8f3), to(#1e64bd));
+    }
+</style>
