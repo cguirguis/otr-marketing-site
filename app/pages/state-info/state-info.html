@@ -1,5 +1,5 @@
 
-<div class="content-page" ng-controller="StateInfoCtrl as vm">
+<div class="content-page">
     <div class="content-container text-center">
         <div class="content-header">
             <div class="content-background" ng-style="{ 'background-image': 'url({{vm.backgroundImgUrl}})' }"></div>
@@ -76,7 +76,7 @@
                 </div>
             </div>
 
-            <button class="fight-my-ticket" ng-click="vm.fightTicket();">Fight My Ticket</button>
+            <button class="fight-my-ticket" ng-click="vm.fightTicketRedirect();">Fight My Ticket</button>
         </div>
 
         <div class="content-body" ng-if="vm.viewType == 'Coverage'">
