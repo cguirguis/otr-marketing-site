@@ -8,8 +8,8 @@
 
     DefaultTemplateCtrl.$inject = ['$window', '$timeout', 'GlobalUtils'];
     function DefaultTemplateCtrl($window, $timeout, GlobalUtils) {
-        var vm = this,
-            isMobileDevice = GlobalUtils.isMobileDevice();
+        var vm = this;
+        vm.isMobileDevice = GlobalUtils.isMobileDevice();
 
         // ----- TODO: Need to move this back in the view -----------------------------
         $("ul#menu-main-menu li").click(function() {
