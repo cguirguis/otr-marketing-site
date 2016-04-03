@@ -62,8 +62,13 @@
 
         var branchData = null;
 
+        var cookieExpireDate = new Date();
+        var numberOfDaysToAdd = 7;
+        cookieExpireDate.setDate(cookieExpireDate.getDate() + numberOfDaysToAdd);
+
         var cookieDefaults = {
-            'domain' : 'offtherecord.com'
+            'domain' : 'offtherecord.com',
+            'expires' : cookieExpireDate
         };
 
         (function(b,r,a,n,c,h,_,s,d,k) {
