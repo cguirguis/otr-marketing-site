@@ -60,8 +60,6 @@
     branchInit.$inject = ['$cookies'];
     function branchInit($cookies) {
 
-        var branchData = null;
-
         var cookieExpireDate = new Date();
         var numberOfDaysToAdd = 7;
         cookieExpireDate.setDate(cookieExpireDate.getDate() + numberOfDaysToAdd);
@@ -78,18 +76,19 @@
         })(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode banner closeBanner creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setIdentity track validateCode".split(" "), 0);
 
         branch.init('key_live_oik1hC6SvaFGaQl6L4f5chghyqkDbk9G', function(err, data) {
-            branchData = data;
             console.log('branch.init error: ', err);
             console.log('branch.init data: ', data);
+            console.log('branch data: ', data.data);
+            console.log('branch data_parsed: ', data.data_parsed);
 
             // Write Branch data to cookie
-            $cookies.putObject('branch-link', JSON.stringify(branchData), cookieDefaults);
+            $cookies.put('branch-link', JSON.stringify(data.data_parsed), cookieDefaults);
 
         });
 
         branch.banner({
                 icon: 'https://s3.amazonaws.com/otr-assets/img/favicon/favicon.ico',
-                title: 'Off the Record - Fight your traffic ticket',
+                title: 'Off the Record - Fight your traffic tickets',
                 description: 'The smart, easy way to fight your traffic ticket',
                 openAppButtonText: 'Open',              // Text to show on button if the user has the app installed
                 downloadAppButtonText: 'Download',      // Text to show on button if the user does not have the app installed
