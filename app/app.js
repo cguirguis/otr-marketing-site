@@ -80,9 +80,14 @@
             console.log('branch.init data: ', data);
             console.log('branch data: ', data.data);
             console.log('branch data_parsed: ', data.data_parsed);
+            console.log('+clicked_branch_link', data.data_parsed['+clicked_branch_link']);
 
-            // Write Branch data to cookie
-            $cookies.put('branch-link', JSON.stringify(data.data_parsed), cookieDefaults);
+            // Write Branch data to cookie. Only write the cookie if a Branch link was clicked,
+            // otherwise previously written cookies will be overwritten next time user visits site.
+            if (data.data_parsed['+clicked_branch_link']) {
+                $cookies.put('branch-link', JSON.stringify(data.data_parsed), cookieDefaults);
+            }
+
 
         });
 
