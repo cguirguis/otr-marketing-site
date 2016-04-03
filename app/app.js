@@ -24,7 +24,8 @@
                         controller: 'DefaultTemplateCtrl as vm'
                     },
                     'main-header@default-template': {
-                        templateUrl: 'app/common/views/main-header.partial.html'
+                        templateUrl: 'app/common/views/main-header.partial.html',
+                        controller: 'DefaultTemplateCtrl as vm'
                     },
                     'main-footer@default-template': {
                         templateUrl: 'app/common/views/footer.partial.html'
