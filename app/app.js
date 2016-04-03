@@ -62,6 +62,10 @@
 
         var branchData = null;
 
+        var cookieDefaults = {
+            'domain' : 'offtherecord.com'
+        };
+
         (function(b,r,a,n,c,h,_,s,d,k) {
             if (!b[n]||!b[n]._q) {
                 for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-v2.0.0.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h
@@ -74,7 +78,7 @@
             console.log('branch.init data: ', data);
 
             // Write Branch data to cookie
-            $cookies.putObject('branch-link', JSON.stringify(branchData));
+            $cookies.putObject('branch-link', JSON.stringify(branchData), cookieDefaults);
 
         });
 
