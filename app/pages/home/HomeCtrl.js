@@ -62,14 +62,7 @@
         }
 
 
-        $("ul#menu-main-menu li").click(function() {
-            if (isMobileDevice) {
-                $(this).parent().parent().hide();
-            }
-        });
-        $("button.navbar-toggle").click(function() {
-            $("ul#menu-main-menu").parent().toggle();
-        });
+
 
         // This is for drivers/defendants.
 

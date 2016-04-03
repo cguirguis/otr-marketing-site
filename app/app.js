@@ -16,7 +16,6 @@
 
         $stateProvider
             .state('default-template', {
-                //url: '/webapp/',
                 abstract: true,
                 views: {
                     // the main template will be placed here (relatively named)
