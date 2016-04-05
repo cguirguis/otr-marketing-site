@@ -1,0 +1,55 @@
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container" style="width: 96%">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse" style="background-color: #666666; margin-top:13px;">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <div id="logo">
+                <span class="site-name">
+                    <a class="navbar-brand" href="/#/" title="Off the Record" rel="home" style="margin-top:-4px">
+                        <img src="assets/img/OTR-icon.png" width="43" height="36"
+                             style="float:left;float: left;margin-top: 15px;margin-right: 12px;opacity: 0.8" />
+                        <img src="assets/img/otr-logo-V2.gif" width="175" height="21.5" class="logo"
+                             title="Off the Record" style="margin-top:16px;opacity:0.9"
+                             alt="App that lets drivers fight their traffic tickets and speeding tickets with ease" />
+                    </a>
+                </span>
+            </div>
+        </div>
+
+        <div ng-class="{ 'collapse navbar-collapse navbar-ex1-collapse': vm.isMobileDevice }" style="height: 100%;">
+            <ul id="menu-main-menu" class="nav navbar-nav navbar-right">
+                <li id="menu-item-10" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12 page-scroll active">
+                    <a title="Home" href="#home">Home</a>
+                </li>
+                <li id="menu-item-11" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12 page-scroll">
+                    <a title="How it works" href="#howitworks">How it works</a>
+                </li>
+                <li id="menu-item-12" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-12 page-scroll">
+                    <a title="Fight your ticket" href="#fight">Fight your ticket</a>
+                    <i class="fa fa-chevron-down" style="float:none;font-weight:lighter!important;"></i>
+
+                    <ul class="nav-list nav-sublist">
+                        <li class="nav-item">
+                            <a href="#/state/CA" title="California" class="nav-link">California</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#/state/NY" title="New York" class="nav-link">New York</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#/state/OR" title="Oregon" class="nav-link">Oregon</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#/state/WA" title="Washington" class="nav-link">Washington</a>
+                        </li>
+                    </ul>
+                </li>
+                <button class="login-button" ng-click="vm.login()">Login</button>
+            </ul>
+        </div>
+    </div>
+</nav>

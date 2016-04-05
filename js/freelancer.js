@@ -22,11 +22,6 @@ $(function() {
     });
 });
 
-// Highlight the top nav as scrolling occurs
-$('body').scrollspy({
-    target: '.navbar-fixed-top'
-})
-
 
 $(".navbar-toggle").click(function() {
   
@@ -45,7 +40,6 @@ $(".navbar-toggle").click(function() {
 
 // Closes the Responsive Menu on Menu Item Click
 $('.navbar-collapse ul li a').click(function() {
-    
     $('.navbar-toggle').click();
     
     $(".navbar-ex1-collapse").attr("style", "display:none");
@@ -54,3 +48,5 @@ $('.navbar-collapse ul li a').click(function() {
     event.stopPropagation();
     event.stopImmediatePropagation();
 });
+
+

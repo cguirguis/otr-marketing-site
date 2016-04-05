@@ -21,6 +21,7 @@
     function run($rootScope, ENV) {
 
         $rootScope.trackFBButtonConversion = function(buttonName, buttonValue) {
+            console.log('running trackFBButtonConversion()...');
             var fbPixelId = '169269843443494'
             if(ENV.name === 'PROD') {
                 var cd = {};

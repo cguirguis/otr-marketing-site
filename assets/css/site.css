@@ -1,7 +1,28 @@
 /* line 1, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+body {
+     -webkit-font-smoothing: antialiased;
+     font-size: 10px;
+ }
+
+@media (max-width:768px) {
+    body {
+        font-size: 8px;
+    }
+}
+
+@media (max-width:640px) {
+    body {
+        font-size: 6px;
+    }
+}
+
 h1, h2, h3, h4, h5, h6 {
   color: #397faf;
     font-family: "Roboto";
+}
+
+#page {
+    padding-top: 70px !important;
 }
 
 .homepage-banner h1 {
@@ -10,7 +31,25 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
     background-color: #41a3e3!important;
-    color: #aaa;
+    color: #fff !important;
+    font-weight: 600!important;
+}
+
+button.login-button {
+    font-size: 14px;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    margin-top: 16px;
+    margin-left: 10px;
+    background-color: white;
+    border: solid 1px #41a3e3;
+    color: #41a3e3;
+    border-radius: 3px;
+    font-family: Helvetica,Arial,sans-serif;
+}
+button.login-button:hover {
+    background-color: #46b0f5;
+    color: white;
 }
 
 /* line 4, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
@@ -58,12 +97,12 @@ h1, h2, h3, h4, h5, h6 {
 
 /* line 32, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 .homepage-banner.bg-primary {
-  background-image: url("../img/california-road.jpg"); /* update */
-  background-repeat: no-repeat;
-  background-position: center -242px; /* update */
-  height: 37em; /* update */
-  background-size: 100% 142%; /* update */
-  background-color: #337ab7; /* update */
+    background-image: url("../img/california-road.jpg");
+    background-repeat: no-repeat;
+    background-position: center -255px;
+    height: 47em;
+    background-size: 100% 153%;
+    background-color: #337ab7;
 }
 
 .content-page-banner {
@@ -98,10 +137,11 @@ h1, h2, h3, h4, h5, h6 {
 .navbar.navbar-default {
   background-color: white!important;
   border: none;
+    height: 70px;
 }
-.navbar-default .navbar-nav>li>a {
+.navbar-default .navbar-nav>li:not(.hover)>a {
   font-weight: inherit!important;
-  color: #aaa!important;
+  color: #aaa;
 }
 
 .navbar-nav>li {
@@ -112,6 +152,10 @@ h1, h2, h3, h4, h5, h6 {
     .navbar-collapse.collapsing {
         overflow: visible!important;
     }
+}
+
+.navbar-collapse.collapse {
+    height: 65px!important;
 }
 
 @media (max-width: 768px) { /* update */
@@ -144,7 +188,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* line 49, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 .nav.navbar-nav.navbar-right li.active a:hover {
-    color: white!important;
+    color: #fff!important;
 }
 
 /* line 53, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
@@ -154,6 +198,9 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 /* line 55, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+ul#menu-main-menu {
+    height: 100%;
+}
 ul#menu-main-menu a {
     line-height: 18px;
     margin-top: 11px;
@@ -164,33 +211,111 @@ ul#menu-main-menu a {
     border-radius: 3px;
 }
 
-/* line 59, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
-.navbar .container {
-  height: 70px;
+#menu-item-12 {
+    position: relative;
+    margin-right: 15px;
+    margin-left: 5px;
+}
+#menu-item-12 .nav-list {
+    display: none;
+    padding: 20px;
+}
+#menu-item-12 i {
+    float: left;
+    cursor: pointer;
+}
+#menu-item-12 .fa.fa-chevron-down {
+    position: absolute;
+    top: 29px;
+    right: 0px;
+    color: #bbb;
+    font-size: 10px;
+    z-index: 2;
+}
+#menu-item-12 .nav-list a {
+    padding: 5px 15px;
+    font-weight: lighter!important;
+}
+#menu-item-12.hover .nav-list {
+    padding: 70px 15px 2px 15px;
+    background: #fff;
+    background-color: #41a3e3;
+    position: absolute;
+    top: 10px;
+    border-radius: 3px;
+    display: block;
+    width: 185px;
+    z-index: 1;
+}
+#menu-item-12.hover a, #menu-item-12.hover .fa.fa-chevron-down {
+    color: white!important;
+    z-index: 2;
+}
+#menu-item-12.hover .nav-list li.nav-item {
+    list-style: none;
+    color: white;
+    display: block;
+    margin: 0;
+    line-height: 1;
+    padding: 0;
+    position: relative;
+    z-index: 1;
+    height: 50px;
 }
 
-/* line 66, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
-.textwidget h1 {
-  letter-spacing: 1px;
+#menu-item-12.hover .nav-list li.nav-item:hover a {
+    color: #0050a0!important; /*#E6E22F !important;*/
 }
+.navbar-default .navbar-nav>#menu-item-12.hover> a {
+    color: white!important;
+}
+
+#menu-item-13 .login-button {
+    border: solid 1px #1976d2;
+    margin-top: 15px;
+    height: 36px;
+    border-radius: 3px;
+    margin-left: 10px;
+}
+#menu-item-13 .login-button a {
+    line-height: 37px;
+}
+
+/* line 59, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
+.navbar .container {
+  height: 100%;
+}
+
+#text-3.widget {
+    padding: 0;
+}
+
 /* line 68, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 .textwidget #header, .textwidget #subheader {
   font-family: "Oxygen";
   text-align: left;
   text-shadow: 0 3px 10px rgba(0,0,0,0.2); /* update */
+    padding-bottom: 0px;
 }
 /* line 72, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 .textwidget #header {
-  font-size: 3.0em; /* update */
+  font-size: 4.3em; /* update */
   line-height: 1.3em;
   width: 80%;
 }
+@media (max-width: 640px) {
+    .textwidget #header {
+        font-size: 4.0em;
+        width: 100%;
+    }
+}
 /* line 76, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 .textwidget #subheader {
-  font-size: 1.4em;
-  line-height: 1.7em;
+  font-size: 2em;
+  line-height: 1.5em;
   width: 70%;
   font-family: inherit;
+    padding-bottom: 20px;
 }
 
 /* line 81, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
@@ -199,8 +324,16 @@ ul#menu-main-menu a {
     padding: 12px 50px;
     border-radius: 2px;
   color: white;
-  border: solid 1px white;
+  border: solid 1px transparent;
 }
+
+@media (max-width: 640px) {
+    #signUpButton, .signup-button {
+        padding: 12px 24px;
+        font-size: 17px;
+    }
+}
+
 /* line 85, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 #signUpButton:hover, .signup-button:hover {
   background: #2C75BD;
@@ -208,16 +341,30 @@ ul#menu-main-menu a {
   border: solid 1px white;
 }
 
-@media (max-width: 470px) {
+@media (max-width: 640px) {
     .textwidget h1 {
         text-align: center!important;
+        padding-bottom: 0px;
+    }
+    .textwidget #subheader {
+        text-align: center!important;
+        font-size: 2.3em;
+        line-height: 1.4em;
+        width: 100%;
+        padding-bottom: 20px;
     }
     .app-button {
         float: none!important;
     }
     .app-button img {
-        margin-top: 20px;
+        margin-top: 0px;
+        height: 40px;
+        cursor: pointer;
     }
+}
+
+.app-button img {
+    height: 50px;
 }
 
 .textwidget {
@@ -230,22 +377,10 @@ ul#menu-main-menu a {
     }
 }
 
-@media screen and (max-width: 600px) {
-  /* line 93, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
-  .textwidget #subheader {
-    font-size: 14px; /* update */
-    line-height: 1.4em;
-    width: 100%;
-  }
-  /* line 97, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
-  .textwidget #header {
-    width: 90%; 
-    font-size: 2em; /* update */
-  }
-}
 /* line 100, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 .home-widget-area {
   font-family: Roboto;
+    font-size: 16px;
 }
 /* line 103, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 .home-widget-area .bg .container .row .home-widget {
@@ -288,6 +423,8 @@ ul#menu-main-menu a {
 .features {
   font-family: "Roboto";
   overflow: auto;
+    padding-bottom: 0px!important;
+    margin-bottom: 0px;
 }
 /* line 133, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 .features h2 {
@@ -349,7 +486,7 @@ ul#menu-main-menu a {
 }
 
 /* line 179, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
-.signup-section {
+.signup-section:not(.row) {
   background-color: #ededed;
   font-family: "Roboto";
   padding-bottom: 30px;
@@ -515,7 +652,7 @@ div.signup-form {
 /* line 290, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 #footer #footer-widgets #footer-wrapper {
   margin-bottom: 30px;
-  margin-top: 30px;
+  margin-top: 0;
 }
 /* line 293, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 #footer #footer-widgets #footer-wrapper .row {
@@ -629,7 +766,7 @@ div.signup-form {
 
 /* STATE INFO VIEW */
 .content-page {
-    margin-top: 39px;
+    margin-top: 70px;
 }
 @media (max-width: 400px) {
     .content-page {
@@ -683,11 +820,17 @@ div.signup-form {
 .content-nav {
     width: 100%;
     height: auto!important;
-    padding: 0 100px;
+    /*padding: 0 100px;*/
     background-color: #333;
     display: inline-block;
     color: white;
     box-sizing: border-box;
+    z-index: 1;
+}
+
+.content-nav.fixed {
+    position:fixed;
+    left: 0;
 }
 .content-nav ul {
     width: 90%;
@@ -713,6 +856,7 @@ div.signup-form {
     padding: 10px 28px;
     height: 40px;
     cursor: pointer;
+    font-size: 16px;
 }
 @media (max-width: 515px) {
     .content-nav {
@@ -720,7 +864,7 @@ div.signup-form {
     }
 }
 .content-body {
-    padding: 40px 30px;
+    padding: 30px 30px;
     text-align: center;
     overflow: auto;
 }
@@ -744,11 +888,13 @@ div.signup-form {
     padding-right: 10px;
 }
 .content-body p {
-    color: #555!important;
+}
+.content-body p.large, .content-body p.green-text {
+    color: #555;
     float: right;
     font-weight: 400;
-    font-size: 60px;
-    line-height: 60px;
+    font-size: 40px;
+    line-height: 40px;
     width: 40%;
     text-align: center;
 }
@@ -824,7 +970,7 @@ div.signup-form {
     border-bottom: solid 1px #f8f8f8;
     border-right: solid 1px #f8f8f8;
     background-color: white;
-    font-size: 25px;
+    font-size: 22px;
     color: #333;
 }
 
@@ -876,13 +1022,15 @@ div.signup-form {
 }
 
 button.fight-my-ticket {
+    clear: both;
     cursor: pointer;
     height: 60px;
     font-size: 1.5em!important;
     border: solid 1px rgb(31, 85, 142);
     border-radius: 3px;
-    width: 50%;
+    width: 60%;
     min-width: 250px;
+    max-width: 660px;
     color: white;
     background: #2a81d7;
     background: -moz-linear-gradient(0% 100% 90deg, #206bcb, #3e9ee5);
@@ -895,8 +1043,8 @@ button.fight-my-ticket {
     -webkit-box-shadow: inset 0 1px 0 0 #62b1e9;
     cursor: pointer;
     text-shadow: 0 -1px 1px #3275bc;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 20px;
+    margin-bottom: 60px;
 }
 button.fight-my-ticket:hover {
     color: white;
@@ -905,6 +1053,9 @@ button.fight-my-ticket:hover {
     -webkit-box-shadow: inset 0 1px 0 0 #72b9eb, 0 1px 2px 0 #b3b3b3;
     background: -moz-linear-gradient(0% 100% 90deg, #10386a, #3e9ee5);
     background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#42a8f3), to(#1e64bd));
+}
+.green-text {
+    color:#52A058!important;
 }
 
 /* END OF STATE INFO VIEW */
