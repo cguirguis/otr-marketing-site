@@ -1,0 +1,32 @@
+{
+  "name": "otr-marketing-site",
+  "version": "1.0.0",
+  "description": "The landing site for offtherecord.com",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexg313/OTRMarketingSite.git"
+  },
+  "author": "Off the Record, Inc.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexg313/OTRMarketingSite/issues"
+  },
+  "homepage": "https://github.com/alexg313/OTRMarketingSite#readme",
+  "devDependencies": {
+    "bower": "1.7.2",
+    "browserify": "13.0.0",
+    "browserify-ngannotate": "2.0.0",
+    "del": "2.2.0",
+    "gulp": "^3.9.0",
+    "gulp-bower": "0.0.11",
+    "gulp-debug": "^2.1.2",
+    "gulp-install": "0.6.0",
+    "merge-stream": "^1.0.0",
+    "run-sequence": "1.1.5",
+    "vinyl-source-stream": "1.1.0"
+  }
+}
