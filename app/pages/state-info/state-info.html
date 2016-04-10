@@ -131,10 +131,15 @@
             </div>
         </div>
 
-        <div class="content-body" ng-if="vm.viewType == 'Fight'">
+        <div class="content-body fight-page" ng-if="vm.viewType == 'Fight'">
             <h2 class="fight-title">Off The Record makes fighting your ticket easy and risk-free. </h2>
             <hr style="display:block;" class="gray-hr">
             <br>
+
+            <div style="width:100%;margin-top:-20px;float:left;text-align:center;">
+                <button class="fight-my-ticket" ng-click="vm.fightTicketRedirect();">Fight My Ticket</button>
+            </div>
+
             <div class="overview-row">
                 <h1>
                     Average success rate
@@ -145,21 +150,31 @@
             </div>
             <hr/>
             <div class="overview-row">
-                <h1>Cost to fight</h1>
-                <p class="large">${{vm.stateDetails.baseFee}}</p>
-            </div>
-            <hr/>
-            <div class="overview-row">
-                <h1>Money-back guarantee</h1>
+                <h1>
+                    Money-back guarantee
+                    <div class="subtitle">Full refund if we are unable to keep the ticket off your record</div>
+                </h1>
                 <p class="green-text"><i class="fa fa-check"></i></p>
             </div>
-
-            <div style="width:100%;margin-top:-20px;float:left;text-align:center;">
-                <button class="fight-my-ticket" ng-click="vm.fightTicketRedirect();">Fight My Ticket</button>
+            <!--div class="overview-row">
+                <h1>No need to go to court</h1>
+                <p class="large">${{vm.stateDetails.baseFee}}</p>
+            </div-->
+            <hr/>
+            <div class="overview-row text-only">
+                <h1>No going to court</h1>
+                <p class="green-text"></p>
+            </div>
+            <hr/>
+            <div class="overview-row text-only">
+                <h1>No insurance increases</h1>
+                <p class="green-text"></p>
             </div>
 
+            <hr style="display:block;min-width:90%;" />
+
             <div class="options-comparison">
-                <h1>How much fighting your ticket could save you:</h1>
+                <h1>How much fighting this ticket could save you:</h1>
                 <table>
                     <tr>
                         <td class="white-bg"></td>
@@ -168,17 +183,34 @@
                     </tr>
                     <tr>
                         <td>Fine</td>
-                        <td>${{vm.stateDetails.avgFine}} (average)</td>
-                        <td>$0</td>
+                        <td style="position:relative;">
+                            <div class="ticket-fine">
+                                <input type="text" id="ticketFine" class="inline-field red-text" ng-model="vm.ticketFine"
+                                         ng-enter="vm.blurTicketFine()"
+                                         text-input-description="average ticket fine"
+                                         ng-model-options="{updateOn: 'default blur', debounce: {default: 500, blur: 0} }" />
+                            </div>
+                        </td>
+                        <td>
+                            $0 <span class="asterisk">*</span>
+                            <div class="asterisk-text">* if case is dismissed</div>
+                        </td>
                     </tr>
                     <tr>
                         <td>Legal fee</td>
                         <td>$0</td>
-                        <td>${{vm.stateDetails.baseFee}}</td>
+                        <td>
+                            ${{vm.stateDetails.baseFee}} <i class="fa fa-question-circle" />
+                            <div class="asterisk-text">rates may vary by county</div>
+                        </td>
                     </tr>
                     <tr>
-                        <td>Insurance penalty</td>
-                        <td>$540 - $1,800</td>
+                        <td>Insurance increase</td>
+                        <td><div class="red-text">
+                                ${{vm.insuranceIncrease}}
+                                <a href="" class="edit-field-text" ng-click="vm.editInsuranceVariables()">edit your insurance info</a>
+                            </div>
+                        </td>
                         <td>$0</td>
                     </tr>
                     <tr>
@@ -188,19 +220,26 @@
                     </tr>
                     <tr>
                         <td>Total cost</td>
-                        <td>${{540 + vm.stateDetails.avgFine}} - ${{1800 + vm.stateDetails.avgFine}}</td>
-                        <td>${{vm.stateDetails.baseFee}}</td>
+                        <td class="red-text">${{vm.totalTicketCost()}}</td>
+                        <td>${{vm.stateDetails.baseFee}} <span class="asterisk">*</span>
+                            <div class="asterisk-text">* if case is dismissed</div>
+                        </td>
                     </tr>
                 </table>
             </div>
 
             <div class="overview-row" style="width: 100%;margin-top: -10px;max-width:inherit">
-                <h1 style="width: 50%;line-height: 50px;">Total estimated savings:</h1>
+                <h1 style="width: 50%;line-height: 1.3em;padding-right:25px;text-align: right;">Total estimated savings:</h1>
                 <div style="width:50%;float:left;">
-                    <p class="large" style="float:left;width:100%;" class="green-text">${{540 + vm.stateDetails.avgFine - vm.stateDetails.baseFee}} - {{1800 + vm.stateDetails.avgFine - vm.stateDetails.baseFee}}</p>
-                    <div style="font-size: 25px;margin-top:-10px">over the next 3 years</div>
+                    <p class="large green-text" style="float:left;width:auto" class="green-text">${{vm.totalSavings()}}</p>
+                    <div class="savings-timeframe">over the next 3 years</div>
                 </div>
             </div>
+
+            <br>
+            <br>
+
+            <button class="fight-my-ticket" ng-click="vm.fightTicketRedirect();">Fight My Ticket</button>
         </div>
 
         <div class="content-body" ng-if="vm.viewType == 'FAQ'">
@@ -211,6 +250,32 @@
     </div>
 </div>
 
+
+<script type="text/ng-template" id="updateInsurancePremium.html">
+    <div class="edit-insurance-info">
+        <div class="modal-row">
+            <div>What is your monthly insurance premium?</div>
+            <div>
+                <span class="dollar-sign">$</span>
+                <input type="text" id="monthlyPremium" class="inline-field dollar-value" ng-model="monthlyPremium"
+                       ng-enter="ok()" />
+            </div>
+        </div>
+        <div class="modal-row">
+            <div>What violation did you get cited for?</div>
+            <div>
+                <select id="violation" class="">
+                    <option id="1">Speeding</option>
+                    <option id="2">Violation 2</option>
+                    <option id="3">Violation 3</option>
+                    <option id="4">Violation 4</option>
+                    <option id="5">Violation 5</option>
+                </select>
+            </div>
+        </div>
+        <button class="modal-button" ng-click="ok()">update</button>
+    </div>
+</script>
 
 <style>
     .content-body {
@@ -294,5 +359,116 @@
         text-transform: initial;
         font-size: 22px;
     }
-
+    .inline-field {
+        /*width: 100px;
+        height: 53px;
+        margin-top: -16px;
+        margin-bottom: -16px;
+        text-align: center;
+        margin-left: 5px;
+        border: 1px solid #B5D7F5!important;*/
+        border: 1px solid transparent !important;
+        width: 103%;
+        height: 63px;
+        margin-top: -20px;
+        margin-bottom: -21px;
+        text-align: center;
+        margin-left: -18px;
+        margin-right: -19px;
+    }
+    .red-text {
+        color: #A54242!important;
+    }
+    .ticket-fine:before {
+        position: absolute;
+        top: 35%;
+        content: "$";
+        left: calc(50% - 40px);
+        color: #A54242;
+    }
+    .text-input-description {
+        font-size: 13px;
+        position: absolute;
+        bottom: 1px;
+        right: calc(50% - 45px);
+        color: #666;
+    }
+    .inline-field.dollar-value {
+        width: 200px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        margin-left: -60px;
+        font-size: 35px;
+        background-color: transparent;
+    }
+    span.dollar-sign {
+        font-size: 33px;
+        color: #333;
+        margin-left: 35px;
+    }
+    .asterisk {
+        color: #E6E6E6;
+        font-size: 25px;
+    }
+    .asterisk-text {
+        color: #CCC;
+        font-size: 13px;
+        width: 100%;
+        margin-bottom: -19px;
+        margin-top: 1px;
+        text-align: right;
+    }
+    .edit-field-text {
+        font-size: 13px;
+        line-height: 18px;
+        display: block;
+        margin-top: 10px;
+        margin-bottom: -17px;
+    }
+    .edit-insurance-info {
+        padding: 30px;
+        font-size: 20px;
+        text-align: center;
+    }
+    .edit-insurance-info .modal-row {
+        margin-bottom: 15px;
+    }
+    .edit-insurance-info .modal-row > div {
+        display: inline-block;
+        width: 49%;
+        text-align: left;
+        font-size: 20px;
+    }
+    @media (max-width: 768px) {
+        .edit-insurance-info .modal-row {
+            margin-bottom: 15px;
+        }
+        .edit-insurance-info .modal-row > div {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+    }
+    .modal-button {
+        font-size: 22px;
+        width: 100%;
+        height: 46px;
+        text-transform: uppercase;
+        background-color: white;
+        border: solid 1px #448CE2;
+        color: #2265B5;
+        margin-top: 20px;
+    }
+    .modal-button:hover {
+        background-color: #2265B5;
+        color: white;
+    }
+    .fa-question-circle {
+        color: #78B6FF;
+        font-size: 18px;
+        display: inline-block;
+        top: -1px;
+        position: relative;
+        left: 2px;
+    }
 </style>

@@ -3,11 +3,11 @@
 
     angular
         .module('brochure')
-        .controller('StateInfoCtrl', StateInfoCtrl);
+        .controller('StateInfoCtrl', StateInfoCtrl)
+        .controller('InsuranceModalCtrl', InsuranceModalCtrl);
 
-
-    StateInfoCtrl.$inject = ['ENV', '$scope', '$stateParams', '$window', '$timeout', '$location', '$anchorScroll', 'GlobalUtils'];
-    function StateInfoCtrl(ENV, $scope, $stateParams, $window, $timeout, $location, $anchorScroll, GlobalUtils) {
+    StateInfoCtrl.$inject = ['ENV', '$scope', '$stateParams', '$window', '$timeout', '$location', '$anchorScroll', '$uibModal', 'GlobalUtils'];
+    function StateInfoCtrl(ENV, $scope, $stateParams, $window, $timeout, $location, $anchorScroll, $uibModal, GlobalUtils) {
         var vm = this,
 
             URLS = {
@@ -32,13 +32,12 @@
 
         vm.stateDetails = {
             "baseFee" : 250,
-            "successRate" : 96,
+            "successRate" : 97,
             "avgFine" : 180
         };
 
         switch (vm.stateCode) {
             case "OR" :
-            case "OR2" :
                 vm.stateDetails = {
                     "baseFee" : 350,
                     "successRate" : 88,
@@ -59,10 +58,68 @@
                 };
         }
 
+        vm.ticketFine = vm.stateDetails.avgFine;
+        vm.insuranceIncrease = 540;
+        vm.monthlyPremium = 100;
+
         // ----- INTERFACE ------------------------------------------------------------
         vm.fightTicketRedirect = fightTicketRedirect;
+        vm.totalSavings = totalSavings;
+        vm.totalTicketCost = totalTicketCost;
+        vm.editInsuranceVariables = editInsuranceVariables;
+        vm.updateInsuranceIncrease = updateInsuranceIncrease;
 
         // ----- PUBLIC METHODS -------------------------------------------------------
+
+        function editInsuranceVariables() {
+            vm.editInsuranceInfo = true;
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'updateInsurancePremium.html',
+                controller: 'InsuranceModalCtrl',
+                size: 'lg',
+                resolve: {
+                    monthlyPremium: function () {
+                        return vm.monthlyPremium;
+                    }
+                }
+            });
+
+            modalInstance.opened.then(
+                function () {
+                    $timeout(function() {
+                        $("#monthlyPremium").select();
+                    });
+                }
+            );
+
+            modalInstance.result.then(
+                function (monthlyPremium) {
+                    vm.monthlyPremium = monthlyPremium;
+                    vm.updateInsuranceIncrease();
+                    $(".edit-field-text").blur();
+                }, function () {
+                    $(".edit-field-text").blur();
+                }
+            );
+        }
+
+        function updateInsuranceIncrease() {
+            // Calculate insurance increase over 3 years
+            // monthly premium * 15% avg ticket increase * 12 months * 3 years
+            var value = parseInt(vm.monthlyPremium);
+            value = value * 0.15 * 12 * 3;
+            vm.insuranceIncrease = GlobalUtils.numberWithCommas(value);
+        }
+
+        function totalSavings() {
+            return GlobalUtils.numberWithCommas(GlobalUtils.parseDollarString(vm.totalTicketCost()) - vm.stateDetails.baseFee);
+        }
+
+        function totalTicketCost() {
+            return GlobalUtils.numberWithCommas(parseInt(vm.ticketFine) + parseInt(vm.insuranceIncrease));
+        }
 
         function fightTicketRedirect() {
 
@@ -82,7 +139,11 @@
             $anchorScroll.yOffset = 110;
             $location.hash(id);
             $anchorScroll();
-        }
+        };
+
+        vm.blurTicketFine = function() {
+            $(event.target).blur();
+        };
 
         // Fix top and left content nav bars so that they're sticky once
         // user has scrolled past a certain point
@@ -119,5 +180,18 @@
             });
         });
     }
+
+    function InsuranceModalCtrl($scope, $timeout, $uibModalInstance, monthlyPremium) {
+
+        $scope.monthlyPremium = monthlyPremium;
+
+        $scope.ok = function () {
+            $uibModalInstance.close($scope.monthlyPremium);
+        };
+
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
+    };
 
 })();

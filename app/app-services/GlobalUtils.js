@@ -14,6 +14,8 @@
         service.showMobileWebApp = showMobileWebApp;
         service.isMobileDevice = isMobileDevice;
         service.getAppUrl = getAppUrl;
+        service.numberWithCommas = numberWithCommas;
+        service.parseDollarString = parseDollarString;
 
         (function initService() {
 
@@ -39,7 +41,7 @@
             })(navigator.userAgent||navigator.vendor||window.opera);
 
             return isMobileDevice || window.innerWidth <= 800;
-        };
+        }
 
         function isMobileDevice() {
 
@@ -53,7 +55,14 @@
             })(navigator.userAgent||navigator.vendor||window.opera);
 
             return isMobileDevice || window.innerWidth <= 800;
-        };
+        }
 
+        function numberWithCommas(x) {
+            return parseInt(x).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        function parseDollarString(x) {
+            return Number(x.replace(/[^0-9\.]+/g,""));
+        }
     }
 })();
