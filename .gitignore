@@ -5,6 +5,7 @@ node_modules/
 
 ## Directory-based project format:
 .idea/
+.sass-cache/
 workspace.xml
 
 # if you remove the above rule, at least ignore the following:

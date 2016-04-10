@@ -158,13 +158,10 @@ button.login-button {
   }
 }
 
-.navbar-collapse.collapse {
-  height: 65px!important;
-}
-
-@media (max-width: 768px) { /* update */
+@media (max-width: 768px) {
   .navbar-collapse.navbar-ex1-collapse {
     border: solid 1px #dedede;
+    display: none;
 
     ul li {
       border-bottom: solid 1px #efefef;
@@ -182,6 +179,9 @@ button.login-button {
     background-color: white;
     margin-top: 0px;
     margin-bottom: 0px;
+    border: 1px solid;
+    border-color: #41A3E3;
+    padding-bottom: 5px;
   }
 }
 
@@ -321,7 +321,7 @@ ul#menu-main-menu {
   padding: 12px 50px;
   border-radius: 2px;
   color: white;
-  border: solid 1px transparent;
+  border: solid 1px white;
 
   &:hover {
     background: #2C75BD;
