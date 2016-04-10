@@ -1,4 +1,3 @@
-/* line 1, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 body {
   -webkit-font-smoothing: antialiased;
   font-size: 10px;
@@ -317,7 +316,6 @@ ul#menu-main-menu {
   }
 }
 
-/* line 81, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 #signUpButton, .signup-button {
   background: #2566a6;
   padding: 12px 50px;
@@ -394,16 +392,13 @@ ul#menu-main-menu {
 .home-widget-area .woocommerce ul.product_list_widget li:last-child {
   float: none;
 }
-/* line 116, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 .home-widget-area .woocommerce ul.product_list_widget li div.product-wrap {
   background-color: transparent;
   border: none;
 }
-/* line 120, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 .home-widget-area .woocommerce ul.product_list_widget li div.product-wrap div.product-img-wrap img {
   width: 230px;
 }
-/* line 123, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
 .home-widget-area .noMoreMailingTickets {
   font-size: 2em;
   margin-bottom: 2em;
@@ -464,13 +459,11 @@ ul#menu-main-menu {
 }
 
 @media screen and (max-width: 650px) {
-  /* line 171, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
   .features .feature {
     width: 50%;
   }
 }
 @media screen and (max-width: 500px) {
-  /* line 174, C:/Users/chrguir/Desktop/OTR2/assets/sass/site.sass */
   .features .feature {
     width: 100%;
     min-height: inherit;
