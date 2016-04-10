@@ -246,7 +246,7 @@ ul#menu-main-menu {
   padding: 12px 50px;
   border-radius: 2px;
   color: white;
-  border: solid 1px transparent; }
+  border: solid 1px white; }
   #signUpButton:hover, .signup-button:hover {
     background: #2C75BD;
     color: white;
