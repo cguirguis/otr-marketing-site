@@ -165,7 +165,12 @@ button.login-button {
 
     ul li {
       border-bottom: solid 1px #efefef;
-      padding-bottom: 10px;
+      background-color: white;
+      margin-top: 0px;
+      margin-bottom: 0px;
+      border: 1px solid;
+      border-color: #41A3E3;
+      padding-bottom: 5px;
     }
 
     &.collapse.in ul#menu-main-menu a {
