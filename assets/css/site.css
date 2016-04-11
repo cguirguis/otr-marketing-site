@@ -23,6 +23,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar-default {
   background-color: white !important;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.35);
   border: none;
   height: 70px; }
   .navbar-default .navbar-nav > li {
@@ -38,6 +39,9 @@ h1, h2, h3, h4, h5, h6 {
     color: white !important; }
 
 @media (max-width: 900px) and (min-width: 768px) {
+  .navbar-default .navbar-header .logo {
+    display: none; } }
+@media (max-width: 300px) {
   .navbar-default .navbar-header .logo {
     display: none; } }
 button.login-button {
@@ -127,17 +131,18 @@ button.login-button {
     display: none; }
     .navbar-collapse.navbar-ex1-collapse.in {
       overflow-y: visible; }
-    .navbar-collapse.navbar-ex1-collapse > ul > li {
+    .navbar-collapse.navbar-ex1-collapse > ul > li:not(:first-child) {
       background-color: white;
       margin-top: 0px;
       margin-bottom: 0px;
       border-top: 1px solid;
-      border-color: #41A3E3;
+      border-color: #F1F1F1;
       padding-bottom: 5px; }
-      .navbar-collapse.navbar-ex1-collapse > ul > li.active {
+      .navbar-collapse.navbar-ex1-collapse > ul > li:not(:first-child).active {
         background-color: #41a3e3; }
-      .navbar-collapse.navbar-ex1-collapse > ul > li .login-button {
-        margin-top: 10px; }
+      .navbar-collapse.navbar-ex1-collapse > ul > li:not(:first-child) .login-button {
+        margin-top: 10px;
+        width: 46%; }
     .navbar-collapse.navbar-ex1-collapse.collapse.in ul#menu-main-menu a {
       height: 35px;
       line-height: 11px; }
@@ -334,7 +339,8 @@ ul#menu-main-menu {
   font-size: 2em;
   margin-bottom: 2em;
   color: #397faf;
-  font-weight: 300; }
+  font-weight: 300;
+  line-height: 1.2em; }
 
 .features {
   font-family: "Roboto";
@@ -615,9 +621,6 @@ div.signup-form {
         border-color: #aaa;
         width: 100%; }
 
-@media (max-width: 400px) {
-  .content-page {
-    margin-top: 35px; } }
 .content-nav {
   width: 100%;
   height: auto !important;
@@ -626,35 +629,45 @@ div.signup-form {
   color: white;
   box-sizing: border-box;
   z-index: 1; }
-
-.content-nav.fixed {
-  position: fixed;
-  left: 0; }
-
-.content-nav ul {
-  width: 90%;
-  margin-bottom: 0;
-  line-height: 20px; }
-  .content-nav ul li {
-    list-style: none;
-    cursor: pointer; }
-    .content-nav ul li.active {
-      background-color: #777;
-      cursor: default; }
-      .content-nav ul li.active:hover {
-        background-color: #777; }
-    .content-nav ul li:hover {
-      background-color: #555; }
-.content-nav .nav-item {
-  float: left;
-  padding: 10px 28px;
-  height: 40px;
-  cursor: pointer;
-  font-size: 16px; }
+  .content-nav.fixed {
+    position: fixed;
+    left: 0; }
+  .content-nav ul {
+    width: 90%;
+    margin-bottom: 0;
+    line-height: 20px; }
+    .content-nav ul li {
+      list-style: none;
+      cursor: pointer; }
+      .content-nav ul li.active {
+        background-color: #777;
+        cursor: default; }
+        .content-nav ul li.active:hover {
+          background-color: #777; }
+      .content-nav ul li:hover {
+        background-color: #555; }
+  .content-nav .nav-item {
+    float: left;
+    padding: 10px 28px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 16px; }
 
 @media (max-width: 515px) {
+  .content-body {
+    padding-top: 20px; }
+
   .content-nav {
-    padding: 0 0 !important; } }
+    padding: 0 0 !important; }
+    .content-nav ul {
+      display: inline-table;
+      margin-left: -45px;
+      margin-bottom: 1px;
+      margin-top: 9px;
+      width: 100%; }
+      .content-nav ul li {
+        width: 100%;
+        float: none; } }
 .content-body {
   padding: 30px 30px;
   text-align: center;
@@ -869,6 +882,7 @@ button.fight-my-ticket {
     float: left;
     width: calc(100% - 240px);
     padding: 0px 40px;
+    padding-right: 10px;
     margin-bottom: 70px;
     text-align: left; }
     .content-body .content-wrapper .content-section {
@@ -887,7 +901,7 @@ button.fight-my-ticket {
       .content-body .content-wrapper .content-section blockquote {
         background: none repeat scroll 0 0 #FCFCFC;
         border-left: 4px solid #c3d92c;
-        margin: 0 3em;
+        margin: 0 1em 0 2em;
         margin-bottom: 10px;
         font-size: 15px;
         padding: 10px 0 7px 15px;
@@ -906,8 +920,10 @@ button.fight-my-ticket {
       float: none;
       width: 100%; }
       .content-body .left-nav ul > li {
-        display: inline-block;
-        padding-right: 30px; }
+        padding-right: 30px;
+        display: list-item;
+        list-style: initial;
+        list-style-position: inside; }
       .content-body .left-nav li.parent {
         width: 100%; }
     .content-body .content-wrapper {
@@ -1019,3 +1035,18 @@ button.fight-my-ticket {
     width: 100%;
     text-align: center;
     margin-bottom: 10px; } }
+@media (max-width: 400px) {
+  .content-header h1 {
+    font-size: 55px; }
+
+  .content-body.fight-page {
+    padding: 30px 0px; }
+    .content-body.fight-page h1 {
+      padding-left: 10px;
+      padding-right: 10px;
+      line-height: 40px; }
+    .content-body.fight-page button.fight-my-ticket {
+      margin-top: 10px;
+      margin-bottom: 30px; }
+    .content-body.fight-page .options-comparison {
+      padding: 0px; } }

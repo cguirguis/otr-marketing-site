@@ -34,6 +34,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar-default {
   background-color: white!important;
+  box-shadow: 0 0 5px rgba(0, 0, 0, .35);
   border: none;
   height: 70px;
 
@@ -60,6 +61,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 900px) and (min-width: 768px) {
+  .navbar-default .navbar-header .logo {
+    display: none;
+  }
+}
+
+@media (max-width: 300px) {
   .navbar-default .navbar-header .logo {
     display: none;
   }
@@ -176,12 +183,12 @@ button.login-button {
       overflow-y: visible;
     }
 
-    > ul > li {
+    > ul > li:not(:first-child) {
       background-color: white;
       margin-top: 0px;
       margin-bottom: 0px;
       border-top: 1px solid;
-      border-color: #41A3E3;
+      border-color: #F1F1F1;
       padding-bottom: 5px;
 
       &.active {
@@ -190,6 +197,7 @@ button.login-button {
 
       .login-button {
         margin-top: 10px;
+        width: 46%;
       }
     }
 
@@ -445,6 +453,7 @@ ul#menu-main-menu {
   margin-bottom: 2em;
   color: #397faf;
   font-weight: 300;
+  line-height: 1.2em;
 }
 
 .features {
@@ -839,27 +848,21 @@ div.signup-form {
     }
   }
 }
-@media (max-width: 400px) {
-  .content-page {
-    margin-top: 35px;
-  }
-}
 
 .content-nav {
   width: 100%;
-  height: auto!important;
+  height: auto !important;
   background-color: #333;
   display: inline-block;
   color: white;
   box-sizing: border-box;
   z-index: 1;
-}
 
-.content-nav.fixed {
-  position:fixed;
-  left: 0;
-}
-.content-nav {
+  &.fixed {
+    position: fixed;
+    left: 0;
+  }
+
   ul {
     width: 90%;
     margin-bottom: 0;
@@ -891,8 +894,24 @@ div.signup-form {
   }
 }
 @media (max-width: 515px) {
+  .content-body {
+    padding-top: 20px;
+  }
   .content-nav {
     padding: 0 0!important;
+
+    ul {
+      display: inline-table;
+      margin-left: -45px;
+      margin-bottom: 1px;
+      margin-top: 9px;
+      width: 100%;
+
+      li {
+        width: 100%;
+        float: none;
+      }
+    }
   }
 }
 .content-body {

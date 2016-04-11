@@ -40,6 +40,7 @@
     float: left;
     width: calc(100% - 240px);
     padding: 0px 40px;
+    padding-right: 10px;
     margin-bottom: 70px;
     text-align: left;
 
@@ -63,7 +64,7 @@
       blockquote {
         background: none repeat scroll 0 0 #FCFCFC;
         border-left: 4px solid rgb(195, 217, 44);
-        margin: 0 3em;
+        margin: 0 1em 0 2em;
         margin-bottom: 10px;
         font-size: 15px;
         padding: 10px 0 7px 15px;
@@ -92,8 +93,10 @@
       width: 100%;
 
       ul > li {
-        display: inline-block;
         padding-right: 30px;
+        display: list-item;
+        list-style: initial;
+        list-style-position: inside;
       }
 
       li.parent {
