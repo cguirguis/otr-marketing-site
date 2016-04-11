@@ -23,21 +23,6 @@ $(function() {
 });
 
 
-$(".navbar-toggle").click(function() {
-  
-  $(".navbar-ex1-collapse").attr("style", "");
-      
-	$(".navbar-ex1-collapse").toggleClass("in");
-	
-	if ($(".navbar-ex1-collapse").hasClass("in") && $(".navbar-toggle").data('toggle') == "expanded") {
-    $(".navbar-toggle").data('toggle', "collapse");
-  } else {
-    //$(".navbar-toggle").data('toggle', "expanded");
-  }
-    
-	event.stopPropagation();
-});
-
 // Closes the Responsive Menu on Menu Item Click
 $('.navbar-collapse ul li a').click(function() {
     $('.navbar-toggle').click();

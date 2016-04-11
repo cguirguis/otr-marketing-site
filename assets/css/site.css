@@ -15,6 +15,9 @@ h1, h2, h3, h4, h5, h6 {
 #page {
   padding-top: 70px !important; }
 
+#branch-banner-iframe {
+  background-color: white; }
+
 .homepage-banner h1 {
   color: white !important; }
 
@@ -34,6 +37,9 @@ h1, h2, h3, h4, h5, h6 {
   .navbar-default .navbar-nav > #menu-item-12.hover > a {
     color: white !important; }
 
+@media (max-width: 900px) and (min-width: 768px) {
+  .navbar-default .navbar-header .logo {
+    display: none; } }
 button.login-button {
   font-size: 14px;
   text-transform: uppercase;
@@ -118,25 +124,45 @@ button.login-button {
     overflow: visible !important; } }
 @media (max-width: 768px) {
   .navbar-collapse.navbar-ex1-collapse {
-    border: solid 1px #dedede;
     display: none; }
-    .navbar-collapse.navbar-ex1-collapse ul li {
-      border-bottom: solid 1px #efefef;
-      padding-bottom: 10px; }
+    .navbar-collapse.navbar-ex1-collapse.in {
+      overflow-y: visible; }
+    .navbar-collapse.navbar-ex1-collapse > ul > li {
+      background-color: white;
+      margin-top: 0px;
+      margin-bottom: 0px;
+      border-top: 1px solid;
+      border-color: red;
+      padding-bottom: 5px; }
+      .navbar-collapse.navbar-ex1-collapse > ul > li.active {
+        background-color: #41a3e3; }
+      .navbar-collapse.navbar-ex1-collapse > ul > li .login-button {
+        margin-top: 10px; }
     .navbar-collapse.navbar-ex1-collapse.collapse.in ul#menu-main-menu a {
-      height: 37px;
-      line-height: 20px; }
+      height: 35px;
+      line-height: 11px; }
+    .navbar-collapse.navbar-ex1-collapse #menu-item-12 {
+      margin-right: 0;
+      margin-left: 0;
+      overflow: visible;
+      width: 100%; }
+      .navbar-collapse.navbar-ex1-collapse #menu-item-12 .fa.fa-chevron-down {
+        top: 21px;
+        right: 20px;
+        font-size: 15px; }
+      .navbar-collapse.navbar-ex1-collapse #menu-item-12 ul.nav-list.nav-sublist {
+        width: 100%; }
 
   ul#menu-main-menu {
     height: 100% !important;
     background-color: white;
     margin-top: 0px;
-    margin-bottom: 0px; }
-}
+    margin-bottom: 0px;
+    border: 1px solid;
+    border-color: #41A3E3;
+    padding-bottom: 5px; } }
 .nav.navbar-nav.navbar-right li:not(.active) a:hover {
   color: #058ecc !important; }
-  .nav.navbar-nav.navbar-right li:not(.active) a:hover.active a:hover {
-    color: #fff !important; }
 
 ul#menu-main-menu {
   height: 100%; }
@@ -152,7 +178,8 @@ ul#menu-main-menu {
 #menu-item-12 {
   position: relative;
   margin-right: 15px;
-  margin-left: 5px; }
+  margin-left: 5px;
+  width: 185px; }
   #menu-item-12 .nav-list {
     display: none;
     padding: 20px; }
@@ -165,7 +192,7 @@ ul#menu-main-menu {
   #menu-item-12 .fa.fa-chevron-down {
     position: absolute;
     top: 29px;
-    right: 0px;
+    right: 10px;
     color: #bbb;
     font-size: 10px;
     z-index: 2; }
@@ -813,9 +840,6 @@ button.fight-my-ticket {
 
 /* END OF STATE INFO VIEW */
 
-@media (max-width: 768px) {
-  .content-body .left-nav {
-    float: left; } }
 .content-body {
   font-size: 14px; }
   .content-body .left-nav {
@@ -873,6 +897,22 @@ button.fight-my-ticket {
         .content-body .content-wrapper .content-section .content-subsection h3 {
           text-transform: initial;
           font-size: 22px; }
+
+@media (max-width: 768px) {
+  .content-body {
+    padding-top: 10px; }
+    .content-body .left-nav {
+      float: none;
+      width: 100%; }
+      .content-body .left-nav ul > li {
+        display: inline-block;
+        padding-right: 30px; }
+      .content-body .left-nav li.parent {
+        width: 100%; }
+    .content-body .content-wrapper {
+      width: 100%;
+      margin-top: 20px;
+      padding: 0; } }
 
 .content-body hr.gray-hr {
   border: 0;
@@ -968,7 +1008,8 @@ button.fight-my-ticket {
   display: inline-block;
   top: -1px;
   position: relative;
-  left: 2px; }
+  left: 2px;
+  cursor: pointer; }
 
 @media (max-width: 768px) {
   .content-body .edit-insurance-info .modal-row {

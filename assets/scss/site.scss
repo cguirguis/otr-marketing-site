@@ -24,6 +24,10 @@ h1, h2, h3, h4, h5, h6 {
   padding-top: 70px !important;
 }
 
+#branch-banner-iframe {
+  background-color: white;
+}
+
 .homepage-banner h1 {
   color: white!important;
 }
@@ -52,6 +56,12 @@ h1, h2, h3, h4, h5, h6 {
     > #menu-item-12.hover> a {
       color: white!important;
     }
+  }
+}
+
+@media (max-width: 900px) and (min-width: 768px) {
+  .navbar-default .navbar-header .logo {
+    display: none;
   }
 }
 
@@ -160,22 +170,49 @@ button.login-button {
 
 @media (max-width: 768px) {
   .navbar-collapse.navbar-ex1-collapse {
-    border: solid 1px #dedede;
     display: none;
 
-    ul li {
-      border-bottom: solid 1px #efefef;
+    &.in {
+      overflow-y: visible;
+    }
+
+    > ul > li {
       background-color: white;
       margin-top: 0px;
       margin-bottom: 0px;
-      border: 1px solid;
-      border-color: #41A3E3;
+      border-top: 1px solid;
+      border-color: red;
       padding-bottom: 5px;
+
+      &.active {
+        background-color: #41a3e3;
+      }
+
+      .login-button {
+        margin-top: 10px;
+      }
     }
 
     &.collapse.in ul#menu-main-menu a {
-      height: 37px;
-      line-height: 20px;
+      height: 35px;
+      line-height: 11px;
+    }
+
+    #menu-item-12 {
+      margin-right: 0;
+      margin-left: 0;
+      overflow: visible;
+      width: 100%;
+
+      .fa.fa-chevron-down {
+        top: 21px;
+        right: 20px;
+        font-size: 15px;
+      }
+
+      ul.nav-list.nav-sublist {
+        width: 100%;
+      }
     }
   }
 
@@ -192,10 +229,6 @@ button.login-button {
 
 .nav.navbar-nav.navbar-right li:not(.active) a:hover {
   color: #058ecc!important;
-
-  &.active a:hover {
-    color: #fff!important;
-  }
 }
 
 ul#menu-main-menu {
@@ -216,6 +249,7 @@ ul#menu-main-menu {
   position: relative;
   margin-right: 15px;
   margin-left: 5px;
+  width: 185px;
 
   .nav-list {
     display: none;
@@ -233,7 +267,7 @@ ul#menu-main-menu {
   .fa.fa-chevron-down {
     position: absolute;
     top: 29px;
-    right: 0px;
+    right: 10px;
     color: #bbb;
     font-size: 10px;
     z-index: 2;

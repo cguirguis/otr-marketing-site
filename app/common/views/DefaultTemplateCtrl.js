@@ -16,15 +16,19 @@
 
         vm.isMobileDevice = GlobalUtils.isMobileDevice();
 
-        $scope.$on('$viewContentLoaded', function(){
-            // ----- TODO: Need to move this back in the view -----------------------------
-            $("ul#menu-main-menu li").click(function() {
+        $(document).ready(function () {
+
+            var navbarToggle = $("button.navbar-toggle");
+
+            $("ul#menu-main-menu li:not(#menu-item-12)").click(function() {
                 if (vm.isMobileDevice) {
-                    $(this).parent().parent().hide();
+                    $("ul#menu-main-menu").parent().hide();
                 }
             });
-            $("button.navbar-toggle").click(function() {
+
+            navbarToggle.click(function() {
                 $("ul#menu-main-menu").parent().toggle();
+                event.stopPropagation();
             });
 
             var fightNavItem = $('#menu-item-12');

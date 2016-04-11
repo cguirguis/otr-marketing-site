@@ -1,14 +1,4 @@
 
-@media (max-width: 768px) {
-  .content-body {
-    .left-nav {
-      float: left;
-    }
-    .content-wrapper {
-
-    }
-  }
-}
 .content-body {
   font-size: 14px;
 
@@ -89,6 +79,31 @@
           font-size: 22px;
         }
       }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .content-body {
+    padding-top: 10px;
+
+    .left-nav {
+      float: none;
+      width: 100%;
+
+      ul > li {
+        display: inline-block;
+        padding-right: 30px;
+      }
+
+      li.parent {
+        width: 100%;
+      }
+    }
+    .content-wrapper {
+      width: 100%;
+      margin-top: 20px;
+      padding: 0;
     }
   }
 }

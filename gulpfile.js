@@ -6,14 +6,13 @@ var gutil = require('gulp-util');
 var sass = require('gulp-ruby-sass');
 var concat = require('gulp-concat');
 
-
 gulp.task('sass', function () {
     return sass('./assets/scss/*.scss')
         .pipe(gulp.dest('./assets/css'));
 });
 
 // Concatenate CSS Files
-gulp.task('concat-css', function() {
+gulp.task('concat-css', ['sass'], function() {
     return gulp.src([
             'assets/css/site.css',
             'assets/css/state-page.css',
@@ -28,4 +27,4 @@ gulp.task('watch', function() {
     gulp.watch('./assets/scss/*.scss', ['sass', 'concat-css'])
 });
 
-gulp.task('default', ['sass', 'concat-css', 'watch']);
+gulp.task('default', ['concat-css']);

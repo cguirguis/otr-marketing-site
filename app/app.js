@@ -126,7 +126,7 @@
                 disableHide: false,                     // Should the user have the ability to hide the banner? (show's X on left side)
                 forgetHide: true,                          // Should we show the banner after the user closes it? Can be set to true, or an integer to show again after X days
                 position: 'top',                        // Sets the position of the banner, options are: 'top' or 'bottom', and the default is 'top'
-                mobileSticky: false,                    // Determines whether the mobile banner will be set `position: fixed;` (sticky) or `position: absolute;`, defaults to false *this property only applies when the banner position is 'top'
+                mobileSticky: true,                    // Determines whether the mobile banner will be set `position: fixed;` (sticky) or `position: absolute;`, defaults to false *this property only applies when the banner position is 'top'
                 desktopSticky: true,                    // Determines whether the desktop banner will be set `position: fixed;` (sticky) or `position: absolute;`, defaults to true *this property only applies when the banner position is 'top'
                 make_new_link: false,                   // Should the banner create a new link, even if a link already exists?
                 rating: 5,                              // Number of stars (should be your store rating)
@@ -144,6 +144,19 @@
                     username: 'Alex'
                 }
             });
+
+        branch.addListener('willShowBanner', onShowBranchBanner);
+        branch.addListener('willCloseBanner', onCloseBranchBanner);
+
+        function onShowBranchBanner() {
+            // Push top navbar down the height of the branch banner
+            $(".navbar.navbar-fixed-top").css("top", "76px");
+        }
+
+        function onCloseBranchBanner() {
+            // Reset navbar's top property to 0
+            $(".navbar.navbar-fixed-top").css("top", "0");
+        }
     }
 
 })();

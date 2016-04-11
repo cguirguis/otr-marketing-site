@@ -143,6 +143,12 @@
 
         vm.blurTicketFine = function() {
             $(event.target).blur();
+
+            // If user changed value, hide 'average ticket fine'
+            // description in the ticket fine input field
+            if ($(event.target).val() != vm.stateDetails.avgFine) {
+                $(event.target).next(".text-input-description").hide();
+            }
         };
 
         // Fix top and left content nav bars so that they're sticky once
@@ -156,27 +162,37 @@
                 var topNavHeight = $('.navbar').outerHeight();
                 var aboveHeight = $('.content-header').outerHeight();
                 var contentTopPadding = $(".content-body").css("padding-top").substr(0,2);
+
                 $(window).scroll(function(){
+                    var responsiveMode = $(window).width() < 768;
+
                     if ($(window).scrollTop() > aboveHeight){
                         var footerTopPos = $("#footer-wrapper")[0].getBoundingClientRect().top - 100;
                         var leftNavBottomPos = leftNav.position().top + leftNavHeight;
-                        var footerCollision = footerTopPos < leftNavBottomPos ||
-                            footerTopPos < (145 + leftNavHeight);
+                        var footerCollision = !responsiveMode
+                            ? footerTopPos < leftNavBottomPos || footerTopPos < (145 + leftNavHeight)
+                            : footerTopPos < 110;
 
                         if (footerCollision) {
-                            leftNav.css('top', footerTopPos - leftNavHeight + 'px');
+                            if (responsiveMode) {
+                                contentNav.css('top', footerTopPos - 40 + 'px');
+                            } else {
+                                leftNav.css('top', footerTopPos - leftNavHeight + 'px');
+                            }
                         } else {
                             contentNav.addClass('fixed').css('top', topNavHeight + 'px')
                                 .next().css("padding-top", parseInt(contentTopPadding) + 50 + "px");
-                            leftNav.addClass('fixed').css('top', '145px').css('left', '30px');
-                            contentWrapper.css("margin-left", "240px");
+                            if (!responsiveMode) {
+                                leftNav.addClass('fixed').css('top', '145px').css('left', '30px');
+                                contentWrapper.css("margin-left", "240px");
+                            }
                         }
                     } else {
                         contentNav.removeClass('fixed').next().css("padding-top", contentTopPadding + "px");
                         leftNav.removeClass('fixed');
                         contentWrapper.css("margin-left", "0");
                     }
-                }   );
+                });
             });
         });
     }
