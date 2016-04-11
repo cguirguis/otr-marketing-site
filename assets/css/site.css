@@ -218,7 +218,8 @@ ul#menu-main-menu {
     padding: 0;
     position: relative;
     z-index: 1;
-    height: 50px; }
+    height: 50px;
+    cursor: pointer; }
   #menu-item-12.hover .nav-list li.nav-item:hover a {
     color: #0050a0 !important;
     /*#E6E22F !important;*/ }
