@@ -1,0 +1,134 @@
+
+.content-body {
+  hr.gray-hr {
+    border: 0;
+    height: 1px;
+    background: #eee;
+    max-width: inherit;
+  }
+  h2.fight-title {
+    margin-top: 0;
+    color: #999
+  }
+
+  .inline-field {
+    /*width: 100px;
+    height: 53px;
+    margin-top: -16px;
+    margin-bottom: -16px;
+    text-align: center;
+    margin-left: 5px;
+    border: 1px solid #B5D7F5!important;*/
+    border: 1px solid transparent !important;
+    width: 103%;
+    height: 63px;
+    margin-top: -20px;
+    margin-bottom: -21px;
+    text-align: center;
+    margin-left: -18px;
+    margin-right: -19px;
+
+    &.dollar-value {
+      width: 200px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      margin-left: -60px;
+      font-size: 35px;
+      background-color: transparent;
+    }
+  }
+  .red-text {
+    color: #A54242!important;
+  }
+  .ticket-fine:before {
+    position: absolute;
+    top: 35%;
+    content: "$";
+    left: calc(50% - 40px);
+    color: #A54242;
+  }
+  .text-input-description {
+    font-size: 13px;
+    position: absolute;
+    bottom: 1px;
+    right: calc(50% - 45px);
+    color: #666;
+  }
+  span.dollar-sign {
+    font-size: 33px;
+    color: #333;
+    margin-left: 35px;
+  }
+  .asterisk {
+    color: #E6E6E6;
+    font-size: 25px;
+  }
+  .asterisk-text {
+    color: #CCC;
+    font-size: 13px;
+    width: 100%;
+    margin-bottom: -19px;
+    margin-top: 1px;
+    text-align: right;
+  }
+  .edit-field-text {
+    font-size: 13px;
+    line-height: 18px;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: -17px;
+  }
+  .edit-insurance-info {
+    padding: 30px;
+    font-size: 20px;
+    text-align: center;
+
+    .modal-row {
+      margin-bottom: 15px;
+
+      > div {
+        display: inline-block;
+        width: 49%;
+        text-align: left;
+        font-size: 20px;
+      }
+    }
+  }
+
+  .modal-button {
+    font-size: 22px;
+    width: 100%;
+    height: 46px;
+    text-transform: uppercase;
+    background-color: white;
+    border: solid 1px #448CE2;
+    color: #2265B5;
+    margin-top: 20px;
+    &:hover {
+      background-color: #2265B5;
+      color: white;
+    }
+  }
+
+  .fa-question-circle {
+    color: #78B6FF;
+    font-size: 18px;
+    display: inline-block;
+    top: -1px;
+    position: relative;
+    left: 2px;
+  }
+}
+
+@media (max-width: 768px) {
+  .content-body {
+    .edit-insurance-info .modal-row {
+      margin-bottom: 15px;
+    }
+    .edit-insurance-info .modal-row > div {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+  }
+}

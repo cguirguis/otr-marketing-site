@@ -117,8 +117,8 @@ button.login-button {
   background-image: url("../img/california-road.jpg");
   background-repeat: no-repeat;
   background-position: center -255px;
-  height: 47em;
-  background-size: 100% 153%;
+  height: 415px;
+  background-size: 100% 158%;
   background-color: #337ab7;
 }
 
@@ -185,7 +185,7 @@ button.login-button {
   }
 }
 
-.nav.navbar-nav.navbar-right li a:hover {
+.nav.navbar-nav.navbar-right li:not(.active) a:hover {
   color: #058ecc!important;
 
   &.active a:hover {
@@ -307,6 +307,7 @@ ul#menu-main-menu {
     width: 70%;
     font-family: inherit;
     padding-bottom: 20px;
+    font-weight: 300;
   }
 }
 @media (max-width: 640px) {
