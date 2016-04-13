@@ -1,0 +1,20 @@
+// Font variables
+$roboto: "Roboto";
+$raleway: "Raleway", sans-serif;
+
+// color variables
+$primaryBlue: #41A3E3;
+$primaryBlueDarker: #397FAF;
+
+/*
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+.box {
+  @include border-radius(10px);
+}
+*/

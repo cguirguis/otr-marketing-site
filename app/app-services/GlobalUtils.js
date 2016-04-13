@@ -62,7 +62,11 @@
         }
 
         function parseDollarString(x) {
-            return Number(x.replace(/[^0-9\.]+/g,""));
+            if (!x.replace) {
+                return x;
+            }
+            var value = x.replace(",", "");
+            return Number(value.replace(",","").replace(/[^0-9\.]+/g,""));
         }
     }
 })();

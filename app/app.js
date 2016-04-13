@@ -42,10 +42,28 @@
             })
             .state('default-template.state-info', {
                 url: '/state/:stateCode',
+                abstract: true,
                 views: {
                     '': {
                         templateUrl: 'app/pages/state-info/state-info.html',
                         controller: 'StateInfoCtrl as vm'
+                    }
+                }
+            })
+            .state('default-template.state-info.overview', {
+                url: '',
+                views: {
+                    'CA@default-template.state-info': {
+                        templateUrl: 'app/pages/state-info/overview/california.html'
+                    },
+                    'NY@default-template.state-info': {
+                        templateUrl: 'app/pages/state-info/overview/newyork.html'
+                    },
+                    'OR@default-template.state-info': {
+                        templateUrl: 'app/pages/state-info/overview/oregon.html'
+                    },
+                    'WA@default-template.state-info': {
+                        templateUrl: 'app/pages/state-info/overview/washington.html'
                     }
                 }
             });

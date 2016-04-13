@@ -4,11 +4,6 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 
- $(document).ready(function() {
-	$(".menu-item.page-scroll").removeClass("active");
-	$(".menu-main-menu li:first-child").addClass("active");
-});
-
 // jQuery for page scrolling feature - requires jQuery Easing plugin
 $(function() {
     $('body').on('click', '.page-scroll a', function(event) {

@@ -1,3 +1,5 @@
+@import '_vars.scss';
+
 body {
   -webkit-font-smoothing: antialiased;
   font-size: 10px;
@@ -16,8 +18,8 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #397faf;
-  font-family: "Roboto";
+  color: $primaryBlueDarker;
+  font-family: $roboto;
 }
 
 #page {
@@ -49,7 +51,7 @@ h1, h2, h3, h4, h5, h6 {
     }
     > .active {
       > a, > a:hover, > a:focus {
-        background-color: #41a3e3 !important;
+        background-color: $primaryBlue !important;
         color: #fff !important;
         font-weight: 600 !important;
       }
@@ -79,8 +81,8 @@ button.login-button {
   margin-top: 16px;
   margin-left: 10px;
   background-color: white;
-  border: solid 1px #41a3e3;
-  color: #41a3e3;
+  border: solid 1px $primaryBlue;
+  color: $primaryBlue;
   border-radius: 3px;
   font-family: Helvetica,Arial,sans-serif;
 
@@ -192,7 +194,7 @@ button.login-button {
       padding-bottom: 5px;
 
       &.active {
-        background-color: #41a3e3;
+        background-color: $primaryBlue;
       }
 
       .login-button {
@@ -230,7 +232,7 @@ button.login-button {
     margin-top: 0px;
     margin-bottom: 0px;
     border: 1px solid;
-    border-color: #41A3E3;
+    border-color: $primaryBlue;
     padding-bottom: 5px;
   }
 }
@@ -284,7 +286,7 @@ ul#menu-main-menu {
     .nav-list {
       padding: 70px 15px 2px 15px;
       background: #fff;
-      background-color: #41a3e3;
+      background-color: $primaryBlue;
       position: absolute;
       top: 10px;
       border-radius: 3px;
@@ -425,39 +427,42 @@ ul#menu-main-menu {
 .home-widget-area {
   font-family: Roboto;
   font-size: 16px;
-}
-.home-widget-area .bg .container .row .home-widget {
-  padding: 0px;
-}
-.home-widget-area .bg .container .row .home-widget #woocommerce_products-2 {
-  margin: 0 0 4.5em;
-}
-.home-widget-area .woocommerce ul.product_list_widget {
-  margin: 0 -15px 0px -15px;
-}
-.home-widget-area .woocommerce ul.product_list_widget li {
-  float: left;
-}
-.home-widget-area .woocommerce ul.product_list_widget li:last-child {
-  float: none;
-}
-.home-widget-area .woocommerce ul.product_list_widget li div.product-wrap {
-  background-color: transparent;
-  border: none;
-}
-.home-widget-area .woocommerce ul.product_list_widget li div.product-wrap div.product-img-wrap img {
-  width: 230px;
-}
-.home-widget-area .noMoreMailingTickets {
-  font-size: 2em;
-  margin-bottom: 2em;
-  color: #397faf;
-  font-weight: 300;
-  line-height: 1.2em;
-}
 
+  .bg .container .row .home-widget {
+    padding: 0px;
+
+    #woocommerce_products-2 {
+      margin: 0 0 4.5em;
+    }
+  }
+  .woocommerce ul.product_list_widget {
+    margin: 0 -15px 0px -15px;
+
+    li {
+      float: left;
+
+      &:last-child {
+        float: none;
+      }
+      div.product-wrap {
+        background-color: transparent;
+        border: none;
+      }
+      div.product-wrap div.product-img-wrap img { width: 230px;
+      }
+    }
+  }
+  .noMoreMailingTickets {
+    font-size: 2em;
+    margin-bottom: 2em;
+    color: $primaryBlueDarker;
+    font-weight: 300;
+    line-height: 1.2em;
+  }
+
+}
 .features {
-  font-family: "Roboto";
+  font-family: $roboto;
   overflow: auto;
   padding-bottom: 0px!important;
   margin-bottom: 0px;
@@ -483,7 +488,7 @@ ul#menu-main-menu {
     min-height: 300px;
 
     &:hover .icon-preview, .features .feature:hover .feature-title {
-      color: #397faf;
+      color: $primaryBlueDarker;
     }
 
     .icon-preview {
@@ -522,7 +527,7 @@ ul#menu-main-menu {
 .signup-section {
   &:not(.row) {
     background-color: #ededed;
-    font-family: "Roboto";
+    font-family: $roboto;
     padding-bottom: 30px;
     background-image: url(../img/bg-pattern-gray.jpg);
     background-repeat: no-repeat;
@@ -531,7 +536,7 @@ ul#menu-main-menu {
 
   .container .row {
     h2 {
-      font-family: "Roboto";
+      font-family: $roboto;
       margin-top: 50px;
       margin-bottom: 30px;
       color: #dedede;
@@ -539,7 +544,7 @@ ul#menu-main-menu {
     .signup-text {
       margin-top: -10px;
       font-size: 1.3em;
-      font-family: "Roboto";
+      font-family: $roboto;
       font-weight: 100;
       color: #cccccc;
     }
@@ -610,7 +615,7 @@ div.signup-form {
 
         .textwidget h3 {
           color: white;
-          font-family: "Roboto";
+          font-family: $roboto;
           font-weight: 100;
           font-size: 2.3em;
         }
@@ -625,8 +630,8 @@ div.signup-form {
 .lawyer-lead-form {
   .modal-footer {
     .btn.btn-default {
-      background-color: #397faf;
-      border-color: #397faf;
+      background-color: $primaryBlueDarker;
+      border-color: $primaryBlueDarker;
       color: white;
 
       &:hover {
@@ -641,7 +646,7 @@ div.signup-form {
   border-botom: none;
 
   p.signup-text {
-    color: #397faf;
+    color: $primaryBlueDarker;
     font-size: 2em;
     font-weight: 100;
     font-family: Roboto;
@@ -693,7 +698,7 @@ div.signup-form {
         h4 {
           color: white;
           font-weight: 300;
-          font-family: "Roboto";
+          font-family: $roboto;
 
           &.widgettitle {
             margin: 0;
@@ -736,11 +741,11 @@ div.signup-form {
     h2.notification-title {
       color: white;
       font-size: 1.5em;
-      font-family: "Roboto";
+      font-family: $roboto;
       margin-bottom: 10px;
     }
     input[type='submit'] {
-      background-color: #397faf;
+      background-color: $primaryBlueDarker;
       border-color: white;
     }
     &:hover {
@@ -792,381 +797,3 @@ div.signup-form {
     width: 100%;
   }
 }
-
-
-/* STATE INFO VIEW */
-.content-page {
-  margin-top: 70px;
-
-  .content-container {
-    display: inline-block;
-    width: 100%!important;
-    height: auto;
-    text-align: center;
-
-    .content-header {
-      height: 400px;
-      position: relative;
-
-      h1 {
-        font-family: "Oswald", sans-serif;
-        margin-top: 0px;
-        font-size: 75px;
-        font-weight: 400;
-        text-transform: uppercase;
-        color: white!important;
-        position: absolute;
-        width: 100%;
-      }
-
-      .content-background {
-        width: 100%!important;
-        height: 400px;
-        background-size: 100% 100%;
-        background-position: center;
-        position: absolute;
-        left: 0;
-        right: 0;
-        opacity: 1;
-      }
-
-      .fighting-text {
-        font-family: "Raleway", sans-serif;
-        position: relative;
-        text-transform: uppercase;
-        font-size: 23px;
-        color: white!important;
-        padding-top: 30px;
-        width: 100%;
-        z-index: 1;
-      }
-
-      hr {
-        border-color: #aaa;
-        width: 100%;
-      }
-    }
-  }
-}
-
-.content-nav {
-  width: 100%;
-  height: auto !important;
-  background-color: #333;
-  display: inline-block;
-  color: white;
-  box-sizing: border-box;
-  z-index: 1;
-
-  &.fixed {
-    position: fixed;
-    left: 0;
-  }
-
-  ul {
-    width: 90%;
-    margin-bottom: 0;
-    line-height: 20px;
-
-    li {
-      list-style: none;
-      cursor: pointer;
-
-      &.active {
-        background-color: #777;
-        cursor: default;
-        &:hover {
-          background-color: #777;
-        }
-      }
-      &:hover {
-        background-color: #555;
-      }
-    }
-  }
-
-  .nav-item {
-    float: left;
-    padding: 10px 28px;
-    height: 40px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-}
-@media (max-width: 515px) {
-  .content-body {
-    padding-top: 20px;
-  }
-  .content-nav {
-    padding: 0 0!important;
-
-    ul {
-      display: inline-table;
-      margin-left: -45px;
-      margin-bottom: 1px;
-      margin-top: 9px;
-      width: 100%;
-
-      li {
-        width: 100%;
-        float: none;
-      }
-    }
-  }
-}
-.content-body {
-  padding: 30px 30px;
-  text-align: center;
-  overflow: auto;
-
-  h1 {
-    float: left;
-    color: #333!important;
-    font-size: 24px;
-    font-weight: 400;
-    margin-top: 0px;
-    margin-bottom: 20px;
-  }
-
-  &.fight-page h1 {
-    color: #397faf!important;
-    font-size: 32px;
-    font-weight: 300;
-    margin-top: 0px;
-    margin-bottom: 20px;
-    text-align: center;
-    width: 100%;
-  }
-
-  .overview-row {
-    padding: 0px 20px;
-    overflow: hidden;
-    margin: auto;
-    vertical-align: top;
-    max-width: 800px;
-    min-height: 100px;
-    display: inline-block;
-    width: 100%;
-
-    h1 {
-      color: #333!important;
-      float: left;
-      font-size: 30px;
-      font-weight: 300;
-      margin: 0;
-      line-height: 60px;
-      width: 70%;
-      text-align: right;
-    }
-
-    &.text-only h1 {
-      text-align: right;
-    }
-
-    .savings-timeframe {
-      font-size: 2em;
-      float: left;
-      line-height: 1.3em;
-      margin-left: 10px;
-    }
-  }
-
-  p.large, p.green-text {
-    color: #555;
-    float: right;
-    font-weight: 400;
-    font-size: 40px;
-    line-height: 40px;
-    width: 30%;
-    text-align: center;
-  }
-
-  p.green-text {
-    font-size: 4em;
-    line-height: 1em;
-    font-weight: bold;
-  }
-
-  .subtitle {
-    color: #ccc;
-    font-size: 16px;
-    line-height: 16px;
-    clear: both;
-    margin-bottom: 10px;
-  }
-
-  hr {
-    width: 90%;
-    max-width: 650px;
-    margin-top: 15px;
-  }
-
-  .options-comparison {
-    clear: both;
-    width: 100%;
-    text-align: center;
-    padding: 0px 20px;
-    margin-bottom: 40px;
-    margin-top: 40px;
-  }
-
-  table {
-    clear: both;
-    width: 100%;
-    min-width: 600px;
-    border-spacing: 1px;
-    border-collapse: separate;
-
-    tr {
-      &:last-child td {
-        border-bottom: solid 1px #fcfcfc;
-        font-weight: 400;
-      }
-      &:nth-child(1) td {
-        font-weight: 400;
-        font-size: 18px;
-        border-bottom: solid 1px #f8f8f8;
-      }
-      &:not(:nth-child(1)) td:not(:nth-child(1)) {
-        border-bottom: solid 1px #f8f8f8;
-        border-right: solid 1px #f8f8f8;
-        background-color: white;
-        font-size: 22px;
-        color: #333;
-      }
-    }
-
-    td {
-      padding: 20px 10px;
-      background-color: #f8f8f8;
-      width: 40%;
-
-      &:nth-child(1) {
-        text-align: right;
-        padding-right: 15px;
-        width: 160px;
-        border: solid 1px #f8f8f8;
-        border-top: none;
-        background-color: #f3f3f3;
-        font-size: 18px;
-      }
-
-      &:nth-child(4) {
-        background-color: #f8f8f8;
-      }
-
-      &.white-bg {
-        background-color: white;
-        border: none;
-      }
-
-      &.light-gray {
-        color: #ccc!important;
-      }
-    }
-  }
-}
-
-@media (min-width: 1024px) {
-  .content-body {
-    .overview-row {
-      width: 48%;
-      display: inline-block;
-      margin-bottom: 30px;
-
-      h1 {
-        line-height: 40px;
-        margin-top: 15px;
-      }
-
-      .subtitle {
-        margin-top: 10px;
-      }
-
-      .savings-timeframe {
-        line-height: 2.5em;
-      }
-    }
-  }
-  hr {
-    display: none;
-  }
-}
-
-@media (max-width: 640px) {
-  .content-body .overview-row .savings-timeframe {
-    font-size: 1.6em;
-    margin-left: 0;
-  }
-}
-
-@media (max-width: 768px) {
-  .content-body .overview-row {
-    max-width: inherit;
-    padding-top: 0px;
-
-    h1 {
-      width: 100%;
-      text-align: center;
-      margin-bottom: 10px;
-    }
-
-    p {
-      width: 100%;
-      text-align: center;
-    }
-
-    &.text-only {
-      h1 {
-        text-align: center;
-      }
-      p {
-        display: none;
-      }
-    }
-  }
-  .content-body hr {
-    margin-top: 0px;
-  }
-}
-
-button.fight-my-ticket {
-  clear: both;
-  cursor: pointer;
-  height: 60px;
-  font-size: 1.5em!important;
-  border: solid 1px rgb(31, 85, 142);
-  border-radius: 3px;
-  width: 60%;
-  min-width: 250px;
-  max-width: 660px;
-  color: white;
-  background: #2a81d7;
-  background: -moz-linear-gradient(0% 100% 90deg, #206bcb, #3e9ee5);
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#3e9ee5), to(#206bcb));
-  border-top: 1px solid #2a73a6;
-  border-right: 1px solid #165899;
-  border-bottom: 1px solid #07428f;
-  border-left: 1px solid #165899;
-  -moz-box-shadow: inset 0 1px 0 0 #62b1e9;
-  -webkit-box-shadow: inset 0 1px 0 0 #62b1e9;
-  cursor: pointer;
-  text-shadow: 0 -1px 1px #3275bc;
-  margin-top: 20px;
-  margin-bottom: 60px;
-
-  &:hover {
-    color: white;
-    background-color: #147bd8;
-    -moz-box-shadow: inset 0 1px 0 0 #72b9eb, 0 1px 2px 0 #b3b3b3;
-    -webkit-box-shadow: inset 0 1px 0 0 #72b9eb, 0 1px 2px 0 #b3b3b3;
-    background: -moz-linear-gradient(0% 100% 90deg, #10386a, #3e9ee5);
-    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#42a8f3), to(#1e64bd));
-  }
-}
-
-.green-text {
-  color:#52A058!important;
-}
-
-/* END OF STATE INFO VIEW */

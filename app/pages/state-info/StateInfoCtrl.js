@@ -25,7 +25,6 @@
         // ----- VARS AVAILABLE TO THE VIEW -------------------------------------------
 
         vm.viewType = "Overview";
-
         vm.stateCode = $stateParams.stateCode;
         vm.stateName = STATES[vm.stateCode];
         vm.backgroundImgUrl = "assets/img/states/" + vm.stateCode + ".jpg";
@@ -61,6 +60,7 @@
         vm.ticketFine = vm.stateDetails.avgFine;
         vm.insuranceIncrease = 540;
         vm.monthlyPremium = 100;
+        vm.selectedViolation = 0.21;
 
         // ----- INTERFACE ------------------------------------------------------------
         vm.fightTicketRedirect = fightTicketRedirect;
@@ -95,8 +95,9 @@
             );
 
             modalInstance.result.then(
-                function (monthlyPremium) {
-                    vm.monthlyPremium = monthlyPremium;
+                function (data) {
+                    vm.monthlyPremium = data.monthlyPremium;
+                    vm.selectedViolation = data.selectedViolation;
                     vm.updateInsuranceIncrease();
                     $(".edit-field-text").blur();
                 }, function () {
@@ -107,9 +108,9 @@
 
         function updateInsuranceIncrease() {
             // Calculate insurance increase over 3 years
-            // monthly premium * 15% avg ticket increase * 12 months * 3 years
+            // monthly premium * avg ticket increase * 12 months * 3 years
             var value = parseInt(vm.monthlyPremium);
-            value = value * 0.15 * 12 * 3;
+            value = value * vm.selectedViolation * 12 * 3;
             vm.insuranceIncrease = GlobalUtils.numberWithCommas(value);
         }
 
@@ -118,7 +119,8 @@
         }
 
         function totalTicketCost() {
-            return GlobalUtils.numberWithCommas(parseInt(vm.ticketFine) + parseInt(vm.insuranceIncrease));
+            return GlobalUtils.numberWithCommas(parseInt(vm.ticketFine) +
+                GlobalUtils.parseDollarString(vm.insuranceIncrease));
         }
 
         function fightTicketRedirect() {
@@ -200,9 +202,25 @@
     function InsuranceModalCtrl($scope, $timeout, $uibModalInstance, monthlyPremium) {
 
         $scope.monthlyPremium = monthlyPremium;
+        $scope.selectedViolation = 0.21;
+
+        $scope.violationOptions = [
+            { "name": "Speeding (1-15 mph over limit)", "value": 0.21 },
+            { "name": "Speeding (16-30 mph over limit)", "value": 0.28 },
+            { "name": "Speeding (31+ mph over limit)", "value": 0.30 },
+            { "name": "Failure to stop", "value": 0.19 },
+            { "name": "Failure to yield", "value": 0.19 },
+            { "name": "Following too closely (tailgating)", "value": 0.1337 },
+            { "name": "Improper pass", "value": 0.1365 },
+            { "name": "Improper turn+", "value": 0.1433 },
+            { "name": "Seatbelt infraction", "value": 0.05 },
+            { "name": "HOV lane violation", "value": 0.18 },
+            { "name": "Careless driving", "value": 0.27 },
+            { "name": "Reckless driving", "value": 0.82 }
+        ];
 
         $scope.ok = function () {
-            $uibModalInstance.close($scope.monthlyPremium);
+            $uibModalInstance.close({ monthlyPremium: $scope.monthlyPremium, selectedViolation: $scope.selectedViolation});
         };
 
         $scope.cancel = function () {
