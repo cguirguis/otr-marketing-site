@@ -585,7 +585,7 @@ div.signup-form {
   .content-page .content-container {
     display: inline-block;
     width: 100% !important;
-    height: 400px;
+    height: auto;
     text-align: center; }
     .content-page .content-container .content-header {
       height: 400px;
