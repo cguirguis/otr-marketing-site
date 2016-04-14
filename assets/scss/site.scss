@@ -34,6 +34,11 @@ h1, h2, h3, h4, h5, h6 {
   color: white!important;
 }
 
+.no-padding {
+  margin: 0!important;
+  padding: 0!important;
+}
+
 .navbar-default {
   background-color: white!important;
   box-shadow: 0 0 5px rgba(0, 0, 0, .35);

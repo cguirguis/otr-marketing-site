@@ -33,6 +33,10 @@ h1, h2, h3, h4, h5, h6 {
 .homepage-banner h1 {
   color: white !important; }
 
+.no-padding {
+  margin: 0 !important;
+  padding: 0 !important; }
+
 .navbar-default {
   background-color: white !important;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.35);
@@ -701,106 +705,10 @@ div.signup-form {
         font-weight: 400;
         margin-top: 0px;
         margin-bottom: 20px; }
-      .content-page .content-container .content-body.fight-page h1 {
-        color: #397FAF !important;
-        font-size: 32px;
-        font-weight: 300;
-        margin-top: 0px;
-        margin-bottom: 20px;
-        text-align: center;
-        width: 100%; }
-      .content-page .content-container .content-body .overview-row {
-        padding: 0px 20px;
-        overflow: hidden;
-        margin: auto;
-        vertical-align: top;
-        max-width: 800px;
-        min-height: 100px;
-        display: inline-block;
-        width: 100%; }
-        .content-page .content-container .content-body .overview-row h1 {
-          color: #333 !important;
-          float: left;
-          font-size: 30px;
-          font-weight: 300;
-          margin: 0;
-          line-height: 60px;
-          width: 70%;
-          text-align: right; }
-        .content-page .content-container .content-body .overview-row.text-only h1 {
-          text-align: right; }
-        .content-page .content-container .content-body .overview-row .savings-timeframe {
-          font-size: 2em;
-          float: left;
-          line-height: 1.3em;
-          margin-left: 10px; }
-      .content-page .content-container .content-body p.large, .content-page .content-container .content-body p.green-text {
-        color: #555;
-        float: right;
-        font-weight: 400;
-        font-size: 40px;
-        line-height: 40px;
-        width: 30%;
-        text-align: center; }
-      .content-page .content-container .content-body p.green-text {
-        font-size: 4em;
-        line-height: 1em;
-        font-weight: bold; }
-      .content-page .content-container .content-body .subtitle {
-        color: #ccc;
-        font-size: 16px;
-        line-height: 16px;
-        clear: both;
-        margin-bottom: 10px; }
       .content-page .content-container .content-body hr {
         width: 90%;
         max-width: 650px;
         margin-top: 15px; }
-      .content-page .content-container .content-body .options-comparison {
-        clear: both;
-        width: 100%;
-        text-align: center;
-        padding: 0px 20px;
-        margin-bottom: 40px;
-        margin-top: 40px; }
-      .content-page .content-container .content-body table {
-        clear: both;
-        width: 100%;
-        min-width: 600px;
-        border-spacing: 1px;
-        border-collapse: separate; }
-        .content-page .content-container .content-body table tr:last-child td {
-          border-bottom: solid 1px #fcfcfc;
-          font-weight: 400; }
-        .content-page .content-container .content-body table tr:nth-child(1) td {
-          font-weight: 400;
-          font-size: 18px;
-          border-bottom: solid 1px #f8f8f8; }
-        .content-page .content-container .content-body table tr:not(:nth-child(1)) td:not(:nth-child(1)) {
-          border-bottom: solid 1px #f8f8f8;
-          border-right: solid 1px #f8f8f8;
-          background-color: white;
-          font-size: 22px;
-          color: #333; }
-        .content-page .content-container .content-body table tr td {
-          padding: 20px 10px;
-          background-color: #f8f8f8;
-          width: 40%; }
-          .content-page .content-container .content-body table tr td:nth-child(1) {
-            text-align: right;
-            padding-right: 15px;
-            width: 160px;
-            border: solid 1px #f8f8f8;
-            border-top: none;
-            background-color: #f3f3f3;
-            font-size: 18px; }
-          .content-page .content-container .content-body table tr td:nth-child(4) {
-            background-color: #f8f8f8; }
-          .content-page .content-container .content-body table tr td.white-bg {
-            background-color: white;
-            border: none; }
-          .content-page .content-container .content-body table tr td.light-gray {
-            color: #ccc !important; }
       .content-page .content-container .content-body .content-wrapper {
         float: left;
         width: calc(100% - 240px);
@@ -869,83 +777,157 @@ div.signup-form {
   .content-page .green-text {
     color: #52A058 !important; }
 
+@media (max-width: 768px) {
+  .content-page .content-container .content-body {
+    padding-top: 10px; }
+    .content-page .content-container .content-body .left-nav {
+      float: none;
+      width: 100%; }
+      .content-page .content-container .content-body .left-nav ul > li {
+        padding-right: 30px;
+        display: list-item;
+        list-style: initial;
+        list-style-position: inside; }
+      .content-page .content-container .content-body .left-nav li.parent {
+        width: 100%; }
+    .content-page .content-container .content-body .content-wrapper {
+      width: 100%;
+      margin-top: 20px;
+      padding: 0; }
+    .content-page .content-container .content-body hr {
+      margin-top: 0px; } }
 @media (max-width: 515px) {
-  .content-body {
+  .content-page .content-container .content-body {
     padding-top: 20px; }
 
-  .content-nav {
+  .content-page .content-container .content-nav {
     padding: 0 0 !important; }
-    .content-nav ul {
+    .content-page .content-container .content-nav ul {
       display: inline-table;
       margin-left: -45px;
       margin-bottom: 1px;
       margin-top: 9px;
       width: 100%; }
-      .content-nav ul li {
+      .content-page .content-container .content-nav ul li {
         width: 100%;
         float: none; } }
-@media (max-width: 640px) {
-  .content-body .overview-row .savings-timeframe {
-    font-size: 1.6em;
-    margin-left: 0; } }
-@media (max-width: 768px) {
-  .content-body {
-    padding-top: 10px; }
-    .content-body .left-nav {
-      float: none;
-      width: 100%; }
-      .content-body .left-nav ul > li {
-        padding-right: 30px;
-        display: list-item;
-        list-style: initial;
-        list-style-position: inside; }
-      .content-body .left-nav li.parent {
-        width: 100%; }
-    .content-body .content-wrapper {
-      width: 100%;
-      margin-top: 20px;
-      padding: 0; }
-    .content-body .overview-row {
-      max-width: inherit;
-      padding-top: 0px; }
-      .content-body .overview-row h1 {
-        width: 100%;
-        text-align: center;
-        margin-bottom: 10px; }
-      .content-body .overview-row p {
-        width: 100%;
-        text-align: center; }
-      .content-body .overview-row.text-only h1 {
-        text-align: center; }
-      .content-body .overview-row.text-only p {
-        display: none; }
-    .content-body hr {
-      margin-top: 0px; } }
-@media (min-width: 1024px) {
-  .content-body .overview-row {
-    width: 48%;
-    display: inline-block;
-    margin-bottom: 30px; }
-    .content-body .overview-row h1 {
-      line-height: 40px;
-      margin-top: 15px; }
-    .content-body .overview-row .subtitle {
-      margin-top: 10px; }
-    .content-body .overview-row .savings-timeframe {
-      line-height: 2.5em; }
 
-  hr {
-    display: none; } }
+/*
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
 
-.content-body hr.gray-hr {
+.box {
+  @include border-radius(10px);
+}
+*/
+.content-page .content-container .content-body.fight-page h1 {
+  color: #397FAF !important;
+  font-size: 32px;
+  font-weight: 300;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  text-align: center;
+  width: 100%; }
+.content-page .content-container .content-body .overview-row {
+  padding: 0px 20px;
+  overflow: hidden;
+  margin: auto;
+  vertical-align: top;
+  max-width: 800px;
+  min-height: 100px;
+  display: inline-block;
+  width: 100%; }
+  .content-page .content-container .content-body .overview-row h1 {
+    color: #333 !important;
+    float: left;
+    font-size: 30px;
+    font-weight: 300;
+    margin: 0;
+    line-height: 60px;
+    width: 70%;
+    text-align: right; }
+    .content-page .content-container .content-body .overview-row h1.savings-title {
+      width: 48%;
+      line-height: 2.3em;
+      padding-right: 25px;
+      text-align: right;
+      padding-right: 15px; }
+  .content-page .content-container .content-body .overview-row div.savings-result .savings-timeframe {
+    font-size: 2em;
+    float: left;
+    line-height: 2.6em;
+    margin-left: 10px; }
+  .content-page .content-container .content-body .overview-row div.savings-result p {
+    float: left;
+    width: auto; }
+  .content-page .content-container .content-body .overview-row p.green-text {
+    font-size: 4em;
+    line-height: 1em;
+    font-weight: bold; }
+  .content-page .content-container .content-body .overview-row .subtitle {
+    color: #ccc;
+    font-size: 16px;
+    line-height: 16px;
+    clear: both;
+    margin-bottom: 10px; }
+.content-page .content-container .content-body .options-comparison {
+  clear: both;
+  width: 100%;
+  text-align: center;
+  padding: 0px 20px;
+  margin-bottom: 40px;
+  margin-top: 40px; }
+.content-page .content-container .content-body table {
+  clear: both;
+  width: 100%;
+  min-width: 600px;
+  border-spacing: 1px;
+  border-collapse: separate; }
+  .content-page .content-container .content-body table tr:last-child td {
+    border-bottom: solid 1px #fcfcfc;
+    font-weight: 400; }
+  .content-page .content-container .content-body table tr:nth-child(1) td {
+    font-weight: 400;
+    font-size: 18px;
+    border-bottom: solid 1px #f8f8f8; }
+  .content-page .content-container .content-body table tr:not(:nth-child(1)) td:not(:nth-child(1)) {
+    border-bottom: solid 1px #f8f8f8;
+    border-right: solid 1px #f8f8f8;
+    background-color: white;
+    font-size: 22px;
+    color: #333; }
+  .content-page .content-container .content-body table tr td {
+    padding: 20px 10px;
+    background-color: #f8f8f8;
+    width: 40%; }
+    .content-page .content-container .content-body table tr td:nth-child(1) {
+      text-align: right;
+      padding-right: 15px;
+      width: 160px;
+      border: solid 1px #f8f8f8;
+      border-top: none;
+      background-color: #f3f3f3;
+      font-size: 18px; }
+    .content-page .content-container .content-body table tr td:nth-child(4) {
+      background-color: #f8f8f8; }
+    .content-page .content-container .content-body table tr td.white-bg {
+      background-color: white;
+      border: none; }
+    .content-page .content-container .content-body table tr td.light-gray {
+      color: #ccc !important; }
+.content-page .content-container .content-body hr.gray-hr {
   border: 0;
   height: 1px;
   background: #eee;
   max-width: inherit; }
-.content-body h2.fight-title {
+.content-page .content-container .content-body h2.fight-title {
   margin-top: 0;
   color: #999; }
-.content-body .inline-field {
+.content-page .content-container .content-body .inline-field {
   /*width: 100px;
   height: 53px;
   margin-top: -16px;
@@ -961,48 +943,44 @@ div.signup-form {
   text-align: center;
   margin-left: -18px;
   margin-right: -19px; }
-  .content-body .inline-field.dollar-value {
+  .content-page .content-container .content-body .inline-field.dollar-value {
     width: 200px;
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: -60px;
     font-size: 35px;
     background-color: transparent; }
-.content-body .red-text {
+.content-page .content-container .content-body .red-text {
   color: #A54242 !important; }
-.content-body .ticket-fine:before {
+.content-page .content-container .content-body .ticket-fine:before {
   position: absolute;
   top: 35%;
   content: "$";
   left: calc(50% - 40px);
   color: #A54242; }
-.content-body .text-input-description {
+.content-page .content-container .content-body .text-input-description {
   font-size: 13px;
   position: absolute;
   bottom: 1px;
   right: calc(50% - 45px);
   color: #666; }
-.content-body span.dollar-sign {
-  font-size: 33px;
-  color: #333;
-  margin-left: 35px; }
-.content-body .asterisk {
+.content-page .content-container .content-body .asterisk {
   color: #E6E6E6;
   font-size: 25px; }
-.content-body .asterisk-text {
+.content-page .content-container .content-body .asterisk-text {
   color: #CCC;
   font-size: 13px;
   width: 100%;
   margin-bottom: -19px;
   margin-top: 1px;
   text-align: right; }
-.content-body .edit-field-text {
+.content-page .content-container .content-body .edit-field-text {
   font-size: 13px;
   line-height: 18px;
   display: block;
   margin-top: 10px;
   margin-bottom: -17px; }
-.content-body .fa-question-circle {
+.content-page .content-container .content-body .fa-question-circle {
   color: #78B6FF;
   font-size: 18px;
   display: inline-block;
@@ -1022,6 +1000,10 @@ div.signup-form {
       width: 49%;
       text-align: left;
       font-size: 20px; }
+    .edit-insurance-info .modal-row span.dollar-sign {
+      font-size: 33px;
+      color: #333;
+      margin-left: 35px; }
 
 .modal-button {
   font-size: 22px;
@@ -1036,25 +1018,91 @@ div.signup-form {
     background-color: #2265B5;
     color: white; }
 
+@media (min-width: 1024px) {
+  .content-page .content-container .content-body.fight-page .overview-row {
+    width: 48%;
+    display: inline-block;
+    margin-bottom: 30px; }
+    .content-page .content-container .content-body.fight-page .overview-row h1 {
+      line-height: 40px;
+      margin-top: 15px; }
+    .content-page .content-container .content-body.fight-page .overview-row .subtitle {
+      margin-top: 10px; }
+
+  hr {
+    display: none; } }
+@media (max-width: 853px) {
+  .content-page .content-container .content-body.fight-page .overview-row {
+    max-width: inherit;
+    padding: 0; }
+    .content-page .content-container .content-body.fight-page .overview-row h1 {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 10px; }
+      .content-page .content-container .content-body.fight-page .overview-row h1.savings-title {
+        width: 100%;
+        line-height: 1.3em;
+        text-align: center;
+        margin-bottom: 10px; }
+    .content-page .content-container .content-body.fight-page .overview-row div.savings-result {
+      width: 100%; }
+      .content-page .content-container .content-body.fight-page .overview-row div.savings-result .savings-timeframe, .content-page .content-container .content-body.fight-page .overview-row div.savings-result p.large.green-text {
+        width: 100%;
+        margin-bottom: 0px;
+        line-height: 1em; }
+    .content-page .content-container .content-body.fight-page .overview-row p {
+      width: 100%;
+      text-align: center; } }
 @media (max-width: 768px) {
-  .content-body .edit-insurance-info .modal-row {
-    margin-bottom: 15px; }
-  .content-body .edit-insurance-info .modal-row > div {
+  .content-page .content-container .content-body.fight-page {
+    padding: 30px 10px; }
+    .content-page .content-container .content-body.fight-page .edit-insurance-info .modal-row {
+      margin-bottom: 15px; }
+    .content-page .content-container .content-body.fight-page .edit-insurance-info .modal-row > div {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 10px; }
+    .content-page .content-container .content-body.fight-page .overview-row {
+      max-width: inherit;
+      padding: 0; }
+      .content-page .content-container .content-body.fight-page .overview-row h1 {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px; }
+        .content-page .content-container .content-body.fight-page .overview-row h1.savings-title {
+          width: 100%;
+          line-height: 1.3em;
+          text-align: center;
+          margin-bottom: 10px; }
+      .content-page .content-container .content-body.fight-page .overview-row div.savings-result {
+        width: 100%; }
+        .content-page .content-container .content-body.fight-page .overview-row div.savings-result .savings-timeframe, .content-page .content-container .content-body.fight-page .overview-row div.savings-result p.large.green-text {
+          width: 100%;
+          margin-bottom: 0px; }
+      .content-page .content-container .content-body.fight-page .overview-row p {
+        width: 100%;
+        text-align: center; } }
+@media (max-width: 640px) {
+  .content-page .content-container .content-body .overview-row .savings-timeframe {
+    font-size: 1.6em;
+    margin-left: 0; }
+
+  .edit-insurance-info .modal-row > div {
+    display: block;
     width: 100%;
-    text-align: center;
     margin-bottom: 10px; } }
 @media (max-width: 400px) {
-  .content-header h1 {
+  .content-page .content-container .content-header h1 {
     font-size: 55px; }
 
-  .content-body.fight-page {
+  .content-page .content-container .content-body.fight-page {
     padding: 30px 0px; }
-    .content-body.fight-page h1 {
+    .content-page .content-container .content-body.fight-page h1 {
       padding-left: 10px;
       padding-right: 10px;
       line-height: 40px; }
-    .content-body.fight-page button.fight-my-ticket {
+    .content-page .content-container .content-body.fight-page button.fight-my-ticket {
       margin-top: 10px;
       margin-bottom: 30px; }
-    .content-body.fight-page .options-comparison {
+    .content-page .content-container .content-body.fight-page .options-comparison {
       padding: 0px; } }

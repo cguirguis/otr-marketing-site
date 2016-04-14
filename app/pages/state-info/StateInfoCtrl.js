@@ -155,47 +155,57 @@
 
         // Fix top and left content nav bars so that they're sticky once
         // user has scrolled past a certain point
-        $scope.$on('$viewContentLoaded', function(){
-            $timeout(function() {
-                var leftNav = $(".left-nav");
-                var contentNav = $('.content-nav');
-                var contentWrapper = $('.content-wrapper');
-                var leftNavHeight = leftNav.outerHeight();
-                var topNavHeight = $('.navbar').outerHeight();
-                var aboveHeight = $('.content-header').outerHeight();
-                var contentTopPadding = $(".content-body").css("padding-top").substr(0,2);
+        $scope.$on('$viewContentLoaded', function(scope, stateName){
+            console.log(stateName);
+            if (stateName == "@default-template.state-info") {
 
-                $(window).scroll(function(){
-                    var responsiveMode = $(window).width() < 768;
+                var onContentLoaded = function(stateName) {
+                    var leftNav = $(".left-nav");
+                    var contentNav = $('.content-nav');
+                    var contentWrapper = $('.content-wrapper');
+                    var leftNavHeight = leftNav.outerHeight();
+                    var topNavHeight = $('.navbar').outerHeight();
+                    var aboveHeight = $('.content-header').outerHeight();
+                    var contentTopPadding = $(".content-body").css("padding-top").substr(0, 2);
 
-                    if ($(window).scrollTop() > aboveHeight){
-                        var footerTopPos = $("#footer-wrapper")[0].getBoundingClientRect().top - 100;
-                        var leftNavBottomPos = leftNav.position().top + leftNavHeight;
-                        var footerCollision = !responsiveMode
-                            ? footerTopPos < leftNavBottomPos || footerTopPos < (145 + leftNavHeight)
-                            : footerTopPos < 110;
+                    var onScroll = function(stateName) {
+                        var responsiveMode = $(window).width() < 768;
 
-                        if (footerCollision) {
-                            if (responsiveMode) {
-                                contentNav.css('top', footerTopPos - 40 + 'px');
+                        if ($(window).scrollTop() > aboveHeight) {
+                            if (stateName != "@default-template.state-info") {
+                                return;
+                            }
+
+                            var footerTopPos = $("#footer-wrapper")[0].getBoundingClientRect().top - 100;
+                            var leftNavBottomPos = leftNav.position().top + leftNavHeight;
+                            var footerCollision = !responsiveMode
+                                ? footerTopPos < leftNavBottomPos || footerTopPos < (145 + leftNavHeight)
+                                : footerTopPos < 110;
+
+                            if (footerCollision) {
+                                if (responsiveMode) {
+                                    contentNav.css('top', footerTopPos - 40 + 'px');
+                                } else {
+                                    leftNav.css('top', footerTopPos - leftNavHeight + 'px');
+                                }
                             } else {
-                                leftNav.css('top', footerTopPos - leftNavHeight + 'px');
+                                contentNav.addClass('fixed').css('top', topNavHeight + 'px')
+                                    .next().css("padding-top", parseInt(contentTopPadding) + 50 + "px");
+                                if (!responsiveMode) {
+                                    leftNav.addClass('fixed').css('top', '145px').css('left', '30px');
+                                    contentWrapper.css("margin-left", "240px");
+                                }
                             }
                         } else {
-                            contentNav.addClass('fixed').css('top', topNavHeight + 'px')
-                                .next().css("padding-top", parseInt(contentTopPadding) + 50 + "px");
-                            if (!responsiveMode) {
-                                leftNav.addClass('fixed').css('top', '145px').css('left', '30px');
-                                contentWrapper.css("margin-left", "240px");
-                            }
+                            contentNav.removeClass('fixed').next().css("padding-top", contentTopPadding + "px");
+                            leftNav.removeClass('fixed');
+                            contentWrapper.css("margin-left", "0");
                         }
-                    } else {
-                        contentNav.removeClass('fixed').next().css("padding-top", contentTopPadding + "px");
-                        leftNav.removeClass('fixed');
-                        contentWrapper.css("margin-left", "0");
-                    }
-                });
-            });
+                    };
+                    $(window).scroll(onScroll(stateName));
+                };
+                $timeout(onContentLoaded(stateName));
+            }
         });
     }
 

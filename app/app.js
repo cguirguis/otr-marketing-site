@@ -42,7 +42,6 @@
             })
             .state('default-template.state-info', {
                 url: '/state/:stateCode',
-                abstract: true,
                 views: {
                     '': {
                         templateUrl: 'app/pages/state-info/state-info.html',
@@ -51,21 +50,14 @@
                 }
             })
             .state('default-template.state-info.overview', {
-                url: '',
-                views: {
-                    'CA@default-template.state-info': {
-                        templateUrl: 'app/pages/state-info/overview/california.html'
-                    },
-                    'NY@default-template.state-info': {
-                        templateUrl: 'app/pages/state-info/overview/newyork.html'
-                    },
-                    'OR@default-template.state-info': {
-                        templateUrl: 'app/pages/state-info/overview/oregon.html'
-                    },
-                    'WA@default-template.state-info': {
-                        templateUrl: 'app/pages/state-info/overview/washington.html'
-                    }
-                }
+                url: '/overview',
+                templateUrl: 'app/pages/state-info/overview.html',
+                controller: 'StateInfoCtrl as vm'
+            })
+            .state('default-template.state-info.fight', {
+                url: '/fight',
+                templateUrl: 'app/pages/state-info/fight-ticket.html',
+                controller: 'StateInfoCtrl as vm'
             });
 
         $urlRouterProvider.otherwise('/');
