@@ -602,6 +602,11 @@ div.signup-form {
 */
 .content-page {
   margin-top: 70px; }
+  .content-page a {
+    cursor: pointer;
+    color: #333; }
+    .content-page a:hover {
+      color: #41A3E3; }
   .content-page .content-container {
     display: inline-block;
     width: 100% !important;
@@ -677,11 +682,12 @@ div.signup-form {
       text-align: center;
       overflow: auto; }
       .content-page .content-container .content-body .left-nav {
-        background-color: rgba(58, 165, 240, 0.15);
+        border: solid 1px rgba(165, 165, 165, 0.55);
         padding: 20px;
-        width: 240px;
+        width: 220px;
         text-align: left;
-        float: left; }
+        float: left;
+        background: rgba(185, 185, 185, 0.05); }
         .content-page .content-container .content-body .left-nav.fixed {
           position: fixed;
           left: 0; }
@@ -693,8 +699,8 @@ div.signup-form {
         .content-page .content-container .content-body .left-nav ul {
           padding-left: 10px; }
           .content-page .content-container .content-body .left-nav ul li {
-            list-style: none;
-            line-height: 32px;
+            list-style: inherit;
+            line-height: 28px;
             cursor: pointer; }
             .content-page .content-container .content-body .left-nav ul li:not(.parent):hover {
               color: #1ab5ff; }
@@ -716,13 +722,18 @@ div.signup-form {
         padding-right: 10px;
         margin-bottom: 70px;
         text-align: left; }
+        .content-page .content-container .content-body .content-wrapper .intro {
+          font-size: 14px;
+          color: #333 !important;
+          margin-top: 0px;
+          margin-bottom: 20px; }
         .content-page .content-container .content-body .content-wrapper .content-section {
           padding: 10px 0px 10px 0px;
           font-size: 15px; }
           .content-page .content-container .content-body .content-wrapper .content-section.summary {
             border: solid 1px rgba(0, 100, 146, 0.27);
-            text-align: center;
-            font-size: 17px;
+            text-align: left;
+            font-size: 16px;
             padding: 20px; }
           .content-page .content-container .content-body .content-wrapper .content-section h3 {
             font-family: "Oswald", sans-serif;
@@ -735,7 +746,7 @@ div.signup-form {
             margin: 0 1em 0 2em;
             margin-bottom: 10px;
             font-size: 15px;
-            padding: 10px 0 7px 15px;
+            padding: 10px 10px 7px 15px;
             text-align: left; }
           .content-page .content-container .content-body .content-wrapper .content-section .content-subsection {
             margin-left: 35px;
@@ -743,6 +754,10 @@ div.signup-form {
             .content-page .content-container .content-body .content-wrapper .content-section .content-subsection h3 {
               text-transform: initial;
               font-size: 22px; }
+          .content-page .content-container .content-body .content-wrapper .content-section .emphasized {
+            font-weight: 400; }
+          .content-page .content-container .content-body .content-wrapper .content-section .underline {
+            text-decoration: underline; }
   .content-page button.fight-my-ticket {
     clear: both;
     cursor: pointer;
@@ -783,6 +798,8 @@ div.signup-form {
     .content-page .content-container .content-body .left-nav {
       float: none;
       width: 100%; }
+      .content-page .content-container .content-body .left-nav a:hover {
+        text-decoration: underline; }
       .content-page .content-container .content-body .left-nav ul > li {
         padding-right: 30px;
         display: list-item;

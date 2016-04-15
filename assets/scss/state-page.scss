@@ -3,6 +3,14 @@
 .content-page {
   margin-top: 70px;
 
+  a {
+    cursor: pointer;
+    color: #333;
+    &:hover {
+      color: $primaryBlue;
+    }
+  }
+
   .content-container {
     display: inline-block;
     width: 100%!important;
@@ -104,11 +112,12 @@
       overflow: auto;
 
       .left-nav {
-        background-color: rgba(58, 165, 240, 0.15);
+        border: solid 1px rgba(165, 165, 165, 0.55);
         padding: 20px;
-        width: 240px;
+        width: 220px;
         text-align: left;
         float: left;
+        background: rgba(185, 185, 185, 0.05);
 
         &.fixed {
           position: fixed;
@@ -126,8 +135,8 @@
           padding-left: 10px;
 
           li {
-            list-style: none;
-            line-height: 32px;
+            list-style: inherit;
+            line-height: 28px;
             cursor: pointer;
 
             &:not(.parent):hover {
@@ -160,14 +169,20 @@
         margin-bottom: 70px;
         text-align: left;
 
+        .intro {
+          font-size:14px;
+          color:#333!important;
+          margin-top:0px;
+          margin-bottom:20px;
+        }
         .content-section {
           padding: 10px 0px 10px 0px;
           font-size: 15px;
 
           &.summary {
             border: solid 1px rgba(0, 100, 146, 0.27);
-            text-align: center;
-            font-size: 17px;
+            text-align: left;
+            font-size: 16px;
             padding: 20px;
           }
           h3 {
@@ -183,7 +198,7 @@
             margin: 0 1em 0 2em;
             margin-bottom: 10px;
             font-size: 15px;
-            padding: 10px 0 7px 15px;
+            padding: 10px 10px 7px 15px;
             text-align: left;
           }
 
@@ -195,6 +210,14 @@
               text-transform: initial;
               font-size: 22px;
             }
+          }
+
+          .emphasized {
+            font-weight: 400;
+          }
+
+          .underline {
+            text-decoration: underline;
           }
         }
       }
@@ -248,6 +271,10 @@
     .left-nav {
       float: none;
       width: 100%;
+
+      a:hover {
+        text-decoration: underline;
+      }
 
       ul > li {
         padding-right: 30px;

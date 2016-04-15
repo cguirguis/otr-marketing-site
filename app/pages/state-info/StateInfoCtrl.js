@@ -168,14 +168,10 @@
                     var aboveHeight = $('.content-header').outerHeight();
                     var contentTopPadding = $(".content-body").css("padding-top").substr(0, 2);
 
-                    var onScroll = function(stateName) {
+                    $(window).scroll(function() {
                         var responsiveMode = $(window).width() < 768;
 
                         if ($(window).scrollTop() > aboveHeight) {
-                            if (stateName != "@default-template.state-info") {
-                                return;
-                            }
-
                             var footerTopPos = $("#footer-wrapper")[0].getBoundingClientRect().top - 100;
                             var leftNavBottomPos = leftNav.position().top + leftNavHeight;
                             var footerCollision = !responsiveMode
@@ -201,8 +197,7 @@
                             leftNav.removeClass('fixed');
                             contentWrapper.css("margin-left", "0");
                         }
-                    };
-                    $(window).scroll(onScroll(stateName));
+                    })
                 };
                 $timeout(onContentLoaded(stateName));
             }
