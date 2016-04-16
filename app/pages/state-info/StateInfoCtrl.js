@@ -6,60 +6,66 @@
         .controller('StateInfoCtrl', StateInfoCtrl)
         .controller('InsuranceModalCtrl', InsuranceModalCtrl);
 
-    StateInfoCtrl.$inject = ['ENV', '$scope', '$stateParams', '$window', '$timeout', '$location', '$anchorScroll', '$uibModal', 'GlobalUtils'];
-    function StateInfoCtrl(ENV, $scope, $stateParams, $window, $timeout, $location, $anchorScroll, $uibModal, GlobalUtils) {
+    StateInfoCtrl.$inject = ['ENV', '$state', '$filter', '$stateParams', '$window', '$timeout', '$location', '$anchorScroll', '$uibModal', 'GlobalUtils'];
+    function StateInfoCtrl(ENV, $state, $filter, $stateParams, $window, $timeout, $location, $anchorScroll, $uibModal, GlobalUtils) {
         var vm = this,
 
-            URLS = {
-                COURTS: ENV.apiEndpoint + '/api/v1/courts/lead'
-            },
             STATES = {
-                "WA" : "Washington state",
-                "OR" : "Oregon",
-                "CA" : "California",
-                "NY" : "New York",
-                "TX" : "Texas",
-                "OK" : "Oklahoma"
+                WA : {
+                    abbreviation : 'WA',
+                    name : 'Washington state',
+                    backgroundImgUrl : 'assets/img/states/WA.jpg',
+                    baseFee : 200,
+                    successRate : 97,
+                    avgFine : 180
+                },
+                OR : {
+                    abbreviation : 'OR',
+                    name : 'Oregon',
+                    backgroundImgUrl : 'assets/img/states/OR.jpg',
+                    baseFee : 350,
+                    successRate : 88,
+                    avgFine : 270
+                },
+                CA : {
+                    abbreviation : 'CA',
+                    name : 'California',
+                    backgroundImgUrl : 'assets/img/states/CA.jpg',
+                    baseFee : 300,
+                    successRate : 93,
+                    avgFine : 207
+                },
+                NY : {
+                    abbreviation : 'NY',
+                    name : 'New York',
+                    backgroundImgUrl : 'assets/img/states/NY.jpg',
+                    baseFee : 200,
+                    successRate : 95,
+                    avgFine : 180
+                },
+                TX : {
+                    abbreviation : 'TX',
+                    name : 'Texas',
+                    backgroundImgUrl : 'assets/img/states/TX.jpg',
+                    baseFee : 200,
+                    successRate : 97,
+                    avgFine : 107
+                },
+                OK : {
+                    abbreviation : 'OK',
+                    name : 'Oklahoma',
+                    backgroundImgUrl : 'assets/img/states/OK.jpg',
+                    baseFee : 200,
+                    successRate : 96,
+                    avgFine : 180
+                }
             };
 
         // ----- VARS AVAILABLE TO THE VIEW -------------------------------------------
 
-        vm.viewType = "Overview";
-        vm.stateCode = $stateParams.stateCode;
-        vm.stateName = STATES[vm.stateCode];
-        vm.backgroundImgUrl = "assets/img/states/" + vm.stateCode + ".jpg";
-
-        vm.stateDetails = {
-            "baseFee" : 250,
-            "successRate" : 97,
-            "avgFine" : 180
-        };
-
-        switch (vm.stateCode) {
-            case "OR" :
-                vm.stateDetails = {
-                    "baseFee" : 350,
-                    "successRate" : 88,
-                    "avgFine" : 380
-                };
-                break;
-            case "CA" :
-                vm.stateDetails = {
-                    "baseFee" : 300,
-                    "successRate" : 87,
-                    "avgFine" : 360
-                };
-            case "TX" :
-                vm.stateDetails = {
-                    "baseFee" : 200,
-                    "successRate" : 90,
-                    "avgFine" : 240
-                };
-        }
-
-        vm.ticketFine = vm.stateDetails.avgFine;
+        vm.selectedState = STATES[$stateParams.stateCode];
         vm.insuranceIncrease = 540;
-        vm.monthlyPremium = 100;
+        vm.clientMonthlyPremium = 100;
         vm.selectedViolation = 0.21;
 
         // ----- INTERFACE ------------------------------------------------------------
@@ -68,20 +74,27 @@
         vm.totalTicketCost = totalTicketCost;
         vm.editInsuranceVariables = editInsuranceVariables;
         vm.updateInsuranceIncrease = updateInsuranceIncrease;
+        vm.scrollTo = scrollTo;
+        vm.blurTicketFineField = blurTicketFineField;
 
         // ----- PUBLIC METHODS -------------------------------------------------------
 
+        (function initController() {
+
+        })();
+
         function editInsuranceVariables() {
-            vm.editInsuranceInfo = true;
+            // vm.editInsuranceInfo = true;
 
             var modalInstance = $uibModal.open({
                 animation: true,
+                //backdrop:       'static',
                 templateUrl: 'updateInsurancePremium.html',
                 controller: 'InsuranceModalCtrl',
                 size: 'lg',
                 resolve: {
                     monthlyPremium: function () {
-                        return vm.monthlyPremium;
+                        return vm.clientMonthlyPremium;
                     }
                 }
             });
@@ -96,31 +109,35 @@
 
             modalInstance.result.then(
                 function (data) {
-                    vm.monthlyPremium = data.monthlyPremium;
+                    vm.clientMonthlyPremium = data.monthlyPremium;
                     vm.selectedViolation = data.selectedViolation;
                     vm.updateInsuranceIncrease();
                     $(".edit-field-text").blur();
-                }, function () {
+                },
+                function (message) {
+                    $log.info('message: ' + message);
                     $(".edit-field-text").blur();
                 }
             );
         }
 
+        /*
+        Calculate insurance increase over 3 years:
+            insurance increase = monthly premium * expected premium increase * 36 months
+         */
         function updateInsuranceIncrease() {
-            // Calculate insurance increase over 3 years
-            // monthly premium * avg ticket increase * 12 months * 3 years
-            var value = parseInt(vm.monthlyPremium);
-            value = value * vm.selectedViolation * 12 * 3;
-            vm.insuranceIncrease = GlobalUtils.numberWithCommas(value);
+            vm.insuranceIncrease = vm.clientMonthlyPremium * vm.selectedViolation * 36;
         }
 
         function totalSavings() {
-            return GlobalUtils.numberWithCommas(GlobalUtils.parseDollarString(vm.totalTicketCost()) - vm.stateDetails.baseFee);
+            console.log('total ticket cost: ', vm.totalTicketCost());
+            console.log('base fee: ', vm.selectedState.baseFee);
+            return vm.totalTicketCost() - vm.selectedState.baseFee;
         }
 
         function totalTicketCost() {
-            return GlobalUtils.numberWithCommas(parseInt(vm.ticketFine) +
-                GlobalUtils.parseDollarString(vm.insuranceIncrease));
+            var ticketFine = (vm.clientTicketFine) ? vm.clientTicketFine : vm.selectedState.avgFine;
+            return parseInt(ticketFine) + vm.insuranceIncrease;
         }
 
         function fightTicketRedirect() {
@@ -132,76 +149,71 @@
             });
         }
 
-        vm.goToFightView = function() {
-            vm.viewType = 'Fight';
-            $window.scrollTo(0, 400);
-        };
-
-        vm.scrollTo = function(id) {
+        function scrollTo(id) {
             $anchorScroll.yOffset = 110;
             $location.hash(id);
             $anchorScroll();
-        };
+        }
 
-        vm.blurTicketFine = function() {
+        function blurTicketFineField() {
             $(event.target).blur();
 
-            // If user changed value, hide 'average ticket fine'
-            // description in the ticket fine input field
-            if ($(event.target).val() != vm.stateDetails.avgFine) {
+            if (vm.clientTicketFine != vm.selectedState.avgFine) {
                 $(event.target).next(".text-input-description").hide();
             }
         };
 
         // Fix top and left content nav bars so that they're sticky once
         // user has scrolled past a certain point
-        $scope.$on('$viewContentLoaded', function(scope, stateName){
-            console.log(stateName);
-            if (stateName == "@default-template.state-info") {
-
-                var onContentLoaded = function(stateName) {
-                    var leftNav = $(".left-nav");
-                    var contentNav = $('.content-nav');
-                    var contentWrapper = $('.content-wrapper');
-                    var leftNavHeight = leftNav.outerHeight();
-                    var topNavHeight = $('.navbar').outerHeight();
-                    var aboveHeight = $('.content-header').outerHeight();
-                    var contentTopPadding = $(".content-body").css("padding-top").substr(0, 2);
-
-                    $(window).scroll(function() {
-                        var responsiveMode = $(window).width() < 768;
-
-                        if ($(window).scrollTop() > aboveHeight) {
-                            var footerTopPos = $("#footer-wrapper")[0].getBoundingClientRect().top - 100;
-                            var leftNavBottomPos = leftNav.position().top + leftNavHeight;
-                            var footerCollision = !responsiveMode
-                                ? footerTopPos < leftNavBottomPos || footerTopPos < (145 + leftNavHeight)
-                                : footerTopPos < 110;
-
-                            if (footerCollision) {
-                                if (responsiveMode) {
-                                    contentNav.css('top', footerTopPos - 40 + 'px');
-                                } else {
-                                    leftNav.css('top', footerTopPos - leftNavHeight + 'px');
-                                }
-                            } else {
-                                contentNav.addClass('fixed').css('top', topNavHeight + 'px')
-                                    .next().css("padding-top", parseInt(contentTopPadding) + 50 + "px");
-                                if (!responsiveMode) {
-                                    leftNav.addClass('fixed').css('top', '145px').css('left', '30px');
-                                    contentWrapper.css("margin-left", "240px");
-                                }
-                            }
-                        } else {
-                            contentNav.removeClass('fixed').next().css("padding-top", contentTopPadding + "px");
-                            leftNav.removeClass('fixed');
-                            contentWrapper.css("margin-left", "0");
-                        }
-                    })
-                };
-                $timeout(onContentLoaded(stateName));
-            }
-        });
+        //$scope.$on('$viewContentLoaded', function(scope, stateName){
+        //    console.log('stateName: ', stateName);
+        //    if (stateName == "@default-template.state-info") {
+        //
+        //        var onContentLoaded = function(stateName) {
+        //            var leftNav = $(".left-nav");
+        //            console.log('leftNav: ', leftNav);
+        //            var contentNav = $('.content-nav');
+        //            var contentWrapper = $('.content-wrapper');
+        //            var leftNavHeight = leftNav.outerHeight();
+        //            var topNavHeight = $('.navbar').outerHeight();
+        //            var aboveHeight = $('.content-header').outerHeight();
+        //            var contentTopPadding = $(".content-body").css("padding-top").substr(0, 2);
+        //
+        //            $(window).scroll(function() {
+        //                var responsiveMode = $(window).width() < 768;
+        //
+        //                if ($(window).scrollTop() > aboveHeight) {
+        //                    var footerTopPos = $("#footer-wrapper")[0].getBoundingClientRect().top - 100;
+        //                    var leftNavBottomPos = leftNav.position().top + leftNavHeight;
+        //                    console.log('leftNavBottomPos: ', leftNavBottomPos);
+        //                    var footerCollision = !responsiveMode
+        //                        ? footerTopPos < leftNavBottomPos || footerTopPos < (145 + leftNavHeight)
+        //                        : footerTopPos < 110;
+        //
+        //                    if (footerCollision) {
+        //                        if (responsiveMode) {
+        //                            contentNav.css('top', footerTopPos - 40 + 'px');
+        //                        } else {
+        //                            leftNav.css('top', footerTopPos - leftNavHeight + 'px');
+        //                        }
+        //                    } else {
+        //                        contentNav.addClass('fixed').css('top', topNavHeight + 'px')
+        //                            .next().css("padding-top", parseInt(contentTopPadding) + 50 + "px");
+        //                        if (!responsiveMode) {
+        //                            leftNav.addClass('fixed').css('top', '145px').css('left', '30px');
+        //                            contentWrapper.css("margin-left", "240px");
+        //                        }
+        //                    }
+        //                } else {
+        //                    contentNav.removeClass('fixed').next().css("padding-top", contentTopPadding + "px");
+        //                    leftNav.removeClass('fixed');
+        //                    contentWrapper.css("margin-left", "0");
+        //                }
+        //            })
+        //        };
+        //        $timeout(onContentLoaded(stateName));
+        //    }
+        //});
     }
 
     function InsuranceModalCtrl($scope, $timeout, $uibModalInstance, monthlyPremium) {

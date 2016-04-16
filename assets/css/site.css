@@ -886,7 +886,7 @@ div.signup-form {
     line-height: 1em;
     font-weight: bold; }
   .content-page .content-container .content-body .overview-row .subtitle {
-    color: #ccc;
+    color: darkgray;
     font-size: 16px;
     line-height: 16px;
     clear: both;
@@ -936,6 +936,8 @@ div.signup-form {
       border: none; }
     .content-page .content-container .content-body table tr td.light-gray {
       color: #ccc !important; }
+    .content-page .content-container .content-body table tr td.dark-gray {
+      color: darkgray !important; }
 .content-page .content-container .content-body hr.gray-hr {
   border: 0;
   height: 1px;
@@ -976,23 +978,25 @@ div.signup-form {
   left: calc(50% - 40px);
   color: #A54242; }
 .content-page .content-container .content-body .text-input-description {
-  font-size: 13px;
+  font-size: 15px;
   position: absolute;
   bottom: 1px;
-  right: calc(50% - 45px);
-  color: #666; }
+  right: calc(50% - 135px);
+  color: tomato; }
 .content-page .content-container .content-body .asterisk {
   color: #E6E6E6;
   font-size: 25px; }
 .content-page .content-container .content-body .asterisk-text {
-  color: #CCC;
+  color: darkgray;
   font-size: 13px;
   width: 100%;
   margin-bottom: -19px;
   margin-top: 1px;
   text-align: right; }
 .content-page .content-container .content-body .edit-field-text {
-  font-size: 13px;
+  font-size: 15px;
+  color: tomato;
+  text-decoration: underline;
   line-height: 18px;
   display: block;
   margin-top: 10px;

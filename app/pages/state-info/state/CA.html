@@ -1,131 +1,134 @@
-<div class="left-nav">
-    <div class="nav-title">Traffic tickets in {{vm.stateName}}</div>
-    <ul>
-        <li><a ng-click="vm.scrollTo('fines-and-penalties')">Fines & penalties</a></li>
-        <li><a ng-click="vm.scrollTo('moving-violations')">Moving violations</a></li>
-        <li><a ng-click="vm.scrollTo('non-moving-violations')">Non-moving violations</a></li>
-        <li class="parent"><a ng-click="vm.scrollTo('response-options')">Responding to your ticket</a>
-            <ul>
-                <li><a ng-click="vm.scrollTo('pay')">Paying your ticket</a></li>
-                <li><a ng-click="vm.scrollTo('traffic-school')">Attending traffic school</a></li>
-                <li><a ng-click="vm.scrollTo('contest')">Fighting your ticket</a></li>
-            </ul>
-        </li>
-        <li><a ng-click="vm.scrollTo('license-suspension')">License suspension</a></li>
-        <li><a ng-click="vm.scrollTo('hiring-attorney')">Hiring an attorney</a></li>
-        <li><a ng-click="vm.scrollTo('commercial-drivers')">Commercial drivers</a></li>
-    </ul>
-</div>
 
-<div class="content-wrapper">
-    <p class="intro">On this page, you'll find information about California traffic ticket fines and penalties, what to do if you lose your traffic ticket, and penalties for commercial drivers.</p>
 
-    <div class="content-section summary">
-        When you receive a traffic citation in California, you can either fight your ticket or make a payment to the court in the county where you received it. Failure to appear in court or to pay the amount due by the date listed on the mailed courtesy notice can result in a $300 civil assessment fee, a warrant for your arrest, and/or suspension of your driver's license.
-    </div>
-
-    <div class="content-section">
-        <h3 id="fines-and-penalties">Fines & penalties</h3>
-        <p>Traffic fine amounts in California vary by county court. To get specific details about traffic ticket fees, you'll need to contact the county court listed on your citation. If you're a commercial driver, see below.</p>
-        <p>The penalties for traffic tickets are consistent throughout all counties in California.</p>
-        <p>Points issued will depend on the traffic violation. Violations such as <span class="emphasized">speeding</span>, making an <span class="emphasized">unsafe lane change</span>, or an <span class="emphasized">at-fault accident</span> will give you lower points than serious violations, such as reckless driving</span>, <span class="emphasized">hit-and-run</span>, <span class="emphasized">DUI</span>, or driving with a <span class="emphasized">suspended or revoked license</span>.
-        </p>
-        <blockquote>If convicted of a traffic violation, you could receive points on your CA driving record, or have your driver's license suspended or revoked. Your traffic court may give you the option to have points removed from your record upon completion of a court-approved traffic course.
-        </blockquote>
-    </div>
-
-    <div class="content-section">
-        <h3 id="moving-violations">Moving violations</h3>
-        <p>A moving violation occurs whenever a traffic law is violated by a vehicle in motion. Some examples of moving violations are speeding, running a stop sign or red light, and drunk driving. A non-moving violation, by contrast, is usually related to parking or faulty equipment.</p>
-    </div>
-
-    <div class="content-section">
-        <h3 id="non-moving-violations">Non-moving violations</h3>
-        <p>Contrary to popular belief, non-moving violations are very often violations that occur when the car is moving. Examples of this are inattentive driving, driving while talking on a cell phone, and driving without a seat belt. What makes these violations “non-moving” isn’t what happens when they occur, but what the law says.</p>
-        <p>What separates the moving violation from the non-moving violation is the way it’s treated by the court and by the Department of Licensing (DOL). Whereas a speeding ticket is reported to the DOL, non-moving violations are not. And, in fact, some infractions are specifically ordered not to be reported to the DOL or to insurance companies.</p>
-    </div>
-
-    <div class="content-section">
-        <h3 id="response-options">Responding to your ticket</h3>
-        <p>You can respond to a moving violation ticket in one of the following ways:</p>
-        <ol>
-            <li><span class="emphasized"><a ng-click="vm.scrollTo('pay')">Pay the fine (or obtain an extension)</a></span>
-                <p>There are several ways to pay the fine, including paying online and by mailing payment to the court. If the courtesy notice you receive indicates a "mandatory appearance", you must appear in court.</p>
-            </li>
-            <li><span class="emphasized"><a ng-click="vm.scrollTo('traffic-school')">Request traffic school</a></span>
-                <p>There are certain requirements you must meet to be eligible for traffic school and there is typically a processing fee you must pay to the court. You can ask for traffic school on the date of your hearing.</p>
-            </li>
-            <li><span class="emphasized"><a ng-click="vm.scrollTo('contest')">Contest your ticket</a></span>
-                <p>You can contest your ticket by either mailing the courtesy notice back to the court with the <i>trial date</i> box checked, or by fighting it with <a href="#" ui-sref="default-template.state-info.fight">Off the Record</a>.</p>
-            </li>
-        </ol>
-
-        <blockquote>Contesting your ticket is the best way to prevent the point penalty on your driving
-                    record and the hit to your insurance premiums.</blockquote>
-
-        <div class="content-subsection">
-            <h3 id="pay">Paying your ticket</h3>
-            <p>Paying a CA traffic ticket is an admission of guilt.</p>
-            <p>This means:</p>
-            <ul>
-                <li>You are waiving your right to challenge the traffic ticket in court.</li>
-                <li>Depending on your CA driving record, the Department of Licensing (DOL) may suspend your California driver's license.</li>
-                <li>The traffic violation may cause an increase in your car insurance rates.</li>
-            </ul>
-        </div>
-
-        <div class="content-subsection">
-            <h3 id="traffic-school">Attending traffic school</h3>
-            <p>Traffic school can keep the ticket and any points off your DMV record. You may attend traffic school if
-                you meet the following criteria:</p>
-            <ul>
-                <li>You have not attended traffic school for a citation issued within the past 18 months of the
-                    issue date of the citation.</li>
-                <li>If your citation is for speeding, your speed did not exceed 25mph over the posted speed limit.</li>
-                <li>The office is for a moving (driving) violation.</li>
-                <li>You were not driving a commercial vehicle or carrying hazardous materials.</li>
-            </ul>
-            <blockquote>You can ask for traffic school on the date of your hearing, or by calling the court to find
-                out if you're eligible.</blockquote>
-        </div>
-
-        <div class="content-subsection">
-            <h3 id="contest">Fighting your ticket</h3>
-            <p>If you want to contest your citation, you may do so by either requesting a trial by written declaration (no court appearance required), or by requesting a court trial.</p>
-            <ul>
-                <li><span class="underline emphasized">Trial by Declaration</span>
-                    <p>To request a trial by written declaration, check the appropriate box on the payment section of your ticket courtesy notice. You must submit the full fine payment, along with the completed <a href="http://www.courts.ca.gov/documents/tr205.pdf" target="_blank">Request for Trial by Written Declaration form</a> to court's payment processing center.</p>
-                </li>
-                <li><span class="underline emphasized">Court Trial</span>
-                    <p>To request an arraignment hearing and obtain a future date for the court trial, check the appropriate box on the payment section of your ticket courtesy notice. Once your request is received, the court will set your case for arraignment and provide you with the notice of the hearing date. You may reserve a court date for arraignment either online, by mail, or in person.</p>
-                </li>
-            </ul>
-
-            <blockquote>Enlisting the help of an attorney can be an effective way to contest your traffic tickets, as they have the the legal expertise and court relationship to produce the best outome for your case.</blockquote>
-        </div>
-    </div>
-
-    <div class="content-section">
-        <h3 id="license-suspension">Driver license suspension</h3>
-        <p>The CA Department of Motor Vehicles (DMV) will suspend your driver's license if you accumulate 4 points or more in 12 months. The court will suspend your driver's license (regardless of the number of points on your driving record) if you're cited for a serious traffic violation such as driving under the influence (DUI) of alcohol or drugs.
-        </p>
-    </div>
-
-    <div class="content-section">
-        <h3 id="hiring-attorney">Hiring an attorney</h3>
-        <p>Fighting your traffic ticket can help you avoid fines, license suspension, and increased insurance premiums. A traffic ticket attorney is a major asset in that fight. Typically, you can expect an attorney to: </p>
+    <div class="left-nav">
+        <div class="nav-title">Traffic tickets in {{vm.selectedState.name}}</div>
         <ul>
-            <li>Request a court trial</li>
-            <li>Request discovery for your case</li>
-            <li>Represent you in court</li>
-            <li>Negotiate with the prosecutor to have your charges dropped or reduced</li>
+            <li><a ng-click="vm.scrollTo('fines-and-penalties')">Fines & penalties</a></li>
+            <li><a ng-click="vm.scrollTo('moving-violations')">Moving violations</a></li>
+            <li><a ng-click="vm.scrollTo('non-moving-violations')">Non-moving violations</a></li>
+            <li class="parent"><a ng-click="vm.scrollTo('response-options')">Responding to your ticket</a>
+                <ul>
+                    <li><a ng-click="vm.scrollTo('pay')">Paying your ticket</a></li>
+                    <li><a ng-click="vm.scrollTo('traffic-school')">Attending traffic school</a></li>
+                    <li><a ng-click="vm.scrollTo('contest')">Fighting your ticket</a></li>
+                </ul>
+            </li>
+            <li><a ng-click="vm.scrollTo('license-suspension')">License suspension</a></li>
+            <li><a ng-click="vm.scrollTo('hiring-attorney')">Hiring an attorney</a></li>
+            <li><a ng-click="vm.scrollTo('commercial-drivers')">Commercial drivers</a></li>
         </ul>
     </div>
 
-    <div class="content-section">
-        <h3 id="commercial-drivers">Fine & penalties for commercial drivers</h3>
-        <p> you have a CDL and are ticketed for a moving violation in California, you must notify your employer within 30 days of your conviction (even if you get ticketed while driving your own car).
-        </p>
-        <p>If the conviction occurs out of state, use a <a href="http://www.dmv.ca.gov/portal/wcm/connect/3d111ecc-d246-4a84-94dd-44e05c1d149d/dl535.pdf?MOD=AJPERES&CONVERT_TO=url&CACHEID=3d111ecc-d246-4a84-94dd-44e05c1d149d" target="_blank">Report of Out-of-State Traffic Conviction by a Commercial Driver</a> (Form DL 535) to notify your employer.</p>
+    <div class="content-wrapper">
+        <p class="intro">On this page, you'll find information about California traffic ticket fines and penalties, what to do if you lose your traffic ticket, and penalties for commercial drivers.</p>
+
+        <div class="content-section summary">
+            When you receive a traffic citation in California, you can either fight your ticket or make a payment to the court in the county where you received it. Failure to appear in court or to pay the amount due by the date listed on the mailed courtesy notice can result in a $300 civil assessment fee, a warrant for your arrest, and/or suspension of your driver's license.
+        </div>
+
+        <div class="content-section">
+            <h3 id="fines-and-penalties">Fines & penalties</h3>
+            <p>Traffic fine amounts in California vary by county court. To get specific details about traffic ticket fees, you'll need to contact the county court listed on your citation. If you're a commercial driver, see below.</p>
+            <p>The penalties for traffic tickets are consistent throughout all counties in California.</p>
+            <p>Points issued will depend on the traffic violation. Violations such as <span class="emphasized">speeding</span>, making an <span class="emphasized">unsafe lane change</span>, or an <span class="emphasized">at-fault accident</span> will give you lower points than serious violations, such as reckless driving</span>, <span class="emphasized">hit-and-run</span>, <span class="emphasized">DUI</span>, or driving with a <span class="emphasized">suspended or revoked license</span>.
+            </p>
+            <blockquote>If convicted of a traffic violation, you could receive points on your CA driving record, or have your driver's license suspended or revoked. Your traffic court may give you the option to have points removed from your record upon completion of a court-approved traffic course.
+            </blockquote>
+        </div>
+
+        <div class="content-section">
+            <h3 id="moving-violations">Moving violations</h3>
+            <p>A moving violation occurs whenever a traffic law is violated by a vehicle in motion. Some examples of moving violations are speeding, running a stop sign or red light, and drunk driving. A non-moving violation, by contrast, is usually related to parking or faulty equipment.</p>
+        </div>
+
+        <div class="content-section">
+            <h3 id="non-moving-violations">Non-moving violations</h3>
+            <p>Contrary to popular belief, non-moving violations are very often violations that occur when the car is moving. Examples of this are inattentive driving, driving while talking on a cell phone, and driving without a seat belt. What makes these violations “non-moving” isn’t what happens when they occur, but what the law says.</p>
+            <p>What separates the moving violation from the non-moving violation is the way it’s treated by the court and by the Department of Licensing (DOL). Whereas a speeding ticket is reported to the DOL, non-moving violations are not. And, in fact, some infractions are specifically ordered not to be reported to the DOL or to insurance companies.</p>
+        </div>
+
+        <div class="content-section">
+            <h3 id="response-options">Responding to your ticket</h3>
+            <p>You can respond to a moving violation ticket in one of the following ways:</p>
+            <ol>
+                <li><span class="emphasized"><a ng-click="vm.scrollTo('pay')">Pay the fine (or obtain an extension)</a></span>
+                    <p>There are several ways to pay the fine, including paying online and by mailing payment to the court. If the courtesy notice you receive indicates a "mandatory appearance", you must appear in court.</p>
+                </li>
+                <li><span class="emphasized"><a ng-click="vm.scrollTo('traffic-school')">Request traffic school</a></span>
+                    <p>There are certain requirements you must meet to be eligible for traffic school and there is typically a processing fee you must pay to the court. You can ask for traffic school on the date of your hearing.</p>
+                </li>
+                <li><span class="emphasized"><a ng-click="vm.scrollTo('contest')">Contest your ticket</a></span>
+                    <p>You can contest your ticket by either mailing the courtesy notice back to the court with the <i>trial date</i> box checked, or by fighting it with <a href="#" ui-sref="default-template.state-info.fight">Off the Record</a>.</p>
+                </li>
+            </ol>
+
+            <blockquote>Contesting your ticket is the best way to prevent the point penalty on your driving
+                        record and the hit to your insurance premiums.</blockquote>
+
+            <div class="content-subsection">
+                <h3 id="pay">Paying your ticket</h3>
+                <p>Paying a CA traffic ticket is an admission of guilt.</p>
+                <p>This means:</p>
+                <ul>
+                    <li>You are waiving your right to challenge the traffic ticket in court.</li>
+                    <li>Depending on your CA driving record, the Department of Licensing (DOL) may suspend your California driver's license.</li>
+                    <li>The traffic violation may cause an increase in your car insurance rates.</li>
+                </ul>
+            </div>
+
+            <div class="content-subsection">
+                <h3 id="traffic-school">Attending traffic school</h3>
+                <p>Traffic school can keep the ticket and any points off your DMV record. You may attend traffic school if
+                    you meet the following criteria:</p>
+                <ul>
+                    <li>You have not attended traffic school for a citation issued within the past 18 months of the
+                        issue date of the citation.</li>
+                    <li>If your citation is for speeding, your speed did not exceed 25mph over the posted speed limit.</li>
+                    <li>The office is for a moving (driving) violation.</li>
+                    <li>You were not driving a commercial vehicle or carrying hazardous materials.</li>
+                </ul>
+                <blockquote>You can ask for traffic school on the date of your hearing, or by calling the court to find
+                    out if you're eligible.</blockquote>
+            </div>
+
+            <div class="content-subsection">
+                <h3 id="contest">Fighting your ticket</h3>
+                <p>If you want to contest your citation, you may do so by either requesting a trial by written declaration (no court appearance required), or by requesting a court trial.</p>
+                <ul>
+                    <li><span class="underline emphasized">Trial by Declaration</span>
+                        <p>To request a trial by written declaration, check the appropriate box on the payment section of your ticket courtesy notice. You must submit the full fine payment, along with the completed <a href="http://www.courts.ca.gov/documents/tr205.pdf" target="_blank">Request for Trial by Written Declaration form</a> to court's payment processing center.</p>
+                    </li>
+                    <li><span class="underline emphasized">Court Trial</span>
+                        <p>To request an arraignment hearing and obtain a future date for the court trial, check the appropriate box on the payment section of your ticket courtesy notice. Once your request is received, the court will set your case for arraignment and provide you with the notice of the hearing date. You may reserve a court date for arraignment either online, by mail, or in person.</p>
+                    </li>
+                </ul>
+
+                <blockquote>Enlisting the help of an attorney can be an effective way to contest your traffic tickets, as they have the the legal expertise and court relationship to produce the best outome for your case.</blockquote>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h3 id="license-suspension">Driver license suspension</h3>
+            <p>The CA Department of Motor Vehicles (DMV) will suspend your driver's license if you accumulate 4 points or more in 12 months. The court will suspend your driver's license (regardless of the number of points on your driving record) if you're cited for a serious traffic violation such as driving under the influence (DUI) of alcohol or drugs.
+            </p>
+        </div>
+
+        <div class="content-section">
+            <h3 id="hiring-attorney">Hiring an attorney</h3>
+            <p>Fighting your traffic ticket can help you avoid fines, license suspension, and increased insurance premiums. A traffic ticket attorney is a major asset in that fight. Typically, you can expect an attorney to: </p>
+            <ul>
+                <li>Request a court trial</li>
+                <li>Request discovery for your case</li>
+                <li>Represent you in court</li>
+                <li>Negotiate with the prosecutor to have your charges dropped or reduced</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h3 id="commercial-drivers">Fine & penalties for commercial drivers</h3>
+            <p> you have a CDL and are ticketed for a moving violation in California, you must notify your employer within 30 days of your conviction (even if you get ticketed while driving your own car).
+            </p>
+            <p>If the conviction occurs out of state, use a <a href="http://www.dmv.ca.gov/portal/wcm/connect/3d111ecc-d246-4a84-94dd-44e05c1d149d/dl535.pdf?MOD=AJPERES&CONVERT_TO=url&CACHEID=3d111ecc-d246-4a84-94dd-44e05c1d149d" target="_blank">Report of Out-of-State Traffic Conviction by a Commercial Driver</a> (Form DL 535) to notify your employer.</p>
+        </div>
     </div>
-</div>
+

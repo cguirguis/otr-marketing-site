@@ -14,7 +14,7 @@
             <div class="subtitle">Based on historical performance</div>
         </h1>
 
-        <p class="green-text">{{vm.stateDetails.successRate}}%</p>
+        <p class="green-text">{{vm.selectedState.successRate}}%</p>
     </div>
     <hr/>
     <div class="overview-row">
@@ -29,44 +29,44 @@
         <h1>
             <div class="title">No going to court</div>
         </h1>
-        <p class="green-text">
-            <i class="fa fa-university" style="color:#DDD;"></i>
-        </p>
-        <p class="green-text"></p>
+        <p class="green-text"><i class="fa fa-check"></i></p>
     </div>
     <hr/>
     <div class="overview-row">
         <h1>
             <div class="title">No insurance increases</div>
         </h1>
-        <p class="green-text" style="position:relative;">
-            <i class="fa fa-lock" style="color:#DDD;"></i>
-        </p>
-        <p class="green-text"></p>
+        <p class="green-text" style="position:relative;"><i class="fa fa-check"></i></p>
     </div>
 
     <hr style="display:block;min-width:90%;" />
 
     <div class="options-comparison">
-        <h1>How much fighting this ticket could save you:</h1>
+        <h1>What's the real cost of your ticket?</h1>
         <table>
             <tr>
                 <td class="white-bg"></td>
-                <td>Paying your ticket</td>
-                <td>Fight it with Off the Record</td>
+                <td>When you pay the fine: </td>
+                <td>When you fight it with <strong>Off the Record</strong>:</td>
             </tr>
             <tr>
-                <td>Fine</td>
+                <td>
+                    Your fine
+                    <div style="font-size: 14px;color:brown">
+                        Avg fine in {{ vm.selectedState.abbreviation }} is {{ vm.selectedState.avgFine | currency : '$' : 0 }}
+                    </div>
+                </td>
                 <td style="position:relative;">
                     <div class="ticket-fine">
-                        <input type="text" id="ticketFine" class="inline-field red-text" ng-model="vm.ticketFine"
-                                 ng-enter="vm.blurTicketFine()"
-                                 text-input-description="average ticket fine"
-                                 ng-model-options="{updateOn: 'default blur', debounce: {default: 500, blur: 0} }" />
+                        <input type="text" id="ticketFine" class="inline-field red-text" ng-model="vm.clientTicketFine"
+                               placeholder="{{ vm.selectedState.avgFine | currency : '' : 0 }}"
+                               ng-enter="vm.blurTicketFineField()"
+                               text-input-description="Click above to update this number with your fine"
+                               ng-model-options="{updateOn: 'default blur', debounce: {default: 500, blur: 0} }" />
                     </div>
                 </td>
                 <td>
-                    $0 <span class="asterisk">*</span>
+                    $0
                     <div class="asterisk-text">* if case is dismissed</div>
                 </td>
             </tr>
@@ -74,28 +74,30 @@
                 <td>Legal fee</td>
                 <td>$0</td>
                 <td>
-                    ${{vm.stateDetails.baseFee}} <i class="fa fa-question-circle" />
-                    <div class="asterisk-text">rates may vary by county</div>
+                    From ${{vm.selectedState.baseFee}} <i class="fa fa-question-circle" />
+                    <div class="asterisk-text">* rates vary by county</div>
                 </td>
             </tr>
             <tr>
                 <td>Insurance increase</td>
                 <td><div class="red-text">
-                        ${{vm.insuranceIncrease}}
-                        <a href="" class="edit-field-text" ng-click="vm.editInsuranceVariables()">edit your insurance info</a>
+                        {{ vm.insuranceIncrease | currency : '$' : 0 }}
+                        <a href="" class="edit-field-text" ng-click="vm.editInsuranceVariables()">
+                            edit your insurance info to get a more accurate estimate
+                        </a>
                     </div>
                 </td>
                 <td>$0</td>
             </tr>
             <tr>
                 <td>Point penalty</td>
-                <td class="light-gray">N/A</td>
-                <td class="light-gray">N/A</td>
+                <td class="dark-gray">N/A</td>
+                <td class="dark-gray">N/A</td>
             </tr>
             <tr>
-                <td>Total cost</td>
-                <td class="red-text">${{vm.totalTicketCost()}}</td>
-                <td>${{vm.stateDetails.baseFee}} <span class="asterisk">*</span>
+                <td>Your total cost</td>
+                <td class="red-text">{{ vm.totalTicketCost() | currency : '$' : 0 }}</td>
+                <td>${{vm.selectedState.baseFee}}
                     <div class="asterisk-text">* if case is dismissed</div>
                 </td>
             </tr>
@@ -105,7 +107,7 @@
     <div class="overview-row" style="width: 100%;margin-top: -10px;max-width:inherit">
         <h1 class="savings-title">Total estimated savings:</h1>
         <div class="savings-result">
-            <p class="large green-text" class="green-text">${{vm.totalSavings()}}</p>
+            <p class="large green-text" class="green-text">{{ vm.totalSavings() | currency : '$' : 0 }}</p>
             <div class="savings-timeframe">over the next 3 years</div>
         </div>
     </div>

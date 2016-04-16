@@ -2,18 +2,23 @@
 <div class="content-page">
     <div class="content-container text-center">
         <div class="content-header">
-            <div class="content-background" ng-style="{ 'background-image': 'url({{vm.backgroundImgUrl}})' }"></div>
+            <div class="content-background" ng-style="{ 'background-image': 'url({{vm.selectedState.backgroundImgUrl}})' }"></div>
             <div class="fighting-text">traffic tickets in</div>
-            <h1>{{vm.stateName}}</h1>
+            <h1>{{vm.selectedState.name}}</h1>
         </div>
         <div class="content-nav">
             <ul>
                 <li class="nav-item" ui-sref-active="active" ui-sref="default-template.state-info.overview">Overview</li>
                 <li class="nav-item" ui-sref-active="active" ui-sref="default-template.state-info.fight">Fight your ticket</li>
-                <!--<li class="nav-item" ng-class="{ active : vm.viewType == 'FAQ' }" ng-click="vm.viewType = 'FAQ'">FAQ</li>-->
             </ul>
         </div>
-         <ui-view />
+
+        <div class="content-body">
+            <!----- CONTENT INSERTED HERE ----->
+            <ui-view />
+            <!--------------------------------->
+        </div>
+
     </div>
 </div>
 
@@ -21,7 +26,7 @@
 <script type="text/ng-template" id="updateInsurancePremium.html">
     <div class="edit-insurance-info">
         <div class="modal-row">
-            <div>What is your monthly insurance premium?</div>
+            <div>How much do you pay for car insurance each month?</div>
             <div>
                 <span class="dollar-sign">$</span>
                 <input type="text" id="monthlyPremium" class="inline-field dollar-value" ng-model="monthlyPremium"
@@ -29,7 +34,7 @@
             </div>
         </div>
         <div class="modal-row">
-            <div>What violation did you get cited for?</div>
+            <div>What did you get ticketed for?</div>
             <div>
                 <select id="violationDropdown" ng-model="selectedViolation"
                         ng-options="violation.value as violation.name for violation in violationOptions">
