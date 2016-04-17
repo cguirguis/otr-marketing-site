@@ -257,17 +257,18 @@
           color: #333;
           margin-top: 10px;
           cursor: pointer;
-
-          &:after {
-            font-family: $fontAwesome;
-            content: '\f078';
-            float: right;
-            font-size: 14px;
-            margin-top: 7px;
-            opacity: 0.6;
-          }
         }
-        .content-section, .content-subsection {
+
+        .content-section[expandable-section] h3:after {
+          font-family: $fontAwesome;
+          content: '\f078';
+          float: right;
+          font-size: 14px;
+          margin-top: 7px;
+          opacity: 0.6;
+        }
+
+        .content-section[expandable-section], .content-subsection[expandable-section] {
           &.collapsed {
             overflow: hidden;
 
