@@ -587,6 +587,14 @@ div.signup-form {
 @media screen and (max-width: 768px) {
   #footer #sub-floor .copyright {
     width: 100%; } }
+.faq-bg {
+  background-image: url(https://a0.muscache.com/airbnb/static/help/search/banner-43710af3493e21337be78422248650b3.png); }
+
+.faq-questions {
+  font-style: 16px;
+  font-family: Circular,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  line-height: 1.43;
+  -webkit-font-smoothing: antialiased; }
 
 /*
 @mixin border-radius($radius) {

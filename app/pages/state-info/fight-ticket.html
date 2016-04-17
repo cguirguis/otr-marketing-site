@@ -61,7 +61,7 @@
                         <input type="text" id="ticketFine" class="inline-field red-text" ng-model="vm.clientTicketFine"
                                placeholder="{{ vm.selectedState.avgFine | currency : '' : 0 }}"
                                ng-enter="vm.blurTicketFineField()"
-                               text-input-description="Click above to update this number with your fine"
+                               text-input-description="Enter your fine here for a more accurate estimate"
                                ng-model-options="{updateOn: 'default blur', debounce: {default: 500, blur: 0} }" />
                     </div>
                 </td>

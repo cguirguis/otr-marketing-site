@@ -40,6 +40,11 @@
                     }
                 }
             })
+            .state('default-template.faq', {
+                url: '/traffic-citation-faq',
+                templateUrl: 'app/pages/faq/faq.html',
+                controller: 'FaqCtrl as vm'
+            })
             .state('default-template.state-info', {
                 abstract: true,
                 url: '/how-to-fight-your-traffic-ticket/:stateCode',
