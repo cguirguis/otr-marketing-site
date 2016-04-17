@@ -1,0 +1,102 @@
+<div class="left-nav">
+    <div class="nav-title">Traffic tickets in {{vm.stateName}}</div>
+    <ul>
+        <li><a ng-click="vm.scrollTo('fines-and-penalties')">Fines & penalties</a></li>
+        <li><a ng-click="vm.scrollTo('moving-violations')">Moving violations</a></li>
+        <li><a ng-click="vm.scrollTo('non-moving-violations')">Non-moving violations</a></li>
+        <li class="parent"><a ng-click="vm.scrollTo('response-options')">Responding to your ticket</a>
+            <ul>
+                <li><a ng-click="vm.scrollTo('pay')">Paying your ticket</a></li>
+                <li><a ng-click="vm.scrollTo('mitigate')">Mitigation hearing</a></li>
+                <li><a ng-click="vm.scrollTo('contest')">Contested hearing</a></li>
+            </ul>
+        </li>
+        <li><a ng-click="vm.scrollTo('hiring-attorney')">Hiring an attorney</a></li>
+    </ul>
+</div>
+<div class="content-wrapper">
+    <div class="content-section summary">
+        Depending on the type of {{vm.stateName}} traffic ticket you received, you can generally pay your ticket fines online, by mail, by phone, or in person. You can also fight your ticket or ask the court to reduce your fine. Be sure to respond to your traffic ticket within 15 days, or you could face additional penalties, such as a license suspension.
+    </div>
+
+    <div class="content-section" >
+        <h3 id="fines-and-penalties">Fines & penalties</h3>
+        <p>Traffic fines in {{vm.stateName}} vary by court. If you do not pay on time, you will be charged additional late fees.
+            Refer to your traffic ticket to determine your exact ticket amount, deadlines, and penalties.</p>
+        <blockquote>{{vm.stateName}}'s Department of Licensing (DOL) does not operate under a driving record point system. However, there are penalties, including driver's license suspension and revocation, for repeat speeding tickets or other violations that exhibit a pattern of unsafe driving.
+            Too many traffic violations on your driving record or commit a major violation, your driver's license can be suspended.</blockquote>
+        <p>Some major violations include:
+        <ul>
+            <li>Reckless driving.</li>
+            <li>Driving under the influence (DUI) of drugs or alcohol.</li>
+            <li>Not carrying adequate car insurance.</li>
+        </ul>
+        </p>
+    </div>
+
+    <div class="content-section" expandable-section>
+        <h3 id="moving-violations">Moving violations</h3>
+        <p>A moving violation occurs whenever a traffic law is violated by a vehicle in motion. Some examples of moving violations are speeding, running a stop sign or red light, and drunk driving. A non-moving violation, by contrast, is usually related to parking or faulty equipment.</p>
+    </div>
+
+    <div class="content-section" expandable-section>
+        <h3 id="non-moving-violations">Non-moving violations</h3>
+        <p>Contrary to popular belief, non-moving violations are very often violations that occur when the car is moving. Examples of this are inattentive driving, driving while talking on a cell phone, and driving without a seat belt. What makes these violations “non-moving” isn’t what happens when they occur, but what the law says.</p>
+        <p>What separates the moving violation from the non-moving violation is the way it’s treated by the court and by the Department of Licensing (DOL). Whereas a speeding ticket is reported to the DOL, non-moving violations are not. And, in fact, some infractions are specifically ordered not to be reported to the DOL or to insurance companies.</p>
+    </div>
+
+    <div class="content-section" expandable-section>
+        <h3 id="response-options">Responding to your ticket</h3>
+        <p>There are three ways to respond to your traffic ticket:</p>
+        <ul>
+            <li>Paying the fine</li>
+            <li>Requesting a mitigation hearing</li>
+            <li>Requesting a contested hearing</li>
+        </ul>
+        <p>Regardless of plea, it must be entered before the ticket's due date. In most cases, this will general be about 15 days from the infraction date.</p>
+        <blockquote>The first two options are guilty pleas, while the third option, request a contested hearing, is another name for not guilty.</blockquote>
+
+        <div class="content-subsection" expandable-section>
+            <h3 id="pay">Pay the ticket</h3>
+            <p>Paying a {{vm.stateCode}} traffic ticket is an admission of guilt.</p>
+            <p>This means:</p>
+            <ul>
+                <li>You are waiving your right to challenge the traffic ticket in court.</li>
+                <li>Depending on your {{vm.stateCode}} driving record, the Department of Licensing (DOL) may suspend your {{vm.stateName}}f driver's license.</li>
+                <li>The traffic violation may cause an increase in your car insurance rates.</li>
+            </ul>
+        </div>
+
+        <div class="content-subsection" expandable-section>
+            <h3 id="mitigate">Requesting a mitigation hearing</h3>
+            <p>If you're guilty of the traffic violation, you have the option to request a mitigation hearing and have your fine reduced. Your mitigation hearing may result in, any of the following in lieu of paying the full original ticket fine:</p>
+            <ul>
+                <li>Fine reduction</li>
+                <li>Monthly payment plan</li>
+                <li>Community service</li>
+            </ul>
+            <blockquote>You CANNOT appeal the judge's decision in a mitigation hearing.</blockquote>
+            <p>Follow the instructions on your traffic ticket to request this hearing.</p>
+        </div>
+
+        <div class="content-subsection" expandable-section>
+            <h3 id="contest">Requesting a contested hearing</h3>
+            <p>If you want to plead “not guilty" to the violation, you can request a contested hearing at the relevant county court by checking the appropriate check box on your ticket and then mailing it in to the court. You can also contest it right on your phone by using the <a href="#" ui-sref="default-template.state-info.fight">Off the Record</a> app.</p>
+
+            <blockquote>One in four tickets is issued in error, yet only 5% of drivers contest their traffic tickets..</blockquote>
+        </div>
+    </div>
+
+    <div class="content-section" expandable-section>
+        <h3 id="hiring-attorney">Hiring an attorney</h3>
+        <p>Fighting your traffic ticket can help you avoid fines, license suspension, and increased insurance premiums. A traffic ticket attorney is a major asset in that fight. Typically, you can expect an attorney to: </p>
+        <ul>
+            <li>Request a contested hearing</li>
+            <li>Request discovery for your case</li>
+            <li>Represent you in court</li>
+            <li>Negotiate with the prosecutor to have your charges dropped or reduced</li>
+        </ul>
+    </div>
+</div>
+
+<button class="fight-my-ticket" ng-click="vm.fightTicketRedirect();">Fight My Ticket</button>

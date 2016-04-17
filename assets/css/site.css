@@ -601,7 +601,8 @@ div.signup-form {
 }
 */
 .content-page {
-  margin-top: 70px; }
+  margin-top: 70px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
   .content-page a {
     cursor: pointer;
     color: #111; }
@@ -667,16 +668,17 @@ div.signup-form {
           cursor: pointer; }
           .content-page .content-container .content-nav ul li.active {
             cursor: default;
-            border-top: solid 2px #41A3E3; }
+            border-top: solid 2px #41A3E3;
+            color: white; }
           .content-page .content-container .content-nav ul li:hover {
-            border-top: solid 2px #41A3E3; }
+            color: white; }
       .content-page .content-container .content-nav .nav-item {
         float: left;
         padding: 10px 28px;
         height: 40px;
         cursor: pointer;
         font-size: 16px;
-        border-top: solid 2px transparent;
+        color: #aaa;
         margin-right: 3px; }
     .content-page .content-container .content-body {
       font-size: 14px;
@@ -725,7 +727,7 @@ div.signup-form {
         margin-bottom: 40px;
         text-align: left; }
         .content-page .content-container .content-body .content-wrapper .intro {
-          font-size: 14px;
+          font-size: 15px;
           color: #333 !important;
           margin-top: 0px;
           margin-bottom: 20px; }
@@ -735,7 +737,7 @@ div.signup-form {
           .content-page .content-container .content-body .content-wrapper .content-section.summary {
             border: solid 1px rgba(0, 100, 146, 0.27);
             text-align: left;
-            font-size: 16px;
+            font-size: 15px;
             padding: 20px; }
           .content-page .content-container .content-body .content-wrapper .content-section h3 {
             font-family: "Open Sans", sans-serif;
