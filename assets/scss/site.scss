@@ -833,3 +833,23 @@ div.signup-form {
 .faq-bg {
   background-image: url(https://a0.muscache.com/airbnb/static/help/search/banner-43710af3493e21337be78422248650b3.png);
 }
+.align-middle {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.faq-question {
+  color: #4d4d4d;
+}
+//.faq-text {
+//  font-family: Arial,Helvetica,sans-serif;
+//  font-size: 14px;
+//  color: #4d4d4d;
+//}
+
+.content-page .content-container .content-body .content-wrapper .content-section .faq-list a {
+  color: #1D4681;
+}
+.content-page .content-container .content-body .content-wrapper .content-section .faq-list li {
+  padding-bottom: 5px;
+}

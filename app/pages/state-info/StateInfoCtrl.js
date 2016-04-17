@@ -70,7 +70,7 @@
                     name: selectedState.name,
                     backgroundImgUrl: 'assets/img/states/default.jpg',
                     baseFee: 250,
-                    successRate: 90,
+                    successRate: 95,
                     avgFine: 180
                 });
         }

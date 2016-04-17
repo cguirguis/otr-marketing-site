@@ -604,6 +604,20 @@ div.signup-form {
 .faq-bg {
   background-image: url(https://a0.muscache.com/airbnb/static/help/search/banner-43710af3493e21337be78422248650b3.png); }
 
+.align-middle {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%); }
+
+.faq-question {
+  color: #4d4d4d; }
+
+.content-page .content-container .content-body .content-wrapper .content-section .faq-list a {
+  color: #1D4681; }
+
+.content-page .content-container .content-body .content-wrapper .content-section .faq-list li {
+  padding-bottom: 5px; }
+
 @media (max-width: 970px) {
   .content-page .content-container .content-header {
     height: 300px !important; }
@@ -617,7 +631,7 @@ div.signup-form {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
   .content-page a {
     cursor: pointer;
-    color: #111; }
+    color: #4d4d4d; }
     .content-page a:hover {
       color: #41A3E3; }
   .content-page .content-container {
@@ -626,7 +640,7 @@ div.signup-form {
     height: auto;
     text-align: center; }
     .content-page .content-container div {
-      color: #111; }
+      color: #4d4d4d; }
     .content-page .content-container .content-header {
       height: 400px;
       position: relative; }
@@ -635,10 +649,11 @@ div.signup-form {
         margin-top: 0px;
         font-size: 75px;
         font-weight: 400;
-        text-transform: uppercase;
-        color: white !important;
+        color: white;
         position: absolute;
         width: 100%; }
+      .content-page .content-container .content-header .uppercase {
+        text-transform: uppercase; }
       .content-page .content-container .content-header .content-background {
         width: 100% !important;
         height: 400px;

@@ -7,11 +7,12 @@ $palanquin: "Palanquin", sans-serif;
 $arial: "Arial", sans-serif;
 $helvetica: "Helvetica Neue",Helvetica,Arial,sans-serif;
 $fontAwesome: "FontAwesome";
+$defaultFontFamily: "Arial,Helvetica,sans-serif";
 
 // color variables
 $primaryBlue: #41A3E3;
 $primaryBlueDarker: #397FAF;
-$gray1: #111;
+$gray1: #4d4d4d;
 
 
 @mixin split-columns($numCols, $columnGap) {
