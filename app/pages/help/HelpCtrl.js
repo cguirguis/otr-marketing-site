@@ -3,11 +3,11 @@
 
     angular
         .module('brochure')
-        .controller('FaqCtrl', FaqCtrl);
+        .controller('HelpCtrl', HelpCtrl);
 
 
-    FaqCtrl.$inject = ['ENV', '$window', '$location', '$rootScope', '$scope', '$timeout', '$anchorScroll', '$http', '$q', 'GlobalUtils'];
-    function FaqCtrl(ENV, $window, $location, $rootScope, $scope, $timeout, $anchorScroll, $http, $q, GlobalUtils) {
+    HelpCtrl.$inject = ['ENV', '$window', '$location', '$rootScope', '$scope', '$timeout', '$anchorScroll', '$http', '$q', 'GlobalUtils'];
+    function HelpCtrl(ENV, $window, $location, $rootScope, $scope, $timeout, $anchorScroll, $http, $q, GlobalUtils) {
         var vm = this;
 
         // ----- INTERFACE ------------------------------------------------------------
