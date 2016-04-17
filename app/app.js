@@ -40,10 +40,29 @@
                     }
                 }
             })
-            .state('default-template.faq', {
+            .state('default-template.help', {
+                abstract: true,
+                url: '/help',
+                views: {
+                    '': {
+                        templateUrl: 'app/pages/help/help-template.html'
+                    }
+                }
+            })
+            .state('default-template.help.faq', {
                 url: '/traffic-citation-faq',
-                templateUrl: 'app/pages/faq/faq.html',
-                controller: 'FaqCtrl as vm'
+                templateUrl: 'app/pages/help/faq.html',
+                controller: 'HelpCtrl as vm'
+            })
+            .state('default-template.help.contact-us', {
+                url: '/contact-us',
+                templateUrl: 'app/pages/help/contact-us.html'
+                //controller: 'HelpCtrl as vm'
+            })
+            .state('default-template.help.about-us', {
+                url: '/about-us',
+                templateUrl: 'app/pages/help/about-us.html'
+                //controller: 'HelpCtrl as vm'
             })
             .state('default-template.state-info', {
                 abstract: true,

@@ -257,7 +257,7 @@ ul#menu-main-menu {
     color: #0050a0 !important;
     /*#E6E22F !important;*/ }
   #menu-item-12.active i {
-    color: white; }
+    color: white !important; }
 
 #menu-item-13 .login-button {
   border: solid 1px #1976d2;
