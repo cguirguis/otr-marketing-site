@@ -1,15 +1,3 @@
-/*
-@mixin border-radius($radius) {
-  -webkit-border-radius: $radius;
-  -moz-border-radius: $radius;
-  -ms-border-radius: $radius;
-  border-radius: $radius;
-}
-
-.box {
-  @include border-radius(10px);
-}
-*/
 body {
   -webkit-font-smoothing: antialiased;
   font-size: 10px; }
@@ -54,7 +42,7 @@ h1, h2, h3, h4, h5, h6 {
   .navbar-default .navbar-nav > #menu-item-12.hover > a {
     color: white !important; }
 
-@media (max-width: 900px) and (min-width: 768px) {
+@media (max-width: 940px) and (min-width: 768px) {
   .navbar-default .navbar-header .logo {
     display: none; } }
 @media (max-width: 300px) {
@@ -196,6 +184,18 @@ ul#menu-main-menu {
     font-weight: bolder !important;
     border-radius: 3px; }
 
+::-webkit-scrollbar-track {
+  background-color: white; }
+
+/* the new scrollbar will have a flat appearance with the set background color */
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2); }
+
+/* this will style the thumb, ignoring the track */
+::-webkit-scrollbar-button {
+  background-color: #7c2929; }
+
+/* optionally, you can style the top and the bottom buttons (left and right for horizontal bars) */
 #menu-item-12 {
   position: relative;
   margin-right: 15px;
@@ -205,8 +205,7 @@ ul#menu-main-menu {
     display: none;
     padding: 20px; }
     #menu-item-12 .nav-list a {
-      padding: 5px 15px;
-      font-weight: lighter !important; }
+      padding: 5px 10px; }
   #menu-item-12 i {
     float: left;
     cursor: pointer; }
@@ -217,17 +216,28 @@ ul#menu-main-menu {
     color: #bbb;
     font-size: 10px;
     z-index: 2; }
+  #menu-item-12.hover > a {
+    background-color: #41A3E3; }
   #menu-item-12.hover .nav-list {
-    padding: 70px 15px 2px 15px;
+    padding: 60px 15px 10px 15px;
     background: #fff;
     background-color: #41A3E3;
     position: absolute;
     top: 10px;
     border-radius: 3px;
     display: block;
-    width: 185px;
-    z-index: 1; }
-  #menu-item-12.hover a, #menu-item-12.hover #menu-item-12.hover .fa.fa-chevron-down {
+    width: 500px;
+    z-index: 1;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    left: -150px;
+    -moz-column-count: 3;
+    column-count: 3;
+    -webkit-column-count: 3;
+    -moz-column-gap: 15px;
+    -webkit-column-gap: 15px;
+    column-gap: 15px; }
+  #menu-item-12.hover a, #menu-item-12.hover.hover .fa.fa-chevron-down {
     color: white !important;
     z-index: 2; }
   #menu-item-12.hover .nav-list li.nav-item {
@@ -239,11 +249,15 @@ ul#menu-main-menu {
     padding: 0;
     position: relative;
     z-index: 1;
-    height: 50px;
+    height: 35px;
     cursor: pointer; }
+    #menu-item-12.hover .nav-list li.nav-item a {
+      text-transform: none; }
   #menu-item-12.hover .nav-list li.nav-item:hover a {
     color: #0050a0 !important;
     /*#E6E22F !important;*/ }
+  #menu-item-12.active i {
+    color: white; }
 
 #menu-item-13 .login-button {
   border: solid 1px #1976d2;
@@ -587,19 +601,17 @@ div.signup-form {
 @media screen and (max-width: 768px) {
   #footer #sub-floor .copyright {
     width: 100%; } }
+.faq-bg {
+  background-image: url(https://a0.muscache.com/airbnb/static/help/search/banner-43710af3493e21337be78422248650b3.png); }
 
-/*
-@mixin border-radius($radius) {
-  -webkit-border-radius: $radius;
-  -moz-border-radius: $radius;
-  -ms-border-radius: $radius;
-  border-radius: $radius;
-}
-
-.box {
-  @include border-radius(10px);
-}
-*/
+@media (max-width: 970px) {
+  .content-page .content-container .content-header {
+    height: 300px !important; }
+    .content-page .content-container .content-header .content-background {
+      width: 100% !important;
+      height: 300px !important;
+      background-size: 100% 100% !important;
+      background-position: left !important; } }
 .content-page {
   margin-top: 70px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
@@ -630,8 +642,9 @@ div.signup-form {
       .content-page .content-container .content-header .content-background {
         width: 100% !important;
         height: 400px;
-        background-size: 100% 100%;
-        background-position: center;
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+        background-position: top;
         position: absolute;
         left: 0;
         right: 0;
@@ -857,18 +870,6 @@ div.signup-form {
         width: 100%;
         float: none; } }
 
-/*
-@mixin border-radius($radius) {
-  -webkit-border-radius: $radius;
-  -moz-border-radius: $radius;
-  -ms-border-radius: $radius;
-  border-radius: $radius;
-}
-
-.box {
-  @include border-radius(10px);
-}
-*/
 .content-page .content-container .content-body.fight-page h1 {
   color: #397FAF !important;
   font-size: 32px;
@@ -914,7 +915,7 @@ div.signup-form {
     line-height: 1em;
     font-weight: bold; }
   .content-page .content-container .content-body .overview-row .subtitle {
-    color: #ccc;
+    color: darkgray;
     font-size: 16px;
     line-height: 16px;
     clear: both;
@@ -964,6 +965,8 @@ div.signup-form {
       border: none; }
     .content-page .content-container .content-body table tr td.light-gray {
       color: #ccc !important; }
+    .content-page .content-container .content-body table tr td.dark-gray {
+      color: darkgray !important; }
 .content-page .content-container .content-body hr.gray-hr {
   border: 0;
   height: 1px;
@@ -973,21 +976,11 @@ div.signup-form {
   margin-top: 0;
   color: #999; }
 .content-page .content-container .content-body .inline-field {
-  /*width: 100px;
-  height: 53px;
-  margin-top: -16px;
-  margin-bottom: -16px;
-  text-align: center;
-  margin-left: 5px;
-  border: 1px solid #B5D7F5!important;*/
-  border: 1px solid transparent !important;
-  width: 103%;
-  height: 63px;
-  margin-top: -20px;
-  margin-bottom: -21px;
-  text-align: center;
-  margin-left: -18px;
-  margin-right: -19px; }
+  width: 130px;
+  height: 50px;
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center; }
   .content-page .content-container .content-body .inline-field.dollar-value {
     width: 200px;
     margin-top: 10px;
@@ -999,21 +992,22 @@ div.signup-form {
   color: #A54242 !important; }
 .content-page .content-container .content-body .ticket-fine:before {
   position: absolute;
-  top: 35%;
+  top: 30%;
   content: "$";
   left: calc(50% - 40px);
   color: #A54242; }
 .content-page .content-container .content-body .text-input-description {
   font-size: 13px;
+  line-height: 13px;
   position: absolute;
-  bottom: 1px;
-  right: calc(50% - 45px);
-  color: #666; }
+  bottom: 4px;
+  width: 100%;
+  color: #41A3E3; }
 .content-page .content-container .content-body .asterisk {
   color: #E6E6E6;
   font-size: 25px; }
 .content-page .content-container .content-body .asterisk-text {
-  color: #CCC;
+  color: darkgray;
   font-size: 13px;
   width: 100%;
   margin-bottom: -19px;
@@ -1021,10 +1015,13 @@ div.signup-form {
   text-align: right; }
 .content-page .content-container .content-body .edit-field-text {
   font-size: 13px;
+  line-height: 13px;
+  color: #41A3E3;
+  text-decoration: underline;
   line-height: 18px;
   display: block;
   margin-top: 10px;
-  margin-bottom: -17px; }
+  margin-bottom: -10px; }
 .content-page .content-container .content-body .fa-question-circle {
   color: #78B6FF;
   font-size: 18px;
@@ -1039,16 +1036,23 @@ div.signup-form {
   font-size: 20px;
   text-align: center; }
   .edit-insurance-info .modal-row {
-    margin-bottom: 15px; }
+    margin-bottom: 35px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    clear: both; }
     .edit-insurance-info .modal-row > div {
       display: inline-block;
       width: 49%;
       text-align: left;
-      font-size: 20px; }
+      font-size: 20px;
+      float: left; }
     .edit-insurance-info .modal-row span.dollar-sign {
       font-size: 33px;
-      color: #333;
-      margin-left: 35px; }
+      color: #777;
+      margin-left: 0px; }
+    .edit-insurance-info .modal-row input[type='text'] {
+      padding: 10px;
+      width: 70px; }
 
 .modal-button {
   font-size: 22px;

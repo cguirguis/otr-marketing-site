@@ -13,15 +13,13 @@ $primaryBlue: #41A3E3;
 $primaryBlueDarker: #397FAF;
 $gray1: #111;
 
-/*
-@mixin border-radius($radius) {
-  -webkit-border-radius: $radius;
-  -moz-border-radius: $radius;
-  -ms-border-radius: $radius;
-  border-radius: $radius;
+
+@mixin split-columns($numCols, $columnGap) {
+  -moz-column-count: $numCols;
+  column-count: $numCols;
+  -webkit-column-count: $numCols;
+  -moz-column-gap: $columnGap;
+  -webkit-column-gap: $columnGap;
+  column-gap: $columnGap;
 }
 
-.box {
-  @include border-radius(10px);
-}
-*/

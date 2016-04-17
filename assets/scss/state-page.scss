@@ -1,5 +1,18 @@
 @import '_vars.scss';
 
+@media (max-width:970px) {
+  .content-page .content-container .content-header {
+    height: 300px !important;
+
+    .content-background {
+      width: 100% !important;
+      height: 300px !important;
+      background-size: 100% 100% !important;
+      background-position: left !important;
+    }
+  }
+}
+
 .content-page {
   margin-top: 70px;
   font-family: $helvetica;
@@ -40,8 +53,9 @@
       .content-background {
         width: 100%!important;
         height: 400px;
-        background-size: 100% 100%;
-        background-position: center;
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+        background-position: top;
         position: absolute;
         left: 0;
         right: 0;

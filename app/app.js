@@ -40,8 +40,14 @@
                     }
                 }
             })
+            .state('default-template.faq', {
+                url: '/traffic-citation-faq',
+                templateUrl: 'app/pages/faq/faq.html',
+                controller: 'FaqCtrl as vm'
+            })
             .state('default-template.state-info', {
-                url: '/state/:stateCode',
+                abstract: true,
+                url: '/how-to-fight-your-traffic-ticket/:stateCode',
                 views: {
                     '': {
                         templateUrl: 'app/pages/state-info/state-info.html',
@@ -50,12 +56,19 @@
                 }
             })
             .state('default-template.state-info.overview', {
-                url: '/overview',
-                templateUrl: 'app/pages/state-info/overview.html',
+                url: '',
+                templateUrl: function ($stateParams) {
+                    var stateCode = $stateParams.stateCode;
+                    var supportedStates = ["CA", "NY", "OR", "WA"];
+                    if (!supportedStates.includes(stateCode)) {
+                        return 'app/pages/state-info/state/default.html';
+                    }
+                    return 'app/pages/state-info/state/' + $stateParams.stateCode + '.html';
+                },
                 controller: 'StateInfoCtrl as vm'
             })
             .state('default-template.state-info.fight', {
-                url: '/fight',
+                url: '/contest-traffic-ticket-with-off-the-record',
                 templateUrl: 'app/pages/state-info/fight-ticket.html',
                 controller: 'StateInfoCtrl as vm'
             });
@@ -106,11 +119,11 @@
         })(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode banner closeBanner creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setIdentity track validateCode".split(" "), 0);
 
         branch.init('key_live_oik1hC6SvaFGaQl6L4f5chghyqkDbk9G', function(err, data) {
-            console.log('branch.init error: ', err);
-            console.log('branch.init data: ', data);
-            console.log('branch data: ', data.data);
-            console.log('branch data_parsed: ', data.data_parsed);
-            console.log('+clicked_branch_link', data.data_parsed['+clicked_branch_link']);
+            //console.log('branch.init error: ', err);
+            //console.log('branch.init data: ', data);
+            //console.log('branch data: ', data.data);
+            //console.log('branch data_parsed: ', data.data_parsed);
+            //console.log('+clicked_branch_link', data.data_parsed['+clicked_branch_link']);
 
             // Write Branch data to cookie. Only write the cookie if a Branch link was clicked,
             // otherwise previously written cookies will be overwritten next time user visits site.

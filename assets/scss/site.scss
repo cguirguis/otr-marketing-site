@@ -67,7 +67,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-@media (max-width: 900px) and (min-width: 768px) {
+@media (max-width: 940px) and (min-width: 768px) {
   .navbar-default .navbar-header .logo {
     display: none;
   }
@@ -260,6 +260,19 @@ ul#menu-main-menu {
   }
 }
 
+::-webkit-scrollbar-track {
+  background-color: white;
+} /* the new scrollbar will have a flat appearance with the set background color */
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+} /* this will style the thumb, ignoring the track */
+
+::-webkit-scrollbar-button {
+  background-color: #7c2929;
+} /* optionally, you can style the top and the bottom buttons (left and right for horizontal bars) */
+
+
 #menu-item-12 {
   position: relative;
   margin-right: 15px;
@@ -271,8 +284,7 @@ ul#menu-main-menu {
     padding: 20px;
 
     a {
-      padding: 5px 15px;
-      font-weight: lighter!important;
+      padding: 5px 10px;
     }
   }
   i {
@@ -288,18 +300,26 @@ ul#menu-main-menu {
     z-index: 2;
   }
   &.hover {
+    > a {
+      background-color: $primaryBlue;
+    }
+
     .nav-list {
-      padding: 70px 15px 2px 15px;
+      padding: 60px 15px 10px 15px;
       background: #fff;
       background-color: $primaryBlue;
       position: absolute;
       top: 10px;
       border-radius: 3px;
       display: block;
-      width: 185px;
+      width: 500px;
       z-index: 1;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      left: -150px;
+      @include split-columns(3, 15px);
     }
-    a, #menu-item-12.hover .fa.fa-chevron-down {
+    a, &.hover .fa.fa-chevron-down {
       color: white !important;
       z-index: 2;
     }
@@ -312,12 +332,19 @@ ul#menu-main-menu {
       padding: 0;
       position: relative;
       z-index: 1;
-      height: 50px;
+      height: 35px;
       cursor: pointer;
+
+      a {
+        text-transform: none;
+      }
     }
     .nav-list li.nav-item:hover a {
       color: #0050a0!important; /*#E6E22F !important;*/
     }
+  }
+  &.active i {
+    color: white;
   }
 }
 
@@ -801,4 +828,8 @@ div.signup-form {
   #footer #sub-floor .copyright {
     width: 100%;
   }
+}
+
+.faq-bg {
+  background-image: url(https://a0.muscache.com/airbnb/static/help/search/banner-43710af3493e21337be78422248650b3.png);
 }

@@ -1,5 +1,5 @@
 <div class="left-nav">
-    <div class="nav-title">Traffic tickets in {{vm.stateName}}</div>
+    <div class="nav-title">Traffic tickets in {{vm.selectedState.name}}</div>
     <ul>
         <li><a ng-click="vm.scrollTo('fines-and-penalties')">Fines & penalties</a></li>
         <li><a ng-click="vm.scrollTo('moving-violations')">Moving violations</a></li>
@@ -16,14 +16,14 @@
 </div>
 <div class="content-wrapper">
     <div class="content-section summary">
-        Depending on the type of {{vm.stateName}} traffic ticket you received, you can generally pay your ticket fines online, by mail, by phone, or in person. You can also fight your ticket or ask the court to reduce your fine. Be sure to respond to your traffic ticket within 15 days, or you could face additional penalties, such as a license suspension.
+        Depending on the type of {{vm.selectedState.name}} traffic ticket you received, you can generally pay your ticket fines online, by mail, by phone, or in person. You can also fight your ticket or ask the court to reduce your fine. Be sure to respond to your traffic ticket within 15 days, or you could face additional penalties, such as a license suspension.
     </div>
 
     <div class="content-section" >
         <h3 id="fines-and-penalties">Fines & penalties</h3>
-        <p>Traffic fines in {{vm.stateName}} vary by court. If you do not pay on time, you will be charged additional late fees.
+        <p>Traffic fines in {{vm.selectedState.name}} vary by court. If you do not pay on time, you will be charged additional late fees.
             Refer to your traffic ticket to determine your exact ticket amount, deadlines, and penalties.</p>
-        <blockquote>{{vm.stateName}}'s Department of Licensing (DOL) does not operate under a driving record point system. However, there are penalties, including driver's license suspension and revocation, for repeat speeding tickets or other violations that exhibit a pattern of unsafe driving.
+        <blockquote>{{vm.selectedState.name}}'s Department of Licensing (DOL) does not operate under a driving record point system. However, there are penalties, including driver's license suspension and revocation, for repeat speeding tickets or other violations that exhibit a pattern of unsafe driving.
             Too many traffic violations on your driving record or commit a major violation, your driver's license can be suspended.</blockquote>
         <p>Some major violations include:
         <ul>
@@ -58,11 +58,11 @@
 
         <div class="content-subsection" expandable-section>
             <h3 id="pay">Pay the ticket</h3>
-            <p>Paying a {{vm.stateCode}} traffic ticket is an admission of guilt.</p>
+            <p>Paying a {{vm.vm.selectedState.name}} traffic ticket is an admission of guilt.</p>
             <p>This means:</p>
             <ul>
                 <li>You are waiving your right to challenge the traffic ticket in court.</li>
-                <li>Depending on your {{vm.stateCode}} driving record, the Department of Licensing (DOL) may suspend your {{vm.stateName}}f driver's license.</li>
+                <li>Depending on your {{vm.selectedState.abbreviation}} driving record, the Department of Licensing (DOL) may suspend your {{vm.selectedState.name}}f driver's license.</li>
                 <li>The traffic violation may cause an increase in your car insurance rates.</li>
             </ul>
         </div>
@@ -99,4 +99,4 @@
     </div>
 </div>
 
-<button class="fight-my-ticket" ng-click="vm.fightTicketRedirect();">Fight My Ticket</button>
+<button class="fight-my-ticket" ui-sref="default-template.state-info.fight">Fight My Ticket</button>

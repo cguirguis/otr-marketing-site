@@ -60,7 +60,7 @@
     }
 
     .subtitle {
-      color: #ccc;
+      color: darkgray;
       font-size: 16px;
       line-height: 16px;
       clear: both;
@@ -128,6 +128,10 @@
         &.light-gray {
           color: #ccc!important;
         }
+
+        &.dark-gray {
+          color: darkgray!important;
+        }
       }
     }
   }
@@ -145,21 +149,12 @@
   }
 
   .inline-field {
-    /*width: 100px;
-    height: 53px;
-    margin-top: -16px;
-    margin-bottom: -16px;
+    //border: 1px solid transparent !important;
+    width: 130px;
+    height: 50px;
+    margin-top: 0;
+    margin-bottom: 20px;
     text-align: center;
-    margin-left: 5px;
-    border: 1px solid #B5D7F5!important;*/
-    border: 1px solid transparent !important;
-    width: 103%;
-    height: 63px;
-    margin-top: -20px;
-    margin-bottom: -21px;
-    text-align: center;
-    margin-left: -18px;
-    margin-right: -19px;
 
     &.dollar-value {
       width: 200px;
@@ -177,7 +172,7 @@
 
   .ticket-fine:before {
     position: absolute;
-    top: 35%;
+    top: 30%;
     content: "$";
     left: calc(50% - 40px);
     color: #A54242;
@@ -185,11 +180,20 @@
 
   .text-input-description {
     font-size: 13px;
+    line-height: 13px;
     position: absolute;
-    bottom: 1px;
-    right: calc(50% - 45px);
-    color: #666;
+    bottom: 4px;
+    width: 100%;
+    color: $primaryBlue;
   }
+
+  //.text-input-description-fight-chart {
+  //  font-size: 15px;
+  //  position: absolute;
+  //  bottom: 1px;
+  //  right: calc(50% - 135px);
+  //  color: tomato;
+  //}
 
   .asterisk {
     color: #E6E6E6;
@@ -197,7 +201,7 @@
   }
 
   .asterisk-text {
-    color: #CCC;
+    color: darkgray;
     font-size: 13px;
     width: 100%;
     margin-bottom: -19px;
@@ -207,10 +211,13 @@
 
   .edit-field-text {
     font-size: 13px;
+    line-height: 13px;
+    color: $primaryBlue;
+    text-decoration: underline;
     line-height: 18px;
     display: block;
     margin-top: 10px;
-    margin-bottom: -17px;
+    margin-bottom: -10px;
   }
 
   .fa-question-circle {
@@ -230,19 +237,28 @@
   text-align: center;
 
   .modal-row {
-    margin-bottom: 15px;
+    margin-bottom: 35px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    clear: both;
 
     > div {
       display: inline-block;
       width: 49%;
       text-align: left;
       font-size: 20px;
+      float: left;
     }
 
     span.dollar-sign {
       font-size: 33px;
-      color: #333;
-      margin-left: 35px;
+      color: #777;
+      margin-left: 0px;
+    }
+
+    input[type='text'] {
+      padding: 10px;
+      width: 70px;
     }
   }
 }
