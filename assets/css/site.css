@@ -604,7 +604,7 @@ div.signup-form {
   margin-top: 70px; }
   .content-page a {
     cursor: pointer;
-    color: #333; }
+    color: #111; }
     .content-page a:hover {
       color: #41A3E3; }
   .content-page .content-container {
@@ -612,11 +612,13 @@ div.signup-form {
     width: 100% !important;
     height: auto;
     text-align: center; }
+    .content-page .content-container div {
+      color: #111; }
     .content-page .content-container .content-header {
       height: 400px;
       position: relative; }
       .content-page .content-container .content-header h1 {
-        font-family: "Oswald", sans-serif;
+        font-family: "Open Sans", sans-serif;
         margin-top: 0px;
         font-size: 75px;
         font-weight: 400;
@@ -664,18 +666,18 @@ div.signup-form {
           list-style: none;
           cursor: pointer; }
           .content-page .content-container .content-nav ul li.active {
-            background-color: #777;
-            cursor: default; }
-            .content-page .content-container .content-nav ul li.active:hover {
-              background-color: #777; }
+            cursor: default;
+            border-top: solid 2px #41A3E3; }
           .content-page .content-container .content-nav ul li:hover {
-            background-color: #555; }
+            border-top: solid 2px #41A3E3; }
       .content-page .content-container .content-nav .nav-item {
         float: left;
         padding: 10px 28px;
         height: 40px;
         cursor: pointer;
-        font-size: 16px; }
+        font-size: 16px;
+        border-top: solid 2px transparent;
+        margin-right: 3px; }
     .content-page .content-container .content-body {
       font-size: 14px;
       padding: 30px 30px;
@@ -720,7 +722,7 @@ div.signup-form {
         width: calc(100% - 240px);
         padding: 0px 40px;
         padding-right: 10px;
-        margin-bottom: 70px;
+        margin-bottom: 40px;
         text-align: left; }
         .content-page .content-container .content-body .content-wrapper .intro {
           font-size: 14px;
@@ -736,17 +738,19 @@ div.signup-form {
             font-size: 16px;
             padding: 20px; }
           .content-page .content-container .content-body .content-wrapper .content-section h3 {
-            font-family: "Oswald", sans-serif;
+            font-family: "Open Sans", sans-serif;
             text-transform: uppercase;
             font-size: 22px;
-            color: #333; }
+            color: #333;
+            margin-top: 10px;
+            cursor: pointer; }
           .content-page .content-container .content-body .content-wrapper .content-section blockquote {
             background: none repeat scroll 0 0 #FCFCFC;
             border-left: 4px solid #c3d92c;
-            margin: 0 1em 0 2em;
-            margin-bottom: 10px;
+            margin: 5px 1em 0 2em;
+            margin-bottom: 15px;
             font-size: 15px;
-            padding: 10px 10px 7px 15px;
+            padding: 13px 10px 10px 15px;
             text-align: left; }
           .content-page .content-container .content-body .content-wrapper .content-section .content-subsection {
             margin-left: 35px;
@@ -754,10 +758,32 @@ div.signup-form {
             .content-page .content-container .content-body .content-wrapper .content-section .content-subsection h3 {
               text-transform: initial;
               font-size: 22px; }
+          .content-page .content-container .content-body .content-wrapper .content-section a {
+            color: #397FAF; }
+            .content-page .content-container .content-body .content-wrapper .content-section a:hover {
+              text-decoration: underline; }
           .content-page .content-container .content-body .content-wrapper .content-section .emphasized {
             font-weight: 400; }
           .content-page .content-container .content-body .content-wrapper .content-section .underline {
             text-decoration: underline; }
+        .content-page .content-container .content-body .content-wrapper .content-section h3 {
+          font-family: "Open Sans", sans-serif;
+          text-transform: uppercase;
+          font-size: 22px;
+          color: #333;
+          margin-top: 10px;
+          cursor: pointer; }
+          .content-page .content-container .content-body .content-wrapper .content-section h3:after {
+            font-family: "FontAwesome";
+            content: '\f078';
+            float: right;
+            font-size: 14px;
+            margin-top: 7px;
+            opacity: 0.6; }
+        .content-page .content-container .content-body .content-wrapper .content-section.collapsed, .content-page .content-container .content-body .content-wrapper .content-subsection.collapsed {
+          overflow: hidden; }
+          .content-page .content-container .content-body .content-wrapper .content-section.collapsed h3:after, .content-page .content-container .content-body .content-wrapper .content-subsection.collapsed h3:after {
+            content: '\f054'; }
   .content-page button.fight-my-ticket {
     clear: both;
     cursor: pointer;
