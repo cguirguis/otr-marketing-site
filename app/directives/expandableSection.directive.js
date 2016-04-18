@@ -10,10 +10,12 @@ angular.module("brochure").directive('expandableSection', function() {
             var contentSection = $(event.target).parent();
             contentSection.toggleClass("collapsed");
 
+            var titleHeight = parseInt(contentSection.children("h3").css("height"));
+
             var collapse = contentSection.hasClass("collapsed");
             if (collapse) {
                 contentSection.animate({
-                    height: "55px"
+                    height: (titleHeight - 24 + 55) + "px"
                 }, 200, function () {});
             } else {
                 contentSection.animate({

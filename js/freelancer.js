@@ -8,7 +8,7 @@
 $(function() {
     $('body').on('click', '.page-scroll a', function(event) {
         var $anchor = $(this);
-		$(".menu-item.page-scroll").removeClass("active");
+		$(".menu-item-12").removeClass("active");
 		$anchor.parent().addClass("active");
         $('html, body').stop().animate({
             scrollTop: $($anchor.attr('href')).offset().top

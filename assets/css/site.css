@@ -654,8 +654,9 @@ div.signup-form {
       background-size: 100% 100% !important;
       background-position: left !important; } }
 .content-page {
-  margin-top: 70px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  margin-top: 70px; }
+  .content-page *:not(i) {
+    font-family: "Helvetica", Helvetica, Arial, sans-serif; }
   .content-page a {
     cursor: pointer;
     color: #4d4d4d; }
@@ -736,7 +737,7 @@ div.signup-form {
         color: #aaa;
         margin-right: 3px; }
     .content-page .content-container .content-body {
-      font-size: 14px;
+      font-size: 15px;
       padding: 30px 30px;
       text-align: center;
       overflow: auto; }
@@ -815,10 +816,6 @@ div.signup-form {
             .content-page .content-container .content-body .content-wrapper .content-section .content-subsection h3 {
               text-transform: initial;
               font-size: 22px; }
-          .content-page .content-container .content-body .content-wrapper .content-section a {
-            color: #397FAF; }
-            .content-page .content-container .content-body .content-wrapper .content-section a:hover {
-              text-decoration: underline; }
           .content-page .content-container .content-body .content-wrapper .content-section .emphasized {
             font-weight: 400; }
           .content-page .content-container .content-body .content-wrapper .content-section .underline {
@@ -841,6 +838,10 @@ div.signup-form {
           overflow: hidden; }
           .content-page .content-container .content-body .content-wrapper .content-section[expandable-section].collapsed h3:after, .content-page .content-container .content-body .content-wrapper .content-subsection[expandable-section].collapsed h3:after {
             content: '\f054'; }
+      .content-page .content-container .content-body a {
+        color: #397FAF; }
+        .content-page .content-container .content-body a:hover {
+          text-decoration: underline; }
   .content-page button.fight-my-ticket {
     clear: both;
     cursor: pointer;

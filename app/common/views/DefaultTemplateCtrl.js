@@ -237,7 +237,9 @@
             var fightNavItem = $('#menu-item-12');
             fightNavItem.mouseover(function() {
                 fightNavItem.addClass("hover");
-                $("html").css('overflow', 'hidden');
+                if (vm.isMobileDevice) {
+                    $("html").css('overflow', 'hidden');
+                }
             });
 
             $('.nav-list').click(function() {
@@ -250,9 +252,13 @@
             });
 
             $('#menu-item-12, .nav-list').mouseleave(function() {
-                //fightNavItem.removeClass("hover");
+                fightNavItem.removeClass("hover");
                 $("html").css('overflow', 'visible');
             });
+
+            $('.navbar-brand').on('click', function(event) {
+                $(".menu-item-12").removeClass("active");
+            })
         });
 
         // ----- INTERFACE ------------------------------------------------------------
