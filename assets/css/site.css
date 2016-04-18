@@ -160,7 +160,7 @@ button.login-button {
         right: 20px;
         font-size: 15px; }
       .navbar-collapse.navbar-ex1-collapse #menu-item-12 ul.nav-list.nav-sublist {
-        width: 100%;
+        width: 103%;
         padding: 50px 5px 0px 5px;
         left: 0px;
         overflow-y: scroll;
@@ -211,6 +211,17 @@ ul#menu-main-menu {
     font-size: 14px;
     font-weight: bolder !important;
     border-radius: 3px; }
+
+::-webkit-scrollbar-track {
+  background-color: transparent; }
+
+/* the new scrollbar will have a flat appearance with the set background color */
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2); }
+
+/* this will style the thumb, ignoring the track */
+::-webkit-scrollbar-button {
+  background-color: white; }
 
 /* optionally, you can style the top and the bottom buttons (left and right for horizontal bars) */
 #menu-item-12 {
@@ -618,7 +629,10 @@ div.signup-form {
   #footer #sub-floor .copyright {
     width: 100%; } }
 .faq-bg {
-  background-image: url(https://a0.muscache.com/airbnb/static/help/search/banner-43710af3493e21337be78422248650b3.png); }
+  background-image: url(../img/otr-header-bg.png);
+  opacity: 0.7 !important;
+  background-size: auto auto !important;
+  font-size: 45px !important; }
 
 .align-middle {
   position: relative;
