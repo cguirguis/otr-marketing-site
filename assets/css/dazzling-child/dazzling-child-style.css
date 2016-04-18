@@ -376,7 +376,8 @@ input[type="text"].wpcf7-form-control, input[type="email"].wpcf7-form-control{
 }
 
 p, .btn, div {
-    font-family: 'Roboto', sans-serif;
+    /*font-family: 'Roboto', sans-serif;*/
+    font-family: Arial,Helvetica,sans-serif;
     font-weight: 300;
 }
 
