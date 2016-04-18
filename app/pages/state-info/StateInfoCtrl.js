@@ -6,8 +6,8 @@
         .controller('StateInfoCtrl', StateInfoCtrl)
         .controller('InsuranceModalCtrl', InsuranceModalCtrl);
 
-    StateInfoCtrl.$inject = ['ENV', '$rootScope', '$state', '$filter', '$stateParams', '$window', '$timeout', '$location', '$anchorScroll', '$uibModal', 'GlobalUtils'];
-    function StateInfoCtrl(ENV, $rootScope, $state, $filter, $stateParams, $window, $timeout, $location, $anchorScroll, $uibModal, GlobalUtils) {
+    StateInfoCtrl.$inject = ['$rootScope', '$scope', '$stateParams', '$window', '$timeout', '$location', '$anchorScroll', '$uibModal', 'GlobalUtils'];
+    function StateInfoCtrl($rootScope, $scope, $stateParams, $window, $timeout, $location, $anchorScroll, $uibModal, GlobalUtils) {
         var vm = this,
 
             STATES = {
@@ -94,7 +94,16 @@
         // ----- PUBLIC METHODS -------------------------------------------------------
 
         (function initController() {
-
+            $scope.$on('$viewContentLoaded', function() {
+                function showTooltip(event) {
+                    $(event.target).parent().children(".otr-tooltip").removeClass("hide");
+                }
+                function hideTooltip(event) {
+                    $(event.target).parent().children(".otr-tooltip").addClass("hide");
+                }
+                $(".fa-question-circle").on('mouseover', showTooltip);
+                $(".fa-question-circle").on('mouseout', hideTooltip);
+            });
         })();
 
         function editInsuranceVariables() {
@@ -144,8 +153,6 @@
         }
 
         function totalSavings() {
-            console.log('total ticket cost: ', vm.totalTicketCost());
-            console.log('base fee: ', vm.selectedState.baseFee);
             return vm.totalTicketCost() - vm.selectedState.baseFee;
         }
 

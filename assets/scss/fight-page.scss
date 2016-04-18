@@ -38,6 +38,7 @@
         padding-right:25px;
         text-align: right;
         padding-right: 15px;
+        font-weight: 400;
       }
     }
 
@@ -136,6 +137,28 @@
     }
   }
 
+  .fa-question-circle {
+    color: #78B6FF;
+    font-size: 18px;
+    display: inline-block;
+    top: -1px;
+    position: relative;
+    left: 2px;
+    cursor: pointer;
+  }
+
+  .otr-tooltip {
+    font-size: 12px;
+    line-height: 15px;
+    width: 180px;
+    border: solid 1px #ccc;
+    padding: 10px;
+    background-color: #FFFFF9;
+    position: absolute;
+    top: 35px;
+    left: -15px;
+  }
+
   hr.gray-hr {
     border: 0;
     height: 1px;
@@ -187,14 +210,6 @@
     color: $primaryBlue;
   }
 
-  //.text-input-description-fight-chart {
-  //  font-size: 15px;
-  //  position: absolute;
-  //  bottom: 1px;
-  //  right: calc(50% - 135px);
-  //  color: tomato;
-  //}
-
   .asterisk {
     color: #E6E6E6;
     font-size: 25px;
@@ -218,16 +233,6 @@
     display: block;
     margin-top: 10px;
     margin-bottom: -10px;
-  }
-
-  .fa-question-circle {
-    color: #78B6FF;
-    font-size: 18px;
-    display: inline-block;
-    top: -1px;
-    position: relative;
-    left: 2px;
-    cursor: pointer;
   }
 }
 
@@ -393,6 +398,14 @@
       margin-bottom: 10px;
     }
   }
+
+  .content-page .content-container .content-body .options-comparison {
+    padding: 0px;
+
+    table {
+      margin-left: -10px;
+    }
+  }
 }
 
 @media (max-width: 400px) {
@@ -412,10 +425,6 @@
       button.fight-my-ticket {
         margin-top: 10px;
         margin-bottom: 30px;
-      }
-
-      .options-comparison {
-        padding: 0px;
       }
     }
   }

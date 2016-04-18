@@ -39,6 +39,10 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0!important;
 }
 
+.hide {
+  display: none;
+}
+
 .navbar-default {
   background-color: white!important;
   box-shadow: 0 0 5px rgba(0, 0, 0, .35);
@@ -218,6 +222,7 @@ button.login-button {
       margin-left: 0;
       overflow: visible;
       width: 100%;
+      overflow-x: hidden;
 
       .fa.fa-chevron-down {
         top: 21px;
@@ -859,11 +864,12 @@ div.signup-form {
   }
 }
 
-.faq-bg {
+.content-page .content-container .content-header .content-background .faq-bg {
   background-image: url(../img/otr-header-bg.png);
   opacity: 0.7!important;
   background-size: auto auto!important;
   font-size: 45px!important;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 .align-middle {
   position: relative;
