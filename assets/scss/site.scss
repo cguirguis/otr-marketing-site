@@ -227,6 +227,35 @@ button.login-button {
 
       ul.nav-list.nav-sublist {
         width: 100%;
+        padding: 50px 5px 0px 5px;
+        left: 0px;
+        overflow-y: scroll;
+        @include split-columns(2, 15px);
+        height: auto;
+        max-height: inherit;
+
+        li.nav-item {
+          list-style: none;
+          color: white;
+          display: block;
+          margin: 0;
+          line-height: 1;
+          padding: 0;
+          position: relative;
+          z-index: 1;
+          height: 30px;
+          cursor: pointer;
+        }
+      }
+
+      &.hover {
+        height: 340px;
+        overflow-y: scroll;
+
+        .nav-list li.nav-item a {
+          text-transform: none;
+          font-size: 15px;
+        }
       }
     }
   }
@@ -261,7 +290,7 @@ ul#menu-main-menu {
 }
 
 ::-webkit-scrollbar-track {
-  background-color: white;
+  background-color: transparent;
 } /* the new scrollbar will have a flat appearance with the set background color */
 
 ::-webkit-scrollbar-thumb {
@@ -269,7 +298,7 @@ ul#menu-main-menu {
 } /* this will style the thumb, ignoring the track */
 
 ::-webkit-scrollbar-button {
-  background-color: #7c2929;
+  background-color: white;
 } /* optionally, you can style the top and the bottom buttons (left and right for horizontal bars) */
 
 
@@ -305,7 +334,7 @@ ul#menu-main-menu {
     }
 
     .nav-list {
-      padding: 60px 15px 10px 15px;
+      padding: 60px 15px 20px 15px;
       background: #fff;
       background-color: $primaryBlue;
       position: absolute;
@@ -314,7 +343,7 @@ ul#menu-main-menu {
       display: block;
       width: 500px;
       z-index: 1;
-      overflow-y: scroll;
+      //overflow-y: scroll;
       overflow-x: hidden;
       left: -150px;
       @include split-columns(3, 15px);

@@ -160,7 +160,35 @@ button.login-button {
         right: 20px;
         font-size: 15px; }
       .navbar-collapse.navbar-ex1-collapse #menu-item-12 ul.nav-list.nav-sublist {
-        width: 100%; }
+        width: 100%;
+        padding: 50px 5px 0px 5px;
+        left: 0px;
+        overflow-y: scroll;
+        -moz-column-count: 2;
+        column-count: 2;
+        -webkit-column-count: 2;
+        -moz-column-gap: 15px;
+        -webkit-column-gap: 15px;
+        column-gap: 15px;
+        height: auto;
+        max-height: inherit; }
+        .navbar-collapse.navbar-ex1-collapse #menu-item-12 ul.nav-list.nav-sublist li.nav-item {
+          list-style: none;
+          color: white;
+          display: block;
+          margin: 0;
+          line-height: 1;
+          padding: 0;
+          position: relative;
+          z-index: 1;
+          height: 30px;
+          cursor: pointer; }
+      .navbar-collapse.navbar-ex1-collapse #menu-item-12.hover {
+        height: 340px;
+        overflow-y: scroll; }
+        .navbar-collapse.navbar-ex1-collapse #menu-item-12.hover .nav-list li.nav-item a {
+          text-transform: none;
+          font-size: 15px; }
 
   ul#menu-main-menu {
     height: 100% !important;
@@ -185,7 +213,7 @@ ul#menu-main-menu {
     border-radius: 3px; }
 
 ::-webkit-scrollbar-track {
-  background-color: white; }
+  background-color: transparent; }
 
 /* the new scrollbar will have a flat appearance with the set background color */
 ::-webkit-scrollbar-thumb {
@@ -193,7 +221,7 @@ ul#menu-main-menu {
 
 /* this will style the thumb, ignoring the track */
 ::-webkit-scrollbar-button {
-  background-color: #7c2929; }
+  background-color: white; }
 
 /* optionally, you can style the top and the bottom buttons (left and right for horizontal bars) */
 #menu-item-12 {
@@ -219,7 +247,7 @@ ul#menu-main-menu {
   #menu-item-12.hover > a {
     background-color: #41A3E3; }
   #menu-item-12.hover .nav-list {
-    padding: 60px 15px 10px 15px;
+    padding: 60px 15px 20px 15px;
     background: #fff;
     background-color: #41A3E3;
     position: absolute;
@@ -228,7 +256,6 @@ ul#menu-main-menu {
     display: block;
     width: 500px;
     z-index: 1;
-    overflow-y: scroll;
     overflow-x: hidden;
     left: -150px;
     -moz-column-count: 3;
@@ -681,7 +708,7 @@ div.signup-form {
           cursor: pointer; }
           .content-page .content-container .content-nav ul li.active {
             cursor: default;
-            border-top: solid 2px #41A3E3;
+            border-bottom: solid 3px #41A3E3;
             color: white; }
           .content-page .content-container .content-nav ul li:hover {
             color: white; }

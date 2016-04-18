@@ -175,7 +175,7 @@
             if (vm.clientTicketFine != vm.selectedState.avgFine) {
                 $(event.target).next(".text-input-description").hide();
             }
-        };
+        }
 
         // Fix top and left content nav bars so that they're sticky once
         // user has scrolled past a certain point

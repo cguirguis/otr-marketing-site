@@ -104,7 +104,7 @@
 
           &.active {
             cursor: default;
-            border-top: solid 2px $primaryBlue;
+            border-bottom: solid 3px $primaryBlue;
             color: white;
           }
           &:hover {

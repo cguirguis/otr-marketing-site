@@ -237,17 +237,21 @@
             var fightNavItem = $('#menu-item-12');
             fightNavItem.mouseover(function() {
                 fightNavItem.addClass("hover");
+                $("html").css('overflow', 'hidden');
             });
-            $('.nav-list').click(function() {
 
+            $('.nav-list').click(function() {
                 fightNavItem.removeClass("hover");
                 $(".menu-item-12").removeClass("active");
                 $("#menu-item-12").addClass("active");
+                $("ul#menu-main-menu").parent().toggle();
+                $("html").css('overflow', 'visible');
                 event.stopPropagation();
             });
 
             $('#menu-item-12, .nav-list').mouseleave(function() {
-                fightNavItem.removeClass("hover");
+                //fightNavItem.removeClass("hover");
+                $("html").css('overflow', 'visible');
             });
         });
 
