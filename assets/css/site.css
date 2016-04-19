@@ -856,6 +856,10 @@ div.signup-form {
   .content-page .green-text {
     color: #52A058 !important; }
 
+@media (min-width: 1050px) {
+  .content-page.state-page .content-container .content-header .content-background {
+    background-position: center;
+    background-size: 100% 120%; } }
 @media (max-width: 970px) {
   .content-page.state-page .content-container .content-header {
     height: 300px !important; }

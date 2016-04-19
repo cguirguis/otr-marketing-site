@@ -1,5 +1,5 @@
 
-<div class="content-page">
+<div class="content-page state-page">
     <div class="content-container text-center">
         <div class="content-header">
             <div class="content-background" ng-style="{ 'background-image': 'url({{vm.selectedState.backgroundImgUrl}})' }"></div>
@@ -15,7 +15,7 @@
 
         <div class="content-body">
             <!----- CONTENT INSERTED HERE ----->
-            <ui-view />
+            <ui-view autoscroll="true" />
             <!--------------------------------->
         </div>
     </div>
