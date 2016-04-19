@@ -16,7 +16,8 @@ gulp.task('concat-css', ['sass'], function() {
     return gulp.src([
             'assets/css/site.css',
             'assets/css/state-page.css',
-            'assets/css/fight-page.css'
+            'assets/css/fight-page.css',
+            'assets/css/help-page.css'
         ])
         .pipe(concat('site.css'))
         .pipe(gulp.dest('assets/css'));
@@ -25,7 +26,8 @@ gulp.task('concat-css', ['sass'], function() {
 gulp.task('clean', ['concat-css'], function() {
     return del([
         'assets/css/state-page.css',
-        'assets/css/fight-page.css'
+        'assets/css/fight-page.css',
+        'assets/css/help-page.css'
     ]);
 });
 

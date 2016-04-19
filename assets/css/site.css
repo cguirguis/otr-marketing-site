@@ -632,34 +632,7 @@ div.signup-form {
 @media screen and (max-width: 768px) {
   #footer #sub-floor .copyright {
     width: 100%; } }
-.content-page .content-container .content-header .content-background .faq-bg {
-  background-image: url(../img/otr-header-bg.png);
-  opacity: 0.7 !important;
-  background-size: auto auto !important;
-  font-size: 45px !important;
-  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); }
 
-.align-middle {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%); }
-
-.faq-question {
-  color: #4d4d4d; }
-
-.content-page .content-container .content-body .content-wrapper .content-section .faq-list a {
-  color: #1D4681; }
-
-.content-page .content-container .content-body .content-wrapper .content-section .faq-list li {
-  padding-bottom: 5px; }
-
-@media (max-width: 970px) {
-  .content-page .content-container .content-header {
-    height: 300px !important; }
-    .content-page .content-container .content-header .content-background {
-      height: 300px !important;
-      background-position: left !important;
-      background-size: 100% 100% !important; } }
 .content-page {
   margin-top: 70px; }
   .content-page *:not(i) {
@@ -682,7 +655,7 @@ div.signup-form {
       .content-page .content-container .content-header h1 {
         font-family: "Open Sans", sans-serif;
         margin-top: 0px;
-        font-size: 75px;
+        font-size: calc(4vw + 2vh + 2vmin);
         font-weight: 400;
         color: white;
         position: absolute;
@@ -883,6 +856,13 @@ div.signup-form {
   .content-page .green-text {
     color: #52A058 !important; }
 
+@media (max-width: 970px) {
+  .content-page.state-page .content-container .content-header {
+    height: 300px !important; }
+    .content-page.state-page .content-container .content-header .content-background {
+      height: 300px !important;
+      background-position: left !important;
+      background-size: 100% 100% !important; } }
 @media (max-width: 768px) {
   .content-page .content-container .content-body {
     padding-top: 10px; }
@@ -1219,3 +1199,19 @@ div.signup-form {
     .content-page .content-container .content-body.fight-page button.fight-my-ticket {
       margin-top: 10px;
       margin-bottom: 30px; } }
+
+.content-page.help-page .content-container .content-header .content-background {
+  background-image: url(../img/otr-header-bg.png);
+  opacity: 0.7;
+  background-size: auto auto;
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); }
+.content-page.help-page .content-container .content-body .content-wrapper .content-section .faq-list a {
+  color: #1D4681; }
+.content-page.help-page .content-container .content-body .content-wrapper .content-section .faq-list li {
+  padding-bottom: 5px; }
+.content-page.help-page .content-container .align-middle {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%); }
+.content-page.help-page .content-container .faq-question {
+  color: #4d4d4d; }

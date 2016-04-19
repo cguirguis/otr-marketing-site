@@ -1,0 +1,39 @@
+// This file defines the styles by the help pages
+// (about us, faq, contact us, etc.)
+// These styles override default .content-page styling
+// defined in content-page.scss
+
+@import '_vars.scss';
+
+.content-page.help-page {
+  .content-container {
+    .content-header {
+      .content-background {
+        background-image: url(../img/otr-header-bg.png);
+        opacity: 0.7;
+        background-size: auto auto;
+        text-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      }
+    }
+    .content-body {
+      .content-wrapper .content-section {
+        .faq-list {
+          a {
+            color: #1D4681;
+          }
+          li {
+            padding-bottom: 5px;
+          }
+        }
+      }
+    }
+    .align-middle {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .faq-question {
+      color: #4d4d4d;
+    }
+  }
+}

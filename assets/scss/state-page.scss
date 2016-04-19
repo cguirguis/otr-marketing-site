@@ -1,16 +1,8 @@
+// This file defines the styles by the state pages
+// These styles override default .content-page styling
+// defined in content-page.scss
+
 @import '_vars.scss';
-
-@media (max-width:970px) {
-  .content-page .content-container .content-header {
-    height: 300px !important;
-
-    .content-background {
-      height: 300px !important;
-      background-position: left !important;
-      background-size: 100% 100% !important;
-    }
-  }
-}
 
 .content-page {
   margin-top: 70px;
@@ -22,6 +14,7 @@
   a {
     cursor: pointer;
     color: #4d4d4d;
+
     &:hover {
       color: $primaryBlue;
     }
@@ -44,7 +37,7 @@
       h1 {
         font-family: $openSans;
         margin-top: 0px;
-        font-size: 75px;
+        font-size: calc(4vw + 2vh + 2vmin);
         font-weight: 400;
         color: white;
         position: absolute;
@@ -323,6 +316,18 @@
 
   .green-text {
     color:#52A058!important;
+  }
+}
+
+@media (max-width:970px) {
+  .content-page.state-page .content-container .content-header {
+    height: 300px !important;
+
+    .content-background {
+      height: 300px !important;
+      background-position: left !important;
+      background-size: 100% 100% !important;
+    }
   }
 }
 

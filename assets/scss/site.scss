@@ -1,3 +1,7 @@
+// This is the main site SCSS file. It defines styles
+// used by the home page as well as common elements
+// across the site.
+
 @import '_vars.scss';
 
 body {
@@ -862,32 +866,4 @@ div.signup-form {
   #footer #sub-floor .copyright {
     width: 100%;
   }
-}
-
-.content-page .content-container .content-header .content-background .faq-bg {
-  background-image: url(../img/otr-header-bg.png);
-  opacity: 0.7!important;
-  background-size: auto auto!important;
-  font-size: 45px!important;
-  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-}
-.align-middle {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-}
-.faq-question {
-  color: #4d4d4d;
-}
-//.faq-text {
-//  font-family: Arial,Helvetica,sans-serif;
-//  font-size: 14px;
-//  color: #4d4d4d;
-//}
-
-.content-page .content-container .content-body .content-wrapper .content-section .faq-list a {
-  color: #1D4681;
-}
-.content-page .content-container .content-body .content-wrapper .content-section .faq-list li {
-  padding-bottom: 5px;
 }
