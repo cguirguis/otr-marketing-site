@@ -45,7 +45,8 @@
                 url: '/help',
                 views: {
                     '': {
-                        templateUrl: 'app/pages/help/help-template.html'
+                        templateUrl: 'app/pages/help/help-template.html',
+                        controller: 'HelpCtrl as vm'
                     }
                 }
             })
@@ -56,13 +57,13 @@
             })
             .state('default-template.help.contact-us', {
                 url: '/contact-us',
-                templateUrl: 'app/pages/help/contact-us.html'
-                //controller: 'HelpCtrl as vm'
+                templateUrl: 'app/pages/help/contact-us.html',
+                controller: 'HelpCtrl as vm'
             })
             .state('default-template.help.about-us', {
                 url: '/about-us',
-                templateUrl: 'app/pages/help/about-us.html'
-                //controller: 'HelpCtrl as vm'
+                templateUrl: 'app/pages/help/about-us.html',
+                controller: 'HelpCtrl as vm'
             })
             .state('default-template.state-info', {
                 abstract: true,
