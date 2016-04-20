@@ -10,8 +10,13 @@
     .run(init)
     .config(config);
 
-    config.$inject = ['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide'];
-    function config($stateProvider, $urlRouterProvider, $httpProvider, $provide) {
+    config.$inject = ['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide', '$locationProvider'];
+    function config($stateProvider, $urlRouterProvider, $httpProvider, $provide, $locationProvider) {
+
+        // enable html5Mode for pushstate ('#'-less URLs)
+        $locationProvider.html5Mode(true).hashPrefix('!');
+
+        $urlRouterProvider.otherwise('/');
 
         $stateProvider
             .state('default-template', {
@@ -91,8 +96,6 @@
                 templateUrl: 'app/pages/state-info/fight-ticket.html',
                 controller: 'StateInfoCtrl as vm'
             });
-
-        $urlRouterProvider.otherwise('/');
 
         $httpProvider.defaults.withCredentials = true;
 
