@@ -6,8 +6,8 @@
         .controller('StateInfoCtrl', StateInfoCtrl)
         .controller('InsuranceModalCtrl', InsuranceModalCtrl);
 
-    StateInfoCtrl.$inject = ['$rootScope', '$scope', '$stateParams', '$window', '$timeout', '$location', '$anchorScroll', '$uibModal', 'GlobalUtils'];
-    function StateInfoCtrl($rootScope, $scope, $stateParams, $window, $timeout, $location, $anchorScroll, $uibModal, GlobalUtils) {
+    StateInfoCtrl.$inject = ['$rootScope', '$scope', '$log', '$stateParams', '$window', '$timeout', '$location', '$anchorScroll', '$uibModal', 'GlobalUtils'];
+    function StateInfoCtrl($rootScope, $scope, $log, $stateParams, $window, $timeout, $location, $anchorScroll, $uibModal, GlobalUtils) {
         var vm = this,
 
             STATES = {
