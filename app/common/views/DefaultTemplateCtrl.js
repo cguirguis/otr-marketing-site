@@ -265,6 +265,7 @@
         vm.fightTicketRedirect = fightTicketRedirect;
         vm.login = login;
         vm.submitSubscribeForm = submitSubscribeForm;
+        vm.formatStateName = formatStateName;
 
 
         // ----- PUBLIC METHODS -------------------------------------------------------
@@ -353,6 +354,10 @@
                     }
                 }
             )
+        }
+
+        function formatStateName(name) {
+            return name.toLowerCase().replace(/ /g,'-');
         }
 
     }

@@ -41,7 +41,7 @@
                     <ul class="nav-list nav-sublist">
                         <li class="nav-item"
                             ng-repeat="state in statesList"
-                            ui-sref="default-template.state-info.overview({stateCode: '{{state.abbreviation}}', stateName: '{{state.name}}'})">
+                            ui-sref="default-template.state-info.overview({stateCode: '{{state.abbreviation}}', stateName: '{{vm.formatStateName(state.name)}}'})">
 
                             <a href="#" title="{{state.name}}" class="nav-link">{{state.name}}</a>
 

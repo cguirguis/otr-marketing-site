@@ -61,12 +61,14 @@
                 }
             };
 
-        var selectedState = $rootScope.statesList.filter(function(d) { return d.abbreviation == $stateParams.stateCode; })[0];
+        // State name may have '-' so make sure state code didn't pick up first part
+        var stateCode = $stateParams.stateCode.split('-')[0];
+        var selectedState = $rootScope.statesList.filter(function(d) { return d.abbreviation == stateCode; })[0];
 
-        if (!STATES[$stateParams.stateCode]) {
-            STATES[$stateParams.stateCode] = $.extend({}, selectedState,
+        if (!STATES[stateCode]) {
+            STATES[stateCode] = $.extend({}, selectedState,
                 {
-                    abbreviation: $stateParams.stateCode,
+                    abbreviation: stateCode,
                     name: selectedState.name,
                     backgroundImgUrl: 'assets/img/states/default.jpg',
                     baseFee: 250,
@@ -77,7 +79,7 @@
 
         // ----- VARS AVAILABLE TO THE VIEW -------------------------------------------
 
-        vm.selectedState = STATES[$stateParams.stateCode];
+        vm.selectedState = STATES[stateCode];
         vm.insuranceIncrease = 540;
         vm.clientMonthlyPremium = 100;
         vm.selectedViolation = 0.21;
