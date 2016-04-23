@@ -599,8 +599,6 @@ div.signup-form {
   #footer #subscriber-signup input[type='submit'] {
     background-color: #397FAF;
     border-color: white; }
-  #footer #subscriber-signup:hover {
-    background-color: #204d74; }
   #footer #subscriber-signup .help-block {
     color: #d98f9f; }
   #footer #subscriber-signup .has-error {
@@ -1127,6 +1125,9 @@ div.signup-form {
 
   hr {
     display: none; } }
+@media (max-width: 1023px) {
+  .content-page .content-container .content-body.fight-page .overview-row div.savings-result .savings-timeframe {
+    float: none; } }
 @media (max-width: 853px) {
   .content-page .content-container .content-body.fight-page .overview-row {
     max-width: inherit;

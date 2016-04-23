@@ -305,6 +305,17 @@
   }
 }
 
+
+@media (max-width: 1023px) {
+  .content-page .content-container .content-body.fight-page .overview-row {
+    div.savings-result {
+      .savings-timeframe {
+        float: none;
+      }
+    }
+  }
+}
+
 @media (max-width: 853px) {
   .content-page .content-container .content-body.fight-page .overview-row {
     max-width: inherit;
