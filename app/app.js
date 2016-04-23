@@ -92,7 +92,7 @@
                 controller: 'StateInfoCtrl as vm'
             })
             .state('default-template.state-info.fight', {
-                url: '/fighting-your-traffic-ticket',
+                url: '/why-fight-your-traffic-ticket',
                 templateUrl: 'app/pages/state-info/fight-ticket.html',
                 controller: 'StateInfoCtrl as vm'
             });

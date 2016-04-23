@@ -43,7 +43,7 @@
                             ng-repeat="state in statesList"
                             ui-sref="default-template.state-info.overview({stateCode: '{{state.abbreviation}}', stateName: '{{state.name}}'})">
 
-                            <a href="#" title="California" class="nav-link">{{state.name}}</a>
+                            <a href="#" title="{{state.name}}" class="nav-link">{{state.name}}</a>
 
                         </li>
                     </ul>

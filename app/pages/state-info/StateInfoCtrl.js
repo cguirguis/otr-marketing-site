@@ -96,10 +96,10 @@
         (function initController() {
             $scope.$on('$viewContentLoaded', function() {
                 function showTooltip(event) {
-                    $(event.target).parent().children(".otr-tooltip").removeClass("hide");
+                    $(event.target).children(".otr-tooltip").removeClass("hide");
                 }
                 function hideTooltip(event) {
-                    $(event.target).parent().children(".otr-tooltip").addClass("hide");
+                    $(event.target).children(".otr-tooltip").addClass("hide");
                 }
                 $(".fa-question-circle").on('mouseover', showTooltip);
                 $(".fa-question-circle").on('mouseout', hideTooltip);

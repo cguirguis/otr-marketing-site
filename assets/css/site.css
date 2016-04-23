@@ -181,7 +181,6 @@ button.login-button {
           color: white;
           display: block;
           margin: 0;
-          line-height: 1;
           padding: 0;
           position: relative;
           z-index: 1;
@@ -233,11 +232,14 @@ ul#menu-main-menu {
   margin-right: 15px;
   margin-left: 5px;
   width: 185px; }
+  #menu-item-12 a {
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: none;
+    transition: none; }
   #menu-item-12 .nav-list {
     display: none;
     padding: 20px; }
-    #menu-item-12 .nav-list a {
-      padding: 5px 10px; }
   #menu-item-12 i {
     float: left;
     cursor: pointer; }
@@ -251,11 +253,11 @@ ul#menu-main-menu {
   #menu-item-12.hover > a {
     background-color: #41A3E3; }
   #menu-item-12.hover .nav-list {
-    padding: 60px 15px 20px 15px;
+    padding: 20px 15px 20px 15px;
     background: #fff;
     background-color: #41A3E3;
     position: absolute;
-    top: 10px;
+    top: 51px;
     border-radius: 3px;
     display: block;
     width: 500px;
@@ -276,7 +278,6 @@ ul#menu-main-menu {
     color: white;
     display: block;
     margin: 0;
-    line-height: 1;
     padding: 0;
     position: relative;
     z-index: 1;
@@ -1019,8 +1020,8 @@ div.signup-form {
   padding: 10px;
   background-color: #FFFFF9;
   position: absolute;
-  top: 35px;
-  left: -15px; }
+  top: -44px;
+  left: -180px; }
 .content-page .content-container .content-body hr.gray-hr {
   border: 0;
   height: 1px;
