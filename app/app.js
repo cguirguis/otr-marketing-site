@@ -15,7 +15,6 @@
 
         // enable html5Mode for pushstate ('#'-less URLs)
         $locationProvider.html5Mode(true).hashPrefix('!');
-
         $urlRouterProvider.otherwise('/');
 
         $stateProvider
@@ -56,7 +55,7 @@
                 }
             })
             .state('default-template.help.faq', {
-                url: '/traffic-citation-faq',
+                url: '/faq',
                 templateUrl: 'app/pages/help/faq.html',
                 controller: 'HelpCtrl as vm'
             })
@@ -72,7 +71,7 @@
             })
             .state('default-template.state-info', {
                 abstract: true,
-                url: '/how-to-fight-your-traffic-ticket/:stateCode',
+                url: '/:stateCode-:stateName',
                 views: {
                     '': {
                         templateUrl: 'app/pages/state-info/state-info.html',
@@ -81,7 +80,7 @@
                 }
             })
             .state('default-template.state-info.overview', {
-                url: '',
+                url: '/traffic-tickets',
                 templateUrl: function ($stateParams) {
                     var stateCode = $stateParams.stateCode;
                     var supportedStates = ["CA", "NY", "OR", "WA"];
@@ -93,7 +92,7 @@
                 controller: 'StateInfoCtrl as vm'
             })
             .state('default-template.state-info.fight', {
-                url: '/contest-traffic-ticket-with-off-the-record',
+                url: '/fighting-your-traffic-ticket',
                 templateUrl: 'app/pages/state-info/fight-ticket.html',
                 controller: 'StateInfoCtrl as vm'
             });
