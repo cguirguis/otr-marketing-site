@@ -637,7 +637,7 @@ div.signup-form {
 .content-page {
   margin-top: 70px; }
   .content-page *:not(i) {
-    font-family: "Helvetica", Helvetica, Arial, sans-serif; }
+    font-family: "Arial", sans-serif; }
   .content-page a {
     cursor: pointer;
     color: #4d4d4d; }
