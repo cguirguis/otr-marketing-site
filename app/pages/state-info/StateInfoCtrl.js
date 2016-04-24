@@ -6,80 +6,40 @@
         .controller('StateInfoCtrl', StateInfoCtrl)
         .controller('InsuranceModalCtrl', InsuranceModalCtrl);
 
-    StateInfoCtrl.$inject = ['$rootScope', '$scope', '$log', '$stateParams', '$window', '$timeout', '$location', '$anchorScroll', '$uibModal', 'GlobalUtils'];
-    function StateInfoCtrl($rootScope, $scope, $log, $stateParams, $window, $timeout, $location, $anchorScroll, $uibModal, GlobalUtils) {
-        var vm = this,
+    StateInfoCtrl.$inject = ['$rootScope', '$scope', '$log', '$state', '$stateParams', '$window', '$timeout', '$location', '$anchorScroll', '$uibModal', 'GlobalUtils', 'ngMeta'];
+    function StateInfoCtrl($rootScope, $scope, $log, $state, $stateParams, $window, $timeout, $location, $anchorScroll, $uibModal, GlobalUtils, ngMeta) {
+        var vm = this;
 
-            STATES = {
-                WA : {
-                    abbreviation : 'WA',
-                    name : 'Washington state',
-                    backgroundImgUrl : 'assets/img/states/WA.jpg',
-                    baseFee : 200,
-                    successRate : 97,
-                    avgFine : 180
-                },
-                OR : {
-                    abbreviation : 'OR',
-                    name : 'Oregon',
-                    backgroundImgUrl : 'assets/img/states/OR.jpg',
-                    baseFee : 350,
-                    successRate : 88,
-                    avgFine : 270
-                },
-                CA : {
-                    abbreviation : 'CA',
-                    name : 'California',
-                    backgroundImgUrl : 'assets/img/states/CA.jpg',
-                    baseFee : 300,
-                    successRate : 93,
-                    avgFine : 207
-                },
-                NY : {
-                    abbreviation : 'NY',
-                    name : 'New York',
-                    backgroundImgUrl : 'assets/img/states/NY.jpg',
-                    baseFee : 200,
-                    successRate : 95,
-                    avgFine : 180
-                },
-                TX : {
-                    abbreviation : 'TX',
-                    name : 'Texas',
-                    backgroundImgUrl : 'assets/img/states/TX.jpg',
-                    baseFee : 200,
-                    successRate : 97,
-                    avgFine : 107
-                },
-                OK : {
-                    abbreviation : 'OK',
-                    name : 'Oklahoma',
-                    backgroundImgUrl : 'assets/img/states/OK.jpg',
-                    baseFee : 200,
-                    successRate : 96,
-                    avgFine : 180
-                }
-            };
+        vm.selectedState = _.find($rootScope.statesList, function(o) {
+            return o.abbreviation == $stateParams.stateCode;
+        });
 
-        // State name may have '-' so make sure state code didn't pick up first part
-        var stateCode = $stateParams.stateCode.split('-')[0];
-        var selectedState = $rootScope.statesList.filter(function(d) { return d.abbreviation == stateCode; })[0];
+        // Set state defaults if necessary
+        if (!vm.selectedState.backgroundImgUrl) vm.selectedState.backgroundImgUrl = $rootScope.defaultStateValues.backgroundImgUrl;
+        if (!vm.selectedState.baseFee) vm.selectedState.baseFee = $rootScope.defaultStateValues.baseFee;
+        if (!vm.selectedState.successRate) vm.selectedState.successRate = $rootScope.defaultStateValues.successRate;
+        if (!vm.selectedState.avgFine) vm.selectedState.avgFine = $rootScope.defaultStateValues.avgFine;
 
-        if (!STATES[stateCode]) {
-            STATES[stateCode] = $.extend({}, selectedState,
-                {
-                    abbreviation: stateCode,
-                    name: selectedState.name,
-                    backgroundImgUrl: 'assets/img/states/default.jpg',
-                    baseFee: 250,
-                    successRate: 95,
-                    avgFine: 180
-                });
+        //console.log('state code: ', $stateParams.stateCode);
+        //console.log('current state: ', $state.current);
+        //console.log('selected state: ', vm.selectedState);
+
+        // Set the page title and meta tags.
+        // This is a temporary workaround until ngMeta adds a feature that supports 'resolve'
+        if ($state.current.name == 'default-template.state-info.overview') {
+            ngMeta.setTitle(vm.selectedState.name + ' Traffic Tickets & Violations');
+            ngMeta.setTag('description',
+                'Learn how to fight or pay your ' + vm.selectedState.name + ' traffic ticket, ' +
+                'prevent insurance increase & hire a lawyer in ' + vm.selectedState.abbreviation + '.');
+        } else if ($state.current.name == 'default-template.state-info.fight') {
+            ngMeta.setTitle('Fight Your ' + vm.selectedState.name + ' Traffic Ticket');
+            ngMeta.setTag('description',
+                'Learn why and how you should fight your traffic ticket in ' + vm.selectedState.name + ' and ' +
+                'how to hire the best lawyer to help you contest your ticket.');
         }
 
-        // ----- VARS AVAILABLE TO THE VIEW -------------------------------------------
 
-        vm.selectedState = STATES[stateCode];
+        // ----- VARS AVAILABLE TO THE VIEW -------------------------------------------
         vm.insuranceIncrease = 540;
         vm.clientMonthlyPremium = 100;
         vm.selectedViolation = 0.21;

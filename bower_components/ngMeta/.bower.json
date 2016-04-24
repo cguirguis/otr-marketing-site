@@ -1,0 +1,43 @@
+{
+  "name": "ngMeta",
+  "version": "0.3.7",
+  "authors": [
+    "Vinay Gopinath <vinayg18@gmail.com>"
+  ],
+  "description": "Meta tags support for AngularJS single page applications (SPA)",
+  "main": "src/ngMeta.js",
+  "keywords": [
+    "angularjs",
+    "meta",
+    "title",
+    "open-graph",
+    "description",
+    "spa"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/vinaygopinath/ngMeta",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.2"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.2",
+    "angular-route": "^1.2"
+  },
+  "_release": "0.3.7",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.3.7",
+    "commit": "9344cb59bf625f7e17173cbfc10a4698e47516f6"
+  },
+  "_source": "https://github.com/vinaygopinath/ngMeta.git",
+  "_target": "^0.3.7",
+  "_originalSource": "ngMeta",
+  "_direct": true
+}
