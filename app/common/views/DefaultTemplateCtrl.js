@@ -14,6 +14,13 @@
                 POST_SUBSCRIPTION: ENV.apiEndpoint + '/api/v1/subscribe'
             };
 
+        $rootScope.defaultStateValues = {
+            backgroundImgUrl : 'assets/img/states/default.jpg',
+            baseFee : 250,
+            successRate : 95,
+            avgFine : 180
+        }
+
         $rootScope.statesList = [
             {
                 "name": "Alabama",
@@ -33,7 +40,11 @@
             },
             {
                 "name": "California",
-                "abbreviation": "CA"
+                "abbreviation": "CA",
+                backgroundImgUrl : 'assets/img/states/CA.jpg',
+                baseFee : 300,
+                successRate : 93,
+                avgFine : 207
             },
             {
                 "name": "Colorado",
@@ -141,7 +152,11 @@
             },
             {
                 "name": "New York",
-                "abbreviation": "NY"
+                "abbreviation": "NY",
+                backgroundImgUrl : 'assets/img/states/NY.jpg',
+                baseFee : 200,
+                successRate : 95,
+                avgFine : 180
             },
             {
                 "name": "North Carolina",
@@ -157,11 +172,19 @@
             },
             {
                 "name": "Oklahoma",
-                "abbreviation": "OK"
+                "abbreviation": "OK",
+                backgroundImgUrl : 'assets/img/states/OK.jpg',
+                baseFee : 200,
+                successRate : 96,
+                avgFine : 180
             },
             {
                 "name": "Oregon",
-                "abbreviation": "OR"
+                "abbreviation": "OR",
+                backgroundImgUrl : 'assets/img/states/OR.jpg',
+                baseFee : 350,
+                successRate : 88,
+                avgFine : 270
             },
             {
                 "name": "Pennsylvania",
@@ -185,7 +208,11 @@
             },
             {
                 "name": "Texas",
-                "abbreviation": "TX"
+                "abbreviation": "TX",
+                backgroundImgUrl : 'assets/img/states/TX.jpg',
+                baseFee : 200,
+                successRate : 97,
+                avgFine : 107
             },
             {
                 "name": "Utah",
@@ -201,7 +228,11 @@
             },
             {
                 "name": "Washington",
-                "abbreviation": "WA"
+                "abbreviation": "WA",
+                backgroundImgUrl : 'assets/img/states/WA.jpg',
+                baseFee : 200,
+                successRate : 97,
+                avgFine : 180
             },
             {
                 "name": "West Virginia",

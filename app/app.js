@@ -115,7 +115,7 @@
             })
             .state('default-template.state-info', {
                 abstract: true,
-                url: '/:stateCode-:stateName',
+                url: '/{stateCode:[a-zA-Z]{2}}-{stateName}',
                 views: {
                     '': {
                         templateUrl: 'app/pages/state-info/state-info.html',
