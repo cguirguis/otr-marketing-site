@@ -284,7 +284,11 @@ ul#menu-main-menu {
     height: 35px;
     cursor: pointer; }
     #menu-item-12.hover .nav-list li.nav-item a {
-      text-transform: none; }
+      text-transform: none;
+      display: block;
+      height: 100%;
+      margin-top: 0;
+      line-height: 30px; }
   #menu-item-12.hover .nav-list li.nav-item:hover a {
     color: #0050a0 !important;
     /*#E6E22F !important;*/ }

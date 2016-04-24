@@ -376,6 +376,10 @@ ul#menu-main-menu {
 
       a {
         text-transform: none;
+        display: block;
+        height: 100%;
+        margin-top: 0;
+        line-height: 30px;
       }
     }
     .nav-list li.nav-item:hover a {

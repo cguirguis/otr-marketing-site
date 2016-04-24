@@ -44,6 +44,15 @@
                     }
                 }
             })
+            .state('default-template.howitworks', {
+                url: '/how-it-works',
+                views: {
+                    '': {
+                        templateUrl: 'app/pages/how-it-works/index.html',
+                        controller: 'HomeCtrl as vm'
+                    }
+                }
+            })
             .state('default-template.help', {
                 abstract: true,
                 url: '/help',
