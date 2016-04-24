@@ -26,6 +26,13 @@
     "angular": "^1.5.3",
     "angular-cookies": "^1.5.3",
     "ngMeta": "^0.3.7",
-    "lodash": "^4.11.2"
+    "lodash": "^4.11.2",
+    "bootstrap": "~3.3.6",
+    "jquery": "~1.11.0",
+    "jquery-migrate": "~1.4.0",
+    "respond": "~1.4.2",
+    "html5shiv": "~3.7.3",
+    "jquery-easing": "*",
+    "font-awesome": "fontawesome#~4.6.1"
   }
 }
