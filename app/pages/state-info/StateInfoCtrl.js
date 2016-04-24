@@ -6,14 +6,14 @@
         .controller('StateInfoCtrl', StateInfoCtrl)
         .controller('InsuranceModalCtrl', InsuranceModalCtrl);
 
-    StateInfoCtrl.$inject = ['$rootScope', '$scope', '$log', '$stateParams', '$window', '$timeout', '$location', '$anchorScroll', '$uibModal', 'GlobalUtils'];
-    function StateInfoCtrl($rootScope, $scope, $log, $stateParams, $window, $timeout, $location, $anchorScroll, $uibModal, GlobalUtils) {
+    StateInfoCtrl.$inject = ['$rootScope', '$scope', '$log', '$state', '$stateParams', '$window', '$timeout', '$location', '$anchorScroll', '$uibModal', 'GlobalUtils', 'ngMeta'];
+    function StateInfoCtrl($rootScope, $scope, $log, $state, $stateParams, $window, $timeout, $location, $anchorScroll, $uibModal, GlobalUtils, ngMeta) {
         var vm = this,
 
             STATES = {
                 WA : {
                     abbreviation : 'WA',
-                    name : 'Washington state',
+                    name : 'Washington State',
                     backgroundImgUrl : 'assets/img/states/WA.jpg',
                     baseFee : 200,
                     successRate : 97,
@@ -65,16 +65,29 @@
         var stateCode = $stateParams.stateCode.split('-')[0];
         var selectedState = $rootScope.statesList.filter(function(d) { return d.abbreviation == stateCode; })[0];
 
+        // This is a temporary workaround until ngMeta adds a feature that supports 'resolve'
+        if ($state.current.name == 'default-template.state-info.overview') {
+            ngMeta.setTitle(selectedState.name + ' Traffic Tickets & Violations');
+            ngMeta.setTag('description',
+                'Learn how to fight or pay your ' + selectedState.name + ' traffic ticket, ' +
+                'prevent insurance increase & hire a lawyer in ' + selectedState.abbreviation + '.');
+        } else if ($state.current.name == 'default-template.state-info.fight') {
+            ngMeta.setTitle('Fight Your ' + selectedState.name + ' Traffic Ticket');
+            ngMeta.setTag('description',
+                'Learn why and how you should fight your traffic ticket in ' + selectedState.name + ' and ' +
+                'how to hire the best lawyer to help you contest your ticket.');
+        }
+
         if (!STATES[stateCode]) {
             STATES[stateCode] = $.extend({}, selectedState,
-                {
-                    abbreviation: stateCode,
-                    name: selectedState.name,
-                    backgroundImgUrl: 'assets/img/states/default.jpg',
-                    baseFee: 250,
-                    successRate: 95,
-                    avgFine: 180
-                });
+            {
+                abbreviation: stateCode,
+                name: selectedState.name,
+                backgroundImgUrl: 'assets/img/states/default.jpg',
+                baseFee: 250,
+                successRate: 95,
+                avgFine: 180
+            });
         }
 
         // ----- VARS AVAILABLE TO THE VIEW -------------------------------------------

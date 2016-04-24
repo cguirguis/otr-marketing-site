@@ -5,17 +5,34 @@
         'ui.router',
         'ui.bootstrap',
         'ngRetina',
-        'ngCookies'
+        'ngCookies',
+        'ngMeta'
     ])
-    .run(init)
-    .config(config);
+        .run(init)
+        .run(loadEvents)
+        .config(config);
 
-    config.$inject = ['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide', '$locationProvider'];
-    function config($stateProvider, $urlRouterProvider, $httpProvider, $provide, $locationProvider) {
+
+    config.$inject = ['$stateProvider', '$urlRouterProvider', '$httpProvider', '$provide', '$locationProvider', 'ngMetaProvider'];
+    function config($stateProvider, $urlRouterProvider, $httpProvider, $provide, $locationProvider, ngMetaProvider) {
 
         // enable html5Mode for pushstate ('#'-less URLs)
         $locationProvider.html5Mode(true).hashPrefix('!');
         $urlRouterProvider.otherwise('/');
+
+        //Add a suffix to all page titles
+        ngMetaProvider.useTitleSuffix(true);
+        ngMetaProvider.setDefaultTitle('OffTheRecord.com - The smart way to fight your traffic tickets');
+        ngMetaProvider.setDefaultTitleSuffix(' | OffTheRecord.com');
+
+
+        //Set defaults for arbitrary tags
+        ngMetaProvider.setDefaultTag('author', 'Off the Record, Inc.');
+        ngMetaProvider.setDefaultTag('description',
+                'Fight your traffic ticket with OffTheRecord.com to get it fully dismissed. ' +
+                'We have a 97% success rate and offer a full refund if we dont win. ' +
+                'Your ticket will be matched to the local lawyer with the highest chance of success.');
+
 
         $stateProvider
             .state('default-template', {
@@ -42,6 +59,11 @@
                         templateUrl: 'app/pages/home/home.html',
                         controller: 'HomeCtrl as vm'
                     }
+                },
+                meta: {
+                    // title is set in the controller
+                    'description': 'The smart way to fight your speeding or traffic ticket. We win or it\'s free. ' +
+                                   '97% success rate. We match your citation to the lawyer with the highest chance of success.'
                 }
             })
             .state('default-template.howitworks', {
@@ -66,17 +88,30 @@
             .state('default-template.help.faq', {
                 url: '/faq',
                 templateUrl: 'app/pages/help/faq.html',
-                controller: 'HelpCtrl as vm'
+                controller: 'HelpCtrl as vm',
+                meta: {
+                    title : 'Frequently Asked Questions',
+                    description : 'OffTheRecord.com is a service that makes it easy to fight any traffic ticket through a lawyer. ' +
+                                  'Here are some frequently asked questions about the service.'
+                }
             })
             .state('default-template.help.contact-us', {
                 url: '/contact-us',
                 templateUrl: 'app/pages/help/contact-us.html',
-                controller: 'HelpCtrl as vm'
+                controller: 'HelpCtrl as vm',
+                meta: {
+                    title : 'Contact Us',
+                    description : 'Contact us if you have questions about your speeding or traffic ticket and how to fight them.'
+                }
             })
             .state('default-template.help.about-us', {
                 url: '/about-us',
                 templateUrl: 'app/pages/help/about-us.html',
-                controller: 'HelpCtrl as vm'
+                controller: 'HelpCtrl as vm',
+                meta: {
+                    title : 'About Us',
+                    description : 'Learn why Off the Record is the smart way to contest any traffic ticket, and read our story.'
+                }
             })
             .state('default-template.state-info', {
                 abstract: true,
@@ -99,6 +134,17 @@
                     return 'app/pages/state-info/state/' + $stateParams.stateCode + '.html';
                 },
                 controller: 'StateInfoCtrl as vm'
+                // When ngMeta releases their next version, this will work
+                //resolve: {
+                //    data: function($stateParams, ngMeta) {
+                //        ngMeta.setTitle('State Title');
+                //        ngMeta.setTag('description', 'some description...');
+                //        return 'abcd';
+                //    }
+                //},
+                //meta: {
+                //    disableUpdate : true
+                //}
             })
             .state('default-template.state-info.fight', {
                 url: '/why-fight-your-traffic-ticket',
@@ -117,8 +163,11 @@
         });
     }
 
-    init.$inject = ['$rootScope', '$location', '$anchorScroll', '$cookies'];
-    function init($rootScope, $location, $anchorScroll, $cookies) {
+    init.$inject = ['$rootScope', '$location', '$anchorScroll', '$cookies', 'ngMeta'];
+    function init($rootScope, $location, $anchorScroll, $cookies, ngMeta) {
+
+        // Initialize page title and meta tags
+        ngMeta.init();
 
         // Initialize branch.io and add smart banner
         branchInit($cookies);
@@ -212,6 +261,11 @@
             // Reset navbar's top property to 0
             $(".navbar.navbar-fixed-top").css("top", "0");
         }
+    }
+
+    loadEvents.$inject = ['$state', '$rootScope', '$location', '$cookies'];
+    function loadEvents($state, $rootScope, $location, $cookies) {
+
     }
 
 })();
