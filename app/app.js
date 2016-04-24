@@ -48,8 +48,7 @@
                 url: '/how-it-works',
                 views: {
                     '': {
-                        templateUrl: 'app/pages/how-it-works/index.html',
-                        controller: 'HomeCtrl as vm'
+                        templateUrl: 'app/pages/how-it-works/how-it-works.html'
                     }
                 }
             })
