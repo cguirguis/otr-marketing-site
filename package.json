@@ -40,6 +40,7 @@
     "vinyl-source-stream": "1.1.0"
   },
   "dependencies": {
-    "gulp-clean-css": "^2.0.6"
+    "gulp-clean-css": "^2.0.6",
+    "gulp-rename": "^1.2.2"
   }
 }

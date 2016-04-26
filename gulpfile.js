@@ -14,6 +14,8 @@ var replace = require('gulp-replace-task');
 var runSequence = require('run-sequence');
 var merge = require('merge-stream');
 var connect = require('gulp-connect-multi')();
+var rename = require('gulp-rename');
+var argv = require('yargs').argv;
 
 gulp.task('minify-sass', function () {
     return sass('./assets/scss/*.scss')
@@ -38,7 +40,7 @@ gulp.task('minify-css', ['minify-sass'], function() {
 });
 
 gulp.task('minify-js', function() {
-    return gulp.src('app/**/*.js')
+    return gulp.src(['app/**/*.js', '!app/app-config/config.js'])
         .pipe(concat('all-otr.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('build/assets/js'))
@@ -59,7 +61,7 @@ gulp.task('compress-img', function() {
 });
 
 gulp.task('replace-vars', function() {
-    return gulp.src('index.html')
+    gulp.src('index.html')
         .pipe(replace({
             patterns: [
                 {
@@ -69,6 +71,33 @@ gulp.task('replace-vars', function() {
             ]
         }))
         .pipe(gulp.dest('build'));
+
+    var domain = {
+        domainName: 'DEVO',
+        endpoint: 'https://otr-backend-service-us-devo.offtherecord.com'
+    }
+
+    if(argv.prod) {
+        domain.domainName = 'PROD'
+        domain.endpoint = 'https://otr-backend-service-us-prod.offtherecord.com'
+    }
+
+    return gulp.src('app/app-config/config.js')
+        .pipe(replace({
+            patterns: [
+                {
+                    match: 'domain-name',
+                    replacement: domain.domainName
+                },
+                {
+                    match: 'endpoint',
+                    replacement: domain.endpoint
+                }
+            ]
+        }))
+        .pipe(uglify())
+        .pipe(rename('config.min.js'))
+        .pipe(gulp.dest('build/assets/js'));
 });
 
 /********************************************
@@ -92,7 +121,6 @@ gulp.task('copy-src', function() {
     var bower =
         gulp.src('./bower_components/**/*')
             .pipe(gulp.dest('./build/bower_components/'));
-
 
     var app =
         gulp.src('./app/**/*')

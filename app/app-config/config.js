@@ -8,8 +8,8 @@
             //'name': 'LOCAL',
             //'apiEndpoint': 'http://localhost:8080'
 
-            'name': 'DEVO',
-            'apiEndpoint': 'https://otr-backend-service-us-devo.offtherecord.com'
+            'name': '@@domain-name',
+            'apiEndpoint': '@@endpoint'
 
             //'name': 'PROD',
             //'apiEndpoint': 'https://otr-backend-service-us-prod.offtherecord.com'
