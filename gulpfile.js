@@ -92,13 +92,17 @@ gulp.task('copy-src', function() {
     var bower =
         gulp.src('./bower_components/**/*')
             .pipe(gulp.dest('./build/bower_components/'));
-        ;
+
 
     var app =
         gulp.src('./app/**/*')
             .pipe(gulp.dest('./build/app/'));
-    ;
-    return merge(bower, app);
+
+    var seoFiles =
+        gulp.src(['robots.txt', 'sitemap.txt'])
+            .pipe(gulp.dest('./build/'));
+
+    return merge(bower, app, seoFiles);
 });
 
 gulp.task('connect', connect.server({
