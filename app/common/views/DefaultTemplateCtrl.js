@@ -269,7 +269,7 @@
             fightNavItem.mouseover(function() {
                 fightNavItem.addClass("hover");
                 if (vm.isMobileDevice) {
-                    $("html").css('overflow', 'hidden');
+                    //$("html").css('overflow', 'hidden');
                 }
             });
 

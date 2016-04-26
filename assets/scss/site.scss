@@ -236,8 +236,9 @@ button.login-button {
 
       ul.nav-list.nav-sublist {
         width: 103%;
-        padding: 50px 5px 0px 5px;
+        padding: 50px 5px 0px 15px;
         left: 0px;
+        top: 0px;
         overflow-y: scroll;
         @include split-columns(2, 15px);
         height: auto;

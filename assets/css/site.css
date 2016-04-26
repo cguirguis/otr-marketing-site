@@ -165,8 +165,9 @@ button.login-button {
         font-size: 15px; }
       .navbar-collapse.navbar-ex1-collapse #menu-item-12 ul.nav-list.nav-sublist {
         width: 103%;
-        padding: 50px 5px 0px 5px;
+        padding: 50px 5px 0px 15px;
         left: 0px;
+        top: 0px;
         overflow-y: scroll;
         -moz-column-count: 2;
         column-count: 2;

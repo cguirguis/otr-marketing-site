@@ -8,32 +8,70 @@
     </div>
 
     <div class="content-wrapper">
-        <div class="step-section">
-            <h2>Snap a photo of your ticket.</h2>
-            <img src='./assets/img/otr-step-1.png' />
-        </div>
+        <div class="section" id="section-1">
+            <div class="step-section">
+                <h2>Snap a photo of your ticket.</h2>
+                <img src='./assets/img/otr-step-1.png' />
+                <i class="fa fa-angle-right"></i>
+            </div>
 
-        <div class="step-section">
-            <h2>Answer a few questions.</h2>
-            <img src='./assets/img/otr-step-2.png' />
-        </div>
+            <div class="step-section">
+                <h2>Answer a few questions.</h2>
+                <img src='./assets/img/otr-step-2.png' />
+                <i class="fa fa-angle-right"></i>
+            </div>
 
-        <div class="step-section">
-            <h2>Get matched to the best lawyer.</h2>
-            <img src='./assets/img/otr-step-4.png' />
+            <div class="step-section">
+                <h2>Get matched to the best lawyer.</h2>
+                <img src='./assets/img/otr-step-4.png' />
+            </div>
         </div>
-
-        <div class="step-section">
+        <div class="section" id="section-2">
             <h2>You're done.</h2>
-            <h2>No mailing in your ticket. No showing up in court.</h2>
-        </div>
+            <h2 style="font-size:24px">No mailing in your ticket. No showing up in court.</h2>
 
-        <div class="step-section" style="margin-top: 80px;margin-bottom: 50px;">
-            <a href="javascript:void(0)" class="btn btn-lg signup-button fight-my-ticket"
-               ng-click="vm.fightTicketRedirect()"
-               title="Fight My Ticket">Fight My Ticket</a>
+            <div style="margin-top: 40px;margin-bottom: 40px;">
+                <a href="javascript:void(0)" class="btn btn-lg signup-button fight-my-ticket"
+                   ng-click="vm.fightTicketRedirect()"
+                   title="Fight My Ticket">Fight My Ticket</a>
+            </div>
         </div>
+        <div class="section" id="section-3">
+            <h2>Why Off The Record?</h2>
 
+            <div class="features">
+                <div class="feature">
+                    <i class="icon-preview fa fa-clock-o"></i>
+                    <h3 class="feature-title">Less time</h3>
+                    <div class="feature-content">Fight your ticket in under a minute. Get back on the road knowing your driving record is in good hands.</div>
+                </div>
+                <div class="feature">
+                    <i class="icon-preview fa fa-money"></i>
+                    <h3 class="feature-title">Less money</h3>
+                    <div class="feature-content">We negotiate great flat-fee rates, so you never pay more than you need to.</div>
+                </div>
+                <div class="feature">
+                    <i class="icon-preview fa fa-gavel"></i>
+                    <h3 class="feature-title">100% legal</h3>
+                    <div class="feature-content">We work with only the best local attorneys to make fighting your case easy and stress-free.</div>
+                </div>
+                <div class="feature">
+                    <i class="icon-preview fa fa-camera"></i>
+                    <h3 class="feature-title">Easy to use</h3>
+                    <div class="feature-content">Just snap a photo of your ticket, and answer a few questions. You'll never have to mail it in.</div>
+                </div>
+                <div class="feature">
+                    <i class="icon-preview fa fa-institution"></i>
+                    <h3 class="feature-title">No showing up in court</h3>
+                    <div class="feature-content">Already have a court date? No problem, we'll take over so you don't need to go.</div>
+                </div>
+                <div class="feature">
+                    <i class="icon-preview fa fa-comments"></i>
+                    <h3 class="feature-title">Real-time help</h3>
+                    <div class="feature-content">Chat with your lawyer at any time to ask questions or get updates on your case.</div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -69,17 +107,45 @@
     .page.how-it-works .header .gray-overlay {
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.30);
+        background-color: rgba(0, 0, 0, 0.20);
         position: absolute;
     }
     .page.how-it-works .content-wrapper {
         background-color: #fdfdfd;
         border: solid 1px #fdfdfd;
-        padding: 30px 40px 60px 40px;
     }
-    .page.how-it-works .content-wrapper .step-section {
+    .page.how-it-works .content-wrapper .section {
+        text-align: center;
+        padding: 40px 15px 30px 15px;
+    }
+    .page.how-it-works .content-wrapper .section .step-section {
         text-align: center;
         margin-top: 10px;
+        padding: 0 40px;
+    }
+    .page.how-it-works .content-wrapper .section .step-section i {
+        display: none;
+    }
+    .page.how-it-works .content-wrapper .section#section-2 {
+        background-color: #145786;
+    }
+    .page.how-it-works .content-wrapper .section#section-3 {
+        background-color: #f4f4f4;
+        font-size: 14px;
+    }
+    .page.how-it-works .content-wrapper .section#section-3 .features {
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+    .page.how-it-works .content-wrapper .section#section-3 .features .feature {
+        color: #397FAF;
+    }
+    .page.how-it-works .content-wrapper .section#section-3 .features .feature .feature-title {
+        font-size: 2em;
+        font-weight: 300;
+    }
+    .page.how-it-works .content-wrapper .section#section-2 h2 {
+        color: white;
     }
     .page.how-it-works .content-wrapper h2 {
         font-weight: 400;
@@ -88,7 +154,8 @@
     }
     .page.how-it-works .content-wrapper img {
         height: 550px;
-        margin-left: -40px;
+        margin-left: -35px;
+        max-width: none;
     }
 
     .page.how-it-works .content-wrapper .fight-my-ticket.signup-button {
@@ -98,12 +165,69 @@
         font-weight: 400;
         border-radius: 3px;
         padding: 15px 50px;
+        color: white;
+        border-color: white;
+        background: transparent;
+    }
+    .page.how-it-works .content-wrapper .fight-my-ticket.signup-button:hover {
+        background-color: #41A3E3;
+    }
+
+    @media (min-width: 1050px) {
+        .page.how-it-works .content-wrapper .section#section-1 {
+            overflow: auto;
+        }
+        .page.how-it-works .content-wrapper .section#section-1 .step-section {
+            width: 33%;
+            float: left;
+            position: relative;
+        }
+        .page.how-it-works .content-wrapper .section#section-1 .step-section h2 {
+            min-height: 70px;
+        }
+        .page.how-it-works .content-wrapper .section .step-section i {
+            display: block;
+            font-size: 110px;
+            margin-left: 0px;
+            position: absolute;
+            right: -20px;
+            top: 40%;
+            color: #145786;
+            opacity: 0.7;
+        }
     }
 
     @media (max-width: 1065px) {
         .page.how-it-works .header .header-bg {
             background-size: auto 400px;
             background-position: 80%;
+        }
+    }
+    @media (max-width: 400px) {
+        .page.how-it-works .header .header-text {
+            bottom: 15px;
+            font-size: 4em;
+            width: 100%;
+            line-height: 1.2em;
+            margin-left: 0px;
+            text-align: center;
+            padding: 0px 10px;
+        }
+        .page.how-it-works .content-wrapper .section {
+            padding: 20px 15px 10px 15px;
+        }
+        .page.how-it-works .content-wrapper .section .step-section {
+            padding: 0px 10px;
+        }
+        .page.how-it-works .content-wrapper img {
+            height: auto;
+            margin-left: -20px;
+            max-width: 100%;
+        }
+
+        .page.how-it-works .content-wrapper .fight-my-ticket.signup-button {
+            width: 90%;
+            padding: 15px 10px;
         }
     }
 
