@@ -289,10 +289,10 @@
 
             $('.navbar-brand').on('click', function(event) {
                 $(".menu-item-12").removeClass("active");
-            })
+            });
 
             // jQuery for page scrolling feature - requires jQuery Easing plugin
-            $('body').on('click', '.page-scroll a', function(event) {
+            $('.page-scroll a').on('click', function(event) {
                 var $anchor = $(this);
                 $(".menu-item-12").removeClass("active");
                 $anchor.parent().addClass("active");
