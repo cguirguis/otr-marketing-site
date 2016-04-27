@@ -290,6 +290,24 @@
             $('.navbar-brand').on('click', function(event) {
                 $(".menu-item-12").removeClass("active");
             })
+
+            // jQuery for page scrolling feature - requires jQuery Easing plugin
+            $('body').on('click', '.page-scroll a', function(event) {
+                var $anchor = $(this);
+                $(".menu-item-12").removeClass("active");
+                $anchor.parent().addClass("active");
+                event.preventDefault();
+            });
+
+            // Closes the Responsive Menu on Menu Item Click
+            $('.navbar-collapse ul li a').click(function() {
+                $('.navbar-toggle').click();
+                $(".navbar-ex1-collapse").attr("style", "display:none");
+                $(".navbar-ex1-collapse").removeClass("in");
+
+                event.stopPropagation();
+                event.stopImmediatePropagation();
+            });
         });
 
         // ----- INTERFACE ------------------------------------------------------------
