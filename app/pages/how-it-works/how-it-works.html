@@ -36,7 +36,8 @@
                    title="Fight My Ticket">Fight My Ticket</a>
             </div>
         </div>
-        <div class="section" id="section-3">
+
+        <div class="section hide" id="section-3">
             <h2>Why Off The Record?</h2>
 
             <div class="features">
@@ -69,6 +70,45 @@
                     <i class="icon-preview fa fa-comments"></i>
                     <h3 class="feature-title">Real-time help</h3>
                     <div class="feature-content">Chat with your lawyer at any time to ask questions or get updates on your case.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" id="section-4">
+            <h2>Frequently asked questions</h2>
+            <hr/>
+            <div class="question-answer">
+                <div class="question">
+                    <i class="fa fa-quote-left fa-2x fa-pull-left fa-border" aria-hidden="true"></i>
+                    <div class="question-text">I'm not sure whether my ticket is worth fighting. Can I talk to someone over the phone?</div>
+                </div>
+                <div class="answer">Absolutely. If you're not ready to fight your ticket yet, <a href="tel:+18446872946">call us</a> or <a href="mailto:team@offtherecord.com">email</a> your ticket to us for a free evaluation. We'll go over your options and help you decide whether it makes sense to fight the ticket.</div>
+            </div>
+            <div class="question-answer">
+                <div class="question">
+                    <i class="fa fa-quote-left fa-2x fa-pull-left fa-border" aria-hidden="true"></i>
+                    <div class="question-text">What does your fee include?</div>
+                </div>
+                <div class="answer">Everything. Just one flat-fee is all you'll ever have to pay to fight your case. There are no hidden fees. We negotiate special rates with attorneys so you never pay more than you need to.</div>
+            </div>
+            <div class="question-answer">
+                <div class="question">
+                    <i class="fa fa-quote-left fa-2x fa-pull-left fa-border" aria-hidden="true"></i>
+                    <div class="question-text">Do you fight all types of traffic ticket?</div>
+                </div>
+                <div class="answer">Our lawyers are traffic law experce have extensive experience fighting every type of traffic violation. Some of the most common violations we see are speeding, illegal use of the HOV lane, and negligent driving.</div>
+            </div>
+            <div class="question-answer">
+                <div class="question">
+                    <i class="fa fa-quote-left fa-2x fa-pull-left fa-border" aria-hidden="true"></i>
+                    <div class="question-text">What outcome can I expect?</div>
+                </div>
+                <div class="answer">Our primary goal is to get your violation - and fine - <a href="/help/faq#faq9">completely dismissed</a>. We're able to achieve this for an overwhelming majority of tickets. Sometimes, the judge won't dismiss the ticket, but reduce the violation to one that won't impact your record. If we fail to achieve either of these outcomes, you get your <a href="/help/faq#faq9">money back</a>.</div>
+            </div>
+            <hr/>
+            <div class="question-answer" style="margin-top: -10px;margin-bottom: 40px;">
+                <div style="width:100%;max-width:900px;display:inline-block;">
+                    <a ui-sref="default-template.help.faq" style="font-size: 16px;display: block;text-align: right;">More answers ></a>
                 </div>
             </div>
         </div>
@@ -157,6 +197,33 @@
         margin-left: -35px;
         max-width: none;
     }
+    div#section-4 {
+        text-align: center;
+    }
+    .question-answer {
+        width: 100%;
+        text-align: center;
+        padding: 20px;
+        padding-top: 20px;
+    }
+    .question {
+        max-width: 900px;
+        width: 100%;
+        display: inline-block;
+        font-size: 19px;
+        font-family: Helvetica;
+        font-weight: 400;
+        margin-bottom: 15px;
+        text-align: left;
+    }
+    .answer {
+        max-width: 900px;
+        display: inline-block;
+        font-size: 16px;
+        font-family: Helvetica;
+        font-weight: 300;
+        text-align: left;
+    }
 
     .page.how-it-works .content-wrapper .fight-my-ticket.signup-button {
         width: 300px;
@@ -171,6 +238,11 @@
     }
     .page.how-it-works .content-wrapper .fight-my-ticket.signup-button:hover {
         background-color: #41A3E3;
+    }
+    hr {
+        width: 95%;
+        max-width: 900px;
+        display: block!important;
     }
 
     @media (min-width: 1050px) {
