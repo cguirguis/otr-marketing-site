@@ -27,14 +27,17 @@
             </div>
         </div>
         <div class="section" id="section-2">
-            <h2>You're done.</h2>
-            <h2 style="font-size:24px">No mailing in your ticket. No showing up in court.</h2>
+            <div>
+                <h2>You're done.</h2>
+                <h2 style="font-size:24px">No mailing in your ticket. No showing up in court.</h2>
 
-            <div style="margin-top: 40px;margin-bottom: 40px;">
-                <a href="javascript:void(0)" class="btn btn-lg signup-button fight-my-ticket"
-                   ng-click="vm.fightTicketRedirect()"
-                   title="Fight My Ticket">Fight My Ticket</a>
+                <div style="margin-top: 40px;margin-bottom: 40px;">
+                    <a href="javascript:void(0)" class="btn btn-lg signup-button fight-my-ticket"
+                       ng-click="vm.fightTicketRedirect()"
+                       title="Fight My Ticket">Fight My Ticket</a>
+                </div>
             </div>
+            <div class="messages-screenshot"></div>
         </div>
 
         <div class="section hide" id="section-3">
@@ -94,16 +97,16 @@
             <div class="question-answer">
                 <div class="question">
                     <i class="fa fa-quote-left fa-2x fa-pull-left fa-border" aria-hidden="true"></i>
-                    <div class="question-text">Do you fight all types of traffic ticket?</div>
+                    <div class="question-text">Do you fight all types of traffic tickets?</div>
                 </div>
-                <div class="answer">Our lawyers are traffic law experce have extensive experience fighting every type of traffic violation. Some of the most common violations we see are speeding, illegal use of the HOV lane, and negligent driving.</div>
+                <div class="answer">Our lawyers are traffic law experts with extensive experience fighting every type of traffic violation. Some of the most common violations we see are speeding, illegal use of the HOV lane, and negligent driving.</div>
             </div>
             <div class="question-answer">
                 <div class="question">
                     <i class="fa fa-quote-left fa-2x fa-pull-left fa-border" aria-hidden="true"></i>
                     <div class="question-text">What outcome can I expect?</div>
                 </div>
-                <div class="answer">Our primary goal is to get your violation - and fine - <a href="/help/faq#faq9">completely dismissed</a>. We're able to achieve this for an overwhelming majority of tickets. Sometimes, the judge won't dismiss the ticket, but reduce the violation to one that won't impact your record. If we fail to achieve either of these outcomes, you get your <a href="/help/faq#faq9">money back</a>.</div>
+                <div class="answer">Our primary goal is to get your violation - and fine - <a href="/help/faq#faq9">completely dismissed</a>. We're able to achieve this for an overwhelming majority of tickets. Sometimes, the judge won't dismiss the ticket, but reduce the violation to one that won't impact your record. We believe that no one should be penalized for contesting their traffic ticket. That's why if we fail to get the ticket off your record, you'll get a  <a href="/help/faq#faq9">full refund</a>, no questions asked.</div>
             </div>
             <hr/>
             <div class="question-answer" style="margin-top: -10px;margin-bottom: 40px;">
@@ -168,6 +171,22 @@
     }
     .page.how-it-works .content-wrapper .section#section-2 {
         background-color: #145786;
+        padding-bottom: 0;
+    }
+    .page.how-it-works .content-wrapper .section#section-2 div:first-child {
+        width: 50%;
+        float: left;
+        display: inline-block;
+    }
+    .page.how-it-works .content-wrapper .section#section-2 .messages-screenshot {
+        background-image: url(./assets/img/otr-messages.png);
+        background-repeat: no-repeat;
+        background-size: auto 100%;
+        background-position: top;
+        height: 300px;
+        width: 48%;
+        float: left;
+        display: inline-block;
     }
     .page.how-it-works .content-wrapper .section#section-3 {
         background-color: #f4f4f4;
@@ -183,6 +202,9 @@
     .page.how-it-works .content-wrapper .section#section-3 .features .feature .feature-title {
         font-size: 2em;
         font-weight: 300;
+    }
+    .page.how-it-works .content-wrapper .section#section-2 {
+        overflow: auto;
     }
     .page.how-it-works .content-wrapper .section#section-2 h2 {
         color: white;
@@ -273,6 +295,15 @@
         .page.how-it-works .header .header-bg {
             background-size: auto 400px;
             background-position: 80%;
+        }
+    }
+    @media (max-width: 630px) {
+        .page.how-it-works .content-wrapper .section#section-2 div:first-child {
+            width: 100%;
+            float: left;
+        }
+        .page.how-it-works .content-wrapper .section#section-2 .messages-screenshot {
+            width: 100%;
         }
     }
     @media (max-width: 400px) {
