@@ -260,7 +260,7 @@
                 }
             });
 
-            navbarToggle.click(function() {
+            navbarToggle.click(function(event) {
                 $("ul#menu-main-menu").parent().toggle();
                 event.stopPropagation();
             });
@@ -273,7 +273,7 @@
                 }
             });
 
-            $('.nav-list').click(function() {
+            $('.nav-list').click(function(event) {
                 fightNavItem.removeClass("hover");
                 $(".menu-item-12").removeClass("active");
                 $("#menu-item-12").addClass("active");
@@ -287,7 +287,7 @@
                 $("html").css('overflow', 'visible');
             });
 
-            $('.navbar-brand').on('click', function(event) {
+            $('.navbar-brand').on('click', function() {
                 $(".menu-item-12").removeClass("active");
             });
 
@@ -300,7 +300,7 @@
             });
 
             // Closes the Responsive Menu on Menu Item Click
-            $('.navbar-collapse ul li a').click(function() {
+            $('.navbar-collapse ul li a').click(function(event) {
                 $('.navbar-toggle').click();
                 $(".navbar-ex1-collapse").attr("style", "display:none");
                 $(".navbar-ex1-collapse").removeClass("in");
