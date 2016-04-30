@@ -664,12 +664,12 @@ ul#menu-main-menu {
 }
 
 @media screen and (max-width: 650px) {
-  .features .feature {
+  .features-section .features .feature {
     width: 50%;
   }
 }
 @media screen and (max-width: 500px) {
-  .features .feature {
+  .features-section .features .feature {
     width: 100%;
     min-height: inherit;
   }
