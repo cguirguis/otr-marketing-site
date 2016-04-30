@@ -4,6 +4,11 @@
 
 @import '_vars.scss';
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   -webkit-font-smoothing: antialiased;
   font-size: 10px;
@@ -21,6 +26,15 @@ body {
   }
 }
 
+p, .btn, div {
+  font-family: Arial,Helvetica,sans-serif;
+  font-weight: 300;
+}
+
+p {
+  line-height: 24px;
+}
+
 h1, h2, h3, h4, h5, h6 {
   color: $primaryBlueDarker;
   font-family: $roboto;
@@ -34,8 +48,24 @@ h1, h2, h3, h4, h5, h6 {
   background-color: white;
 }
 
-.homepage-banner h1 {
-  color: white!important;
+.homepage-banner {
+  &.bg-primary {
+    background-image: url(../img/images/driver-looking-back.jpg);
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 420px;
+    background-color: #337ab7;
+  }
+  h1 {
+    color: white!important;
+  }
+  .container {
+    width: 100%;
+    background-color: rgba(0,0,0,0.3);
+    height: 100%;
+    padding: 10px 40px;
+  }
 }
 
 .no-padding {
@@ -52,6 +82,17 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 0 5px rgba(0, 0, 0, .35);
   border: none;
   height: 70px;
+
+  .navbar-toggle {
+    border-color: transparent;
+
+    .icon-bar {
+      background-color: #fff;
+    }
+    &:hover, &:focus {
+      background-color: rgba(0,0,0,0.1);
+    }
+  }
 
   .navbar-nav {
     > li {
@@ -143,15 +184,6 @@ button.login-button {
     z-index: 1;
     color: white;
   }
-}
-
-.homepage-banner.bg-primary {
-  background-image: url("../img/california-road.jpg");
-  background-repeat: no-repeat;
-  background-position: center -10px;
-  height: 420px;
-  background-size: 100% 100%;
-  background-color: #337ab7;
 }
 
 .content-page-banner {
@@ -316,6 +348,7 @@ ul#menu-main-menu {
   margin-right: 15px;
   margin-left: 5px;
   width: 185px;
+  cursor: pointer;
 
   a {
    -webkit-transition: none;
@@ -384,7 +417,7 @@ ul#menu-main-menu {
       }
     }
     .nav-list li.nav-item:hover a {
-      color: #0050a0!important; /*#E6E22F !important;*/
+      text-decoration: underline!important;
     }
   }
   &.active i {
@@ -426,6 +459,7 @@ ul#menu-main-menu {
     font-size: 4.3em; /* update */
     line-height: 1.3em;
     width: 80%;
+    font-weight: bold;
   }
   #subheader {
     font-size: 2em;
@@ -500,12 +534,25 @@ ul#menu-main-menu {
   height: 50px;
 }
 
-.home-widget-area {
+#content.how-it-works-header {
+  margin-top: -10px;
+
+  .entry-content {
+    .lead {
+      line-height: 30px;
+      font-size: 18px;
+    }
+    .gray {
+      font-size:22px;
+    }
+  }
+}
+.how-it-works-content {
   font-family: Roboto;
   font-size: 16px;
 
   .bg .container .row .home-widget {
-    padding: 0px;
+    padding: 20px 0;
 
     #woocommerce_products-2 {
       margin: 0 0 4.5em;
@@ -513,9 +560,17 @@ ul#menu-main-menu {
   }
   .woocommerce ul.product_list_widget {
     margin: 0 -15px 0px -15px;
+    clear: both;
+    min-width: 100%;
+    float: left;
+    text-align: center;
 
     li {
       float: left;
+      padding: 0 15px;
+      margin: 0 0 30px;
+      border: none;
+      display: inline-block;
 
       &:last-child {
         float: none;
@@ -524,7 +579,8 @@ ul#menu-main-menu {
         background-color: transparent;
         border: none;
       }
-      div.product-wrap div.product-img-wrap img { width: 230px;
+      div.product-wrap div.product-img-wrap img {
+        width: 230px;
       }
     }
   }
@@ -536,55 +592,73 @@ ul#menu-main-menu {
     line-height: 1.2em;
   }
 
-}
-.features {
-  font-family: $roboto;
-  overflow: auto;
-  padding-bottom: 0px!important;
-  margin-bottom: 0px;
+  .product-img-wrap {
+    height: 280px;
 
-  h2 {
-    color: #666666;
-    margin-bottom: 30px;
-    margin-top: -45px;
-    font-weight: 100;
+    img {
+      max-height: 280px;
+      width: auto !important;
+      float: none !important;
+    }
   }
+}
 
-  .feature {
-    width: 33%;
-    float: left;
-    padding-right: 15px;
-    margin-top: 40px;
-    padding-bottom: 30px;
-    color: #444444;
-    -moz-transition: all 0.2s ease-in-out;
-    -o-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out;
-    margin: auto;
-    min-height: 300px;
+.features-section {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+  background: #f4f4f4;
+  clear: both;
 
-    &:hover .icon-preview, .features .feature:hover .feature-title {
-      color: $primaryBlueDarker;
+  .features {
+    font-family: $roboto;
+    overflow: auto;
+    padding-bottom: 0px !important;
+    margin-bottom: 0px;
+
+    h2 {
+      color: #666666;
+      margin-bottom: 30px;
+      margin-top: -45px;
+      font-weight: 100;
     }
 
-    .icon-preview {
-      font-size: 5em;
-      color: #888888;
-    }
+    .feature {
+      width: 33%;
+      float: left;
+      padding-right: 15px;
+      margin-top: 40px;
+      padding-bottom: 30px;
+      color: #444444;
+      -moz-transition: all 0.2s ease-in-out;
+      -o-transition: all 0.2s ease-in-out;
+      transition: all 0.2s ease-in-out;
+      margin: auto;
+      min-height: 300px;
 
-    .feature-title {
-      font-size: 1.7em;
-      font-weight: 200;
-      color: #428bca;
-    }
+      &:hover .icon-preview, .features .feature:hover .feature-title {
+        color: $primaryBlueDarker;
+      }
 
-    .feature-content {
-      padding: 0px 20px;
-      font-weight: 300;
-    }
+      .icon-preview {
+        font-size: 5em;
+        color: #888888;
+      }
 
-    &.first {
-      padding-left: 0;
+      .feature-title {
+        font-size: 1.7em;
+        font-weight: 200;
+        color: #428bca;
+      }
+
+      .feature-content {
+        padding: 0px 20px;
+        font-weight: 300;
+      }
+
+      &.first {
+        padding-left: 0;
+      }
     }
   }
 }
@@ -704,6 +778,21 @@ div.signup-form {
 
 }
 .lawyer-lead-form {
+  .modal-body {
+    input[type="submit"].btn-default {
+      background-color: #0143A3 !important;
+      color: #fff !important;
+      border: none;
+    }
+    b {
+      position: absolute;
+      right: 23px;
+      z-index: 999;
+      color: red;
+      margin-top: 24px;
+      font-size: 17px;
+    }
+  }
   .modal-footer {
     .btn.btn-default {
       background-color: $primaryBlueDarker;
