@@ -296,7 +296,7 @@
                 var $anchor = $(this);
                 $(".menu-item-12").removeClass("active");
                 $anchor.parent().addClass("active");
-                event.preventDefault();
+                //event.preventDefault();
             });
 
             // Closes the Responsive Menu on Menu Item Click
@@ -305,8 +305,8 @@
                 $(".navbar-ex1-collapse").attr("style", "display:none");
                 $(".navbar-ex1-collapse").removeClass("in");
 
-                event.stopPropagation();
-                event.stopImmediatePropagation();
+                //event.stopPropagation();
+                //event.stopImmediatePropagation();
             });
         });
 
