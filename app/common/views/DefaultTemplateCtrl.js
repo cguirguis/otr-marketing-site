@@ -275,8 +275,6 @@
 
             $('.nav-list').click(function(event) {
                 fightNavItem.removeClass("hover");
-                $(".menu-item-12").removeClass("active");
-                $("#menu-item-12").addClass("active");
                 $("ul#menu-main-menu").parent().toggle();
                 $("html").css('overflow', 'visible');
                 event.stopPropagation();
@@ -287,26 +285,11 @@
                 $("html").css('overflow', 'visible');
             });
 
-            $('.navbar-brand').on('click', function() {
-                $(".menu-item-12").removeClass("active");
-            });
-
-            // jQuery for page scrolling feature - requires jQuery Easing plugin
-            $('.page-scroll a').on('click', function(event) {
-                var $anchor = $(this);
-                $(".menu-item-12").removeClass("active");
-                $anchor.parent().addClass("active");
-                //event.preventDefault();
-            });
-
             // Closes the Responsive Menu on Menu Item Click
             $('.navbar-collapse ul li a').click(function(event) {
                 $('.navbar-toggle').click();
                 $(".navbar-ex1-collapse").attr("style", "display:none");
                 $(".navbar-ex1-collapse").removeClass("in");
-
-                //event.stopPropagation();
-                //event.stopImmediatePropagation();
             });
         });
 

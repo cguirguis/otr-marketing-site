@@ -128,9 +128,9 @@
                     var stateCode = $stateParams.stateCode;
                     var supportedStates = ["CA", "NY", "OR", "WA"];
                     if (!supportedStates.includes(stateCode)) {
-                        return 'app/pages/state-info/state/default.html';
+                        return 'app/pages/state-info/state/default/overview.html';
                     }
-                    return 'app/pages/state-info/state/' + $stateParams.stateCode + '.html';
+                    return 'app/pages/state-info/state/' + stateCode + '/overview.html';
                 },
                 controller: 'StateInfoCtrl as vm'
                 // When ngMeta releases their next version, this will work
@@ -148,6 +148,17 @@
             .state('default-template.state-info.fight', {
                 url: '/why-fight-your-traffic-ticket',
                 templateUrl: 'app/pages/state-info/fight-ticket.html',
+                controller: 'StateInfoCtrl as vm'
+            })
+            .state('default-template.state-info.courts', {
+                url: '/courts',
+                templateUrl: function($stateParams) {
+                    var stateCode = $stateParams.stateCode;
+                    var supportedStates = ["CA", "NY", "OR", "WA"];
+                    return !supportedStates.includes(stateCode)
+                        ? 'app/pages/state-info/state/default/courts.html'
+                        : 'app/pages/state-info/state/' + stateCode + '/courts.html';
+                },
                 controller: 'StateInfoCtrl as vm'
             });
 

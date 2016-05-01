@@ -418,6 +418,7 @@ ul#menu-main-menu {
     }
     .nav-list li.nav-item:hover a {
       text-decoration: underline!important;
+      color: white;
     }
   }
   &.active i {
@@ -669,7 +670,7 @@ ul#menu-main-menu {
   }
 }
 @media screen and (max-width: 500px) {
-  .features-section .features .feature {
+  .features-section.features .feature {
     width: 100%;
     min-height: inherit;
   }

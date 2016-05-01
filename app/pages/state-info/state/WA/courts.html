@@ -1,0 +1,99 @@
+
+<div class="content-wrapper courts">
+    <div class="content-section">
+        <i class="fa fa-university fa-2x" aria-hidden="true"></i>
+        <h3>{{vm.selectedState.name}} courts</h3>
+
+        <div class="court-search" style="margin-top: 20px">
+            <input type="search" id="court-search" placeholder="Search" ng-change="vm.filterCourts()"
+                   ng-model="vm.courtQuery" style="width: 250px;padding: 5px;">
+        </div>
+
+        <div class="no-courts" ng-hide="vm.courtResults && vm.courtResults.length"
+             style="margin-top: 20px">
+            <i class="fa fa-spinner left" aria-hidden="true"></i>
+            No court results.
+        </div>
+
+        <ul class="courts" ng-show="vm.courtResults && vm.courtResults.length">
+            <li class="court" ng-repeat="court in vm.courtResults">
+                <div class="court-name">{{court.courtName}}</div>
+
+                <div class="court-details">
+                    {{court.address.addressLine1}}<span ng-if="court.address.addressLine2">, {{court.address.addressLine2}}</span>
+                    <div>{{court.address.city}}, {{court.address.stateCode}}</div>
+                    <div class="phone">Phone: <a ng-if="court.address.phoneNumber">{{court.address.phoneNumber}}</a></div>
+                </div>
+                <i class="fa fa-gavel" aria-hidden="true"></i>
+                <a ui-sref="default-template.state-info.fight">Fight your {{court.address.city}} traffic ticket</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<style>
+    .content-page .content-container .content-body .content-wrapper.courts {
+        width: 100%;
+    }
+    .content-wrapper.courts .content-section > i {
+        float: left;
+        font-size: 2.2em;
+        color: #555;
+        margin-right: 9px;
+        margin-top: 4px;
+    }
+    .content-wrapper.courts .content-section h3 {
+        margin-top: -10px;
+    }
+    .content-wrapper.courts .content-section a {
+        display: block;
+    }
+    .content-wrapper.courts .content-section div.phone a {
+        display: initial;
+    }
+    .content-wrapper.courts ul.courts {
+        margin-top: 40px;
+        margin-left: 10px;
+        padding: 0;
+        -moz-column-count: 2;
+        column-count: 2;
+        -webkit-column-count: 2;
+        -moz-column-gap: 20px;
+        -webkit-column-gap: 20px;
+        column-gap: 20px;
+    }
+    .content-wrapper.courts li.court {
+        list-style: none;
+        margin-bottom: 0px;
+        -webkit-column-break-inside: avoid;
+        min-height: 140px;
+    }
+    .content-wrapper.courts li.court > div.court-name {
+        font-weight: bold;
+
+    }
+    .content-wrapper.courts li.court > div.court-details {
+        line-height: 21px;
+
+    }
+    .content-wrapper.courts li.court > i {
+        float: left;
+        margin-top: 5px;
+        margin-right: 5px;
+        font-size: 14px;
+        color: #4989B5;
+    }
+
+    @media (min-width: 1100px) {
+        .content-wrapper.courts ul.courts {
+            -moz-column-count: 3;
+            column-count: 3;
+            -webkit-column-count: 3;
+            -moz-column-gap: 10px;
+            -webkit-column-gap: 10px;
+            column-gap: 10px;
+        }
+    }
+
+</style>

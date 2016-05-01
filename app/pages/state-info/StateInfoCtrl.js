@@ -6,8 +6,8 @@
         .controller('StateInfoCtrl', StateInfoCtrl)
         .controller('InsuranceModalCtrl', InsuranceModalCtrl);
 
-    StateInfoCtrl.$inject = ['$rootScope', '$scope', '$log', '$state', '$stateParams', '$window', '$timeout', '$location', '$anchorScroll', '$uibModal', 'GlobalUtils', 'ngMeta'];
-    function StateInfoCtrl($rootScope, $scope, $log, $state, $stateParams, $window, $timeout, $location, $anchorScroll, $uibModal, GlobalUtils, ngMeta) {
+    StateInfoCtrl.$inject = ['$rootScope', '$scope', '$log', '$state', '$stateParams', '$window', '$timeout', '$location', '$anchorScroll', '$uibModal', 'GlobalUtils', 'DataService', 'ngMeta'];
+    function StateInfoCtrl($rootScope, $scope, $log, $state, $stateParams, $window, $timeout, $location, $anchorScroll, $uibModal, GlobalUtils, DataService, ngMeta) {
         var vm = this;
 
         vm.selectedState = _.find($rootScope.statesList, function(o) {
@@ -20,10 +20,6 @@
         if (!vm.selectedState.successRate) vm.selectedState.successRate = $rootScope.defaultStateValues.successRate;
         if (!vm.selectedState.avgFine) vm.selectedState.avgFine = $rootScope.defaultStateValues.avgFine;
 
-        //console.log('state code: ', $stateParams.stateCode);
-        //console.log('current state: ', $state.current);
-        //console.log('selected state: ', vm.selectedState);
-
         // Set the page title and meta tags.
         // This is a temporary workaround until ngMeta adds a feature that supports 'resolve'
         if ($state.current.name == 'default-template.state-info.overview') {
@@ -34,8 +30,30 @@
         } else if ($state.current.name == 'default-template.state-info.fight') {
             ngMeta.setTitle('Fight Your ' + vm.selectedState.name + ' Traffic Ticket');
             ngMeta.setTag('description',
-                'Learn why and how you should fight your traffic ticket in ' + vm.selectedState.name + ' and ' +
-                'how to hire the best lawyer to help you contest your ticket.');
+                'Learn why and how you should fight your traffic ticket in ' + vm.selectedState.name +
+                ' and how to hire the best lawyer to help you contest your ticket.');
+        } else if ($state.current.name == 'default-template.state-info.courts') {
+            ngMeta.setTitle('Fight Your ' + vm.selectedState.name + ' Traffic Ticket');
+            ngMeta.setTag('description',
+                'Got a traffic ticket in ' + vm.selectedState.name + '? Contesting it with OTR ' +
+                'could give you a 97% chance of beating it.');
+
+            vm.courts = [{
+                courtName: "Seattle Municipal Court",
+                city: "Seattle",
+                state: "WA"
+            },{
+                courtName: "King County District Court (Cascade Division)",
+                city: "Lynnwood",
+                state: "WA"
+            },{
+                courtName: "King County District Court (East Division)",
+                city: "Redmond",
+                state: "WA"
+            }];
+            // Fetch state courts
+            getCourts();
+            vm.courtQuery = "";
         }
 
 
@@ -52,6 +70,7 @@
         vm.updateInsuranceIncrease = updateInsuranceIncrease;
         vm.scrollTo = scrollTo;
         vm.blurTicketFineField = blurTicketFineField;
+        vm.filterCourts = filterCourts;
 
         // ----- PUBLIC METHODS -------------------------------------------------------
 
@@ -146,6 +165,35 @@
             }
         }
 
+        /* Court page function */
+        function getCourts() {
+            DataService.getCourts('kin')
+                .then(
+                function(response) {
+                    vm.courts = response.data.courts;
+                    vm.courtResults = vm.courts;
+                },
+                function(error) {
+                    console.log('Error retrieving courts: {0}', JSON.stringify(error));
+                    $rootScope.errorMessage = "Unable to load courts. Please make sure you have an active internet connection.";
+                }
+            );
+        }
+
+        function filterCourts() {
+            var query = vm.courtQuery.toLowerCase();
+
+            if (query.length > 2) {
+                vm.courtResults = vm.courts.filter(function(court) {
+                    return court.courtName.toLowerCase().indexOf(query) >= 0
+                        || court.county.toLowerCase().indexOf(query) === 0
+                        || court.address.city.toLowerCase().indexOf(query) === 0
+                });
+            } else if (!query.length) {
+                vm.courtResults = vm.courts;
+            }
+        };
+
         // Fix top and left content nav bars so that they're sticky once
         // user has scrolled past a certain point
         //$scope.$on('$viewContentLoaded', function(scope, stateName){
@@ -199,7 +247,8 @@
         //});
     }
 
-    function InsuranceModalCtrl($scope, $timeout, $uibModalInstance, monthlyPremium) {
+    InsuranceModalCtrl.$inject = ['$scope', '$uibModalInstance', 'monthlyPremium'];
+    function InsuranceModalCtrl($scope, $uibModalInstance, monthlyPremium) {
 
         $scope.monthlyPremium = monthlyPremium;
         $scope.selectedViolation = 0.21;
