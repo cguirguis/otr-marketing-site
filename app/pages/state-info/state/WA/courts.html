@@ -11,8 +11,12 @@
 
         <div class="no-courts" ng-hide="vm.courtResults && vm.courtResults.length"
              style="margin-top: 20px">
-            <i class="fa fa-spinner left" aria-hidden="true"></i>
             No court results.
+        </div>
+
+        <div class="loading-courts" ng-show="vm.loadingCourts" style="margin-top: 20px">
+            <i class="fa fa-spinner fa-spin left" aria-hidden="true"></i>
+            Loading courts
         </div>
 
         <ul class="courts" ng-show="vm.courtResults && vm.courtResults.length">
@@ -35,6 +39,7 @@
 <style>
     .content-page .content-container .content-body .content-wrapper.courts {
         width: 100%;
+        margin-top: 0;
     }
     .content-wrapper.courts .content-section > i {
         float: left;
@@ -67,7 +72,7 @@
         list-style: none;
         margin-bottom: 0px;
         -webkit-column-break-inside: avoid;
-        min-height: 140px;
+        min-height: 160px;
     }
     .content-wrapper.courts li.court > div.court-name {
         font-weight: bold;
@@ -93,6 +98,28 @@
             -moz-column-gap: 10px;
             -webkit-column-gap: 10px;
             column-gap: 10px;
+        }
+        .content-wrapper.courts li.court {
+            min-height: 140px;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .content-page .content-container .content-body .content-wrapper.courts {
+            width: 100%;
+            margin-left: -10px;
+        }
+        .content-wrapper.courts ul.courts {
+            margin-left: 0px;
+            -moz-column-count: 1;
+            column-count: 1;
+            -webkit-column-count: 1;
+            -moz-column-gap: 10px;
+            -webkit-column-gap: 10px;
+            column-gap: 10px;
+        }
+        .content-wrapper.courts li.court {
+            min-height: 140px;
         }
     }
 

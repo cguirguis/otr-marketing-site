@@ -167,11 +167,13 @@
 
         /* Court page function */
         function getCourts() {
-            DataService.getCourts('kin')
+            vm.loadingCourts = true;
+            DataService.getCourts('king county')
                 .then(
                 function(response) {
                     vm.courts = response.data.courts;
                     vm.courtResults = vm.courts;
+                    vm.loadingCourts = false;
                 },
                 function(error) {
                     console.log('Error retrieving courts: {0}', JSON.stringify(error));
