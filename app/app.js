@@ -25,13 +25,17 @@
         ngMetaProvider.setDefaultTitle('OffTheRecord.com - The smart way to fight your traffic tickets');
         ngMetaProvider.setDefaultTitleSuffix(' | OffTheRecord.com');
 
-
         //Set defaults for arbitrary tags
         ngMetaProvider.setDefaultTag('author', 'Off the Record, Inc.');
         ngMetaProvider.setDefaultTag('description',
                 'Fight your traffic ticket with OffTheRecord.com to get it fully dismissed. ' +
                 'We have a 97% success rate and offer a full refund if we dont win. ' +
                 'Your ticket will be matched to the local lawyer with the highest chance of success.');
+
+        ngMetaProvider.setDefaultTag('keywords',
+            'traffic ticket lawyer, traffic ticket attorney, speeding ticket lawyer, ' +
+            'fight traffic ticket, fight speeding ticket, contest ticket, ' +
+            'traffic ticket, traffic lawyer, traffic attorney, speeding ticket');
 
 
         $stateProvider
@@ -61,7 +65,7 @@
                     }
                 },
                 meta: {
-                    // title is set in the controller
+                    // Uses default title
                     'description': 'The smart way to fight your speeding or traffic ticket. We win or it\'s free. ' +
                                    '97% success rate. We match your citation to the lawyer with the highest chance of success.'
                 }
@@ -71,7 +75,13 @@
                 views: {
                     '': {
                         templateUrl: 'app/pages/how-it-works/how-it-works.html'
+                        //controller: 'HowItWorksCtrl as vm'
                     }
+                },
+                meta: {
+                    title : 'How to Fight Your Traffic Ticket',
+                    description : 'Learn how to fight your traffic ticket with off the record ' +
+                    'and why fighting your ticket with our service is better than hiring a lawyer yourself.'
                 }
             })
             .state('default-template.help', {
@@ -194,13 +204,20 @@
     function branchInit($cookies) {
 
         var cookieExpireDate = new Date();
-        var numberOfDaysToAdd = 7;
+        var numberOfDaysToAdd = 14;
         cookieExpireDate.setDate(cookieExpireDate.getDate() + numberOfDaysToAdd);
 
         var cookieDefaults = {
             'domain' : 'offtherecord.com',
             'expires' : cookieExpireDate
         };
+
+        var channel = 'Website';
+        var campaign = '';
+        var feature = 'smart_banner';
+        var stage = '';
+        var tags = ['some-random-tag', 'other-random-tag'];
+
 
         (function(b,r,a,n,c,h,_,s,d,k) {
             if (!b[n]||!b[n]._q) {
@@ -210,7 +227,7 @@
 
         branch.init('key_live_oik1hC6SvaFGaQl6L4f5chghyqkDbk9G', function(err, data) {
             //console.log('branch.init error: ', err);
-            //console.log('branch.init data: ', data);
+            console.log('branch.init data: ', data);
             //console.log('branch data: ', data.data);
             //console.log('branch data_parsed: ', data.data_parsed);
             //console.log('+clicked_branch_link', data.data_parsed['+clicked_branch_link']);
@@ -219,6 +236,14 @@
             // otherwise previously written cookies will be overwritten next time user visits site.
             if (data.data_parsed['+clicked_branch_link']) {
                 $cookies.put('branch-link', JSON.stringify(data.data_parsed), cookieDefaults);
+
+                // If a branch link was clicked and the user then clicks on the Branch banner,
+                // we need to pass along the values of the originally clicked Branch link.
+                channel = data.data_parsed['~channel'];
+                campaign = data.data_parsed['~campaign'];
+                feature = data.data_parsed['~feature'];
+                stage = data.data_parsed['~stage'];
+                tags = data.data_parsed['~tags'];
             }
 
 
@@ -248,10 +273,11 @@
                 theme: 'light'                         // Uses Branch's predetermined color scheme for the banner { 'light' || 'dark' }, default: 'light'
             },
             {
-                tags: ['some-random-tag', 'other-random-tag'],
-                campaign: 'Marketing Website',
-                stage: 'Home Page',
-                feature: 'smart_banner',
+                channel: channel,
+                campaign: campaign,
+                feature: feature,
+                stage: stage,
+                tags: tags,
                 data: {
                     '$deeplink_path': 'content/page/12354',
                     deeplink: 'data',
