@@ -63,7 +63,6 @@
         vm.selectedViolation = 0.21;
 
         // ----- INTERFACE ------------------------------------------------------------
-        vm.fightTicketRedirect = fightTicketRedirect;
         vm.totalSavings = totalSavings;
         vm.totalTicketCost = totalTicketCost;
         vm.editInsuranceVariables = editInsuranceVariables;
@@ -140,15 +139,6 @@
         function totalTicketCost() {
             var ticketFine = (vm.clientTicketFine) ? vm.clientTicketFine : vm.selectedState.avgFine;
             return parseInt(ticketFine) + vm.insuranceIncrease;
-        }
-
-        function fightTicketRedirect() {
-
-            var appUrl = GlobalUtils.getAppUrl();
-
-            $timeout(function() {
-                $window.location.href= appUrl;
-            });
         }
 
         function scrollTo(id) {

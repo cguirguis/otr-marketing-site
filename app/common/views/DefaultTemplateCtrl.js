@@ -252,6 +252,8 @@
 
         $(document).ready(function () {
 
+            vm.mobileAppUrl = GlobalUtils.getAppUrl();
+
             var navbarToggle = $("button.navbar-toggle");
 
             $("ul#menu-main-menu li:not(#menu-item-12)").click(function() {
@@ -294,22 +296,12 @@
         });
 
         // ----- INTERFACE ------------------------------------------------------------
-        vm.fightTicketRedirect = fightTicketRedirect;
         vm.login = login;
         vm.submitSubscribeForm = submitSubscribeForm;
         vm.formatStateName = formatStateName;
 
 
         // ----- PUBLIC METHODS -------------------------------------------------------
-
-        function fightTicketRedirect() {
-
-            var appUrl = GlobalUtils.getAppUrl();
-
-            $timeout(function() {
-                $window.location.href= appUrl;
-            });
-        }
 
         function login() {
             $rootScope.trackFBButtonConversion('SignUp', 'MenuBar');

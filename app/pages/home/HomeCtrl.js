@@ -16,22 +16,15 @@
                 POST_LAWYER_LEAD: ENV.apiEndpoint + '/api/v1/lawyers/lead'
             };
 
+        $(document).ready(function () {
+            vm.mobileAppUrl = GlobalUtils.getAppUrl();
+        });
+
         // ----- INTERFACE ------------------------------------------------------------
         //vm.saveContactInfo = saveContactInfo;
         vm.openLawyerFormModal = openLawyerFormModal;
-        vm.fightTicketRedirect = fightTicketRedirect;
-
 
         // ----- PUBLIC METHODS -------------------------------------------------------
-
-        function fightTicketRedirect() {
-
-            var appUrl = GlobalUtils.getAppUrl();
-
-            $timeout(function() {
-                $window.location.href= appUrl;
-            });
-        }
 
         function openLawyerFormModal(size) {
             var modalInstance = $uibModal.open({
@@ -86,7 +79,6 @@
 			//postSubscriberData(dataObj);
         //}
     }
-
 
     /**
      * This controller is specifically for the "LawyerFormModal" modal popup.
