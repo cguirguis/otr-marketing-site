@@ -252,13 +252,20 @@
 
         $(document).ready(function () {
 
-            vm.mobileAppUrl = GlobalUtils.getAppUrl();
+            // Generate mobile app link based on screen size
+            $rootScope.mobileAppUrl = GlobalUtils.getAppUrl();
 
             var navbarToggle = $("button.navbar-toggle");
 
             $("ul#menu-main-menu li:not(#menu-item-12)").click(function() {
                 if (vm.isMobileDevice) {
                     $("ul#menu-main-menu").parent().hide();
+                }
+            });
+
+            $("ul#menu-main-menu li#menu-item-12").click(function() {
+                if (vm.isMobileDevice) {
+                    $("#menu-item-12").toggleClass("hover");
                 }
             });
 

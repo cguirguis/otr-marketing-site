@@ -5,7 +5,7 @@
     <br>
 
     <div style="width:100%;margin-top:-20px;float:left;text-align:center;">
-        <a class="fight-my-ticket" ng-href="{{vm.mobileAppUrl}}">Fight My Ticket</a>
+        <a class="fight-my-ticket" ng-href="{{mobileAppUrl}}">Fight My Ticket</a>
     </div>
 
     <div class="overview-row">
@@ -109,7 +109,7 @@
     </div>
 
     <div class="overview-row" style="width: 100%;margin-top: -10px;max-width:inherit">
-        <h1 class="savings-title">Total estimated savings:</h1>
+        <h1 class="savings-title">Fighting this ticket could save you</h1>
         <div class="savings-result">
             <p class="large green-text" class="green-text">{{ vm.totalSavings() | currency : '$' : 0 }}</p>
             <div class="savings-timeframe">over the next 3 years</div>
@@ -119,5 +119,5 @@
     <br>
     <br>
 
-    <a class="fight-my-ticket" ng-href="{{vm.mobileAppUrl}}">Fight My Ticket</a>
+    <a class="fight-my-ticket" ng-href="{{mobileAppUrl}}">Fight My Ticket</a>
 </div>

@@ -16,10 +16,6 @@
                 POST_LAWYER_LEAD: ENV.apiEndpoint + '/api/v1/lawyers/lead'
             };
 
-        $(document).ready(function () {
-            vm.mobileAppUrl = GlobalUtils.getAppUrl();
-        });
-
         // ----- INTERFACE ------------------------------------------------------------
         //vm.saveContactInfo = saveContactInfo;
         vm.openLawyerFormModal = openLawyerFormModal;

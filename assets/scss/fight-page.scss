@@ -33,24 +33,28 @@
       text-align: right;
 
       &.savings-title {
-        width: 48%;
-        line-height: 2.3em;
-        padding-right:25px;
-        text-align: right;
-        padding-right: 15px;
-        font-weight: 400;
+        width: 100%;
+        text-align: center;
+        font-size: 27px;
+        margin-bottom: 15px;
+        margin-top: 0px!important;
+        color: #aaa!important;
       }
     }
 
     div.savings-result {
+      width: 500px;
+      overflow: auto;
+      margin: auto;
+
       .savings-timeframe {
         font-size: 2em;
-        float: left;
         line-height: 2.6em;
-        margin-left: 10px;
       }
       p {
-        float:left;width:auto
+        float:left;
+        width: 185px;
+        text-align: right;
       }
     }
 
@@ -433,9 +437,10 @@
         line-height: 40px;
       }
 
-      button.fight-my-ticket {
+      button.fight-my-ticket, a.fight-my-ticket {
         margin-top: 10px;
         margin-bottom: 30px;
+        display: block;
       }
     }
   }
