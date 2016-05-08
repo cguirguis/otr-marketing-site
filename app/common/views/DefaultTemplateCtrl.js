@@ -302,6 +302,13 @@
             });
         });
 
+        $scope.$on('$viewContentLoaded', function() {
+            bioEp.init({
+                fonts: ['//fonts.googleapis.com/css?family=Titillium+Web:300,400,600'],
+                cookieExp: 0
+            });
+        });
+
         // ----- INTERFACE ------------------------------------------------------------
         vm.login = login;
         vm.submitSubscribeForm = submitSubscribeForm;

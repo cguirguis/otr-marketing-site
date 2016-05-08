@@ -42,6 +42,19 @@
 	/></noscript>
 	<!-- End Facebook Pixel Code -->
 
+    <!--<script type="text/javascript">
+        (function(d, s, id) {
+            window.Wishpond = window.Wishpond || {};
+            Wishpond.merchantId = '166781';
+            Wishpond.writeKey = 'dc97b5c24585';
+            var js, wpjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//cdn.wishpond.net/connect.js";
+            wpjs.parentNode.insertBefore(js, wpjs);
+        }(document, 'script', 'wishpond-connect'));
+    </script>-->
+
 	<!-- favicon -->
 	<link rel="icon" href="assets/img/favicon/favicon.ico">
 	<!--[if IE]>
@@ -118,9 +131,46 @@
     }
     </script>
 
+    <script type="text/javascript" src="assets/js/bioep.min.js"></script>
 </head>
 
 <body class="home page page-id-8 page-template-default" style="zoom: 1;">
+
+    <div id="bio_ep" ng-controller="ExitPopupCtrl as vm">
+        <div id="bio_ep_content">
+            <img src="https://offtherecord.com/assets/img/OTR-icon.png" alt="Off the Record logo" />
+            <div class="heading">{{vm.title}}</div>
+            <div class="primary-options">
+                <div class="primary-option-1" ng-click="vm.handleExitOption(0)">
+                    <div class="option-answer">YES</div>
+                    <div class="option-description">but I'd like some help</div>
+                </div>
+                <div class="primary-option-2" ng-click="vm.handleExitOption(1)">
+                    <div class="option-answer">YES</div>
+                    <div class="option-description">but I want to choose my own attorney</div>
+                </div>
+                <div class="primary-option-3" ng-click="vm.handleExitOption(2)">
+                    <div class="option-answer">NO</div>
+                    <div class="option-description">I don't mind paying higher insurance premiums</div>
+                </div>
+                <div class="option-1-secondary-options">
+                    <div class="header">Please select one of the following ways to get in touch with us:</div>
+                    <div class="call-us"><a href="tel:18446872946">Call us at (844) 687-2946</a></div>
+                    <div style="font-size:16px;margin-bottom:25px;">or have us call you</div>
+                    <input type="text" class="customer-phone" />
+                    <div class="call-me-button" ng-click="vm.callMe()">Call me</div>
+                </div>
+                <div class="option-3-secondary-options">
+                    <div class="header">What you'll miss out on by choosing to go with your own lawyer:</div>
+                    <ul style="margin-top: 15px;">
+                        <li class="otr-benefits">Our 97% success rate</li>
+                        <li class="otr-benefits">Our money-back guarantee</li>
+                        <li class="otr-benefits">Real-time updates on your case</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
 	<div ui-view autoscroll="true" />
 
@@ -141,7 +191,6 @@
 	<script src="bower_components/jquery-easing/jquery.easing.min.js"></script>
 
 	<script src="@@base-build/js/all-otr.min.js"></script>
-	<script src="@@base-build/js/config.min.js"></script>
-
+    <script src="@@base-build/js/config.min.js"></script>
 </body>
 </html>
