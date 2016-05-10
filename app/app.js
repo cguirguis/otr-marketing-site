@@ -44,7 +44,8 @@
                 views: {
                     // the main template will be placed here (relatively named)
                     '@': {
-                        templateUrl: 'app/common/views/default-template.html'
+                        templateUrl: 'app/common/views/default-template.html',
+                        controller: 'DefaultTemplateCtrl as vm'
                     },
                     'main-header@default-template': {
                         templateUrl: 'app/common/views/main-header.partial.html',

@@ -5,8 +5,8 @@
         .module('brochure')
         .controller('ExitPopupCtrl', ExitPopupCtrl);
 
-    ExitPopupCtrl.$inject = ['$rootScope', '$scope'];
-    function ExitPopupCtrl($rootScope, $scope) {
+    ExitPopupCtrl.$inject = ['$rootScope', '$scope', 'DataService'];
+    function ExitPopupCtrl($rootScope, $scope, DataService) {
         var vm = this;
 
         vm.title = "Will you fight your ticket?";
@@ -35,7 +35,8 @@
             var phoneNumber = $(".customer-phone").val();
 
             // Do something with this number
-            //
+            var message = "A website visitor has requested a phone call: \n\r" + phoneNumber;
+            DataService.sendExitFeedback(message);
 
             bioEp.hidePopup();
         }
