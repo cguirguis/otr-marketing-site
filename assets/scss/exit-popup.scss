@@ -1,9 +1,9 @@
 
 #bio_ep {
   display: none;
-  width: 800px;
+  width: 820px;
   height: 518px;
-  left: calc(50% - 400px);
+  left: calc(50% - 410px);
   top: calc(50% - 259px);
   color: #333;
   text-align: center;
@@ -38,10 +38,10 @@
   display: block;
   width: 32px;
   height: 32px;
-  line-height: 28px;
+  line-height: 26px;
   position: absolute;
   right: -22px;
-  top: -14px;
+  top: -22px;
   text-align: center;
   vertical-align: middle;
   text-decoration: none;
@@ -78,7 +78,7 @@
   position: absolute;
   top: 315px;
   left: 25px;
-  width: 650px;
+  width: 670px;
   height: 70px;
   padding: 10px 10px;
 }
@@ -97,7 +97,7 @@
 }
 .review-form input#email {
   margin-left: 3px;
-  width: 250px;
+  width: 270px;
 }
 .review-form button {
   position: relative;
@@ -113,13 +113,20 @@
 }
 .review-text {
   position: relative;
-  margin-top: -37px;
+  margin-top: -62px;
   margin-left: -2px;
   text-align: left;
-  color: white;
-  font-size: 17px;
+  color: #fff;
+  font-size: 20px;
   font-weight: lighter;
-  text-transform: uppercase;
+  top: -10px;
+  width: 450px;
+}
+.thankyou-text {
+  color: #1A6871;
+  margin-top: 13px;
+  font-size: 22px;
+  font-family: "Helvetica";
 }
 @-webkit-keyframes tada {
   0% {

@@ -40,7 +40,7 @@ gulp.task('minify-css', ['minify-sass'], function() {
 });
 
 gulp.task('minify-js', function() {
-    return gulp.src(['app/**/*.js', '!app/app-config/config.js'])
+    return gulp.src(['app/**/*.js', 'js/bioep.min.js', '!app/app-config/config.js'])
         .pipe(concat('all-otr.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('build/assets/js'))
@@ -145,7 +145,7 @@ gulp.task('connect', connect.server({
 
 gulp.task('watch', function() {
     gulp.watch(['assets/scss/**/*.scss'], ['minify-sass']);
-    gulp.watch(['app/**/*.js'], ['minify-js']);
+    gulp.watch(['app/**/*.js','js/bioep.min.js'], ['minify-js']);
 });
 
 gulp.task('build', ['install-dep', 'minify-css', 'minify-js', 'compress-img', 'replace-vars']);

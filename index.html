@@ -42,19 +42,6 @@
 	/></noscript>
 	<!-- End Facebook Pixel Code -->
 
-    <!--<script type="text/javascript">
-        (function(d, s, id) {
-            window.Wishpond = window.Wishpond || {};
-            Wishpond.merchantId = '166781';
-            Wishpond.writeKey = 'dc97b5c24585';
-            var js, wpjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "//cdn.wishpond.net/connect.js";
-            wpjs.parentNode.insertBefore(js, wpjs);
-        }(document, 'script', 'wishpond-connect'));
-    </script>-->
-
 	<!-- favicon -->
 	<link rel="icon" href="assets/img/favicon/favicon.ico">
 	<!--[if IE]>
@@ -130,21 +117,21 @@
         "https://twitter.com/OffTheRecordApp"]
     }
     </script>
-
-    <script type="text/javascript" src="assets/js/bioep.min.js"></script>
 </head>
 
 <body class="home page page-id-8 page-template-default" style="zoom: 1;">
 
-    <div id="bio_ep">
+    <div id="bio_ep" ng-controller="ExitPopupCtrl as vm">
         <div id="bio_ep_content">
             <div class="review-form">
-                <div class="review-text">
-                    Request a free ticket review to know your options
+                <div class="review-text" ng-if="!vm.reviewRequested">
+                    Request a free ticket review right now to know your options
                 </div>
-                <input type="text" id="name" placeholder="Your name" />
-                <input type="text" id="email" placeholder="Your phone number/email" />
-                <button id="submit">GET FREE REVIEW</button>
+                <input type="text" id="name" placeholder="Your name" ng-if="!vm.reviewRequested" />
+                <input type="text" id="email" placeholder="Your phone number or email" ng-if="!vm.reviewRequested" />
+                <button id="submit" ng-click="vm.submitReviewRequest()"ng-if="!vm.reviewRequested" >GET FREE
+                    REVIEW</button>
+                <div class="thankyou-text" ng-if="vm.reviewRequested">Thank you. We'll be in touch with you shortly!</div>
             </div>
         </div>
     </div>
@@ -164,8 +151,8 @@
     <!-- lodash - collection utils -->
     <script src="bower_components/lodash/dist/lodash.min.js"></script>
 
-	<!-- Plugin JavaScript -->
-	<script src="bower_components/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Plugin JavaScript -->
+    <script src="bower_components/jquery-easing/jquery.easing.min.js"></script>
 
 	<script src="@@base-build/js/all-otr.min.js"></script>
     <script src="@@base-build/js/config.min.js"></script>

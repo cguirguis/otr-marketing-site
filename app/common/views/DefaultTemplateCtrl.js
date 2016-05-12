@@ -14,6 +14,8 @@
                 POST_SUBSCRIPTION: ENV.apiEndpoint + '/api/v1/subscribe'
             };
 
+        var exitPopupLoaded = false;
+
         $rootScope.defaultStateValues = {
             backgroundImgUrl : 'assets/img/states/default.jpg',
             baseFee : 250,
@@ -300,13 +302,14 @@
                 $(".navbar-ex1-collapse").attr("style", "display:none");
                 $(".navbar-ex1-collapse").removeClass("in");
             });
-        });
 
-        $scope.$on('$viewContentLoaded', function() {
-            bioEp.init({
-                fonts: ['//fonts.googleapis.com/css?family=Titillium+Web:300,400,600'],
-                cookieExp: 0
-            });
+            if (!exitPopupLoaded) {
+                bioEp.init({
+                    fonts: ['//fonts.googleapis.com/css?family=Titillium+Web:300,400,600'],
+                    cookieExp: 0
+                });
+                exitPopupLoaded = true;
+            }
         });
 
         // ----- INTERFACE ------------------------------------------------------------
@@ -397,6 +400,5 @@
         function formatStateName(name) {
             return name.toLowerCase().replace(/ /g,'-');
         }
-
     }
 })();

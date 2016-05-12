@@ -18,20 +18,33 @@
         };
 
         var sendExitFeedback = function (body) {
-            var url = "https://api:key-5fcf54949d6c85971b6d45e8c0bd6816@api.mailgun.net/v3/sandbox5b04cf85e6284172b1834e06d4d946d7.mailgun.org/messages";
+            var url = "https://api.sendgrid.com/api/mail.send.json";
             var headers = {
-                //"Access-Control-Allow-Headers": "Content-Type, x-requested-with, Authorization",
-                //"Authorization": "Basic YXBpOmtleS01ZmNmNTQ5NDlkNmM4NTk3MWI2ZDQ1ZThjMGJkNjgxNg==",
-                "Access-Control-Allow-Origin": "http://localhost:8888",
-                "Content-Type" : "application/x-www-form-urlencoded"
+                "Authorization": "Bearer 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"
             };
 
             var email = {
-                "from": "Mailgun Sandbox <postmaster@sandbox5b04cf85e6284172b1834e06d4d946d7.mailgun.org>",
-                "to": "Off the Record <team@offtherecord.com>",
-                "subject": "Exit popup feedback",
-                "text": body
+                "personalizations": [
+                    {
+                        "to": [
+                            {
+                                "email": "team@offtherecord.com"
+                            }
+                        ],
+                        "subject": "Ticket review requested"
+                    }
+                ],
+                "from": {
+                    "email": "website@offtherecord.com"
+                },
+                "content": [
+                    {
+                        "type": "text",
+                        "value": body
+                    }
+                ]
             };
+
             $http.post(url, email, { headers: headers });
         };
 

@@ -33,6 +33,7 @@
     "respond": "~1.4.2",
     "html5shiv": "~3.7.3",
     "jquery-easing": "*",
-    "font-awesome": "fontawesome#~4.6.1"
+    "font-awesome": "fontawesome#~4.6.1",
+    "sendgrid": "^1.9.2"
   }
 }
