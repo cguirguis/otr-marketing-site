@@ -1,3 +1,42 @@
+
+
+<style>
+    .review-form.has-error input {
+        border-width: 1px;
+        border-color: red;
+        border-style: solid;
+    }
+</style>
+
+<!-- This is the exit popup -->
+<div id="bio_ep">
+    <div id="bio_ep_content">
+        <div class="review-form" ng-show="!vm.reviewRequested">
+            <form name="ticketReviewRequestForm" id="ticketReviewRequestForm" role="form" novalidate
+                  ng-submit="vm.submitReviewRequest(ticketReviewRequestForm.$valid)">
+            <div class="review-text">
+                Request a free ticket review right now to know your options
+            </div>
+            <input type="text" name="exitPopupName" ng-model="vm.exitPopupName" placeholder="Your name" tabindex="1" required
+                   ng-class="{ 'has-error' : ticketReviewRequestForm.exitPopupName.$invalid && vm.ticketReviewRequestFormSubmitted }" />
+            <input type="text" name="exitPopupContactInfo" ng-model="vm.exitPopupContactInfo" placeholder="Your phone number or email"
+                   tabindex="1" required
+                   ng-class="{ 'has-error' : ticketReviewRequestForm.exitPopupContactInfo.$invalid && vm.ticketReviewRequestFormSubmitted }" />
+            <button type="submit" name="ticket-review-submit-btn" tabindex="3" ng-disabled="vm.submitReviewRequestLoading == true">
+                <span>REQUEST FREE REVIEW &nbsp;</span>
+                <span ng-show="vm.submitReviewRequestLoading">
+                    <i class="fa fa-spinner fa-spin fa-lg"></i>
+                </span>
+            </button>
+            </form>
+        </div>
+        <div class="review-form" ng-show="vm.reviewRequested">
+            <div class="thankyou-text">Thank you. We'll be in touch with you shortly!</div>
+        </div>
+    </div>
+</div>
+
+
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container" style="width: 96%">
         <div class="navbar-header">
