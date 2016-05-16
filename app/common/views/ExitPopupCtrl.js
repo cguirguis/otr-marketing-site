@@ -5,7 +5,7 @@
         .module('brochure')
         .controller('ExitPopupCtrl', ExitPopupCtrl);
 
-    ExitPopupCtrl.$inject = ['$timeut', 'AWSService'];
+    ExitPopupCtrl.$inject = ['$timeout', 'AWSService'];
     function ExitPopupCtrl($timeout, AWSService) {
         var vm = this;
 
