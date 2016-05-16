@@ -36,7 +36,8 @@
             <div>What did you get ticketed for?</div>
             <div>
                 <select id="violationDropdown" ng-model="selectedViolation"
-                        ng-options="violation.value as violation.name for violation in violationOptions">
+                        ng-options="violation.value as violation.name for violation in violationOptions"
+                        style="width: 100%; height: inherit;">
                 </select>
             </div>
         </div>
