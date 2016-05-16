@@ -34,6 +34,7 @@
     "html5shiv": "~3.7.3",
     "jquery-easing": "*",
     "font-awesome": "fontawesome#~4.6.1",
-    "sendgrid": "^1.9.2"
+    "sendgrid": "^1.9.2",
+    "aws-sdk-js": "~2.3.11"
   }
 }

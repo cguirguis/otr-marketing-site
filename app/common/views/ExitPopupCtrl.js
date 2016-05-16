@@ -5,8 +5,8 @@
         .module('brochure')
         .controller('ExitPopupCtrl', ExitPopupCtrl);
 
-    ExitPopupCtrl.$inject = ['$rootScope', '$scope', 'DataService'];
-    function ExitPopupCtrl($rootScope, $scope, DataService) {
+    ExitPopupCtrl.$inject = ['$timeut', 'AWSService'];
+    function ExitPopupCtrl($timeout, AWSService) {
         var vm = this;
 
         // ----- INTERFACE ------------------------------------------------------------
@@ -18,12 +18,17 @@
             var name = $("#name").val() || "A user";
             var contactInfo = $("#email").val();
 
-            // Do something with this number
-            var message = name +  " has requested a free ticket review: " + contactInfo;
-            DataService.sendExitFeedback(message);
+            var data = {
+                name: name,
+                contact: contactInfo
+            };
+            AWSService.sendEmail(data);
 
             vm.reviewRequested = true;
-            //bioEp.hidePopup();
+
+            $timeout(function(){
+                bioEp.hidePopup();
+            }, 2000);
         }
     }
 })();

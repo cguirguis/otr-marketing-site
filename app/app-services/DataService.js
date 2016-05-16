@@ -10,6 +10,14 @@
         var baseUrl = ENV.apiEndpoint + '/api/v1/';
 
         var getCourtsUrl = baseUrl + "courts/traffic";
+        var loginUrl = baseUrl + "authentication/login";
+
+        var login = function(username, password) {
+            var url = loginUrl +
+                "?username=" + encodeURIComponent(username) +
+                "&password=" + encodeURIComponent(password);
+            return $http.post(url);
+        };
 
         var getCourts = function (searchQuery) {
             var url = getCourtsUrl + "/" + searchQuery;
@@ -49,6 +57,7 @@
         };
 
         return {
+            login: login,
             getCourts: getCourts,
             sendExitFeedback: sendExitFeedback
         }
