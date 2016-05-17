@@ -25,7 +25,7 @@
     "angular-ui-router": "^0.2.18",
     "angular": "^1.5.3",
     "angular-cookies": "^1.5.3",
-    "ngMeta": "^0.3.7",
+    "ngMeta": "^0.3.9",
     "lodash": "^4.11.2",
     "bootstrap": "~3.3.6",
     "jquery": "~1.11.0",

@@ -23,20 +23,20 @@
         // Set the page title and meta tags.
         // This is a temporary workaround until ngMeta adds a feature that supports 'resolve'
         if ($state.current.name == 'default-template.state-info.overview') {
-            ngMeta.setTitle(vm.selectedState.name + ' Traffic Tickets & Violations');
-            ngMeta.setTag('description',
-                'Learn how to fight or pay your ' + vm.selectedState.name + ' traffic ticket, ' +
-                'prevent insurance increase & hire a lawyer in ' + vm.selectedState.abbreviation + '.');
+            //ngMeta.setTitle(vm.selectedState.name + ' Traffic Tickets & Violations');
+            //ngMeta.setTag('description',
+            //    'Learn how to fight or pay your ' + vm.selectedState.name + ' traffic ticket, ' +
+            //    'prevent insurance increase & hire a lawyer in ' + vm.selectedState.abbreviation + '.');
         } else if ($state.current.name == 'default-template.state-info.fight') {
-            ngMeta.setTitle('Fight Your ' + vm.selectedState.name + ' Traffic Ticket');
-            ngMeta.setTag('description',
-                'Learn why and how you should fight your traffic ticket in ' + vm.selectedState.name +
-                ' and how to hire the best lawyer to help you contest your ticket.');
+            //ngMeta.setTitle('Fight Your ' + vm.selectedState.name + ' Traffic Ticket');
+            //ngMeta.setTag('description',
+            //    'Learn why and how you should fight your traffic ticket in ' + vm.selectedState.name +
+            //    ' and how to hire the best lawyer to help you contest your ticket.');
         } else if ($state.current.name == 'default-template.state-info.courts') {
-            ngMeta.setTitle('Fight Your ' + vm.selectedState.name + ' Traffic Ticket');
-            ngMeta.setTag('description',
-                'Got a traffic ticket in ' + vm.selectedState.name + '? Contesting it with OTR ' +
-                'could give you a 97% chance of beating it.');
+            //ngMeta.setTitle('Fight Your ' + vm.selectedState.name + ' Traffic Ticket');
+            //ngMeta.setTag('description',
+            //    'Got a traffic ticket in ' + vm.selectedState.name + '? Contesting it with OTR ' +
+            //    'could give you a 97% chance of beating it.');
 
             vm.courts = [{
                 courtName: "Seattle Municipal Court",
