@@ -6,14 +6,15 @@
         .controller('DefaultTemplateCtrl', DefaultTemplateCtrl);
 
 
-    DefaultTemplateCtrl.$inject = ['ENV', '$window', '$rootScope', '$scope', '$timeout', '$http', '$q', 'GlobalUtils'];
-    function DefaultTemplateCtrl(ENV, $window, $rootScope, $scope, $timeout, $http, $q, GlobalUtils) {
+    DefaultTemplateCtrl.$inject = ['ENV', '$window', '$rootScope', '$scope', '$timeout', '$http', '$q', 'GlobalUtils', 'OtrService'];
+    function DefaultTemplateCtrl(ENV, $window, $rootScope, $scope, $timeout, $http, $q, GlobalUtils, OtrService) {
         var vm = this,
 
             URLS = {
                 POST_SUBSCRIPTION: ENV.apiEndpoint + '/api/v1/subscribe'
             };
 
+        var otrService = null;
         var exitPopupLoaded = false;
 
         $rootScope.defaultStateValues = {
@@ -310,16 +311,67 @@
                         cookieExp: 0
                     });
                     exitPopupLoaded = true;
-                }}, 2000);
+                }
+            }, 1000);
         });
 
         // ----- INTERFACE ------------------------------------------------------------
         vm.login = login;
         vm.submitSubscribeForm = submitSubscribeForm;
         vm.formatStateName = formatStateName;
+        vm.submitReviewRequest = submitReviewRequest;
 
 
         // ----- PUBLIC METHODS -------------------------------------------------------
+
+        (function initController() {
+
+            otrService = new OtrService({domain: ENV.apiEndpoint})
+            vm.reviewRequested = false;
+
+        })();
+
+        function submitReviewRequest(isFormValid) {
+
+            if (!isFormValid) {
+                console.log('form not valid');
+                return;
+            }
+
+            vm.ticketReviewRequestFormSubmitted = true;
+            vm.submitReviewRequestLoading = true;
+
+            var params = {
+                request : {
+                    usage : 'OTR_EXIT_POPUP',
+                    notificationMethod : 'EMAIL',
+                    keyValueMap : {
+                        name: vm.exitPopupName,
+                        contact: vm.exitPopupContactInfo
+                    }
+                }
+            };
+
+            console.log('calling otr backend...');
+            otrService.postDataUsingPOST(params)
+                .then(
+                    function(response) {
+                        vm.reviewRequested = true;
+                        vm.submitReviewRequestLoading = false;
+                        console.log('success: ', response);
+                        // Hide the popup
+                        //$timeout(function(){
+                        //    bioEp.hidePopup();
+                        //}, 3000);
+                    },
+                    function(error) {
+                        vm.submitReviewRequestFailed = true;
+                        vm.submitReviewRequestLoading = false;
+                        console.log('error: ', error);
+                        $q.reject(error);
+                    }
+                );
+        }
 
         function login() {
             $rootScope.trackFBButtonConversion('SignUp', 'MenuBar');

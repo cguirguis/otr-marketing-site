@@ -121,9 +121,22 @@
 
 <body class="home page page-id-8 page-template-default" style="zoom: 1;">
 
-	<div ui-view autoscroll="true"></div>
+    <div id="bio_ep" ng-controller="ExitPopupCtrl as vm">
+        <div id="bio_ep_content">
+            <div class="review-form">
+                <div class="review-text" ng-if="!vm.reviewRequested">
+                    Request a free ticket review right now to know your options
+                </div>
+                <input type="text" id="name" placeholder="Your name" ng-if="!vm.reviewRequested" />
+                <input type="text" id="email" placeholder="Your phone number or email" ng-if="!vm.reviewRequested" />
+                <button id="submit" ng-click="vm.submitReviewRequest()"ng-if="!vm.reviewRequested" >GET FREE
+                    REVIEW</button>
+                <div class="thankyou-text" ng-if="vm.reviewRequested">Thank you. We'll be in touch with you shortly!</div>
+            </div>
+        </div>
+    </div>
 
-    <div ng-include="'subscribe-email.html'"></div>
+	<div ui-view autoscroll="true" />
 
 	<!-- Angular Dependencies -->
 	<script src="bower_components/angular/angular.min.js"></script>
@@ -145,6 +158,5 @@
 
 	<script src="@@base-build/js/all-otr.min.js"></script>
     <script src="@@base-build/js/config.min.js"></script>
-
 </body>
 </html>

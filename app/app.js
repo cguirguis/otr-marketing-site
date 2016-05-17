@@ -6,7 +6,8 @@
         'ui.bootstrap',
         'ngRetina',
         'ngCookies',
-        'ngMeta'
+        'ngMeta',
+        'otrBackendService'
     ])
         .run(init)
         .run(loadEvents)
