@@ -50,8 +50,22 @@
                     <button class="login-button" ng-click="vm.login()">Sign Up</button>
                     <button class="login-button" ng-click="vm.login()">Login</button>
                 </li>
-
             </ul>
         </div>
     </div>
 </nav>
+
+<div id="bio_ep" ng-controller="ExitPopupCtrl as vm">
+    <div id="bio_ep_content">
+        <div class="review-form">
+            <div class="review-text" ng-if="!vm.reviewRequested">
+                Request a free ticket review right now to know your options
+            </div>
+            <input type="text" id="name" placeholder="Your name" ng-if="!vm.reviewRequested" />
+            <input type="text" id="email" placeholder="Your phone number or email" ng-if="!vm.reviewRequested" />
+            <button id="submit" ng-click="vm.submitReviewRequest()"ng-if="!vm.reviewRequested" >GET FREE
+                REVIEW</button>
+            <div class="thankyou-text" ng-if="vm.reviewRequested">Thank you. We'll be in touch with you shortly!</div>
+        </div>
+    </div>
+</div>

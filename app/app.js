@@ -28,9 +28,9 @@
         //Set defaults for arbitrary tags
         ngMetaProvider.setDefaultTag('author', 'Off the Record, Inc.');
         ngMetaProvider.setDefaultTag('description',
-                'Fight your traffic ticket with OffTheRecord.com to get it fully dismissed. ' +
-                'We have a 97% success rate and offer a full refund if we dont win. ' +
-                'Your ticket will be matched to the local lawyer with the highest chance of success.');
+                "Fight your traffic ticket with OffTheRecord.com to get it fully dismissed. " +
+                "We have a 97% success rate and offer a full refund if we don't win. " +
+                "Your ticket will be matched to the local lawyer with the highest chance of success.");
 
         ngMetaProvider.setDefaultTag('keywords',
             'traffic ticket lawyer, traffic ticket attorney, speeding ticket lawyer, ' +
@@ -120,6 +120,15 @@
                 meta: {
                     title : 'About Us',
                     description : 'Learn why Off the Record is the smart way to contest any traffic ticket, and read our story.'
+                }
+            })
+            .state('default-template.refer-a-friend', {
+                url: '/refer-a-friend/:referralCode',
+                templateUrl: 'app/pages/referral/refer-a-friend.html',
+                controller: 'ReferralCtrl as vm',
+                meta: {
+                    title : 'Refer a friend',
+                    description : "Share a $20 credit with your friends. You'll earn $20 when they fight their ticket."
                 }
             })
             .state('default-template.state-info', {

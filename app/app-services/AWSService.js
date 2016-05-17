@@ -32,7 +32,6 @@
                     secretAccessKey: 'imA8CstJjuFAoeG3VtbW/411BK3DgvymyUmr7GyJ'
                 });
                 credentialsSet = true;
-                return;
             }
             var params = {
                 Destination: {
@@ -42,19 +41,18 @@
                 },
                 Message: {
                     Subject: {
-                        /* required */
-                        Data: 'Free ticket review requested (exit popup)',
+                        Data: data.subject,
                         Charset: 'ASCII'
                     },
                     Body: {
-                        /*Html: {
-                         Data: 'STRING_VALUE',
-                         Charset: 'STRING_VALUE'
-                         },*/
-                        Text: {
-                            Data: "Name: " + data.name + "\n\Contact: " + data.contact, /* required */
+                        Html: {
+                         Data: data.emailHtml,
+                         Charset: 'ASCII'
+                         },
+                        /*Text: {
+                            Data: "Name: " + data.name + "\n\Contact: " + data.contact,
                             Charset: 'ASCII'
-                        }
+                        }*/
                     }
                 },
                 Source: 'team@offtherecord.com'

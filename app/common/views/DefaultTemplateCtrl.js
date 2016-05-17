@@ -21,7 +21,7 @@
             baseFee : 250,
             successRate : 95,
             avgFine : 180
-        }
+        };
 
         $rootScope.statesList = [
             {
@@ -303,13 +303,14 @@
                 $(".navbar-ex1-collapse").removeClass("in");
             });
 
-            if (!exitPopupLoaded) {
-                bioEp.init({
-                    fonts: ['//fonts.googleapis.com/css?family=Titillium+Web:300,400,600'],
-                    cookieExp: 0
-                });
-                exitPopupLoaded = true;
-            }
+            $timeout(function() {
+                if (!exitPopupLoaded) {
+                    bioEp.init({
+                        fonts: ['//fonts.googleapis.com/css?family=Titillium+Web:300,400,600'],
+                        cookieExp: 0
+                    });
+                    exitPopupLoaded = true;
+                }}, 2000);
         });
 
         // ----- INTERFACE ------------------------------------------------------------
