@@ -222,6 +222,9 @@
     init.$inject = ['$rootScope', '$location', '$anchorScroll', '$cookies', 'ngMeta'];
     function init($rootScope, $location, $anchorScroll, $cookies, ngMeta) {
 
+        var referer = document.referrer;
+        console.log('Referer is: ', referer);
+
         // Initialize page title and meta tags
         ngMeta.init();
 
