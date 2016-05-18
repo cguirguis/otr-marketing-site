@@ -152,23 +152,43 @@
                     }
                     return 'app/pages/state-info/state/' + stateCode + '/overview.html';
                 },
-                controller: 'StateInfoCtrl as vm'
-                // When ngMeta releases their next version, this will work
-                //resolve: {
-                //    data: function($stateParams, ngMeta) {
-                //        ngMeta.setTitle('State Title');
-                //        ngMeta.setTag('description', 'some description...');
-                //        return 'abcd';
-                //    }
-                //},
-                //meta: {
-                //    disableUpdate : true
-                //}
+                controller: 'StateInfoCtrl as vm',
+                resolve: {
+                    data: ['$rootScope', '$stateParams', 'ngMeta', function($rootScope, $stateParams, ngMeta) {
+
+                        var selectedState = _.find($rootScope.statesList, function(o) {
+                            return o.abbreviation == $stateParams.stateCode;
+                        });
+
+                        ngMeta.setTitle(selectedState.name + ' Traffic Tickets & Violations');
+                        ngMeta.setTag('description', 'Learn how to fight or pay your ' + selectedState.name + ' traffic ticket, ' +
+                            'prevent insurance increase, hire a lawyer in ' + selectedState.name + ' and keep your driving record clean.');
+                    }]
+                },
+                meta: {
+                    disableUpdate : true
+                }
             })
             .state('default-template.state-info.fight', {
                 url: '/why-fight-your-traffic-ticket',
                 templateUrl: 'app/pages/state-info/fight-ticket.html',
-                controller: 'StateInfoCtrl as vm'
+                controller: 'StateInfoCtrl as vm',
+                resolve: {
+                    data: ['$rootScope', '$stateParams', 'ngMeta', function($rootScope, $stateParams, ngMeta) {
+
+                        var selectedState = _.find($rootScope.statesList, function(o) {
+                            return o.abbreviation == $stateParams.stateCode;
+                        });
+
+                        ngMeta.setTitle('Fight Your ' + selectedState.name + ' Traffic Ticket');
+                        ngMeta.setTag('description', 'Learn why you should fight your ' + selectedState.name
+                            + ' traffic ticket and how Off the Record connects you with the lawyer most likely '
+                            + 'to get your ticket dismissed.');
+                    }]
+                },
+                meta: {
+                    disableUpdate : true
+                }
             })
             .state('default-template.state-info.courts', {
                 url: '/courts',
@@ -179,7 +199,22 @@
                         ? 'app/pages/state-info/state/default/courts.html'
                         : 'app/pages/state-info/state/' + stateCode + '/courts.html';
                 },
-                controller: 'StateInfoCtrl as vm'
+                controller: 'StateInfoCtrl as vm',
+                resolve: {
+                    data: ['$rootScope', '$stateParams', 'ngMeta', function($rootScope, $stateParams, ngMeta) {
+
+                        var selectedState = _.find($rootScope.statesList, function(o) {
+                            return o.abbreviation == $stateParams.stateCode;
+                        });
+
+                        ngMeta.setTitle(selectedState.name + ' Traffic Courts');
+                        ngMeta.setTag('description', selectedState.name + ' traffic courts. Fight or pay your traffic ticket. ' +
+                            'Court contact information and list of services.');
+                    }]
+                },
+                meta: {
+                    disableUpdate : true
+                }
             });
 
         $httpProvider.defaults.withCredentials = true;
@@ -195,6 +230,9 @@
 
     init.$inject = ['$rootScope', '$location', '$anchorScroll', '$cookies', 'ngMeta'];
     function init($rootScope, $location, $anchorScroll, $cookies, ngMeta) {
+
+        var referer = document.referrer;
+        console.log('Referer is: ', referer);
 
         // Initialize page title and meta tags
         ngMeta.init();
