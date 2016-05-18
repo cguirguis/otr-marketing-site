@@ -327,9 +327,9 @@
                 stage: stage,
                 tags: tags,
                 data: {
-                    '$deeplink_path': 'content/page/12354',
-                    deeplink: 'data',
-                    username: 'Alex'
+                    '$deeplink_path': 'content/page/12354'
+                    //deeplink: 'data',
+                    //username: 'Alex'
                 }
             });
 
