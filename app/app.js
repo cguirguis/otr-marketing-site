@@ -231,8 +231,12 @@
     init.$inject = ['$rootScope', '$location', '$anchorScroll', '$cookies', 'ngMeta'];
     function init($rootScope, $location, $anchorScroll, $cookies, ngMeta) {
 
-        var referer = document.referrer;
-        console.log('Referer is: ', referer);
+        $(document).ready(function() {
+            var referrer = document.referrer;
+            var referer = document.referer;
+            console.log('Referrer is (index.html): ', referrer);
+            console.log('Referer is (index.html): ', referer);
+        });
 
         // Initialize page title and meta tags
         ngMeta.init();
@@ -327,9 +331,9 @@
                 stage: stage,
                 tags: tags,
                 data: {
-                    '$deeplink_path': 'content/page/12354',
-                    deeplink: 'data',
-                    username: 'Alex'
+                    '$deeplink_path': 'content/page/12354'
+                    //deeplink: 'data',
+                    //username: 'Alex'
                 }
             });
 
