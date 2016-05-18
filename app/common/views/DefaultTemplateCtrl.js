@@ -321,7 +321,6 @@
         vm.formatStateName = formatStateName;
         vm.submitReviewRequest = submitReviewRequest;
 
-
         // ----- PUBLIC METHODS -------------------------------------------------------
 
         (function initController() {
@@ -332,13 +331,21 @@
         })();
 
         function submitReviewRequest(isFormValid) {
+            vm.ticketReviewRequestFormSubmitted = true;
 
             if (!isFormValid) {
-                console.log('form not valid');
+                if (!vm.exitPopupName) {
+                    $('.review-form').addClass('name-missing');
+                } else {
+                    $('.review-form').removeClass('name-missing');
+                    $('.review-form').addClass('contact-missing');
+                }
                 return;
             }
 
-            vm.ticketReviewRequestFormSubmitted = true;
+            $('.review-form').removeClass('contact-missing');
+            $('.review-form').removeClass('name-missing');
+
             vm.submitReviewRequestLoading = true;
 
             var params = {
@@ -352,8 +359,7 @@
                 }
             };
 
-            console.log('calling otr backend...');
-            otrService.postDataUsingPOST(params)
+            otrService.submitInternalNotificationUsingPOST(params)
                 .then(
                     function(response) {
                         vm.reviewRequested = true;

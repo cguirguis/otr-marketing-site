@@ -124,7 +124,7 @@
                 }
             })
             .state('default-template.refer-a-friend', {
-                url: '/refer-a-friend/:referralCode',
+                url: '/refer-a-friend/{referralCode}',
                 templateUrl: 'app/pages/referral/refer-a-friend.html',
                 controller: 'ReferralCtrl as vm',
                 meta: {

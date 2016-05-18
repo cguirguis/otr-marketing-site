@@ -19,14 +19,13 @@
             </div>
             <input type="text" name="exitPopupName" ng-model="vm.exitPopupName" placeholder="Your name" tabindex="1" required
                    ng-class="{ 'has-error' : ticketReviewRequestForm.exitPopupName.$invalid && vm.ticketReviewRequestFormSubmitted }" />
-            <input type="text" name="exitPopupContactInfo" ng-model="vm.exitPopupContactInfo" placeholder="Your phone number or email"
-                   tabindex="1" required
+            <input type="text" name="exitPopupContactInfo" ng-model="vm.exitPopupContactInfo"
+                   placeholder="Your phone or email"
+                   tabindex="2" required
                    ng-class="{ 'has-error' : ticketReviewRequestForm.exitPopupContactInfo.$invalid && vm.ticketReviewRequestFormSubmitted }" />
             <button type="submit" name="ticket-review-submit-btn" tabindex="3" ng-disabled="vm.submitReviewRequestLoading == true">
                 <span>REQUEST FREE REVIEW &nbsp;</span>
-                <span ng-show="vm.submitReviewRequestLoading">
-                    <i class="fa fa-spinner fa-spin fa-lg"></i>
-                </span>
+                <i  ng-show="vm.submitReviewRequestLoading" class="fa fa-spinner fa-spin fa-lg"></i>
             </button>
             </form>
         </div>
