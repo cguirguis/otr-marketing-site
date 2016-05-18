@@ -129,21 +129,21 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-button.login-button {
+.nav.navbar-nav.navbar-right li a.login-button {
+  float: left;
   font-size: 14px;
   text-transform: uppercase;
-  padding: 5px 10px;
-  margin-top: 16px;
+  padding: 10px 7px!important;
+  margin-top: 16px!important;
   margin-left: 10px;
   background-color: white;
-  border: solid 1px $primaryBlue;
-  color: $primaryBlue;
+  border: solid 1px transparent;
   border-radius: 3px;
   font-family: Helvetica,Arial,sans-serif;
 
   &:hover {
-    background-color: #46b0f5;
-    color: white;
+    border: solid 1px $primaryBlue;
+    color: $primaryBlue;
   }
 }
 
@@ -346,7 +346,7 @@ ul#menu-main-menu {
 
 #menu-item-12 {
   position: relative;
-  margin-right: 15px;
+  margin-right: 5px;
   margin-left: 5px;
   width: 185px;
   cursor: pointer;
