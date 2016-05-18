@@ -232,7 +232,9 @@
     function init($rootScope, $location, $anchorScroll, $cookies, ngMeta) {
 
         $(document).ready(function() {
-            var referer = document.referrer;
+            var referrer = document.referrer;
+            var referer = document.referer;
+            console.log('Referrer is (index.html): ', referrer);
             console.log('Referer is (index.html): ', referer);
         });
 
