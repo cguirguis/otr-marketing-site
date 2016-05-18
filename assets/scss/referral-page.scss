@@ -36,10 +36,32 @@
         color: #666;
       }
 
+      .referral-signup-button {
+        margin-top: 25px;
+        padding: 40px;
+        background-color: #E2EDF7;
+
+        a {
+          background-color: #157BD2;
+          color: white;
+          padding: 20px 10px;
+          display: block;
+          font-size: 20px;
+          font-family: $helvetica;
+          font-weight: 400;
+          text-decoration: none!important;
+          width: 80%;
+          margin: auto;
+          text-overflow: ellipsis;
+          overflow: auto;
+          &:hover {
+            background-color: #00539A;
+          }
+        }
+      }
       .referral-link-container {
         border: solid 7px #E2EDF7;
         margin-top: 25px;
-
 
         #share-link {
           width: 90%;

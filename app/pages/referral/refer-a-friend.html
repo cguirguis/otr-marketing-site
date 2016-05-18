@@ -11,7 +11,10 @@
                 You can earn $20 cash whenever you refer a friend to Off The Record and they fight their first ticket. It's our way of saying "thanks" for spreading the good word
                 and increasing our collective fighting power!
             </div>
-            <div class="referral-link-container">
+            <div class="referral-signup-button" ng-hide="vm.referralCode">
+                <a ng-href="{{mobileAppUrl}}">Create Your Account And Start Earning Today</a>
+            </div>
+            <div class="referral-link-container" ng-show="vm.referralCode">
                 <input id="share-link" type="text" ng-value="vm.referralLink" />
 
                 <div class="share-options container-fluid">
