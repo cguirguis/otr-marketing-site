@@ -39,11 +39,11 @@
             'fight traffic ticket, fight speeding ticket, contest ticket, ' +
             'traffic ticket, traffic lawyer, traffic attorney, speeding ticket');
 
-        function getNameFromStateParam(param) {
-            return param.replace("-", " ").replace(/\w\S*/g, function(txt){
-                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-            });
-        }
+        //function getNameFromStateParam(param) {
+        //    return param.replace("-", " ").replace(/\w\S*/g, function(txt){
+        //        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        //    });
+        //}
 
         $stateProvider
             .state('default-template', {
@@ -152,11 +152,20 @@
                 controller: 'StateInfoCtrl as vm',
                 resolve: {
                     data: ['$rootScope', '$stateParams', 'ngMeta', function($rootScope, $stateParams, ngMeta) {
-                        var stateName = getNameFromStateParam($stateParams.stateName);
-                        ngMeta.setTitle(stateName + ' Traffic Tickets & Violations');
-                        ngMeta.setTag('description', 'Learn how to fight or pay your ' + $stateParams.stateCode + ' traffic ticket, ' +
-                            'prevent insurance increase, hire a lawyer in ' + stateName + ' and keep' +
-                            ' your driving record clean.');
+
+                        var selectedState = _.find($rootScope.statesList, function(o) {
+                            return o.abbreviation == $stateParams.stateCode;
+                        });
+
+                        ngMeta.setTitle(selectedState.name + ' Traffic Tickets & Violations');
+                        ngMeta.setTag('description', 'Learn how to fight or pay your ' + selectedState.name + ' traffic ticket, ' +
+                            'prevent insurance increase, hire a lawyer in ' + selectedState.name + ' and keep your driving record clean.');
+
+                        //var stateName = getNameFromStateParam($stateParams.stateName);
+                        //ngMeta.setTitle(stateName + ' Traffic Tickets & Violations');
+                        //ngMeta.setTag('description', 'Learn how to fight or pay your ' + $stateParams.stateCode + ' traffic ticket, ' +
+                        //    'prevent insurance increase, hire a lawyer in ' + stateName + ' and keep' +
+                        //    ' your driving record clean.');
                     }]
                 },
                 meta: {
@@ -169,11 +178,21 @@
                 controller: 'StateInfoCtrl as vm',
                 resolve: {
                     data: ['$rootScope', '$stateParams', 'ngMeta', function($rootScope, $stateParams, ngMeta) {
-                        var stateName = getNameFromStateParam($stateParams.stateName);
-                        ngMeta.setTitle('Fight Your ' + stateName + ' Traffic Ticket');
-                        ngMeta.setTag('description', 'Learn why you should fight your ' + stateName
+
+                        var selectedState = _.find($rootScope.statesList, function(o) {
+                            return o.abbreviation == $stateParams.stateCode;
+                        });
+
+                        ngMeta.setTitle('Fight Your ' + selectedState.name + ' Traffic Ticket');
+                        ngMeta.setTag('description', 'Learn why you should fight your ' + selectedState.name
                             + ' traffic ticket and how Off the Record connects you with the lawyer most likely '
                             + 'to get your ticket dismissed.');
+
+                        //var stateName = getNameFromStateParam($stateParams.stateName);
+                        //ngMeta.setTitle('Fight Your ' + stateName + ' Traffic Ticket');
+                        //ngMeta.setTag('description', 'Learn why you should fight your ' + stateName
+                        //    + ' traffic ticket and how Off the Record connects you with the lawyer most likely '
+                        //    + 'to get your ticket dismissed.');
                     }]
                 },
                 meta: {
@@ -192,10 +211,19 @@
                 controller: 'StateInfoCtrl as vm',
                 resolve: {
                     data: ['$rootScope', '$stateParams', 'ngMeta', function($rootScope, $stateParams, ngMeta) {
-                        var stateName = getNameFromStateParam($stateParams.stateName);
-                        ngMeta.setTitle(stateName + ' Traffic Courts');
-                        ngMeta.setTag('description', stateName + ' traffic courts. Fight or pay your traffic ticket. ' +
-                            'Court contact information and list of services.');
+
+                        var selectedState = _.find($rootScope.statesList, function(o) {
+                            return o.abbreviation == $stateParams.stateCode;
+                        });
+
+                        ngMeta.setTitle(selectedState.name + ' Traffic Courts');
+                        ngMeta.setTag('description', selectedState.name + ' traffic courts. Fight or pay your traffic ticket. '
+                            + 'Court contact information and list of services.');
+
+                        //var stateName = getNameFromStateParam($stateParams.stateName);
+                        //ngMeta.setTitle(stateName + ' Traffic Courts');
+                        //ngMeta.setTag('description', stateName + ' traffic courts. Fight or pay your traffic ticket. ' +
+                        //    'Court contact information and list of services.');
                     }]
                 },
                 meta: {
