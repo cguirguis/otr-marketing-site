@@ -27,21 +27,6 @@
 	<meta name="twitter:app:name:ipad" content="Off the Record - Fight your traffic ticket">
 	<meta name="twitter:app:id:ipad" content="1032930471">
 
-    <!-- FB Pixel to track page visits -->
-	<script>
-		!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-				n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-			n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-			t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-				document,'script','//connect.facebook.net/en_US/fbevents.js');
-
-		fbq('init', '169269843443494');
-		fbq('track', "PageView");</script>
-	<noscript><img height="1" width="1" style="display:none"
-				   src="https://www.facebook.com/tr?id=169269843443494&ev=PageView&noscript=1"
-	/></noscript>
-	<!-- End Facebook Pixel Code -->
-
 	<!-- favicon -->
 	<link rel="icon" href="assets/img/favicon/favicon.ico">
 	<!--[if IE]>
@@ -50,14 +35,6 @@
 
 	<link rel="stylesheet" id="dazzling-bootstrap-css" href="bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" media="all">
 
-	<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
-	<script type="text/javascript" src="bower_components/jquery-migrate/jquery-migrate.min.js"></script>
-	<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-	<!--[if lt IE 9]>
-	<script src="bower_components/html5shiv/dist/html5shiv.min.js"></script>
-	<script src="bower_components/respond/dest/respond.min.js"></script>
-	<![endif]-->
 
 	<link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -118,34 +95,71 @@
     }
     </script>
 
+
+	<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script defer type="text/javascript" src="bower_components/jquery-migrate/jquery-migrate.min.js"></script>
+	<script defer type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+	<!--[if lt IE 9]>
+	<script defer src="bower_components/html5shiv/dist/html5shiv.min.js"></script>
+	<script defer src="bower_components/respond/dest/respond.min.js"></script>
+	<![endif]-->
+
+
+	<!-- Angular Dependencies. Don't defer the angular script -->
+	<script src="bower_components/angular/angular.min.js"></script>
+	<script defer src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+	<script defer src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+	<script defer src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+	<!-- to handle Retina displays -->
+	<script defer src="bower_components/angular-retina/build/angular-retina.min.js"></script>
+	<script defer src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+	<!-- For dynamic title and meta tags -->
+	<script defer src="bower_components/ngMeta/dist/ngMeta.min.js"></script>
+	<!-- lodash - collection utils -->
+	<script defer src="bower_components/lodash/dist/lodash.min.js"></script>
+	<!-- AWS JS SDK -->
+	<script defer src="bower_components/aws-sdk-js/dist/aws-sdk.min.js"></script>
+
+	<!-- Plugin JavaScript -->
+	<script defer src="bower_components/jquery-easing/jquery.easing.min.js"></script>
+
+	<!-- OTR Service dependency -->
+	<script defer src="bower_components/otr-shared-libs/dist/otrBackendService.min.js"></script>
+
+	<script defer src="@@base-build/js/all-otr.min.js"></script>
+	<script defer src="@@base-build/js/config.min.js"></script>
+
+	<!-- Determine referer -->
+	<script type="application/javascript">
+		$(document).ready(function() {
+			var referrer = document.referrer;
+			var referer = document.referer;
+			console.log('Referrer is (index.html): ', referrer);
+			console.log('Referer is (index.html): ', referer);
+		});
+	</script>
+
+	<!-- FB Pixel to track page visits -->
+	<script>
+		!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+				n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+			n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+			t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+				document,'script','//connect.facebook.net/en_US/fbevents.js');
+
+		fbq('init', '169269843443494');
+		fbq('track', "PageView");</script>
+	<noscript><img height="1" width="1" style="display:none"
+				   src="https://www.facebook.com/tr?id=169269843443494&ev=PageView&noscript=1"
+	/></noscript>
+	<!-- End Facebook Pixel Code -->
+
 </head>
 
 <body class="home page page-id-8 page-template-default" style="zoom: 1;">
 
 	<div ui-view autoscroll="true"></div>
 
-	<!-- Angular Dependencies -->
-	<script src="bower_components/angular/angular.min.js"></script>
-	<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-	<script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
-	<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-	<!-- to handle Retina displays -->
-	<script src="bower_components/angular-retina/build/angular-retina.min.js"></script>
-	<script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
-    <!-- For dynamic title and meta tags -->
-    <script src="bower_components/ngMeta/dist/ngMeta.min.js"></script>
-    <!-- lodash - collection utils -->
-    <script src="bower_components/lodash/dist/lodash.min.js"></script>
-    <!-- AWS JS SDK -->
-    <script src="bower_components/aws-sdk-js/dist/aws-sdk.min.js"></script>
-
-    <!-- Plugin JavaScript -->
-    <script src="bower_components/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- OTR Service dependency -->
-    <script src="bower_components/otr-shared-libs/dist/otrBackendService.min.js"></script>
-
-    <script src="@@base-build/js/all-otr.min.js"></script>
-    <script src="@@base-build/js/config.min.js"></script>
 </body>
 </html>
