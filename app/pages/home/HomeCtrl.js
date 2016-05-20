@@ -7,8 +7,8 @@
         .controller('LawyerFormModalCtrl', LawyerFormModalCtrl);
 
 
-    HomeCtrl.$inject = ['ENV', '$window', '$http', '$q', '$uibModal', '$log', '$timeout', 'GlobalUtils'];
-    function HomeCtrl(ENV, $window, $http, $q, $uibModal, $log, $timeout, GlobalUtils) {
+    HomeCtrl.$inject = ['ENV', '$window', '$rootScope', '$http', '$q', '$uibModal', '$log', '$timeout', 'GlobalUtils'];
+    function HomeCtrl(ENV, $window, $rootScope, $http, $q, $uibModal, $log, $timeout, GlobalUtils) {
         var vm = this,
             isMobileDevice = GlobalUtils.isMobileDevice(),
 
@@ -16,11 +16,34 @@
                 POST_LAWYER_LEAD: ENV.apiEndpoint + '/api/v1/lawyers/lead'
             };
 
+        vm.iTunesLink = 'http://fight.offtherecord.com/g';
+        vm.isBranchInitComplete = $rootScope.branchInitComplete;
+
         // ----- INTERFACE ------------------------------------------------------------
         //vm.saveContactInfo = saveContactInfo;
         vm.openLawyerFormModal = openLawyerFormModal;
+        vm.getItunesLink = getItunesLink;
 
         // ----- PUBLIC METHODS -------------------------------------------------------
+
+        (function init() {
+             // vm.iTunesLink = getItunesLink();
+        })();
+
+        function getItunesLink() {
+
+            console.log('getITunesLink()');
+            var link = 'http://fight.offtherecord.com/g?';
+            console.log('getITunesLink(): ', link);
+
+            console.log('rootScope branch data: ', $rootScope.branchData);
+            if ($rootScope.branchData.channel) {
+                link = link + 'channel=' + $rootScope.branchData.channel + '&';
+            }
+            console.log('getITunesLink() 2: ', link);
+
+            return link;
+        }
 
         function openLawyerFormModal(size) {
             var modalInstance = $uibModal.open({

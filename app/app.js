@@ -231,21 +231,16 @@
         }]);
     }
 
-    init.$inject = ['$rootScope', '$location', '$anchorScroll', '$cookies', 'ngMeta'];
-    function init($rootScope, $location, $anchorScroll, $cookies, ngMeta) {
+    init.$inject = ['$document', '$rootScope', '$location', '$anchorScroll', '$cookies', 'ngMeta'];
+    function init($document, $rootScope, $location, $anchorScroll, $cookies, ngMeta) {
 
-        $(document).ready(function() {
-            var referrer = document.referrer;
-            var referer = document.referer;
-            console.log('Referrer is (index.html): ', referrer);
-            console.log('Referer is (index.html): ', referer);
-        });
+        writeReferrerCookie($document, $cookies);
 
         // Initialize page title and meta tags
         ngMeta.init();
 
         // Initialize branch.io and add smart banner
-        branchInit($cookies);
+        branchInit($rootScope, $cookies);
 
         // Scroll to proper location when URL has location hash
         $rootScope.$on('$routeChangeSuccess', function() {
@@ -256,7 +251,15 @@
         });
     }
 
-    function branchInit($cookies) {
+    function writeReferrerCookie($document, $cookies) {
+
+        var referrer = $document[0].referrer;
+        console.log('Referrer is (app.js): ', referrer);
+
+        // don't write (or overwrite) a cookie if there's no referrer value
+        if (!referrer || referrer == '') {
+            return;
+        }
 
         var cookieExpireDate = new Date();
         var numberOfDaysToAdd = 14;
@@ -267,6 +270,23 @@
             'expires' : cookieExpireDate
         };
 
+        $cookies.put('otr-referrer', JSON.stringify(referrer), cookieDefaults);
+    }
+
+    function branchInit($rootScope, $cookies) {
+
+        var cookieExpireDate = new Date();
+        var numberOfDaysToAdd = 14;
+        cookieExpireDate.setDate(cookieExpireDate.getDate() + numberOfDaysToAdd);
+
+        var cookieDefaults = {
+            'domain' : 'offtherecord.com',
+            'expires' : cookieExpireDate
+        };
+
+        // initialize structure to avoid null checks.
+        $rootScope.branchData = {};
+        // Set defaults for banner click.
         var channel = 'Website';
         var campaign = '';
         var feature = 'smart_banner';
@@ -281,11 +301,7 @@
         })(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode banner closeBanner creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setIdentity track validateCode".split(" "), 0);
 
         branch.init('key_live_oik1hC6SvaFGaQl6L4f5chghyqkDbk9G', function(err, data) {
-            //console.log('branch.init error: ', err);
             console.log('branch.init data: ', data);
-            //console.log('branch data: ', data.data);
-            //console.log('branch data_parsed: ', data.data_parsed);
-            //console.log('+clicked_branch_link', data.data_parsed['+clicked_branch_link']);
 
             // Write Branch data to cookie. Only write the cookie if a Branch link was clicked,
             // otherwise previously written cookies will be overwritten next time user visits site.
@@ -294,14 +310,23 @@
 
                 // If a branch link was clicked and the user then clicks on the Branch banner,
                 // we need to pass along the values of the originally clicked Branch link.
-                channel = data.data_parsed['~channel'];
-                campaign = data.data_parsed['~campaign'];
-                feature = data.data_parsed['~feature'];
-                stage = data.data_parsed['~stage'];
-                tags = data.data_parsed['~tags'];
+
+                $rootScope.branchData = {
+                    channel : data.data_parsed['~channel'],
+                    campaign : data.data_parsed['~campaign'],
+                    feature : data.data_parsed['~feature'],
+                    stage : data.data_parsed['~stage'],
+                    tags : data.data_parsed['~tags']
+                };
+
+                //channel = data.data_parsed['~channel'];
+                //campaign = data.data_parsed['~campaign'];
+                //feature = data.data_parsed['~feature'];
+                //stage = data.data_parsed['~stage'];
+                //tags = data.data_parsed['~tags'];
             }
 
-
+            $rootScope.branchInitComplete = true;
         });
 
         branch.banner({
@@ -328,11 +353,11 @@
                 theme: 'light'                         // Uses Branch's predetermined color scheme for the banner { 'light' || 'dark' }, default: 'light'
             },
             {
-                channel: channel,
-                campaign: campaign,
-                feature: feature,
-                stage: stage,
-                tags: tags,
+                channel: ($rootScope.branchData.channel) ? $rootScope.branchData.channel : channel,
+                campaign: ($rootScope.branchData.campaign) ? $rootScope.branchData.campaign : campaign,
+                feature: ($rootScope.branchData.feature) ? $rootScope.branchData.feature : feature,
+                stage: ($rootScope.branchData.stage) ? $rootScope.branchData.stage : stage,
+                tags: ($rootScope.branchData.tags) ? $rootScope.branchData.tags : tags,
                 data: {
                     '$deeplink_path': 'content/page/12354'
                     //deeplink: 'data',
