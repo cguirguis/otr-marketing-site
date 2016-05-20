@@ -10,39 +10,52 @@
     HomeCtrl.$inject = ['ENV', '$window', '$rootScope', '$http', '$q', '$uibModal', '$log', '$timeout', 'GlobalUtils'];
     function HomeCtrl(ENV, $window, $rootScope, $http, $q, $uibModal, $log, $timeout, GlobalUtils) {
         var vm = this,
-            isMobileDevice = GlobalUtils.isMobileDevice(),
+            //isMobileDevice = GlobalUtils.isMobileDevice(),
 
             URLS = {
                 POST_LAWYER_LEAD: ENV.apiEndpoint + '/api/v1/lawyers/lead'
             };
 
-        vm.iTunesLink = 'http://fight.offtherecord.com/g';
-        vm.isBranchInitComplete = $rootScope.branchInitComplete;
+        vm.iTunesLink = 'http://fight.offtherecord.com/g?';
 
         // ----- INTERFACE ------------------------------------------------------------
         //vm.saveContactInfo = saveContactInfo;
         vm.openLawyerFormModal = openLawyerFormModal;
-        vm.getItunesLink = getItunesLink;
 
         // ----- PUBLIC METHODS -------------------------------------------------------
 
         (function init() {
-             // vm.iTunesLink = getItunesLink();
+
+            $rootScope.$on('BranchInitComplete', function(event, next, current) {
+                console.log('branch data: ', $rootScope.branchData);
+                buildITunesLink();
+            });
+
         })();
 
-        function getItunesLink() {
+        function buildITunesLink() {
 
-            console.log('getITunesLink()');
+            console.log('building iTunes link');
             var link = 'http://fight.offtherecord.com/g?';
-            console.log('getITunesLink(): ', link);
 
-            console.log('rootScope branch data: ', $rootScope.branchData);
             if ($rootScope.branchData.channel) {
                 link = link + 'channel=' + $rootScope.branchData.channel + '&';
             }
-            console.log('getITunesLink() 2: ', link);
+            if ($rootScope.branchData.campaign) {
+                link = link + 'campaign=' + $rootScope.branchData.campaign + '&';
+            }
+            if ($rootScope.branchData.feature) {
+                link = link + 'feature=' + $rootScope.branchData.feature + '&';
+            }
+            if ($rootScope.branchData.stage) {
+                link = link + 'stage=' + $rootScope.branchData.stage + '&';
+            }
+            if ($rootScope.branchData.tags) {
+                link = link + 'tags=' + $rootScope.branchData.tags + ',iTunesBadgeButton' + '&';
+            }
 
-            return link;
+            console.log('new link: ', link);
+            vm.iTunesLink = link;
         }
 
         function openLawyerFormModal(size) {

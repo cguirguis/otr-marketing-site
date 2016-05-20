@@ -9,6 +9,7 @@
         'ngMeta',
         'otrBackendService'
     ])
+        .run(initData)
         .run(init)
         .run(loadEvents)
         .config(config);
@@ -319,14 +320,12 @@
                     tags : data.data_parsed['~tags']
                 };
 
-                //channel = data.data_parsed['~channel'];
-                //campaign = data.data_parsed['~campaign'];
-                //feature = data.data_parsed['~feature'];
-                //stage = data.data_parsed['~stage'];
-                //tags = data.data_parsed['~tags'];
+                console.log('finished writing branch data to rootscope');
             }
 
+            console.log('branch init complete');
             $rootScope.branchInitComplete = true;
+            $rootScope.$broadcast('BranchInitComplete');
         });
 
         branch.banner({
@@ -357,7 +356,7 @@
                 campaign: ($rootScope.branchData.campaign) ? $rootScope.branchData.campaign : campaign,
                 feature: ($rootScope.branchData.feature) ? $rootScope.branchData.feature : feature,
                 stage: ($rootScope.branchData.stage) ? $rootScope.branchData.stage : stage,
-                tags: ($rootScope.branchData.tags) ? $rootScope.branchData.tags : tags,
+                tags: ($rootScope.branchData.tags) ? $rootScope.branchData.tags + ',smart_banner' : tags,
                 data: {
                     '$deeplink_path': 'content/page/12354'
                     //deeplink: 'data',
@@ -381,6 +380,245 @@
 
     loadEvents.$inject = ['$state', '$rootScope', '$location', '$cookies'];
     function loadEvents($state, $rootScope, $location, $cookies) {
+
+    }
+
+    initData.$inject = ['$rootScope'];
+    function initData($rootScope) {
+
+        $rootScope.defaultStateValues = {
+            backgroundImgUrl : 'assets/img/states/default.jpg',
+            baseFee : 250,
+            successRate : 95,
+            avgFine : 180
+        };
+
+        $rootScope.statesList = [
+            {
+                "name": "Alabama",
+                "abbreviation": "AL"
+            },
+            {
+                "name": "Alaska",
+                "abbreviation": "AK"
+            },
+            {
+                "name": "Arizona",
+                "abbreviation": "AZ"
+            },
+            {
+                "name": "Arkansas",
+                "abbreviation": "AR"
+            },
+            {
+                "name": "California",
+                "abbreviation": "CA",
+                backgroundImgUrl : 'assets/img/states/CA.jpg',
+                baseFee : 300,
+                successRate : 93,
+                avgFine : 207
+            },
+            {
+                "name": "Colorado",
+                "abbreviation": "CO"
+            },
+            {
+                "name": "Connecticut",
+                "abbreviation": "CT"
+            },
+            {
+                "name": "Delaware",
+                "abbreviation": "DE"
+            },
+            {
+                "name": "Florida",
+                "abbreviation": "FL"
+            },
+            {
+                "name": "Georgia",
+                "abbreviation": "GA"
+            },
+            {
+                "name": "Hawaii",
+                "abbreviation": "HI"
+            },
+            {
+                "name": "Idaho",
+                "abbreviation": "ID"
+            },
+            {
+                "name": "Illinois",
+                "abbreviation": "IL"
+            },
+            {
+                "name": "Indiana",
+                "abbreviation": "IN"
+            },
+            {
+                "name": "Iowa",
+                "abbreviation": "IA"
+            },
+            {
+                "name": "Kansas",
+                "abbreviation": "KS"
+            },
+            {
+                "name": "Kentucky",
+                "abbreviation": "KY"
+            },
+            {
+                "name": "Louisiana",
+                "abbreviation": "LA"
+            },
+            {
+                "name": "Maine",
+                "abbreviation": "ME"
+            },
+            {
+                "name": "Maryland",
+                "abbreviation": "MD"
+            },
+            {
+                "name": "Massachusetts",
+                "abbreviation": "MA"
+            },
+            {
+                "name": "Michigan",
+                "abbreviation": "MI"
+            },
+            {
+                "name": "Minnesota",
+                "abbreviation": "MN"
+            },
+            {
+                "name": "Mississippi",
+                "abbreviation": "MS"
+            },
+            {
+                "name": "Missouri",
+                "abbreviation": "MO"
+            },
+            {
+                "name": "Montana",
+                "abbreviation": "MT"
+            },
+            {
+                "name": "Nebraska",
+                "abbreviation": "NE"
+            },
+            {
+                "name": "Nevada",
+                "abbreviation": "NV"
+            },
+            {
+                "name": "New Hampshire",
+                "abbreviation": "NH"
+            },
+            {
+                "name": "New Jersey",
+                "abbreviation": "NJ"
+            },
+            {
+                "name": "New Mexico",
+                "abbreviation": "NM"
+            },
+            {
+                "name": "New York",
+                "abbreviation": "NY",
+                backgroundImgUrl : 'assets/img/states/NY.jpg',
+                baseFee : 200,
+                successRate : 95,
+                avgFine : 180
+            },
+            {
+                "name": "North Carolina",
+                "abbreviation": "NC"
+            },
+            {
+                "name": "North Dakota",
+                "abbreviation": "ND"
+            },
+            {
+                "name": "Ohio",
+                "abbreviation": "OH"
+            },
+            {
+                "name": "Oklahoma",
+                "abbreviation": "OK",
+                backgroundImgUrl : 'assets/img/states/OK.jpg',
+                baseFee : 200,
+                successRate : 96,
+                avgFine : 180
+            },
+            {
+                "name": "Oregon",
+                "abbreviation": "OR",
+                backgroundImgUrl : 'assets/img/states/OR.jpg',
+                baseFee : 350,
+                successRate : 88,
+                avgFine : 270
+            },
+            {
+                "name": "Pennsylvania",
+                "abbreviation": "PA"
+            },
+            {
+                "name": "Rhode Island",
+                "abbreviation": "RI"
+            },
+            {
+                "name": "South Carolina",
+                "abbreviation": "SC"
+            },
+            {
+                "name": "South Dakota",
+                "abbreviation": "SD"
+            },
+            {
+                "name": "Tennessee",
+                "abbreviation": "TN"
+            },
+            {
+                "name": "Texas",
+                "abbreviation": "TX",
+                backgroundImgUrl : 'assets/img/states/TX.jpg',
+                baseFee : 200,
+                successRate : 97,
+                avgFine : 107
+            },
+            {
+                "name": "Utah",
+                "abbreviation": "UT"
+            },
+            {
+                "name": "Vermont",
+                "abbreviation": "VT"
+            },
+            {
+                "name": "Virginia",
+                "abbreviation": "VA"
+            },
+            {
+                "name": "Washington",
+                "abbreviation": "WA",
+                backgroundImgUrl : 'assets/img/states/WA.jpg',
+                baseFee : 200,
+                successRate : 97,
+                avgFine : 180
+            },
+            {
+                "name": "West Virginia",
+                "abbreviation": "WV"
+            },
+            {
+                "name": "Wisconsin",
+                "abbreviation": "WI"
+            },
+            {
+                "name": "Wyoming",
+                "abbreviation": "WY"
+            }
+        ];
 
     }
 
