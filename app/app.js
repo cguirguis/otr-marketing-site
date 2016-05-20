@@ -38,6 +38,11 @@
             'fight traffic ticket, fight speeding ticket, contest ticket, ' +
             'traffic ticket, traffic lawyer, traffic attorney, speeding ticket');
 
+        function getNameFromStateParam(param) {
+            return param.replace("-", " ").replace(/\w\S*/g, function(txt){
+                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            });
+        }
 
         $stateProvider
             .state('default-template', {
@@ -123,15 +128,6 @@
                     description : 'Learn why Off the Record is the smart way to contest any traffic ticket, and read our story.'
                 }
             })
-            .state('default-template.refer-a-friend', {
-                url: '/refer-a-friend/:referralCode',
-                templateUrl: 'app/pages/referral/refer-a-friend.html',
-                controller: 'ReferralCtrl as vm',
-                meta: {
-                    title : 'Refer a friend',
-                    description : "Share a $20 credit with your friends. You'll earn $20 when they fight their ticket."
-                }
-            })
             .state('default-template.state-info', {
                 abstract: true,
                 url: '/{stateCode:[a-zA-Z]{2}}-{stateName}',
@@ -155,14 +151,11 @@
                 controller: 'StateInfoCtrl as vm',
                 resolve: {
                     data: ['$rootScope', '$stateParams', 'ngMeta', function($rootScope, $stateParams, ngMeta) {
-
-                        var selectedState = _.find($rootScope.statesList, function(o) {
-                            return o.abbreviation == $stateParams.stateCode;
-                        });
-
-                        ngMeta.setTitle(selectedState.name + ' Traffic Tickets & Violations');
-                        ngMeta.setTag('description', 'Learn how to fight or pay your ' + selectedState.name + ' traffic ticket, ' +
-                            'prevent insurance increase, hire a lawyer in ' + selectedState.name + ' and keep your driving record clean.');
+                        var stateName = getNameFromStateParam($stateParams.stateName);
+                        ngMeta.setTitle(stateName + ' Traffic Tickets & Violations');
+                        ngMeta.setTag('description', 'Learn how to fight or pay your ' + $stateParams.stateCode + ' traffic ticket, ' +
+                            'prevent insurance increase, hire a lawyer in ' + stateName + ' and keep' +
+                            ' your driving record clean.');
                     }]
                 },
                 meta: {
@@ -175,13 +168,9 @@
                 controller: 'StateInfoCtrl as vm',
                 resolve: {
                     data: ['$rootScope', '$stateParams', 'ngMeta', function($rootScope, $stateParams, ngMeta) {
-
-                        var selectedState = _.find($rootScope.statesList, function(o) {
-                            return o.abbreviation == $stateParams.stateCode;
-                        });
-
-                        ngMeta.setTitle('Fight Your ' + selectedState.name + ' Traffic Ticket');
-                        ngMeta.setTag('description', 'Learn why you should fight your ' + selectedState.name
+                        var stateName = getNameFromStateParam($stateParams.stateName);
+                        ngMeta.setTitle('Fight Your ' + stateName + ' Traffic Ticket');
+                        ngMeta.setTag('description', 'Learn why you should fight your ' + stateName
                             + ' traffic ticket and how Off the Record connects you with the lawyer most likely '
                             + 'to get your ticket dismissed.');
                     }]
@@ -202,18 +191,32 @@
                 controller: 'StateInfoCtrl as vm',
                 resolve: {
                     data: ['$rootScope', '$stateParams', 'ngMeta', function($rootScope, $stateParams, ngMeta) {
-
-                        var selectedState = _.find($rootScope.statesList, function(o) {
-                            return o.abbreviation == $stateParams.stateCode;
-                        });
-
-                        ngMeta.setTitle(selectedState.name + ' Traffic Courts');
-                        ngMeta.setTag('description', selectedState.name + ' traffic courts. Fight or pay your traffic ticket. ' +
+                        var stateName = getNameFromStateParam($stateParams.stateName);
+                        ngMeta.setTitle(stateName + ' Traffic Courts');
+                        ngMeta.setTag('description', stateName + ' traffic courts. Fight or pay your traffic ticket. ' +
                             'Court contact information and list of services.');
                     }]
                 },
                 meta: {
                     disableUpdate : true
+                }
+            })
+            .state('default-template.refer-a-friend', {
+                url: '/refer-a-friend/:referralCode',
+                templateUrl: 'app/pages/referral/refer-a-friend.html',
+                controller: 'ReferralCtrl as vm',
+                meta: {
+                    title : 'Refer a friend',
+                    description : "Share a $20 credit with your friends. You'll earn $20 when they fight their ticket."
+                }
+            })
+            .state('default-template.insurance-impact', {
+                url: '/insurance-impact',
+                templateUrl: 'app/pages/content/insurance-impact.html',
+                meta: {
+                    title : 'How Tickets Increase Insurance Rates',
+                    description : "Find out why insurance rates go up after you get a ticket, and how much your" +
+                    " ticket could end up costing you."
                 }
             });
 

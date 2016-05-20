@@ -6,8 +6,8 @@
         .controller('StateInfoCtrl', StateInfoCtrl)
         .controller('InsuranceModalCtrl', InsuranceModalCtrl);
 
-    StateInfoCtrl.$inject = ['$rootScope', '$scope', '$log', '$state', '$stateParams', '$window', '$timeout', '$location', '$anchorScroll', '$uibModal', 'GlobalUtils', 'DataService', 'ngMeta'];
-    function StateInfoCtrl($rootScope, $scope, $log, $state, $stateParams, $window, $timeout, $location, $anchorScroll, $uibModal, GlobalUtils, DataService, ngMeta) {
+    StateInfoCtrl.$inject = ['$rootScope', '$scope', '$log', '$state', '$stateParams', '$timeout', '$location', '$anchorScroll', '$uibModal', 'DataService'];
+    function StateInfoCtrl($rootScope, $scope, $log, $state, $stateParams, $timeout, $location, $anchorScroll, $uibModal, DataService) {
         var vm = this;
 
         vm.selectedState = _.find($rootScope.statesList, function(o) {
@@ -38,27 +38,15 @@
             //    'Got a traffic ticket in ' + vm.selectedState.name + '? Contesting it with OTR ' +
             //    'could give you a 97% chance of beating it.');
 
-            vm.courts = [{
-                courtName: "Seattle Municipal Court",
-                city: "Seattle",
-                state: "WA"
-            },{
-                courtName: "King County District Court (Cascade Division)",
-                city: "Lynnwood",
-                state: "WA"
-            },{
-                courtName: "King County District Court (East Division)",
-                city: "Redmond",
-                state: "WA"
-            }];
             // Fetch state courts
+            vm.courts = [];
             getCourts();
             vm.courtQuery = "";
         }
 
 
         // ----- VARS AVAILABLE TO THE VIEW -------------------------------------------
-        vm.insuranceIncrease = 540;
+        vm.insuranceIncrease = 790;
         vm.clientMonthlyPremium = 100;
         vm.selectedViolation = 0.21;
 

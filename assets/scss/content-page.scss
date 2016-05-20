@@ -1,0 +1,82 @@
+// This file defines the styles used by all content pages
+// (insurance impact, reckless driving, etc.)
+// These styles override default .content-page styling
+// defined in content-page.scss
+
+@import '_vars.scss';
+
+.content-page.content {
+  .content-container {
+    text-align: left;
+
+    .content-header {
+      text-align: left;
+
+      .content-background {
+        text-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+
+        &:after {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background: #000;
+          opacity: 0.3;
+          filter: alpha(opacity=30);
+          content: " ";
+        }
+      }
+      h1 {
+        text-shadow: 0px 0px 3px #666;
+      }
+    }
+    .content-body {
+      margin-top: -30px;
+      text-align: left;
+
+      .h1 {
+        font-size: 30px;
+        font-weight: 500;
+        font-family: Helvetica;
+        margin-top: 25px;
+      }
+      p {
+        font-size: 21px;
+        margin-top: 20px;
+      }
+    }
+    .align-middle {
+      position: relative;
+      top: 50%;
+      transform: translateY(20%);
+      text-align: center;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .content-page.content .content-container .content-body {
+    padding-top: 30px !important;
+  }
+}
+.content-page.content.insurance-impact {
+  .content-container {
+    .content-header {
+      .content-background {
+        background: url(../img/protect-car.jpg) 0% 50% no-repeat;
+        background-size: cover;
+      }
+    }
+    .content-body {
+      ol {
+        margin-top:  20px;
+
+        li {
+          line-height: 32px;
+          font-size: 21px;
+        }
+      }
+    }
+  }
+}
