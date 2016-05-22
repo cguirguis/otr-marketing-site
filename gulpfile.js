@@ -133,6 +133,12 @@ gulp.task('copy-src', function() {
     return merge(bower, app, seoFiles);
 });
 
+gulp.task('post-build', function() {
+    return gulp.src('build/assets/css/*.css')
+        .pipe(concat('all-stylesheets.min.css'))
+        .pipe(gulp.dest('build/assets/css'));
+});
+
 gulp.task('connect', connect.server({
         root: ['build'],
         port: 8888,
@@ -150,7 +156,7 @@ gulp.task('watch', function() {
 
 gulp.task('build', ['install-dep', 'minify-css', 'minify-js', 'compress-img', 'replace-vars']);
 gulp.task('server', function() {
-    runSequence('build', 'connect', 'watch');
+    runSequence('build', 'post-build', 'connect', 'watch');
 });
 
 gulp.task('clean', function() {
