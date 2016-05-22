@@ -7,20 +7,56 @@
         .controller('LawyerFormModalCtrl', LawyerFormModalCtrl);
 
 
-    HomeCtrl.$inject = ['ENV', '$window', '$http', '$q', '$uibModal', '$log', '$timeout', 'GlobalUtils'];
-    function HomeCtrl(ENV, $window, $http, $q, $uibModal, $log, $timeout, GlobalUtils) {
+    HomeCtrl.$inject = ['ENV', '$window', '$rootScope', '$http', '$q', '$uibModal', '$log', '$timeout', 'GlobalUtils'];
+    function HomeCtrl(ENV, $window, $rootScope, $http, $q, $uibModal, $log, $timeout, GlobalUtils) {
         var vm = this,
-            isMobileDevice = GlobalUtils.isMobileDevice(),
+            //isMobileDevice = GlobalUtils.isMobileDevice(),
 
             URLS = {
                 POST_LAWYER_LEAD: ENV.apiEndpoint + '/api/v1/lawyers/lead'
             };
+
+        vm.iTunesLink = 'http://fight.offtherecord.com/g?';
 
         // ----- INTERFACE ------------------------------------------------------------
         //vm.saveContactInfo = saveContactInfo;
         vm.openLawyerFormModal = openLawyerFormModal;
 
         // ----- PUBLIC METHODS -------------------------------------------------------
+
+        (function init() {
+
+            $rootScope.$on('BranchInitComplete', function(event, next, current) {
+                console.log('branch data: ', $rootScope.branchData);
+                buildITunesLink();
+            });
+
+        })();
+
+        function buildITunesLink() {
+
+            console.log('building iTunes link');
+            var link = 'http://fight.offtherecord.com/g?';
+
+            if ($rootScope.branchData.channel) {
+                link = link + 'channel=' + $rootScope.branchData.channel + '&';
+            }
+            if ($rootScope.branchData.campaign) {
+                link = link + 'campaign=' + $rootScope.branchData.campaign + '&';
+            }
+            if ($rootScope.branchData.feature) {
+                link = link + 'feature=' + $rootScope.branchData.feature + '&';
+            }
+            if ($rootScope.branchData.stage) {
+                link = link + 'stage=' + $rootScope.branchData.stage + '&';
+            }
+            if ($rootScope.branchData.tags) {
+                link = link + 'tags=' + $rootScope.branchData.tags + ',iTunesBadgeButton' + '&';
+            }
+
+            console.log('new link: ', link);
+            vm.iTunesLink = link;
+        }
 
         function openLawyerFormModal(size) {
             var modalInstance = $uibModal.open({

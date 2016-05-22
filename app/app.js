@@ -9,6 +9,7 @@
         'ngMeta',
         'otrBackendService'
     ])
+        .run(initData)
         .run(init)
         .run(loadEvents)
         .config(config);
@@ -38,11 +39,11 @@
             'fight traffic ticket, fight speeding ticket, contest ticket, ' +
             'traffic ticket, traffic lawyer, traffic attorney, speeding ticket');
 
-        function getNameFromStateParam(param) {
-            return param.replace("-", " ").replace(/\w\S*/g, function(txt){
-                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-            });
-        }
+        //function getNameFromStateParam(param) {
+        //    return param.replace("-", " ").replace(/\w\S*/g, function(txt){
+        //        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        //    });
+        //}
 
         $stateProvider
             .state('default-template', {
@@ -151,11 +152,20 @@
                 controller: 'StateInfoCtrl as vm',
                 resolve: {
                     data: ['$rootScope', '$stateParams', 'ngMeta', function($rootScope, $stateParams, ngMeta) {
-                        var stateName = getNameFromStateParam($stateParams.stateName);
-                        ngMeta.setTitle(stateName + ' Traffic Tickets & Violations');
-                        ngMeta.setTag('description', 'Learn how to fight or pay your ' + $stateParams.stateCode + ' traffic ticket, ' +
-                            'prevent insurance increase, hire a lawyer in ' + stateName + ' and keep' +
-                            ' your driving record clean.');
+
+                        var selectedState = _.find($rootScope.statesList, function(o) {
+                            return o.abbreviation == $stateParams.stateCode;
+                        });
+
+                        ngMeta.setTitle(selectedState.name + ' Traffic Tickets & Violations');
+                        ngMeta.setTag('description', 'Learn how to fight or pay your ' + selectedState.name + ' traffic ticket, ' +
+                            'prevent insurance increase, hire a lawyer in ' + selectedState.name + ' and keep your driving record clean.');
+
+                        //var stateName = getNameFromStateParam($stateParams.stateName);
+                        //ngMeta.setTitle(stateName + ' Traffic Tickets & Violations');
+                        //ngMeta.setTag('description', 'Learn how to fight or pay your ' + $stateParams.stateCode + ' traffic ticket, ' +
+                        //    'prevent insurance increase, hire a lawyer in ' + stateName + ' and keep' +
+                        //    ' your driving record clean.');
                     }]
                 },
                 meta: {
@@ -168,11 +178,21 @@
                 controller: 'StateInfoCtrl as vm',
                 resolve: {
                     data: ['$rootScope', '$stateParams', 'ngMeta', function($rootScope, $stateParams, ngMeta) {
-                        var stateName = getNameFromStateParam($stateParams.stateName);
-                        ngMeta.setTitle('Fight Your ' + stateName + ' Traffic Ticket');
-                        ngMeta.setTag('description', 'Learn why you should fight your ' + stateName
+
+                        var selectedState = _.find($rootScope.statesList, function(o) {
+                            return o.abbreviation == $stateParams.stateCode;
+                        });
+
+                        ngMeta.setTitle('Fight Your ' + selectedState.name + ' Traffic Ticket');
+                        ngMeta.setTag('description', 'Learn why you should fight your ' + selectedState.name
                             + ' traffic ticket and how Off the Record connects you with the lawyer most likely '
                             + 'to get your ticket dismissed.');
+
+                        //var stateName = getNameFromStateParam($stateParams.stateName);
+                        //ngMeta.setTitle('Fight Your ' + stateName + ' Traffic Ticket');
+                        //ngMeta.setTag('description', 'Learn why you should fight your ' + stateName
+                        //    + ' traffic ticket and how Off the Record connects you with the lawyer most likely '
+                        //    + 'to get your ticket dismissed.');
                     }]
                 },
                 meta: {
@@ -191,10 +211,19 @@
                 controller: 'StateInfoCtrl as vm',
                 resolve: {
                     data: ['$rootScope', '$stateParams', 'ngMeta', function($rootScope, $stateParams, ngMeta) {
-                        var stateName = getNameFromStateParam($stateParams.stateName);
-                        ngMeta.setTitle(stateName + ' Traffic Courts');
-                        ngMeta.setTag('description', stateName + ' traffic courts. Fight or pay your traffic ticket. ' +
-                            'Court contact information and list of services.');
+
+                        var selectedState = _.find($rootScope.statesList, function(o) {
+                            return o.abbreviation == $stateParams.stateCode;
+                        });
+
+                        ngMeta.setTitle(selectedState.name + ' Traffic Courts');
+                        ngMeta.setTag('description', selectedState.name + ' traffic courts. Fight or pay your traffic ticket. '
+                            + 'Court contact information and list of services.');
+
+                        //var stateName = getNameFromStateParam($stateParams.stateName);
+                        //ngMeta.setTitle(stateName + ' Traffic Courts');
+                        //ngMeta.setTag('description', stateName + ' traffic courts. Fight or pay your traffic ticket. ' +
+                        //    'Court contact information and list of services.');
                     }]
                 },
                 meta: {
@@ -241,21 +270,16 @@
         }]);
     }
 
-    init.$inject = ['$rootScope', '$location', '$anchorScroll', '$cookies', 'ngMeta'];
-    function init($rootScope, $location, $anchorScroll, $cookies, ngMeta) {
+    init.$inject = ['$document', '$rootScope', '$location', '$anchorScroll', '$cookies', 'ngMeta'];
+    function init($document, $rootScope, $location, $anchorScroll, $cookies, ngMeta) {
 
-        $(document).ready(function() {
-            var referrer = document.referrer;
-            var referer = document.referer;
-            console.log('Referrer is (index.html): ', referrer);
-            console.log('Referer is (index.html): ', referer);
-        });
+        writeReferrerCookie($document, $cookies);
 
         // Initialize page title and meta tags
         ngMeta.init();
 
         // Initialize branch.io and add smart banner
-        branchInit($cookies);
+        branchInit($rootScope, $cookies);
 
         // Scroll to proper location when URL has location hash
         $rootScope.$on('$routeChangeSuccess', function() {
@@ -266,7 +290,15 @@
         });
     }
 
-    function branchInit($cookies) {
+    function writeReferrerCookie($document, $cookies) {
+
+        var referrer = $document[0].referrer;
+        console.log('Referrer is (app.js): ', referrer);
+
+        // don't write (or overwrite) a cookie if there's no referrer value
+        if (!referrer || referrer == '') {
+            return;
+        }
 
         var cookieExpireDate = new Date();
         var numberOfDaysToAdd = 14;
@@ -277,6 +309,23 @@
             'expires' : cookieExpireDate
         };
 
+        $cookies.put('otr-referrer', JSON.stringify(referrer), cookieDefaults);
+    }
+
+    function branchInit($rootScope, $cookies) {
+
+        var cookieExpireDate = new Date();
+        var numberOfDaysToAdd = 14;
+        cookieExpireDate.setDate(cookieExpireDate.getDate() + numberOfDaysToAdd);
+
+        var cookieDefaults = {
+            'domain' : 'offtherecord.com',
+            'expires' : cookieExpireDate
+        };
+
+        // initialize structure to avoid null checks.
+        $rootScope.branchData = {};
+        // Set defaults for banner click.
         var channel = 'Website';
         var campaign = '';
         var feature = 'smart_banner';
@@ -291,11 +340,7 @@
         })(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"addListener applyCode banner closeBanner creditHistory credits data deepview deepviewCta first getCode init link logout redeem referrals removeListener sendSMS setIdentity track validateCode".split(" "), 0);
 
         branch.init('key_live_oik1hC6SvaFGaQl6L4f5chghyqkDbk9G', function(err, data) {
-            //console.log('branch.init error: ', err);
             console.log('branch.init data: ', data);
-            //console.log('branch data: ', data.data);
-            //console.log('branch data_parsed: ', data.data_parsed);
-            //console.log('+clicked_branch_link', data.data_parsed['+clicked_branch_link']);
 
             // Write Branch data to cookie. Only write the cookie if a Branch link was clicked,
             // otherwise previously written cookies will be overwritten next time user visits site.
@@ -304,14 +349,21 @@
 
                 // If a branch link was clicked and the user then clicks on the Branch banner,
                 // we need to pass along the values of the originally clicked Branch link.
-                channel = data.data_parsed['~channel'];
-                campaign = data.data_parsed['~campaign'];
-                feature = data.data_parsed['~feature'];
-                stage = data.data_parsed['~stage'];
-                tags = data.data_parsed['~tags'];
+
+                $rootScope.branchData = {
+                    channel : data.data_parsed['~channel'],
+                    campaign : data.data_parsed['~campaign'],
+                    feature : data.data_parsed['~feature'],
+                    stage : data.data_parsed['~stage'],
+                    tags : data.data_parsed['~tags']
+                };
+
+                console.log('finished writing branch data to rootscope');
             }
 
-
+            console.log('branch init complete');
+            $rootScope.branchInitComplete = true;
+            $rootScope.$broadcast('BranchInitComplete');
         });
 
         branch.banner({
@@ -338,11 +390,11 @@
                 theme: 'light'                         // Uses Branch's predetermined color scheme for the banner { 'light' || 'dark' }, default: 'light'
             },
             {
-                channel: channel,
-                campaign: campaign,
-                feature: feature,
-                stage: stage,
-                tags: tags,
+                channel: ($rootScope.branchData.channel) ? $rootScope.branchData.channel : channel,
+                campaign: ($rootScope.branchData.campaign) ? $rootScope.branchData.campaign : campaign,
+                feature: ($rootScope.branchData.feature) ? $rootScope.branchData.feature : feature,
+                stage: ($rootScope.branchData.stage) ? $rootScope.branchData.stage : stage,
+                tags: ($rootScope.branchData.tags) ? $rootScope.branchData.tags + ',smart_banner' : tags,
                 data: {
                     '$deeplink_path': 'content/page/12354'
                     //deeplink: 'data',
@@ -366,6 +418,245 @@
 
     loadEvents.$inject = ['$state', '$rootScope', '$location', '$cookies'];
     function loadEvents($state, $rootScope, $location, $cookies) {
+
+    }
+
+    initData.$inject = ['$rootScope'];
+    function initData($rootScope) {
+
+        $rootScope.defaultStateValues = {
+            backgroundImgUrl : 'assets/img/states/default.jpg',
+            baseFee : 250,
+            successRate : 95,
+            avgFine : 180
+        };
+
+        $rootScope.statesList = [
+            {
+                "name": "Alabama",
+                "abbreviation": "AL"
+            },
+            {
+                "name": "Alaska",
+                "abbreviation": "AK"
+            },
+            {
+                "name": "Arizona",
+                "abbreviation": "AZ"
+            },
+            {
+                "name": "Arkansas",
+                "abbreviation": "AR"
+            },
+            {
+                "name": "California",
+                "abbreviation": "CA",
+                backgroundImgUrl : 'assets/img/states/CA.jpg',
+                baseFee : 300,
+                successRate : 93,
+                avgFine : 207
+            },
+            {
+                "name": "Colorado",
+                "abbreviation": "CO"
+            },
+            {
+                "name": "Connecticut",
+                "abbreviation": "CT"
+            },
+            {
+                "name": "Delaware",
+                "abbreviation": "DE"
+            },
+            {
+                "name": "Florida",
+                "abbreviation": "FL"
+            },
+            {
+                "name": "Georgia",
+                "abbreviation": "GA"
+            },
+            {
+                "name": "Hawaii",
+                "abbreviation": "HI"
+            },
+            {
+                "name": "Idaho",
+                "abbreviation": "ID"
+            },
+            {
+                "name": "Illinois",
+                "abbreviation": "IL"
+            },
+            {
+                "name": "Indiana",
+                "abbreviation": "IN"
+            },
+            {
+                "name": "Iowa",
+                "abbreviation": "IA"
+            },
+            {
+                "name": "Kansas",
+                "abbreviation": "KS"
+            },
+            {
+                "name": "Kentucky",
+                "abbreviation": "KY"
+            },
+            {
+                "name": "Louisiana",
+                "abbreviation": "LA"
+            },
+            {
+                "name": "Maine",
+                "abbreviation": "ME"
+            },
+            {
+                "name": "Maryland",
+                "abbreviation": "MD"
+            },
+            {
+                "name": "Massachusetts",
+                "abbreviation": "MA"
+            },
+            {
+                "name": "Michigan",
+                "abbreviation": "MI"
+            },
+            {
+                "name": "Minnesota",
+                "abbreviation": "MN"
+            },
+            {
+                "name": "Mississippi",
+                "abbreviation": "MS"
+            },
+            {
+                "name": "Missouri",
+                "abbreviation": "MO"
+            },
+            {
+                "name": "Montana",
+                "abbreviation": "MT"
+            },
+            {
+                "name": "Nebraska",
+                "abbreviation": "NE"
+            },
+            {
+                "name": "Nevada",
+                "abbreviation": "NV"
+            },
+            {
+                "name": "New Hampshire",
+                "abbreviation": "NH"
+            },
+            {
+                "name": "New Jersey",
+                "abbreviation": "NJ"
+            },
+            {
+                "name": "New Mexico",
+                "abbreviation": "NM"
+            },
+            {
+                "name": "New York",
+                "abbreviation": "NY",
+                backgroundImgUrl : 'assets/img/states/NY.jpg',
+                baseFee : 200,
+                successRate : 95,
+                avgFine : 180
+            },
+            {
+                "name": "North Carolina",
+                "abbreviation": "NC"
+            },
+            {
+                "name": "North Dakota",
+                "abbreviation": "ND"
+            },
+            {
+                "name": "Ohio",
+                "abbreviation": "OH"
+            },
+            {
+                "name": "Oklahoma",
+                "abbreviation": "OK",
+                backgroundImgUrl : 'assets/img/states/OK.jpg',
+                baseFee : 200,
+                successRate : 96,
+                avgFine : 180
+            },
+            {
+                "name": "Oregon",
+                "abbreviation": "OR",
+                backgroundImgUrl : 'assets/img/states/OR.jpg',
+                baseFee : 350,
+                successRate : 88,
+                avgFine : 270
+            },
+            {
+                "name": "Pennsylvania",
+                "abbreviation": "PA"
+            },
+            {
+                "name": "Rhode Island",
+                "abbreviation": "RI"
+            },
+            {
+                "name": "South Carolina",
+                "abbreviation": "SC"
+            },
+            {
+                "name": "South Dakota",
+                "abbreviation": "SD"
+            },
+            {
+                "name": "Tennessee",
+                "abbreviation": "TN"
+            },
+            {
+                "name": "Texas",
+                "abbreviation": "TX",
+                backgroundImgUrl : 'assets/img/states/TX.jpg',
+                baseFee : 200,
+                successRate : 97,
+                avgFine : 107
+            },
+            {
+                "name": "Utah",
+                "abbreviation": "UT"
+            },
+            {
+                "name": "Vermont",
+                "abbreviation": "VT"
+            },
+            {
+                "name": "Virginia",
+                "abbreviation": "VA"
+            },
+            {
+                "name": "Washington",
+                "abbreviation": "WA",
+                backgroundImgUrl : 'assets/img/states/WA.jpg',
+                baseFee : 200,
+                successRate : 97,
+                avgFine : 180
+            },
+            {
+                "name": "West Virginia",
+                "abbreviation": "WV"
+            },
+            {
+                "name": "Wisconsin",
+                "abbreviation": "WI"
+            },
+            {
+                "name": "Wyoming",
+                "abbreviation": "WY"
+            }
+        ];
 
     }
 
