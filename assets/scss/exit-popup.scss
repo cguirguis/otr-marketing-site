@@ -16,11 +16,10 @@
   top: calc(50% - 259px);
   color: #333;
   text-align: center;
-  background-color: white;
   font-family: 'Titillium Web', 'Open Sans', sans-serif;
-  box-shadow: 0 0 20px rgba(0,0,0,.5);
-  -webkit-box-shadow: 0 0 20px rgba(0,0,0,.5);
-  -moz-box-shadow: 0 0 20px rgba(0,0,0,.5);
+  box-shadow: 0 0 20px rgba(0, 0, 0, .5);
+  -webkit-box-shadow: 0 0 20px rgba(0, 0, 0, .5);
+  -moz-box-shadow: 0 0 20px rgba(0, 0, 0, .5);
   background-image: url('../img/exit-popup-bg.gif');
   background-repeat: no-repeat;
   background-position: 0px -2px;
@@ -54,9 +53,7 @@
   #bio_ep_content {
     padding: 0 0 0 0;
     overflow: auto;
-    font-family: 'Titillium Web', 'Open Sans', sans-serif
-
-    img {
+    font-family: 'Titillium Web', 'Open Sans', sans-serif img {
       display: none;
       padding-left: 50px;
       margin-top: 5px;
@@ -71,96 +68,96 @@
       color: #666;
       font-weight: lighter;
     }
-
-    .review-form {
-      background-color: #efefef;
-      position: absolute;
-      top: 315px;
-      left: 25px;
-      width: 755px;
-      height: 70px;
-      padding: 10px 10px;
-
-      &:after {
-        font-size: 13px;
-        color: red;
-        top: 7px;
-        position: absolute;
-      }
-      &.name-missing:after {
-        content: 'Please enter your name';
-        left: 18px;
-      }
-      &.contact-missing:after {
-        content: 'Please enter your phone/email';
-        left: 243px;
-      }
-
-      input {
-        position: relative;
-        height: 45px;
-        font-size: 20px;
-        font-weight: lighter;
-        padding: 0px 8px;
-        float: left;
-        color: #333;
-        margin-top: 13px;
-
-        &.has-error {
-          border: solid 1px red;
-        }
-
-        &[name="exitPopupName"] {
-          width: 224px;
-        }
-
-        &[name="exitPopupContactInfo"] {
-          margin-left: 3px;
-          width: 250px;
-        }
-      }
-
-      button {
-        position: relative;
-        background-color: red;
-        height: 45px;
-        width: 235px;
-        border: none;
-        margin-top: 13px;
-        background-color: #d55b4a;
-        color: white;
-        margin-left: 2px;
-        font-size: 15px;
-        line-height: 44px;
-        font-weight: bold;
-        position: relative;
-
-        i {
-          position: absolute;
-          top: 16px;
-          right: 6px;
-        }
-      }
-    }
-    .review-text {
-      position: relative;
-      margin-top: -62px;
-      margin-left: -2px;
-      text-align: left;
-      color: #fff;
-      font-size: 20px;
-      font-weight: lighter;
-      top: -10px;
-      width: 450px;
-    }
-    .thankyou-text {
-      color: #1A6871;
-      margin-top: 13px;
-      font-size: 22px;
-      font-family: "Helvetica";
-    }
   }
 }
+#bio_ep #bio_ep_content, .content-page.ticket-review {
+  .review-form {
+    background-color: #efefef;
+    position: absolute;
+    top: 315px;
+    left: 25px;
+    width: 755px;
+    height: 70px;
+    padding: 10px 10px;
+
+    &:after {
+      font-size: 13px;
+      color: red;
+      top: 7px;
+      position: absolute;
+    }
+    &.name-missing:after {
+      content: 'Please enter your name';
+      left: 18px;
+    }
+    &.contact-missing:after {
+      content: 'Please enter your phone/email';
+      left: 243px;
+    }
+
+    input {
+      position: relative;
+      height: 45px;
+      font-size: 20px;
+      font-weight: lighter;
+      padding: 0px 8px;
+      float: left;
+      color: #333;
+      margin-top: 13px;
+
+      &.has-error {
+        border: solid 1px red;
+      }
+
+      &[name="exitPopupName"] {
+        width: 224px;
+      }
+
+      &[name="exitPopupContactInfo"] {
+        margin-left: 3px;
+        width: 250px;
+      }
+    }
+
+    button {
+      position: relative;
+      height: 45px;
+      width: 235px;
+      border: none;
+      margin-top: 13px;
+      background-color: #d55b4a;
+      color: white;
+      margin-left: 2px;
+      font-size: 15px;
+      line-height: 44px;
+      font-weight: bold;
+
+      i {
+        position: absolute;
+        top: 16px;
+        right: 6px;
+      }
+    }
+  }
+  .review-text {
+    position: relative;
+    margin-top: -62px;
+    margin-left: -2px;
+    text-align: left;
+    color: #fff;
+    font-size: 20px;
+    font-weight: lighter;
+    top: -10px;
+    width: 450px;
+  }
+  .thankyou-text {
+    color: #1A6871;
+    margin-top: 13px;
+    font-size: 22px;
+    font-family: "Helvetica";
+  }
+}
+
 
 @-webkit-keyframes tada {
   0% {

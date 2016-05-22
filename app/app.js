@@ -210,6 +210,16 @@
                     description : "Share a $20 credit with your friends. You'll earn $20 when they fight their ticket."
                 }
             })
+            .state('default-template.ticket-review', {
+                url: '/free-ticket-review',
+                templateUrl: 'app/pages/ticket-review/ticket-review.html',
+                controller: 'DefaultTemplateCtrl as vm',
+                meta: {
+                    title : 'Free Ticket Review',
+                    description : "Not sure if you want to fight your ticket? Request a free review to go over your" +
+                    " options and find out whether your ticket is worth fighting."
+                }
+            })
             .state('default-template.insurance-impact', {
                 url: '/insurance-impact',
                 templateUrl: 'app/pages/content/insurance-impact.html',

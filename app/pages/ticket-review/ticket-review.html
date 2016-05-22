@@ -1,72 +1,51 @@
 
-<div class="content-page referral-page">
+<div class="content-page ticket-review">
     <div class="content-container text-center">
         <div class="content-header va-middle">
             <div class="content-background" ></div>
-            <h1 class="align-middle">Earn $20 for everyone you invite.</h1>
+            <h1 class="align-middle">
+                Fighting a ticket can be intimidating.
+                <br>
+                <span class="emphasized">We can help.</span>
+            </h1>
         </div>
 
         <div class="content-body">
+            <div class="h1 emphasized">
+                Not sure whether you should fight your ticket?
+            </div>
             <div class="h1">
-                You can earn $20 cash whenever you refer a friend to Off The Record and they fight their first ticket. It's our way of saying "thanks" for spreading the good word
-                and increasing our collective fighting power!
+                Fill out the form below to request a free review!
+                <br>
+                We'll go over your ticket and explain your
+                options, so you'll know whether it
+                makes sense to fight the ticket or simply pay the fine.
             </div>
-            <div class="referral-signup-button" ng-hide="vm.referralCode">
-                <a ng-href="{{mobileAppUrl}}">Create Your Account And Start Earning Today</a>
-            </div>
-            <div class="referral-link-container" ng-show="vm.referralCode">
-                <input id="share-link" type="text" ng-value="vm.referralLink" />
 
-                <div class="share-options container-fluid">
-                    <div class="row">
-                        <div class="col-sm-3" ng-click="vm.copyLink()">
-                            <i class="fa fa-clipboard" style="color:#007bbf"></i>
-                            <div>Copy to clipboard</div>
-                        </div>
-                        <div class="col-sm-3" ng-click="vm.emailLink()">
-                            <i class="fa fa-envelope" style="color:#BDBDBD"></i>
-                            <div>Email it</div>
-                        </div>
-                        <div class="col-sm-3" ng-click="vm.shareLinkOnFacebook()">
-                            <i class="fa fa-facebook" style="color:#4141A7"></i>
-                            <div>Share it on Facebook</div>
-                        </div>
-                        <div class="col-sm-3" ng-click="vm.tweetLink()">
-                            <i class="fa fa-twitter" style="color:#169AC5"></i>
-                            <div>Tweet it</div>
-                        </div>
+            <div class="review-form">
+                <form name="ticketReviewRequestForm" id="ticketReviewRequestForm" role="form" novalidate
+                      ng-submit="vm.submitReviewRequest(ticketReviewRequestForm.$valid)">
+                    <input type="text" name="exitPopupName" ng-model="vm.exitPopupName" placeholder="Your name" tabindex="1" required
+                           ng-class="{ 'has-error' : ticketReviewRequestForm.exitPopupName.$invalid && vm.ticketReviewRequestFormSubmitted }" />
+                    <input type="text" name="exitPopupContactInfo" ng-model="vm.exitPopupContactInfo"
+                           placeholder="Your phone number or email"
+                           tabindex="2" required
+                           ng-class="{ 'has-error' : ticketReviewRequestForm.exitPopupContactInfo.$invalid && vm.ticketReviewRequestFormSubmitted }" />
+                    
+                    <div class="has-ticket" ng-show="vm.isUploadSupported()">
+                        <input type="checkbox" ng-click="vm.hasTicket = !vm.hasTicket" />
+                        <span>Attach a photo of my ticket</span>
                     </div>
-                </div>
+                    <input id="file" type="file" accept="image/*" ng-show="vm.hasTicket">
+                    <button type="submit" name="ticket-review-submit-btn" tabindex="3"
+                            ng-disabled="vm.submitReviewRequestLoading == true" ng-hide="vm.reviewRequested">
+                        <span>REQUEST A FREE REVIEW &nbsp;</span>
+                        <i  ng-show="vm.submitReviewRequestLoading" class="fa fa-spinner fa-spin fa-lg"></i>
+                    </button>
+                </form>
             </div>
-            <div class="referral-details container-fluid">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="referral-step">1</div>
-                        <h4>Share your link</h4>
-                        <p>
-                            Use the tools above to share your personal referral link. When your friends sign up,
-                            they'll get a $20 discount on their next ticket. Friends don't let friends pay their ticket.
-                        </p>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="referral-step">2</div>
-                        <h4>Earn money</h4>
-                        <p>
-                            You'll earn a referral fee from every friend that clicks your link, subscribes to Off The
-                            Record, and fights their first ticket. Once we confirm the referral, we'll deposit $20 into
-                            your account within 3 days of your friend's purchase.
-                        </p>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="referral-step">3</div>
-                        <h4>Redeem earnings</h4>
-                        <p>
-                            In order to receive your reward, just be sure to have a credit card on file. You can
-                            request a cash transfer at any time, or keep the credit in your account to use against
-                            your next ticket.
-                        </p>
-                    </div>
-                </div>
+            <div class="review-form" ng-show="vm.reviewRequested">
+                <div class="thankyou-text">Thank you. We'll be in touch with you shortly!</div>
             </div>
         </div>
 

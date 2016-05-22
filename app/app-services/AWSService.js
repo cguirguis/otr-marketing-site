@@ -9,15 +9,20 @@
     function AWSService($http, $q, ENV, DataService) {
         var service = {};
         var sesClient = new AWS.SES({apiVersion: '2010-12-01', region: 'us-west-2'});
+        var awsClient = new AWS.S3();
+
         var URLS = {
             GET_CREDENTIALS: ENV.apiEndpoint + '/api/v1/credentials/aws'
         };
+        var bucketRegex = /http.?:\/\/([-\w]+).*.com/;
+        var keyRegex    = /s3.amazonaws.com\/(.*)/;
         var credentialsSet = false;
 
         // INTERFACE
 
         service.setCredentials = setCredentials;
         service.sendEmail = sendEmail;
+        service.getSignedUrl = getSignedUrl;
 
         return service;
 
@@ -76,6 +81,24 @@
                         callback(params);
                     }
                 );
+        }
+
+        function getSignedUrl(options) {
+            var imageUrl      = options.imageUrl;
+
+            var bucketMatches = bucketRegex.exec(imageUrl);
+            var bucketName    = bucketMatches[1];
+            var keyMatches    = keyRegex.exec(imageUrl);
+            var keyName       = keyMatches[1];
+
+            var params = {
+                Bucket: bucketName,
+                Key:    keyName
+            };
+
+            awsClient.getSignedUrl('getObject', params, function (err, url) {
+                options.success(url);
+            });
         }
 
         // PRIVATE FUNCTIONS

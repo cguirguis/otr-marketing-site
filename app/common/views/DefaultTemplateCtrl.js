@@ -6,8 +6,8 @@
         .controller('DefaultTemplateCtrl', DefaultTemplateCtrl);
 
 
-    DefaultTemplateCtrl.$inject = ['ENV', '$window', '$rootScope', '$scope', '$timeout', '$http', '$q', 'GlobalUtils', 'OtrService'];
-    function DefaultTemplateCtrl(ENV, $window, $rootScope, $scope, $timeout, $http, $q, GlobalUtils, OtrService) {
+    DefaultTemplateCtrl.$inject = ['ENV', '$rootScope', '$timeout', '$http', '$q', 'GlobalUtils', 'OtrService', 'FileService'];
+    function DefaultTemplateCtrl(ENV, $rootScope, $timeout, $http, $q, GlobalUtils, OtrService, FileService) {
         var vm = this,
 
             URLS = {
@@ -320,15 +320,28 @@
         vm.submitSubscribeForm = submitSubscribeForm;
         vm.formatStateName = formatStateName;
         vm.submitReviewRequest = submitReviewRequest;
+        vm.isUploadSupported = isUploadSupported;
 
         // ----- PUBLIC METHODS -------------------------------------------------------
 
         (function initController() {
 
-            otrService = new OtrService({domain: ENV.apiEndpoint})
+            otrService = new OtrService({domain: ENV.apiEndpoint});
+            $rootScope.otrService = otrService;
             vm.reviewRequested = false;
 
+            FileService.initializeFileReaderHandler();
         })();
+
+        function isUploadSupported() {
+            if (navigator.userAgent.match(/(Android (1.0|1.1|1.5|1.6|2.0|2.1))|(Windows Phone (OS 7|8.0))|(XBLWP)|(ZuneWP)|(w(eb)?OSBrowser)|(webOS)|(Kindle\/(1.0|2.0|2.5|3.0))/)) {
+                return false;
+            }
+            var elem = document.createElement('input');
+            elem.type = 'file';
+
+            return !elem.disabled;
+        }
 
         function submitReviewRequest(isFormValid) {
             vm.ticketReviewRequestFormSubmitted = true;
@@ -358,6 +371,19 @@
                     }
                 }
             };
+
+            // Include citation image URL if user uploaded an image
+            if (vm.hasTicket) {
+                if ($rootScope.citation && !$rootScope.citation.ticketImageUrl) {
+                    // Wait for async citation upload to complete
+                    $timeout(function(d) {
+                        submitReviewRequest(isFormValid);
+                    }, 1500);
+                    return;
+                } else {
+                    params.request.keyValueMap.ticketImage = $rootScope.citation.ticketImageUrl;
+                }
+            }
 
             otrService.submitInternalNotificationUsingPOST(params)
                 .then(

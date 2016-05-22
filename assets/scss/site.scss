@@ -40,6 +40,10 @@ h1, h2, h3, h4, h5, h6 {
   font-family: $roboto;
 }
 
+.emphasized {
+  font-weight: 600;
+}
+
 #page {
   padding-top: 70px !important;
   background-color: white;
