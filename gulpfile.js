@@ -133,7 +133,7 @@ gulp.task('copy-src', function() {
     return merge(bower, app, seoFiles);
 });
 
-gulp.task('post-build', function() {
+gulp.task('concat-css', function() {
     return gulp.src('build/assets/css/*.css')
         .pipe(concat('all-stylesheets.min.css'))
         .pipe(gulp.dest('build/assets/css'));
@@ -154,9 +154,12 @@ gulp.task('watch', function() {
     gulp.watch(['app/**/*.js','js/bioep.min.js'], ['minify-js']);
 });
 
-gulp.task('build', ['install-dep', 'minify-css', 'minify-js', 'compress-img', 'replace-vars']);
+gulp.task('build', ['install-dep', 'minify-css', 'minify-js', 'compress-img', 'replace-vars'], function() {
+    runSequence('concat-css');
+});
+
 gulp.task('server', function() {
-    runSequence('build', 'post-build', 'connect', 'watch');
+    runSequence('build', 'connect', 'watch');
 });
 
 gulp.task('clean', function() {
