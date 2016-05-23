@@ -16,10 +16,15 @@
             </div>
             <div class="h1">
                 Fill out the form below to request a free review!
-                <br>
+
                 We'll go over your ticket and explain your
                 options, so you'll know whether it
                 makes sense to fight the ticket or simply pay the fine.
+            </div>
+
+            <div class="ready-to-fight">
+                <div>Ready to fight? Get matched to an attorney in under a minute.</div>
+                <a class="get-started-button" ng-href="{{mobileAppUrl}}">Get Started</a>
             </div>
 
             <div class="review-form">
@@ -37,15 +42,21 @@
                         <span>Attach a photo of my ticket</span>
                     </div>
                     <input id="file" type="file" accept="image/*" ng-show="vm.hasTicket">
+                    <div class="image-preview-container" ng-show="vm.hasTicket && citation && citation.ticketImageUrl">
+                        <div class="citation-image-container">
+                            <img id="citation-image" />
+                        </div>
+                    </div>
                     <button type="submit" name="ticket-review-submit-btn" tabindex="3"
                             ng-disabled="vm.submitReviewRequestLoading == true" ng-hide="vm.reviewRequested">
-                        <span>REQUEST A FREE REVIEW &nbsp;</span>
-                        <i  ng-show="vm.submitReviewRequestLoading" class="fa fa-spinner fa-spin fa-lg"></i>
+                        <span>Request a Free Ticket Review &nbsp;</span>
+                        <i ng-show="vm.submitReviewRequestLoading" class="fa fa-spinner fa-spin fa-lg"></i>
                     </button>
                 </form>
             </div>
             <div class="review-form" ng-show="vm.reviewRequested">
                 <div class="thankyou-text">Thank you. We'll be in touch with you shortly!</div>
+                <br>
             </div>
         </div>
 

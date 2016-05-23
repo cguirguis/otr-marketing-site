@@ -2,6 +2,8 @@ https://offtherecord.com/
 https://offtherecord.com/#!/help/faq
 https://offtherecord.com/#!/help/about-us
 https://offtherecord.com/#!/help/contact-us
+https://offtherecord.com/#!/insurance-impact
+https://offtherecord.com/#!/free-ticket-review
 https://offtherecord.com/#!/AL-alabama/traffic-tickets
 https://offtherecord.com/#!/AK-alaska/traffic-tickets
 https://offtherecord.com/#!/AZ-arizona/traffic-tickets

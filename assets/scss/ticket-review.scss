@@ -48,6 +48,45 @@
     .h1 {
       font-size: 17px;
       color: #666;
+      width: 100%;
+      margin: 20px auto;
+      max-width: 630px;
+    }
+    .ready-to-fight {
+      background-color: #E4F2F9;
+      padding: 10px 20px;
+      text-align: center;
+      overflow: auto;
+      margin: auto;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      width: 75%;
+      max-width: 600px;
+
+      > div:first-child {
+        color: #666;
+        line-height: 18px;
+        font-size: 14px;
+      }
+      .get-started-button {
+        display: block;
+        background-color: #007de8;
+        color: #fff;
+        border-radius: 3px;
+        font-size: 14px;
+        padding: 2px 15px;
+        overflow: auto;
+        margin: auto;
+        margin-top: 8px;
+        width: 230px;
+        max-width: 410px;
+        text-decoration: none!important;
+
+        &:hover {
+          background-color: rgb(0, 116, 214);
+        }
+      }
     }
     .review-form {
       width: 100%;
@@ -64,7 +103,7 @@
         display: block;
         margin: auto;
         padding: 25px 40px;
-        overflow: auto;
+        overflow: hidden;
 
         input {
           width: 100%;
@@ -98,6 +137,23 @@
           border-radius: 4px;
         }
 
+        .image-preview-container {
+          overflow: auto;
+          padding: 15px;
+
+          .citation-image-container {
+            height: 250px;
+            position: relative;
+
+            #citation-image {
+              height: 250px;
+              width: auto;
+              border: 1px solid #000;
+              border-radius: 3px;
+            }
+          }
+        }
+
         button {
           margin-top: 6px;
           width: 100%;
@@ -125,17 +181,47 @@
     transform: translateY(20%);
   }
 }
-
+@media (min-width: 850px) {
+  .content-page.ticket-review .content-container .content-body {
+    .ready-to-fight {
+      > div:first-child {
+        float: left;
+        margin-top: 6px;
+      }
+      .get-started-button {
+        float: left;
+        width: 110px;
+        margin: 0 0 0 10px;
+      }
+    }
+  }
+}
 @media (max-width: 768px) {
   .content-page.ticket-review .content-container .content-body {
     padding-top: 30px !important;
   }
-}
-@media (max-width: 400px) {
   .content-page.ticket-review .content-container .content-body {
-    .review-form form {
-      padding: 25px 10px;
-      min-width: 300px;
+    .ready-to-fight {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 5px;
+      .get-started-button {
+        width: 100%;
+      }
+    }
+    .review-form {
+      padding-left: 0;
+      padding-right: 0;
+
+      form {
+        padding: 25px 10px;
+        min-width: 300px;
+        width: 100%;
+
+        button span {
+            font-size: 18px;
+        }
+      }
     }
   }
 }

@@ -44,9 +44,12 @@
         function readFile(file) {
             var reader = new FileReader();
 
-            reader.onloadend = function () {
+            reader.onloadend = function (e) {
                 $rootScope.citation = {};
                 processFile(reader.result, file.type);
+
+                // Show image preview
+                document.getElementById("citation-image").src = e.target.result;
             };
 
             reader.onerror = function () {
