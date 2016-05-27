@@ -35,7 +35,7 @@
 
         function buildITunesLink() {
 
-            if ($rootScope.branchData) {
+            if ($rootScope.branchData.isBranchLink) {
                 var link = 'http://fight.offtherecord.com/ios-app-store?';
 
                 if ($rootScope.branchData.channel) {

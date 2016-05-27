@@ -351,6 +351,7 @@
                 // we need to pass along the values of the originally clicked Branch link.
 
                 $rootScope.branchData = {
+                    isBranchLink : data.data_parsed['+clicked_branch_link'],
                     channel : data.data_parsed['~channel'],
                     campaign : data.data_parsed['~campaign'],
                     feature : data.data_parsed['~feature'],
