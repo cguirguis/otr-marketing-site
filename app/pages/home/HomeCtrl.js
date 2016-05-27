@@ -27,13 +27,15 @@
         (function init() {
 
             $rootScope.$on('BranchInitComplete', function(event, next, current) {
-                console.log('branch data: ', $rootScope.branchData);
+                console.log('BranchInitComplete event: ', $rootScope.branchData);
                 buildITunesLink();
             });
 
         })();
 
         function buildITunesLink() {
+
+            console.log('isBranchLink: ', $rootScope.branchData.isBranchLink);
 
             if ($rootScope.branchData.isBranchLink) {
                 var link = 'http://fight.offtherecord.com/ios-app-store?';
@@ -51,7 +53,7 @@
                     link = link + 'stage=' + $rootScope.branchData.stage + '&';
                 }
                 if ($rootScope.branchData.tags) {
-                    link = link + 'tags=' + $rootScope.branchData.tags + ',iTunesBadgeButton' + '&';
+                    link = link + 'tags=' + $rootScope.branchData.tags + ',iOSBadge,homepage' + '&';
                 }
                 console.log('new link: ', link);
                 vm.iTunesLink = link;

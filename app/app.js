@@ -324,7 +324,9 @@
         };
 
         // initialize structure to avoid null checks.
-        $rootScope.branchData = {};
+        $rootScope.branchData = {
+            isBranchLink : false
+        };
         // Set defaults for banner click.
         var channel = 'Website';
         var campaign = '';
