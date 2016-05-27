@@ -7,8 +7,8 @@
         .controller('LawyerFormModalCtrl', LawyerFormModalCtrl);
 
 
-    HomeCtrl.$inject = ['ENV', '$window', '$rootScope', '$http', '$q', '$uibModal', '$log', '$timeout', 'GlobalUtils'];
-    function HomeCtrl(ENV, $window, $rootScope, $http, $q, $uibModal, $log, $timeout, GlobalUtils) {
+    HomeCtrl.$inject = ['ENV', '$cookies', '$rootScope', '$uibModal', '$log'];
+    function HomeCtrl(ENV, $cookies, $rootScope, $uibModal, $log) {
         var vm = this,
             //isMobileDevice = GlobalUtils.isMobileDevice(),
 
