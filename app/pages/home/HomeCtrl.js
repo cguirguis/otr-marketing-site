@@ -16,7 +16,7 @@
                 POST_LAWYER_LEAD: ENV.apiEndpoint + '/api/v1/lawyers/lead'
             };
 
-        vm.iTunesLink = 'http://fight.offtherecord.com/ios-app-store?';
+        vm.iTunesLink = 'http://fight.offtherecord.com/ios-app-store?channel=website&feature=iOSBadge&stage=homepage&';
 
         // ----- INTERFACE ------------------------------------------------------------
         //vm.saveContactInfo = saveContactInfo;
@@ -35,27 +35,40 @@
 
         function buildITunesLink() {
 
-            console.log('building iTunes link');
-            var link = 'http://fight.offtherecord.com/ios-app-store?';
+            if ($rootScope.branchData) {
+                var link = 'http://fight.offtherecord.com/ios-app-store?';
 
-            if ($rootScope.branchData.channel) {
-                link = link + 'channel=' + $rootScope.branchData.channel + '&';
-            }
-            if ($rootScope.branchData.campaign) {
-                link = link + 'campaign=' + $rootScope.branchData.campaign + '&';
-            }
-            if ($rootScope.branchData.feature) {
-                link = link + 'feature=' + $rootScope.branchData.feature + '&';
-            }
-            if ($rootScope.branchData.stage) {
-                link = link + 'stage=' + $rootScope.branchData.stage + '&';
-            }
-            if ($rootScope.branchData.tags) {
-                link = link + 'tags=' + $rootScope.branchData.tags + ',iTunesBadgeButton' + '&';
+                if ($rootScope.branchData.channel) {
+                    link = link + 'channel=' + $rootScope.branchData.channel + '&';
+                }
+                if ($rootScope.branchData.campaign) {
+                    link = link + 'campaign=' + $rootScope.branchData.campaign + '&';
+                }
+                if ($rootScope.branchData.feature) {
+                    link = link + 'feature=' + $rootScope.branchData.feature + '&';
+                }
+                if ($rootScope.branchData.stage) {
+                    link = link + 'stage=' + $rootScope.branchData.stage + '&';
+                }
+                if ($rootScope.branchData.tags) {
+                    link = link + 'tags=' + $rootScope.branchData.tags + ',iTunesBadgeButton' + '&';
+                }
+                console.log('new link: ', link);
+                vm.iTunesLink = link;
             }
 
-            console.log('new link: ', link);
-            vm.iTunesLink = link;
+            var ref1 = $cookies.get('otr-referrer');
+            var ref2 = $cookies.getObject('otr-referrer');
+
+            console.log('ref1: ', ref1);
+            console.log('ref2: ', ref2);
+
+            if (ref1) {
+                vm.iTunesLink = vm.iTunesLink + 'referrer=' + ref1;
+            }
+
+            console.log('iTunes Link: ', vm.iTunesLink);
+
         }
 
         function openLawyerFormModal(size) {
