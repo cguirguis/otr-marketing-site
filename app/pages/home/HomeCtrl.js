@@ -66,7 +66,9 @@
             console.log('ref2: ', ref2);
 
             if (ref1) {
-                vm.iTunesLink = vm.iTunesLink + 'referrer=' + ref1;
+                var ref1clean = $filter('encodeUri')(ref1);
+                console.log('ref1clean', ref1clean);
+                vm.iTunesLink = vm.iTunesLink + 'referrer=' + ref1clean;
             }
 
             console.log('iTunes Link: ', vm.iTunesLink);
