@@ -36,7 +36,7 @@
         function buildITunesLink() {
 
             console.log('building iTunes link');
-            var link = 'http://fight.offtherecord.com/g?';
+            var link = 'http://fight.offtherecord.com/ios-app-store?';
 
             if ($rootScope.branchData.channel) {
                 link = link + 'channel=' + $rootScope.branchData.channel + '&';
