@@ -16,7 +16,7 @@
                 POST_LAWYER_LEAD: ENV.apiEndpoint + '/api/v1/lawyers/lead'
             };
 
-        vm.iTunesLink = 'http://fight.offtherecord.com/g?';
+        vm.iTunesLink = 'http://fight.offtherecord.com/ios-app-store?';
 
         // ----- INTERFACE ------------------------------------------------------------
         //vm.saveContactInfo = saveContactInfo;
