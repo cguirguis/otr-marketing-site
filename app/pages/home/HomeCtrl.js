@@ -7,8 +7,8 @@
         .controller('LawyerFormModalCtrl', LawyerFormModalCtrl);
 
 
-    HomeCtrl.$inject = ['ENV', '$window', '$rootScope', '$http', '$q', '$uibModal', '$log', '$timeout', 'GlobalUtils'];
-    function HomeCtrl(ENV, $window, $rootScope, $http, $q, $uibModal, $log, $timeout, GlobalUtils) {
+    HomeCtrl.$inject = ['ENV', '$cookies', '$filter', '$rootScope', '$uibModal', '$log'];
+    function HomeCtrl(ENV, $cookies, $filter, $rootScope, $uibModal, $log) {
         var vm = this,
             //isMobileDevice = GlobalUtils.isMobileDevice(),
 
@@ -16,7 +16,7 @@
                 POST_LAWYER_LEAD: ENV.apiEndpoint + '/api/v1/lawyers/lead'
             };
 
-        vm.iTunesLink = 'http://fight.offtherecord.com/g?';
+        vm.iTunesLink = 'http://fight.offtherecord.com/ios-app-store?channel=website&feature=iOSBadge&stage=homepage&';
 
         // ----- INTERFACE ------------------------------------------------------------
         //vm.saveContactInfo = saveContactInfo;
@@ -27,7 +27,7 @@
         (function init() {
 
             $rootScope.$on('BranchInitComplete', function(event, next, current) {
-                console.log('branch data: ', $rootScope.branchData);
+                console.log('BranchInitComplete event: ', $rootScope.branchData);
                 buildITunesLink();
             });
 
@@ -35,27 +35,44 @@
 
         function buildITunesLink() {
 
-            console.log('building iTunes link');
-            var link = 'http://fight.offtherecord.com/g?';
+            console.log('isBranchLink: ', $rootScope.branchData.isBranchLink);
 
-            if ($rootScope.branchData.channel) {
-                link = link + 'channel=' + $rootScope.branchData.channel + '&';
-            }
-            if ($rootScope.branchData.campaign) {
-                link = link + 'campaign=' + $rootScope.branchData.campaign + '&';
-            }
-            if ($rootScope.branchData.feature) {
-                link = link + 'feature=' + $rootScope.branchData.feature + '&';
-            }
-            if ($rootScope.branchData.stage) {
-                link = link + 'stage=' + $rootScope.branchData.stage + '&';
-            }
-            if ($rootScope.branchData.tags) {
-                link = link + 'tags=' + $rootScope.branchData.tags + ',iTunesBadgeButton' + '&';
+            if ($rootScope.branchData.isBranchLink) {
+                var link = 'http://fight.offtherecord.com/ios-app-store?';
+
+                if ($rootScope.branchData.channel) {
+                    link = link + 'channel=' + $rootScope.branchData.channel + '&';
+                }
+                if ($rootScope.branchData.campaign) {
+                    link = link + 'campaign=' + $rootScope.branchData.campaign + '&';
+                }
+                if ($rootScope.branchData.feature) {
+                    link = link + 'feature=' + $rootScope.branchData.feature + '&';
+                }
+                if ($rootScope.branchData.stage) {
+                    link = link + 'stage=' + $rootScope.branchData.stage + '&';
+                }
+                if ($rootScope.branchData.tags) {
+                    link = link + 'tags=' + $rootScope.branchData.tags + ',iOSBadge,homepage' + '&';
+                }
+                console.log('new link: ', link);
+                vm.iTunesLink = link;
             }
 
-            console.log('new link: ', link);
-            vm.iTunesLink = link;
+            var ref1 = $cookies.get('otr-referrer');
+            var ref2 = $cookies.getObject('otr-referrer');
+
+            console.log('ref1: ', ref1);
+            console.log('ref2: ', ref2);
+
+            if (ref1) {
+                var ref1clean = $filter('encodeUri')(ref1);
+                console.log('ref1clean', ref1clean);
+                vm.iTunesLink = vm.iTunesLink + 'referrer=' + ref1clean;
+            }
+
+            console.log('iTunes Link: ', vm.iTunesLink);
+
         }
 
         function openLawyerFormModal(size) {
