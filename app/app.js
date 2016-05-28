@@ -257,7 +257,12 @@
                     description : "Find out why insurance rates go up after you get a ticket, and how much your" +
                     " ticket could end up costing you."
                 }
-            });
+            })
+            .state('legacy-refund-page', {
+                url: '/refund.html',
+                templateUrl: 'app/pages/help/refund.html'
+            })
+        ;
 
         $httpProvider.defaults.withCredentials = true;
 
