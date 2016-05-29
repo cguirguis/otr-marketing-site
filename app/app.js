@@ -270,13 +270,7 @@
             .state('legacy-terms-page', {
                 url: '/terms.html',
                 templateUrl: 'app/pages/help/terms-and-conditions.html'
-            })
-            .state('legacy-about-us-link', {
-                url: '/about.html',
-                templateUrl: 'app/pages/help/terms-and-conditions.html',
-                redirectTo: default-template.help.about-us
-            })
-        ;
+            });
 
         $httpProvider.defaults.withCredentials = true;
 
