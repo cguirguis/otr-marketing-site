@@ -273,7 +273,7 @@
         $provide.decorator('$uiViewScroll', ['$delegate', function ($delegate) {
             return function (uiViewElement) {
                 //var top = uiViewElement[0].getBoundingClientRect().top;
-                //window.scrollTo(0, (top - 30));
+                window.scrollTo(0, (top - 30));
                 // Or some other custom behaviour...
             };
         }]);
