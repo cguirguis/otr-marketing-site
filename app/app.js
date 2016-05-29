@@ -21,7 +21,7 @@
         // enable html5Mode for pushstate ('#'-less URLs)
         $locationProvider.html5Mode(true).hashPrefix('!');
 
-        $urlRouterProvider.when('/about.html', '/about-us');
+        $urlRouterProvider.when('/about.html', '/help/about-us');
         $urlRouterProvider.otherwise('/');
 
         //Add a suffix to all page titles
