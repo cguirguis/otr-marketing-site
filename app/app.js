@@ -27,6 +27,8 @@
         $urlRouterProvider.when('/terms.html', '/help/terms-and-conditions');
         $urlRouterProvider.otherwise('/');
 
+        // bla bla bla
+
         //Add a suffix to all page titles
         ngMetaProvider.useTitleSuffix(true);
         ngMetaProvider.setDefaultTitle('OffTheRecord.com - The smart way to fight your traffic tickets');
