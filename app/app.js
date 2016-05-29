@@ -22,9 +22,9 @@
         $locationProvider.html5Mode(true).hashPrefix('!');
 
         $urlRouterProvider.when('/about.html', '/help/about-us');
-        $urlRouterProvider.when('/privacy.html', '/help/privacy');
+        $urlRouterProvider.when('/privacy.html', '/help/privacy-policy');
         $urlRouterProvider.when('/refund.html', '/help/refund-policy');
-        $urlRouterProvider.when('/terms.html', '/help/terms');
+        $urlRouterProvider.when('/terms.html', '/help/terms-and-conditions');
         $urlRouterProvider.otherwise('/');
 
         //Add a suffix to all page titles
@@ -131,16 +131,29 @@
                 }
             })
             .state('default-template.help.privacy', {
-                url: '/privacy',
-                templateUrl: 'app/pages/help/privacy.html'
+                url: '/privacy-policy',
+                templateUrl: 'app/pages/help/privacy.html',
+                meta: {
+                    title : 'Privacy Policy',
+                    description : 'Read about how we use and protect your data.'
+                }
             })
             .state('default-template.help.refund-policy', {
                 url: '/refund-policy',
-                templateUrl: 'app/pages/help/refunds.html'
+                templateUrl: 'app/pages/help/refunds.html',
+                meta: {
+                    title : 'Our Money Back Guarantee',
+                    description : 'Learn why fighting your ticket with Off The Record is not only smart, but' +
+                    ' absolutely risk-free.'
+                }
             })
             .state('default-template.help.terms', {
-                url: '/terms',
-                templateUrl: 'app/pages/help/terms.html'
+                url: '/terms-and-conditions',
+                templateUrl: 'app/pages/help/terms.html',
+                meta: {
+                    title : 'Terms and Conditions',
+                    description : 'Read our general terms and conditions.'
+                }
             })
             .state('default-template.state-info', {
                 abstract: true,

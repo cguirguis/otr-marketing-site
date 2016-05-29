@@ -26,6 +26,14 @@
           }
         }
       }
+      .content-wrapper.centered {
+        width: 100%;
+
+        > * {
+          max-width: 950px;
+          margin: auto;
+        }
+      }
     }
     .align-middle {
       position: relative;
