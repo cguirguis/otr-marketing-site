@@ -129,6 +129,18 @@
                     description : 'Learn why Off the Record is the smart way to contest any traffic ticket, and read our story.'
                 }
             })
+            .state('default-template.help.privacy', {
+                url: '/privacy',
+                templateUrl: 'app/pages/help/privacy.html'
+            })
+            .state('default-template.help.refund-policy', {
+                url: '/refund-policy',
+                templateUrl: 'app/pages/help/refunds.html'
+            })
+            .state('default-template.help.terms', {
+                url: '/terms',
+                templateUrl: 'app/pages/help/terms.html'
+            })
             .state('default-template.state-info', {
                 abstract: true,
                 url: '/{stateCode:[a-zA-Z]{2}}-{stateName}',
