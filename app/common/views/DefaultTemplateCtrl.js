@@ -109,7 +109,7 @@
             return !elem.disabled;
         }
 
-        function submitReviewRequest(isFormValid) {
+        function submitReviewRequest(isFormValid, isReviewPage) {
             vm.ticketReviewRequestFormSubmitted = true;
 
             if (!isFormValid) {
@@ -129,7 +129,7 @@
 
             var params = {
                 request : {
-                    usage : 'OTR_EXIT_POPUP',
+                    usage : !isReviewPage ? 'OTR_EXIT_POPUP' : 'TICKET_REVIEW_PAGE',
                     notificationMethod : 'EMAIL',
                     keyValueMap : {
                         name: vm.exitPopupName,
@@ -139,7 +139,7 @@
             };
 
             // Include citation image URL if user uploaded an image
-            if (vm.hasTicket) {
+            if (vm.hasTicket && $rootScope.citation) {
                 if ($rootScope.citation && !$rootScope.citation.ticketImageUrl) {
                     // Wait for async citation upload to complete
                     $timeout(function(d) {

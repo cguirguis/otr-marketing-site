@@ -253,29 +253,14 @@
                     description : "Find out why insurance rates go up after you get a ticket, and how much your" +
                     " ticket could end up costing you."
                 }
-            })
-/*
-            // These states so that old legacy links in the iOS app continue to work.
-            // When we do a forced app update, we can get rid of these.
-            .state('legacy-refund-page', {
-                url: '/refund.html',
-                templateUrl: 'app/pages/help/money-back-guarantee.html'
-            })
-            .state('legacy-privacy-page', {
-                url: '/privacy.html',
-                templateUrl: 'app/pages/help/privacy-policy.html'
-            })
-            .state('legacy-terms-page', {
-                url: '/terms.html',
-                templateUrl: 'app/pages/help/terms-and-conditions.html'
-            })*/;
+            });
 
         $httpProvider.defaults.withCredentials = true;
 
         $provide.decorator('$uiViewScroll', ['$delegate', function ($delegate) {
             return function (uiViewElement) {
                 //var top = uiViewElement[0].getBoundingClientRect().top;
-                window.scrollTo(0, (top - 30));
+                //window.scrollTo(0, (top - 30));
                 // Or some other custom behaviour...
             };
         }]);

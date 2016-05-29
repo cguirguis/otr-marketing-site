@@ -29,7 +29,7 @@
 
             <div class="review-form">
                 <form name="ticketReviewRequestForm" id="ticketReviewRequestForm" role="form" novalidate
-                      ng-submit="vm.submitReviewRequest(ticketReviewRequestForm.$valid)">
+                      ng-submit="vm.submitReviewRequest(ticketReviewRequestForm.$valid, true)">
                     <input type="text" name="exitPopupName" ng-model="vm.exitPopupName" placeholder="Your name" tabindex="1" required
                            ng-class="{ 'has-error' : ticketReviewRequestForm.exitPopupName.$invalid && vm.ticketReviewRequestFormSubmitted }" />
                     <input type="text" name="exitPopupContactInfo" ng-model="vm.exitPopupContactInfo"
