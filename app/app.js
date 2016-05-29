@@ -22,6 +22,9 @@
         $locationProvider.html5Mode(true).hashPrefix('!');
 
         $urlRouterProvider.when('/about.html', '/help/about-us');
+        $urlRouterProvider.when('/privacy.html', '/help/privacy');
+        $urlRouterProvider.when('/refund.html', '/help/refund-policy');
+        $urlRouterProvider.when('/terms.html', '/help/terms');
         $urlRouterProvider.otherwise('/');
 
         //Add a suffix to all page titles
@@ -170,12 +173,6 @@
                         ngMeta.setTitle(selectedState.name + ' Traffic Tickets & Violations');
                         ngMeta.setTag('description', 'Learn how to fight or pay your ' + selectedState.name + ' traffic ticket, ' +
                             'prevent insurance increase, hire a lawyer in ' + selectedState.name + ' and keep your driving record clean.');
-
-                        //var stateName = getNameFromStateParam($stateParams.stateName);
-                        //ngMeta.setTitle(stateName + ' Traffic Tickets & Violations');
-                        //ngMeta.setTag('description', 'Learn how to fight or pay your ' + $stateParams.stateCode + ' traffic ticket, ' +
-                        //    'prevent insurance increase, hire a lawyer in ' + stateName + ' and keep' +
-                        //    ' your driving record clean.');
                     }]
                 },
                 meta: {
@@ -197,12 +194,6 @@
                         ngMeta.setTag('description', 'Learn why you should fight your ' + selectedState.name
                             + ' traffic ticket and how Off the Record connects you with the lawyer most likely '
                             + 'to get your ticket dismissed.');
-
-                        //var stateName = getNameFromStateParam($stateParams.stateName);
-                        //ngMeta.setTitle('Fight Your ' + stateName + ' Traffic Ticket');
-                        //ngMeta.setTag('description', 'Learn why you should fight your ' + stateName
-                        //    + ' traffic ticket and how Off the Record connects you with the lawyer most likely '
-                        //    + 'to get your ticket dismissed.');
                     }]
                 },
                 meta: {
@@ -229,11 +220,6 @@
                         ngMeta.setTitle(selectedState.name + ' Traffic Courts');
                         ngMeta.setTag('description', selectedState.name + ' traffic courts. Fight or pay your traffic ticket. '
                             + 'Court contact information and list of services.');
-
-                        //var stateName = getNameFromStateParam($stateParams.stateName);
-                        //ngMeta.setTitle(stateName + ' Traffic Courts');
-                        //ngMeta.setTag('description', stateName + ' traffic courts. Fight or pay your traffic ticket. ' +
-                        //    'Court contact information and list of services.');
                     }]
                 },
                 meta: {
@@ -268,7 +254,7 @@
                     " ticket could end up costing you."
                 }
             })
-
+/*
             // These states so that old legacy links in the iOS app continue to work.
             // When we do a forced app update, we can get rid of these.
             .state('legacy-refund-page', {
@@ -282,7 +268,7 @@
             .state('legacy-terms-page', {
                 url: '/terms.html',
                 templateUrl: 'app/pages/help/terms-and-conditions.html'
-            });
+            })*/;
 
         $httpProvider.defaults.withCredentials = true;
 
