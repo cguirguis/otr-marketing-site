@@ -148,6 +148,7 @@
                     return;
                 } else {
                     params.request.keyValueMap.ticketImage = $rootScope.citation.ticketImageUrl;
+                    params.request.keyValueMap.citationId = $rootScope.citation.citationId;
                 }
             }
 
