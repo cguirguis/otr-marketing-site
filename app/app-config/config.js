@@ -11,6 +11,9 @@
             'name': '@@domain-name',
             'apiEndpoint': '@@endpoint'
 
+            //'name': 'DEVO',
+            //'apiEndpoint': 'https://otr-backend-service-us-devo.offtherecord.com'
+
             //'name': 'PROD',
             //'apiEndpoint': 'https://otr-backend-service-us-prod.offtherecord.com'
 

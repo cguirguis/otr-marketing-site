@@ -20,6 +20,8 @@
 
         // enable html5Mode for pushstate ('#'-less URLs)
         $locationProvider.html5Mode(true).hashPrefix('!');
+
+        $urlRouterProvider.when('/about.html', '/help/about-us');
         $urlRouterProvider.otherwise('/');
 
         //Add a suffix to all page titles
@@ -39,11 +41,7 @@
             'fight traffic ticket, fight speeding ticket, contest ticket, ' +
             'traffic ticket, traffic lawyer, traffic attorney, speeding ticket');
 
-        //function getNameFromStateParam(param) {
-        //    return param.replace("-", " ").replace(/\w\S*/g, function(txt){
-        //        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-        //    });
-        //}
+
 
         $stateProvider
             .state('default-template', {
@@ -269,6 +267,21 @@
                     description : "Find out why insurance rates go up after you get a ticket, and how much your" +
                     " ticket could end up costing you."
                 }
+            })
+
+            // These states so that old legacy links in the iOS app continue to work.
+            // When we do a forced app update, we can get rid of these.
+            .state('legacy-refund-page', {
+                url: '/refund.html',
+                templateUrl: 'app/pages/help/money-back-guarantee.html'
+            })
+            .state('legacy-privacy-page', {
+                url: '/privacy.html',
+                templateUrl: 'app/pages/help/privacy-policy.html'
+            })
+            .state('legacy-terms-page', {
+                url: '/terms.html',
+                templateUrl: 'app/pages/help/terms-and-conditions.html'
             });
 
         $httpProvider.defaults.withCredentials = true;
