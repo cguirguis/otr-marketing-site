@@ -134,7 +134,7 @@ gulp.task('copy-src', function() {
 });
 
 gulp.task('concat-css', function() {
-    return gulp.src('build/assets/css/*.css')
+    return gulp.src(['build/assets/css/all-otr.min.css', 'build/assets/css/all-scss-otr.min.css'])
         .pipe(concat('all-stylesheets.min.css'))
         .pipe(gulp.dest('build/assets/css'));
 });
