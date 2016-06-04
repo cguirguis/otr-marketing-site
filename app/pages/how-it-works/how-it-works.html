@@ -37,7 +37,7 @@
                        title="Fight My Ticket">Fight My Ticket</a>
                 </div>
                 <div class="free-ticket-eval" style="color: #FFFFFF;font-size: 15px;margin-bottom: 25px;margin-top: -10px;">
-                    Not ready to fight yet? <a ui-sref="default-template.ticket-review" style="color: #97D7FF;">Click here to get a
+                    Not ready to fight yet? <a ui-sref="default-template.ticket-review" style="color: #97D7FF;">Get a
                     <b>free ticket evaluation</b></a>.
                 </div>
             </div>
@@ -110,7 +110,7 @@
                     <i class="fa fa-quote-left fa-2x fa-pull-left fa-border" aria-hidden="true"></i>
                     <div class="question-text">What outcome can I expect?</div>
                 </div>
-                <div class="answer">Our primary goal is to get your violation - and fine - <a href="/help/faq#faq8">completely dismissed</a>. We're able to achieve this for an overwhelming majority of tickets. Sometimes, the judge won't dismiss the ticket, but reduce the violation to one that won't impact your record. We believe that no one should be penalized for contesting their traffic ticket. That's why if we fail to get the ticket off your record, you'll get a  <a href="/help/faq#faq9">full refund</a>, no questions asked.</div>
+                <div class="answer">Our primary goal is to get your violation - and fine - <a href="/help/faq#faq8">completely dismissed</a>. We're able to achieve this for an overwhelming majority of tickets. Sometimes, the judge won't dismiss the ticket, but reduce the violation to one that won't impact your record. We believe that no one should be penalized for contesting their traffic ticket. That's why if we fail to get the ticket off your record, you'll get a  <a ui-sref="default-template.help.money-back-guarantee">full refund</a>, no questions asked.</div>
             </div>
             <hr/>
             <div class="question-answer" style="margin-top: -10px;margin-bottom: 40px;">
@@ -124,11 +124,13 @@
 
 <style>
     .page.how-it-works {
-        padding-top:70px;
+        padding-top:0px;
     }
     .page.how-it-works .header {
         height: 400px;
         position: relative;
+        margin-top: -70px;
+        z-index: -1;
     }
     .page.how-it-works .header .header-bg {
         background-color: #ededed;
@@ -142,7 +144,7 @@
     .page.how-it-works .header .header-text {
         position: absolute;
         bottom: 15%;
-        font-size: 6em;
+        font-size: 5.5em;
         width: 50%;
         line-height: 1.4em;
         margin-left: 40px;
@@ -154,7 +156,7 @@
     .page.how-it-works .header .gray-overlay {
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.20);
+        background-color: rgba(0, 0, 0, 0.40);
         position: absolute;
     }
     .page.how-it-works .content-wrapper {
@@ -177,6 +179,9 @@
         background-color: #145786;
         padding-bottom: 0;
     }
+    .page.how-it-works .content-wrapper .section#section-2 .free-ticket-eval a:hover {
+        text-decoration: underline;
+    }
     .page.how-it-works .content-wrapper .section#section-2 div:first-child {
         width: 50%;
         float: left;
@@ -187,7 +192,7 @@
         background-repeat: no-repeat;
         background-size: auto 100%;
         background-position: top;
-        height: 300px;
+        height: 302px;
         width: 48%;
         float: left;
         display: inline-block;
@@ -268,6 +273,7 @@
         color: white;
         border-color: white;
         background: transparent;
+        line-height: 30px;
     }
     .page.how-it-works .content-wrapper .fight-my-ticket.signup-button:hover {
         background-color: #41A3E3;

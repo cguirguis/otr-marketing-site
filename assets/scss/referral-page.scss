@@ -8,6 +8,9 @@
 .content-page.referral-page {
   .content-container {
     .content-header {
+      margin-top: -70px;
+      z-index: -1;
+
       .content-background {
         background: url(https://s3.amazonaws.com/otr-assets/img/friends-fight-speeding-tickets.jpg) no-repeat 50% 35%;        background-size: cover;
         text-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);

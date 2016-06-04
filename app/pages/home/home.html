@@ -1,4 +1,4 @@
-<div id="page" class="hfeed site">
+<div id="page" class="home-page">
 
     <!--<div ui-view></div>-->
     <div class="homepage-banner bg-primary" role="" style="background-color: #f4f4f4;">
@@ -6,19 +6,28 @@
             <div id="text-3" class="widget widget_text">
                 <div class="textwidget">
                     <h1 id="header">
-                        Think twice before you pay that ticket.
+                        Fight your ticket. Save money.
                     </h1>
                     <h1 id="subheader">
                         A single speeding ticket could raise your insurance rates by a whopping $790 over the next 3 years.</h1>
                     <br>
-                    <h1>
-                        <a ng-href="{{mobileAppUrl}}" id="signUpButton" class="btn btn-default btn-lg">Fight My Ticket</a>
-                        <a class="app-button" ng-href="{{ vm.iTunesLink }}" style="float: right;">
-                            <img src="assets/img/badge_ios.png" style="height:50px;cursor:pointer;"
-                                 alt="Download Off the Record from the iOS app store and fight your traffic ticket with lawyer today."
-                                 title="Download Off the Record from the iOS app store to start fighting your traffic tickets today">
-                        </a>
-                    </h1>
+
+                    <div class="get-started-container">
+                        <div class="overlay"></div>
+                        <angucomplete-alt id="state-input-field"
+                                          placeholder="Where did you get your ticket?"
+                                          pause="100"
+                                          selected-object="vm.selectedState"
+                                          local-data="statesList"
+                                          local-search="vm.stateSearch"
+                                          title-field="name"
+                                          description-field="abbreviation"
+                                          image-field="pic"
+                                          minlength="0"
+                                          input-class="state-input"
+                                          match-class="highlight" ></angucomplete-alt>
+
+                        <a ui-sref="default-template.state-info.fight({stateCode: vm.selectedState.description, stateName: vm.selectedState.title})" class="fight-my-ticket get-started-button">Get Started</a></div>
                 </div>
             </div>
         </div>
@@ -30,20 +39,20 @@
             FEATURED IN
         </p>
         <a href="http://usatoday30.usatoday.com/video/new-app-fights-traffic-tickets-for-you/4594279255001" target="_blank">
-            <img src="assets/img/logos/usa-today-logo.png" width="200" class="wp-post-image padding-right-30"
+            <img src="assets/img/logos/usa-today-logo-bw.png" width="200" class="wp-post-image padding-right-30"
                  alt="USA Today">
         </a>
         <a href="http://www.cbs19.tv/story/30428480/new-app-helps-drivers-fight-traffic-tickets" target="_blank">
-            <img src="assets/img/logos/cbs-logo.png" width="150" class="wp-post-image padding-right-30"
+            <img src="assets/img/logos/cbs-logo-bw.png" width="150" class="wp-post-image padding-right-30"
                  alt="CBS logo">
         </a>
 
         <a href="http://www.fox10phoenix.com/news/hot-topics/45565415-story" target="_blank">
-            <img src="assets/img/logos/fox-news-logo.png" width="200" class="wp-post-image padding-right-30"
+            <img src="assets/img/logos/fox-news-logo-bw.png" width="200" class="wp-post-image padding-right-30"
                  alt="Fox logo">
         </a>
         <a href="http://www.king5.com/story/news/local/2015/11/03/ticketapp/75078094/" target="_blank">
-            <img src="assets/img/logos/nbc-logo.png" width="200" class="wp-post-image"
+            <img src="assets/img/logos/nbc-logo-bw.png" width="200" class="wp-post-image"
                  alt="NBC logo">
         </a>
     </div>
@@ -54,7 +63,7 @@
                 <a id="howitworks" name="howitworks" style="display:block;padding-top:20px"></a>
                 <article id="post-8" class="post-8 page type-page status-publish hentry">
                     <div class="entry-content">
-                        <h2 class="gray" style="font-size: 2.9em; font-weight: 300;">
+                        <h2 class="gray" style="font-size: 2.9em; font-weight: 400;color: #656565;">
                             Fighting your ticket has never been easier.</h2>
                         <p class="lead" style="font-size:1.5em">
                             You are legally entitled to contest your traffic tickets, but city and municipal governments make the process inconvenient and cumbersome.
@@ -70,7 +79,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12 home-widget" role="complementary">
-                        <div id="woocommerce_products-2" class="widget woocommerce widget_products">
+                        <div class="widget woocommerce widget_products">
                             <ul class="product_list_widget">
                                 <li class="col-sm-6 col-md-4">
                                     <div class="product-wrap">
@@ -82,7 +91,7 @@
                                             <h3 class="product-name">Snap a photo</h3>
                                         </div>
                                         <div>
-                                            <p>First, provide a photo of your ticket. This will tell us most of the information we need to successfully handle your case.</p>
+                                            <p>First, provide a photo of your ticket. This will give us most of the information we need to start your case.</p>
                                         </div>
                                     </div>
                                 </li>
@@ -96,7 +105,7 @@
                                             <h3 class="product-name">Tell us about your ticket</h3>
                                         </div>
                                         <div>
-                                            <p>We need to know a few things, like the court your ticket was assigned. This will help us find the best lawyer for your ticket.</p>
+                                            <p>We'll ask you a few things - like which court your ticket is assigned to - to will help us match you with the best lawyer.</p>
                                         </div>
                                     </div>
                                 </li>
@@ -107,10 +116,11 @@
                                                 <img src="assets/img/iphone_casesview.png" class="wp-post-image"
                                                      alt="Manage your speeding ticket or traffic ticket online while your lawyer fights it">
                                             </div>
-                                            <h3 class="product-name">Put us to work</h3>
+                                            <h3 class="product-name">Get an attorney</h3>
                                         </div>
                                         <div>
-                                            <p>With our secure payment system and case tracking tools, you'll jumpstart your case and receive real-time status updates.</p>
+                                            <p>We negotiate significantly reduced rates with attorneys. You'll pay one flat fee and be covered by our <a ui-sref="default-template.help.moneyback-guarantee">money back guarantee</a> (in most
+                                                                                                                                                     counties). </p>
                                         </div>
                                     </div>
                                 </li>
@@ -131,37 +141,37 @@
         <div class="container">
             <section class="page-content entry-content clearfix">
                 <div class="row text-center">
-                    <div id="woocommerce_products-2" class="widget info woocommerce widget_products features">
+                    <div class="widget info features">
                         <h2 class="widgettitle">Features</h2>
 
                         <div class="feature">
                             <i class="icon-preview fa fa-clock-o"></i>
-                            <h3 class="feature-title">Super quick</h3>
+                            <h3 class="feature-title">Save Time</h3>
                             <div class="feature-content">Contest your ticket in under a minute. Get back on the road knowing your driving record is in good hands.</div>
                         </div>
                         <div class="feature">
                             <i class="icon-preview fa fa-gavel"></i>
-                            <h3 class="feature-title">100% legal</h3>
+                            <h3 class="feature-title">100% Legal</h3>
                             <div class="feature-content">Everyone is entitled to contest their traffic tickets, but only 5% do. We make the process a lot less intimidating.</div>
                         </div>
                         <div class="feature">
                             <i class="icon-preview fa fa-camera"></i>
-                            <h3 class="feature-title">Easy to use</h3>
+                            <h3 class="feature-title">Easy To Use</h3>
                             <div class="feature-content">Just snap a photo of your ticket, and answer a few questions. You'll never have to mail it in.</div>
                         </div>
                         <div class="feature">
                             <i class="icon-preview fa fa-institution"></i>
-                            <h3 class="feature-title">No showing up in court</h3>
+                            <h3 class="feature-title">No Showing Up In Court</h3>
                             <div class="feature-content">You sit back and relax... we'll match you with the lawyer most likely to win your case in court.</div>
                         </div>
                         <div class="feature">
                             <i class="icon-preview fa fa-comments"></i>
-                            <h3 class="feature-title">Full transparency</h3>
+                            <h3 class="feature-title">Full Transparency</h3>
                             <div class="feature-content">Chat with your lawyer at any time to ask questions or get updates on your case.</div>
                         </div>
                         <div class="feature">
                             <i class="icon-preview fa fa-money"></i>
-                            <h3 class="feature-title">Save money</h3>
+                            <h3 class="feature-title">Saves You Money</h3>
                             <div class="feature-content">You'll save hundreds of $ by avoiding a jump in your insurance premiums.</div>
                         </div>
                     </div>

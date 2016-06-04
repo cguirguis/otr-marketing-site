@@ -35,7 +35,7 @@
     "jquery-easing": "*",
     "font-awesome": "fontawesome#~4.6.1",
     "sendgrid": "^1.9.2",
-    "aws-sdk-js": "~2.3.11",
-    "otr-shared-libs": "https://github.com/alexg313/OTRSharedLibs.git#v1.1.9"
+    "otr-shared-libs": "https://github.com/alexg313/OTRSharedLibs.git#v1.1.9",
+    "angucomplete-alt": "^2.4.1"
   }
 }

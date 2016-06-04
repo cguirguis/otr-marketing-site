@@ -5,7 +5,6 @@
 @import '_vars.scss';
 
 .content-page {
-  margin-top: 70px;
 
   *:not(i) {
     font-family: $arial;
@@ -33,6 +32,8 @@
     .content-header {
       height: 400px;
       position: relative;
+      z-index: -1;
+      margin-top: -70px;
 
       h1 {
         font-family: $openSans;
@@ -70,6 +71,7 @@
         padding-top: 30px;
         width: 100%;
         z-index: 1;
+        padding-top: 80px;
       }
 
       hr {
@@ -280,47 +282,6 @@
     }
   }
 
-  a.fight-my-ticket {
-    display: block;
-    line-height: 60px;
-    clear: both;
-    cursor: pointer;
-    height: 60px;
-    text-transform: uppercase;
-    font-size: 18px;
-    font-family: $helvetica;
-    font-weight: 400;
-    border-radius: 5px;
-    width: 60%;
-    min-width: 250px;
-    max-width: 660px;
-    color: white;
-    background: #2a81d7;
-    margin: auto;
-    margin-top: 10px;
-    margin-bottom: 50px;
-    /*
-    border: solid 1px rgb(31, 85, 142);
-    background: -moz-linear-gradient(0% 100% 90deg, #206bcb, #3e9ee5);
-    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#3e9ee5), to(#206bcb));
-    border-top: 1px solid #2a73a6;
-    border-right: 1px solid #165899;
-    border-bottom: 1px solid #07428f;
-    border-left: 1px solid #165899;
-    -moz-box-shadow: inset 0 1px 0 0 #62b1e9;
-    -webkit-box-shadow: inset 0 1px 0 0 #62b1e9;
-    text-shadow: 0 -1px 1px #3275bc;*/
-
-    &:hover {
-      text-decoration: none;
-      background-color: #1872C3;
-      /*-moz-box-shadow: inset 0 1px 0 0 #72b9eb, 0 1px 2px 0 #b3b3b3;
-      -webkit-box-shadow: inset 0 1px 0 0 #72b9eb, 0 1px 2px 0 #b3b3b3;
-      background: -moz-linear-gradient(0% 100% 90deg, #10386a, #3e9ee5);
-      background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#42a8f3), to(#1e64bd));*/
-    }
-  }
-
   .green-text {
     color:#52A058!important;
   }
@@ -337,10 +298,10 @@
 
 @media (max-width:970px) {
   .content-page.state-page .content-container .content-header {
-    height: 300px !important;
+    height: 370px !important;
 
     .content-background {
-      height: 300px !important;
+      height: 370px !important;
       background-position: left !important;
       background-size: 100% 100% !important;
     }

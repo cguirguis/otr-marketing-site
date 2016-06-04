@@ -7,7 +7,8 @@
         'ngRetina',
         'ngCookies',
         'ngMeta',
-        'otrBackendService'
+        'otrBackendService',
+        'angucomplete-alt'
     ])
         .run(initData)
         .run(init)
@@ -22,9 +23,16 @@
         $locationProvider.html5Mode(true).hashPrefix('!');
 
         $urlRouterProvider.when('/about.html', '/help/about-us');
+
         $urlRouterProvider.when('/privacy.html', '/help/privacy-policy');
-        $urlRouterProvider.when('/refund.html', '/help/refund-policy');
+        $urlRouterProvider.when('/privacy-policy', '/help/privacy-policy');
+
+        $urlRouterProvider.when('/refund.html', '/help/money-back-guarantee');
+        $urlRouterProvider.when('/moneyback-guarantee', '/help/money-back-guarantee');
+        $urlRouterProvider.when('/money-back-guarantee', '/help/money-back-guarantee');
+
         $urlRouterProvider.when('/terms.html', '/help/terms-and-conditions');
+        $urlRouterProvider.when('/terms-and-conditions', '/help/terms-and-conditions');
         $urlRouterProvider.otherwise('/');
 
         //Add a suffix to all page titles
@@ -142,8 +150,8 @@
                     description : 'Read about how we use and protect your data.'
                 }
             })
-            .state('default-template.help.refund-policy', {
-                url: '/refund-policy',
+            .state('default-template.help.money-back-guarantee', {
+                url: '/money-back-guarantee',
                 templateUrl: 'app/pages/help/refunds.html',
                 meta: {
                     title : 'Our Money Back Guarantee',

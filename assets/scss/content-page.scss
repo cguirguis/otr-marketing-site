@@ -11,6 +11,8 @@
 
     .content-header {
       text-align: left;
+      margin-top: -70px;
+      z-index: -1;
 
       .content-background {
         text-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
@@ -63,6 +65,9 @@
 .content-page.content.insurance-impact {
   .content-container {
     .content-header {
+      margin-top: -70px;
+      z-index: -1;
+
       .content-background {
         background: url(../img/protect-car.jpg) 0% 50% no-repeat;
         background-size: cover;

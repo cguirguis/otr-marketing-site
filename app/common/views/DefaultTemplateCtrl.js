@@ -40,6 +40,13 @@
 
             navbarToggle.click(function(event) {
                 $("ul#menu-main-menu").parent().toggle();
+
+                var getStartedContainer = $(".get-started-container")[0];
+                if (getStartedContainer) {
+                    var zIndex = getStartedContainer.style ? parseInt(getStartedContainer.style.zIndex) : 1;
+                    zIndex = !zIndex ? 1 : zIndex;
+                    getStartedContainer.style.zIndex = -1 * zIndex;
+                }
                 event.stopPropagation();
             });
 

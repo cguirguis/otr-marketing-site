@@ -21,6 +21,7 @@
         // ----- INTERFACE ------------------------------------------------------------
         //vm.saveContactInfo = saveContactInfo;
         vm.openLawyerFormModal = openLawyerFormModal;
+        vm.stateSearch = stateSearch;
 
         // ----- PUBLIC METHODS -------------------------------------------------------
 
@@ -32,6 +33,21 @@
             });
 
         })();
+
+        function stateSearch(str) {
+            var matches = [];
+            $rootScope.statesList.forEach(function (state) {
+                if ((state.name.toLowerCase().indexOf(str.toString().toLowerCase()) >= 0) ||
+                    (state.abbreviation.toLowerCase().indexOf(str.toString().toLowerCase()) >= 0)) {
+                    if (state.name.toLowerCase() === str.toString().toLowerCase()) {
+                        vm.selectedState = state;
+                        console.log(vm.selectedState.name);
+                    }
+                    matches.push(state);
+                }
+            });
+            return matches;
+        }
 
         function buildITunesLink() {
 

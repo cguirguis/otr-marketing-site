@@ -51,7 +51,7 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 300px) {
   .navbar-default .navbar-header .logo {
     display: none; } }
-button.login-button {
+button.border-hover {
   font-size: 14px;
   text-transform: uppercase;
   padding: 5px 10px;
