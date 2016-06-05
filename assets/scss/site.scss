@@ -346,6 +346,7 @@ ul#menu-main-menu {
     margin: auto;
     text-align: center;
     z-index: 1;
+    max-width: 900px;
 
     .overlay {
       position: absolute;
@@ -1113,6 +1114,11 @@ a.fight-my-ticket {
   }
 }
 
+@media (min-width: 900px) {
+  .textwidget .get-started-container {
+    margin-top: 10px;
+  }
+}
 @media (min-width: 1200px) {
   #footer #footer-widgets .container {
     width: 1170px;
