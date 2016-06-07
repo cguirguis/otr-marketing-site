@@ -68,10 +68,14 @@ h1, h2, h3, h4, h5, h6 {
 .media-container {
   width: 100%;
   background-color: rgba(255,255,255,0.9);
-  padding-bottom: 10px;
-  padding-top: 10px;
+  padding-bottom: 8px;
+  padding-top: 12px;
   position: absolute;
   bottom: 0;
+
+  .media-image img {
+    max-height: 35px;
+  }
 }
 
 .no-padding {
@@ -387,6 +391,7 @@ ul#menu-main-menu {
       margin-top: -1px;
       position: relative;
       border-radius: 2px;
+      min-width: inherit;
     }
   }
 }
@@ -427,11 +432,7 @@ ul#menu-main-menu {
   font-size: 16px;
 
   .bg .container .row .home-widget {
-    padding: 20px 0;
-
-    #woocommerce_products-2 {
-      margin: 0 0 2em;
-    }
+    padding: 0 0 20px 0;
   }
   .woocommerce ul.product_list_widget {
     margin: 0 -15px 0px -15px;
@@ -905,7 +906,9 @@ a.fight-my-ticket {
       margin-top: 15px;
     }
   }
-
+  .homepage-banner #text-3.widget {
+    margin-top: 70px;
+  }
   button.fight-my-ticket, a.fight-my-ticket {
     margin-top: 10px;
     margin-bottom: 30px;

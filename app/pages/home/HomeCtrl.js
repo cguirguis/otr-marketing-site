@@ -7,10 +7,10 @@
         .controller('LawyerFormModalCtrl', LawyerFormModalCtrl);
 
 
-    HomeCtrl.$inject = ['ENV', '$cookies', '$filter', '$rootScope', '$uibModal', '$log'];
-    function HomeCtrl(ENV, $cookies, $filter, $rootScope, $uibModal, $log) {
+    HomeCtrl.$inject = ['$scope', '$timeout', 'ENV', '$cookies', '$filter', '$rootScope', '$uibModal', '$log', 'GlobalUtils'];
+    function HomeCtrl($scope, $timeout, ENV, $cookies, $filter, $rootScope, $uibModal, $log, GlobalUtils) {
         var vm = this,
-            //isMobileDevice = GlobalUtils.isMobileDevice(),
+            isMobileDevice = GlobalUtils.isMobileDevice(),
 
             URLS = {
                 POST_LAWYER_LEAD: ENV.apiEndpoint + '/api/v1/lawyers/lead'
@@ -30,6 +30,20 @@
             $rootScope.$on('BranchInitComplete', function(event, next, current) {
                 console.log('BranchInitComplete event: ', $rootScope.branchData);
                 buildITunesLink();
+            });
+
+            $scope.$on('$viewContentLoaded', function() {
+                $timeout(function() {
+                    var stateInput = angular.element("#state-input-field_value");
+                    stateInput.on('click', function () {
+                        if (isMobileDevice
+                            && !stateInput.val().length
+                            && window.innerHeight < 750) {
+                            console.log("scroll down.");
+                            window.scrollTo(0, $(".get-started-container").position().top - 5);
+                        }
+                    });
+                });
             });
 
         })();
