@@ -255,6 +255,27 @@
                     disableUpdate : true
                 }
             })
+            // -------------------------------
+            // ----- FIGHT SECTION -----
+            // -------------------------------
+            .state('default-template.fight', {
+                abstract: true,
+                url: '/{stateCode:[a-zA-Z]{2}}-{stateName}',
+                views: {
+                    '': {
+                        templateUrl: 'app/pages/fight/fight.html',
+                        controller: 'StateInfoCtrl as vm'
+                    }
+                }
+            })
+            .state('default-template.fight.photo', {
+                url: '/fight-your-ticket/photo',
+                templateUrl: 'app/pages/fight/photo.html',
+                controller: 'StateInfoCtrl as vm'
+            })
+            // -------------------------------
+            // ----- OTHER PAGES -----
+            // -------------------------------
             .state('default-template.refer-a-friend', {
                 url: '/refer-a-friend/:referralCode',
                 templateUrl: 'app/pages/referral/refer-a-friend.html',

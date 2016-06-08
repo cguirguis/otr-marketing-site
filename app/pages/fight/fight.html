@@ -1,0 +1,23 @@
+
+<div class="content-page app-page">
+    <div class="content-container text-center">
+        <div class="content-header">
+            <div class="content-background" ng-style="{ 'background-image': 'url({{vm.selectedState.backgroundImgUrl}})' }"></div>
+            <h1>Fight Your Ticket</h1>
+        </div>
+        <div class="content-nav">
+            <ul>
+                <li class="nav-item" ui-sref-active="active" ui-sref="default-template.fight.photo">Photo</li>
+                <li class="nav-item" ui-sref-active="active" ui-sref="default-template.fight.court">Court</li>
+                <li class="nav-item" ui-sref-active="active" ui-sref="default-template.fight.date">Date</li>
+                <li class="nav-item" ui-sref-active="active" ui-sref="default-template.fight.violations">Violations</li>
+            </ul>
+        </div>
+
+        <div class="content-body">
+            <!----- TEMPLATE INSERTED HERE ----->
+            <ui-view autoscroll="true" />
+            <!--------------------------------->
+        </div>
+    </div>
+</div>
