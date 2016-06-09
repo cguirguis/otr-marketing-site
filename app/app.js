@@ -8,7 +8,8 @@
         'ngCookies',
         'ngMeta',
         'otrBackendService',
-        'angucomplete-alt'
+        'angucomplete-alt',
+        'flow'
     ])
         .run(initData)
         .run(init)
@@ -264,14 +265,19 @@
                 views: {
                     '': {
                         templateUrl: 'app/pages/fight/fight.html',
-                        controller: 'StateInfoCtrl as vm'
+                        controller: 'TicketCtrl as vm'
                     }
                 }
             })
             .state('default-template.fight.photo', {
                 url: '/fight-your-ticket/photo',
                 templateUrl: 'app/pages/fight/photo.html',
-                controller: 'StateInfoCtrl as vm'
+                controller: 'TicketCtrl as vm'
+            })
+            .state('default-template.fight.court', {
+                url: '/fight-your-ticket/court',
+                templateUrl: 'app/pages/fight/court.html',
+                controller: 'TicketCtrl as vm'
             })
             // -------------------------------
             // ----- OTHER PAGES -----

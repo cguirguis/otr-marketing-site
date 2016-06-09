@@ -19,6 +19,95 @@
     }
     .content-body {
 
+      .step {
+        .step-body {
+          position: relative;
+
+          .meta {
+            //width: calc(100% - 300px);
+            padding: 40px;
+
+            .title {
+              font-size: 40px;
+              line-height: 45px;
+            }
+            .subtitle {
+              font-size: 16px;
+            }
+            .space-top-5 {
+              button {
+                padding: 9px 80px;
+              }
+            }
+          }
+          .flow {
+            > div {
+              min-height: 200px;
+            }
+
+            .pin {
+              display: flex;
+              justify-content: center;
+              flex-direction: column;
+              height: 100%;
+              top: 0;
+              right: 0;
+              font-weight: bold;
+            }
+
+            .drop {
+              padding: 7px;
+              border: 2px dashed;
+              border-radius: 5px;
+              line-height: 34px;
+              background: aliceblue;
+              border-color: cadetblue;
+              margin-bottom: 20px;
+              text-align: center;
+
+              &.no-image {
+                input.multiple-file-input {
+                  visibility: hidden;
+                  position: absolute;
+                }
+                input.single-file-input {
+                  visibility: hidden;
+                  position: absolute;
+                  width: 1px;
+                  height: 1px;
+                }
+              }
+              &.has-image {
+                .remove-image {
+                  cursor: pointer;
+                  position: absolute;
+                  top: 5px;
+                  right: 5px;
+                  background-color: rgba(255,99,71,0.75);
+                  border-radius: 40px;
+                  box-shadow: 0 0 20px rgba(0,0,0,.12);
+                  padding: 6px 10px 5px 22px;
+                  font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+                  font-size: 12px;
+                  color: #fff;
+                  background-position: 10px center;
+                  line-height: 12px;
+                  background-image: url(https://js.intercomcdn.com/images/icon-close-white@1x.bac0a0d6.png);
+                  background-size: 8px 8px;
+                  background-repeat: no-repeat;
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
+}
+
+.justify-center {
+  justify-content: center;
+}
+.space-top-5 {
+  margin-top: 31.25px;
 }

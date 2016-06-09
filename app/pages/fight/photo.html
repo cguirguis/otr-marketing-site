@@ -1,24 +1,23 @@
-<section ng-class="{current: selected, done: completed}" class="step ng-isolate-scope current" ng-transclude="" wz-title="Photo" description="Take a photo of your ticket">
 
-    <div class="panel panel-your-trips space-top-4">
-        <div class="panel-body panel-body-your-trips">
-            <div class="meta">
-                <div class="title show-lg">
+    <div class="step container">
+        <div class="step-body row">
+            <div class="meta col-xs-12 col-md-8">
+                <div class="title">
                     Upload a picture of your ticket
                 </div>
-                <div class="space-top-2 contentb">
+                <div class="subtitle">
                     We'll get most of the information we need right off the ticket.
                 </div>
-                <div class="space-top-5 btn-invite-friends">
+                <div class="space-top-5">
                     <div class="row space-top-5 row-space-1">
                         <div class="col-8">
                             <div class="row row-condensed">
                                 <div class="col-md-12 text-center">
-                                    <button type="submit" tabindex="4" class="btn btn-primary btn-large" style="padding: 9px 80px;" ng-click="vm.submitPhotoStep()" ng-disabled="vm.dataLoading == true">
-                                        <span>Continue &nbsp;</span>
+                                    <button type="submit" tabindex="4" class="btn btn-primary btn-large" ng-click="vm.submitPhotoStep()" ng-disabled="vm.dataLoading == true || !vm.imgContent">
+                                        <span>Continue</span>
                                         <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
                                     </button>
-                                    <div class="space-top-2 form-error-message" ng-show="vm.isImgFormSubmitted == true &amp;&amp; vm.imgContent == null">
+                                    <div class="space-top-2 form-error-message" ng-show="vm.isImgFormSubmitted && !vm.imgContent">
                                         Please upload a picture of your ticket before continuing
                                     </div>
                                 </div>
@@ -28,19 +27,29 @@
                 </div>
             </div>
 
-
-            <div flow-init="{singleFile: true}" flow-name="vm.obj.flow" class="pin" flow-file-added="vm.flowFileAdded($file)" flow-files-added="vm.processFile($files)" flow-files-submitted="vm.flowFilesSubmitted($flow)" flow-file-success="vm.flowFileSuccess($file, $message)">
+            <div flow-init="{singleFile: true}" class="flow"
+                 flow-name="vm.obj.flow" class="pin"
+                 flow-file-added="vm.flowFileAdded($file)"
+                 flow-files-added="vm.processFile($files)"
+                 flow-files-submitted="vm.flowFilesSubmitted($flow)"
+                 flow-file-success="vm.flowFileSuccess($file, $message)">
 
                 <!-- Drag and drop container -->
                 <!-- When there is no image -->
-                <div class="drop pin justify-center" ng-class="dropClass" flow-drop="" ng-show="vm.imgContent == null" flow-drag-enter="dropClass='drag-over'" flow-drag-leave="dropClass=''">
-                    <span class="btn btn-default" flow-btn="">Upload Image<input type="file" multiple="multiple" style="visibility: hidden; position: absolute;"><input type="file" style="visibility: hidden; position: absolute; width: 1px; height: 1px;"></span>
-                    <b>&nbsp;&nbsp;or </b> drag and drop your image here
+                <div class="no-image drop pin justify-center col-xs-12 col-md-4" ng-class="dropClass" flow-drop="" ng-show="vm.imgContent == null" flow-drag-enter="dropClass='drag-over'" flow-drag-leave="dropClass=''">
+                    <span class="btn btn-default" flow-btn="">
+                        Upload Image
+                        <input type="file" multiple="multiple" class="multiple-file-input">
+                        <input type="file" class="single-file-input">
+                    </span>
+                    <b>&nbsp;&nbsp;or </b>
+                    drag and drop your image here
                 </div>
 
                 <!-- When there is an image -->
-                <div class="drop pin justify-center" ng-class="dropClass" flow-drop="" ng-show="vm.imgContent != null" flow-drag-enter="dropClass='drag-over'" flow-drag-leave="dropClass=''">
-                    <div id="intercom-container" ng-click="vm.removeTicketPhoto()" class="intercom-launcher-hovercard-close intercom-launcher-hovercard-close-active">
+                <div class="has-image drop pin justify-center col-xs-12 col-md-4" ng-class="dropClass" flow-drop="" ng-show="vm.imgContent != null" flow-drag-enter="dropClass='drag-over'" flow-drag-leave="dropClass = ''">
+                    <div class="remove-image" ng-click="vm.removeTicketPhoto()"
+                         class="intercom-launcher-hovercard-close intercom-launcher-hovercard-close-active">
                         Remove
                     </div>
                     <img flow-img="$flow.files[0]" class="uploaded-image" style="max-width: 300px">
@@ -48,5 +57,3 @@
             </div>
         </div>
     </div>
-
-</section>
