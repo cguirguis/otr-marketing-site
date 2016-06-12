@@ -140,8 +140,8 @@
                 vm.iTunesLink = link;
             }
 
-            var ref1 = $cookies.get('otr-referrer');
-            var ref2 = $cookies.getObject('otr-referrer');
+            var ref2 = $cookies.get('otr-referrer');
+            var ref1 = $cookies.getObject('otr-referrer');
 
             console.log('ref1: ', ref1);
             console.log('ref2: ', ref2);
