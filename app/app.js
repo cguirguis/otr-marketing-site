@@ -353,11 +353,11 @@
             isBranchLink : false
         };
         // Set defaults for banner click.
-        var channel = 'Website';
-        var campaign = '';
-        var feature = 'smart_banner';
-        var stage = '';
-        var tags = ['some-random-tag', 'other-random-tag'];
+        //var channel = 'Website';
+        //var campaign = '';
+        //var feature = 'smart_banner';
+        //var stage = '';
+        //var tags = ['some-random-tag', 'other-random-tag'];
 
 
         (function(b,r,a,n,c,h,_,s,d,k) {
@@ -385,12 +385,10 @@
                     stage : data.data_parsed['~stage'],
                     tags : data.data_parsed['~tags']
                 };
-
-                console.log('finished writing branch data to rootscope');
             }
 
             console.log('branch init complete');
-            $rootScope.branchInitComplete = true;
+            // $rootScope.branchInitComplete = true;
             $rootScope.$broadcast('BranchInitComplete');
         });
 
@@ -418,11 +416,11 @@
                 theme: 'light'                         // Uses Branch's predetermined color scheme for the banner { 'light' || 'dark' }, default: 'light'
             },
             {
-                channel: ($rootScope.branchData.channel) ? $rootScope.branchData.channel : channel,
-                campaign: ($rootScope.branchData.campaign) ? $rootScope.branchData.campaign : campaign,
-                feature: ($rootScope.branchData.feature) ? $rootScope.branchData.feature : feature,
-                stage: ($rootScope.branchData.stage) ? $rootScope.branchData.stage : stage,
-                tags: ($rootScope.branchData.tags) ? $rootScope.branchData.tags + ',smart_banner' : tags,
+                channel: ($rootScope.branchData.channel) ? $rootScope.branchData.channel : 'website',
+                campaign: ($rootScope.branchData.campaign) ? $rootScope.branchData.campaign : '',
+                feature: ($rootScope.branchData.feature) ? $rootScope.branchData.feature : 'smart_banner',
+                stage: ($rootScope.branchData.stage) ? $rootScope.branchData.stage : '',
+                tags: ($rootScope.branchData.tags) ? $rootScope.branchData.tags + ',smart_banner' : '',
                 data: {
                     '$deeplink_path': 'content/page/12354'
                     //deeplink: 'data',
@@ -593,7 +591,7 @@
                 "abbreviation": "NY",
                 backgroundImgUrl : 'assets/img/states/NY.jpg',
                 baseFee : 200,
-                successRate : 95,
+                successRate : 85,
                 avgFine : 180
             },
             {
