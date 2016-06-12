@@ -357,7 +357,8 @@
         //var campaign = '';
         //var feature = 'smart_banner';
         //var stage = '';
-        var tagsForBannerLink = ['smart_banner'];
+        // var tagsForBannerLink = ['smart_banner'];
+        var tagsForBannerLink;
 
 
         (function(b,r,a,n,c,h,_,s,d,k) {
@@ -388,11 +389,12 @@
 
                 console.log('rootScope.branchData: ', $rootScope.branchData);
 
-                // var tagsForBannerLink;
-
                 if (_.isArray(data.data_parsed['~tags'])) {
                     console.log('tags is an array');
                     tagsForBannerLink = _.concat(data.data_parsed['~tags'], 'smart_banner');
+                } else if (_.isString(data.data_parsed['~tags'])) {
+                    console.log('tags is a string');
+                    tagsForBannerLink = data.data_parsed['~tags'] + ',smart_banner';
                 }
                 console.log('tagsForBannerLink: ', tagsForBannerLink);
             }
