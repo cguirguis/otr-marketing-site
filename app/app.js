@@ -400,9 +400,25 @@
             }
 
             console.log('branch init complete');
+            initBranchSmartBanner();
             $rootScope.$broadcast('BranchInitComplete');
         });
 
+        branch.addListener('willShowBanner', onShowBranchBanner);
+        branch.addListener('willCloseBanner', onCloseBranchBanner);
+
+        function onShowBranchBanner() {
+            // Push top navbar down the height of the branch banner
+            $(".navbar.navbar-fixed-top").css("top", "76px");
+        }
+
+        function onCloseBranchBanner() {
+            // Reset navbar's top property to 0
+            $(".navbar.navbar-fixed-top").css("top", "0");
+        }
+    }
+
+    function initBranchSmartBanner() {
         branch.banner({
                 icon: 'https://s3.amazonaws.com/otr-assets/img/favicon/favicon.ico',
                 title: 'Off the Record - Fight your traffic tickets',
@@ -438,20 +454,9 @@
                     //username: 'Alex'
                 }
             });
-
-        branch.addListener('willShowBanner', onShowBranchBanner);
-        branch.addListener('willCloseBanner', onCloseBranchBanner);
-
-        function onShowBranchBanner() {
-            // Push top navbar down the height of the branch banner
-            $(".navbar.navbar-fixed-top").css("top", "76px");
-        }
-
-        function onCloseBranchBanner() {
-            // Reset navbar's top property to 0
-            $(".navbar.navbar-fixed-top").css("top", "0");
-        }
     }
+
+
 
     loadEvents.$inject = ['$state', '$rootScope', '$location', '$cookies'];
     function loadEvents($state, $rootScope, $location, $cookies) {
