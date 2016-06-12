@@ -6,8 +6,8 @@
         .controller('DefaultTemplateCtrl', DefaultTemplateCtrl);
 
 
-    DefaultTemplateCtrl.$inject = ['ENV', '$rootScope', '$cookies', '$timeout', '$http', '$q', 'GlobalUtils', 'OtrService', 'FileService'];
-    function DefaultTemplateCtrl(ENV, $rootScope, $cookies, $timeout, $http, $q, GlobalUtils, OtrService, FileService) {
+    DefaultTemplateCtrl.$inject = ['ENV', '$rootScope', '$cookies', '$filter', '$timeout', '$http', '$q', 'GlobalUtils', 'OtrService', 'FileService'];
+    function DefaultTemplateCtrl(ENV, $rootScope, $cookies, $filter, $timeout, $http, $q, GlobalUtils, OtrService, FileService) {
         var vm = this,
 
             URLS = {
