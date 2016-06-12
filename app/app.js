@@ -357,7 +357,7 @@
         //var campaign = '';
         //var feature = 'smart_banner';
         //var stage = '';
-        //var tags = ['some-random-tag', 'other-random-tag'];
+        var tagsForBannerLink = ['smart_banner'];
 
 
         (function(b,r,a,n,c,h,_,s,d,k) {
@@ -385,10 +385,19 @@
                     stage : data.data_parsed['~stage'],
                     tags : data.data_parsed['~tags']
                 };
+
+                console.log('rootScope.branchData: ', $rootScope.branchData);
+
+                // var tagsForBannerLink;
+
+                if (_.isArray(data.data_parsed['~tags'])) {
+                    console.log('tags is an array');
+                    tagsForBannerLink = _.concat(data.data_parsed['~tags'], 'smart_banner');
+                }
+                console.log('tagsForBannerLink: ', tagsForBannerLink);
             }
 
             console.log('branch init complete');
-            // $rootScope.branchInitComplete = true;
             $rootScope.$broadcast('BranchInitComplete');
         });
 
@@ -420,7 +429,7 @@
                 campaign: ($rootScope.branchData.campaign) ? $rootScope.branchData.campaign : '',
                 feature: ($rootScope.branchData.feature) ? $rootScope.branchData.feature : 'smart_banner',
                 stage: ($rootScope.branchData.stage) ? $rootScope.branchData.stage : '',
-                tags: ($rootScope.branchData.tags) ? $rootScope.branchData.tags + ',smart_banner' : '',
+                tags: tagsForBannerLink,
                 data: {
                     '$deeplink_path': 'content/page/12354'
                     //deeplink: 'data',
