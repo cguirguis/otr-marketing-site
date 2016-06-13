@@ -92,6 +92,7 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: none;
   border: none;
   height: 70px;
+  z-index: 2;
 
   .navbar-toggle {
     border: solid 1px white;
@@ -1103,6 +1104,10 @@ a.fight-my-ticket {
     }
   }
 
+  #content.how-it-works-header {
+    margin-top: 80px;
+  }
+
   #footer #sub-floor .copyright {
     width: 100%;
   }
@@ -1117,6 +1122,12 @@ a.fight-my-ticket {
 @media (max-width: 816px) {
   .textwidget {
     margin-top: 0px!important;
+  }
+}
+
+@media (max-width: 440px) {
+  #content.how-it-works-header {
+    margin-top: 130px;
   }
 }
 
@@ -1137,7 +1148,7 @@ a.fight-my-ticket {
   }
 }
 
-@media (max-height: 650px) {
+@media (max-height: 650px) and (max-width: 500px) {
   .media-container {
     position: relative;
   }
