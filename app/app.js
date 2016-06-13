@@ -353,11 +353,12 @@
             isBranchLink : false
         };
         // Set defaults for banner click.
-        var channel = 'Website';
-        var campaign = '';
-        var feature = 'smart_banner';
-        var stage = '';
-        var tags = ['some-random-tag', 'other-random-tag'];
+        //var channel = 'Website';
+        //var campaign = '';
+        //var feature = 'smart_banner';
+        //var stage = '';
+        // var tagsForBannerLink = ['smart_banner'];
+        var tagsForBannerLink;
 
 
         (function(b,r,a,n,c,h,_,s,d,k) {
@@ -386,14 +387,38 @@
                     tags : data.data_parsed['~tags']
                 };
 
-                console.log('finished writing branch data to rootscope');
+                console.log('rootScope.branchData: ', $rootScope.branchData);
+
+                if (_.isArray(data.data_parsed['~tags'])) {
+                    console.log('tags is an array');
+                    tagsForBannerLink = _.concat(data.data_parsed['~tags'], 'smart_banner');
+                } else if (_.isString(data.data_parsed['~tags'])) {
+                    console.log('tags is a string');
+                    tagsForBannerLink = data.data_parsed['~tags'] + ',smart_banner';
+                }
+                console.log('tagsForBannerLink: ', tagsForBannerLink);
             }
 
             console.log('branch init complete');
-            $rootScope.branchInitComplete = true;
+            initBranchSmartBanner();
             $rootScope.$broadcast('BranchInitComplete');
         });
 
+        branch.addListener('willShowBanner', onShowBranchBanner);
+        branch.addListener('willCloseBanner', onCloseBranchBanner);
+
+        function onShowBranchBanner() {
+            // Push top navbar down the height of the branch banner
+            $(".navbar.navbar-fixed-top").css("top", "76px");
+        }
+
+        function onCloseBranchBanner() {
+            // Reset navbar's top property to 0
+            $(".navbar.navbar-fixed-top").css("top", "0");
+        }
+    }
+
+    function initBranchSmartBanner() {
         branch.banner({
                 icon: 'https://s3.amazonaws.com/otr-assets/img/favicon/favicon.ico',
                 title: 'Off the Record - Fight your traffic tickets',
@@ -418,31 +443,20 @@
                 theme: 'light'                         // Uses Branch's predetermined color scheme for the banner { 'light' || 'dark' }, default: 'light'
             },
             {
-                channel: ($rootScope.branchData.channel) ? $rootScope.branchData.channel : channel,
-                campaign: ($rootScope.branchData.campaign) ? $rootScope.branchData.campaign : campaign,
-                feature: ($rootScope.branchData.feature) ? $rootScope.branchData.feature : feature,
-                stage: ($rootScope.branchData.stage) ? $rootScope.branchData.stage : stage,
-                tags: ($rootScope.branchData.tags) ? $rootScope.branchData.tags + ',smart_banner' : tags,
+                channel: ($rootScope.branchData.channel) ? $rootScope.branchData.channel : 'website',
+                campaign: ($rootScope.branchData.campaign) ? $rootScope.branchData.campaign : '',
+                feature: ($rootScope.branchData.feature) ? $rootScope.branchData.feature : 'smart_banner',
+                stage: ($rootScope.branchData.stage) ? $rootScope.branchData.stage : '',
+                tags: tagsForBannerLink,
                 data: {
                     '$deeplink_path': 'content/page/12354'
                     //deeplink: 'data',
                     //username: 'Alex'
                 }
             });
-
-        branch.addListener('willShowBanner', onShowBranchBanner);
-        branch.addListener('willCloseBanner', onCloseBranchBanner);
-
-        function onShowBranchBanner() {
-            // Push top navbar down the height of the branch banner
-            $(".navbar.navbar-fixed-top").css("top", "76px");
-        }
-
-        function onCloseBranchBanner() {
-            // Reset navbar's top property to 0
-            $(".navbar.navbar-fixed-top").css("top", "0");
-        }
     }
+
+
 
     loadEvents.$inject = ['$state', '$rootScope', '$location', '$cookies'];
     function loadEvents($state, $rootScope, $location, $cookies) {
@@ -593,7 +607,7 @@
                 "abbreviation": "NY",
                 backgroundImgUrl : 'assets/img/states/NY.jpg',
                 baseFee : 200,
-                successRate : 95,
+                successRate : 85,
                 avgFine : 180
             },
             {
