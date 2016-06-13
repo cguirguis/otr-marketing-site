@@ -5,8 +5,8 @@
         .module('brochure')
         .controller('TicketCtrl', TicketCtrl);
 
-    TicketCtrl.$inject = ['$rootScope', '$scope', '$stateParams', '$q', 'ENV'];
-    function TicketCtrl($rootScope, $scope, $stateParams, $q, ENV) {
+    TicketCtrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', '$q', 'ENV'];
+    function TicketCtrl($rootScope, $scope, $state, $stateParams, $q, ENV) {
         var vm = this;
 
         // State details
@@ -37,6 +37,10 @@
         vm.verifyImageUpload = verifyImageUpload;
         vm.removeTicketPhoto = removeTicketPhoto;
         vm.submitPhotoStep = submitPhotoStep;
+        vm.formatMatchingCourtsResponse = formatMatchingCourtsResponse;
+        vm.findMatchingCourts = findMatchingCourts;
+        vm.isCourtFormInError = isCourtFormInError;
+        vm.submitCourtStep = submitCourtStep;
 
         var otrService = $rootScope.otrService || new OtrService({domain: ENV.apiEndpoint});
 
@@ -103,6 +107,70 @@
                 return false;
             }
             return true;
+        }
+
+        function formatMatchingCourtsResponse(courtsResponse) {
+
+            console.log('formatting response: ', courtsResponse);
+
+            _.forEach(courtsResponse.courts, function(elem, key) {
+                elem.customDescription = elem.address.city + ', ' + elem.address.stateCode + ' - ' + elem.county + ' County';
+            });
+
+            return courtsResponse;
+        }
+
+        function findMatchingCourts(userInputString, timeoutPromise) {
+            var params = {
+                searchQuery: userInputString
+            }
+
+            vm.isCourtSearchLoading = true;
+
+            return otrService.getCourtsByQueryUsingGET(params)
+                .then(
+                function(response) {
+                    vm.isCourtSearchLoading = false;
+                    return response;
+                },
+                function(error) {
+                    vm.isCourtSearchLoading = false;
+                    return $q.reject(error);
+                }
+            );
+        }
+
+        function isCourtFormInError() {
+
+            if (vm.isCourtFormSubmitted == false) {
+                return false;
+            }
+
+            if (vm.selectedCourt && vm.selectedCourt.originalObject) {
+                if (vm.selectedCourt.originalObject.courtId != null) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        function submitCourtStep() {
+            vm.isCourtFormSubmitted = true;
+
+            if (vm.selectedCourt == null || vm.selectedCourt.originalObject == null || vm.selectedCourt.originalObject.courtId == null) {
+                return false;
+            }
+
+            var court = vm.selectedCourt.originalObject;
+            // Set the selected court in the citation
+            vm.newCitation.court = {
+                courtId : court.courtId,
+                location: court.address.city + ", " + court.address.stateCode
+            };
+
+            console.log("court: ", vm.selectedCourt.originalObject);
+            console.log("citation with court: ", vm.newCitation);
         }
 
 

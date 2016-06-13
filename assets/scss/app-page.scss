@@ -25,7 +25,7 @@
 
           .meta {
             //width: calc(100% - 300px);
-            padding: 40px;
+            padding-top: 40px;
 
             .title {
               font-size: 40px;
@@ -37,6 +37,38 @@
             .space-top-5 {
               button {
                 padding: 9px 80px;
+              }
+            }
+
+            angucomplete-alt#courts {
+              input {
+                height: 53px;
+                width: 90%;
+                padding-left: 15px;
+                font-size: 18px;
+              }
+              .otr-angucomplete-dropdown {
+                width: 90%;
+                margin: auto;
+
+                .otr-angucomplete-row {
+                  border: solid 1px #ccc;
+                  border-top: none;
+                  overflow: auto;
+                  cursor: pointer;
+
+                  .angucomplete-title {
+                    float: left;
+                  }
+                  .angucomplete-description {
+                    float: right;
+                  }
+                }
+              }
+              .fa-spinner {
+                position: relative;
+                right: 40px;
+                color: $primaryBlue;
               }
             }
           }
@@ -99,6 +131,7 @@
               }
             }
           }
+
         }
       }
     }
