@@ -315,6 +315,7 @@
         });
     }
 
+    writeReferrerCookie.$inject = ['$document', '$cookies'];
     function writeReferrerCookie($document, $cookies) {
 
         var referrer = $document[0].referrer;
@@ -337,6 +338,7 @@
         $cookies.put('otr-referrer', JSON.stringify(referrer), cookieDefaults);
     }
 
+    writeReferrerCookie.$inject = ['$rootScope', '$cookies'];
     function branchInit($rootScope, $cookies) {
 
         var cookieExpireDate = new Date();
@@ -418,7 +420,8 @@
         }
     }
 
-    function initBranchSmartBanner() {
+    writeReferrerCookie.$inject = ['$rootScope'];
+    function initBranchSmartBanner($rootScope) {
         branch.banner({
                 icon: 'https://s3.amazonaws.com/otr-assets/img/favicon/favicon.ico',
                 title: 'Off the Record - Fight your traffic tickets',
