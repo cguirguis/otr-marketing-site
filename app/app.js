@@ -402,7 +402,7 @@
             }
 
             console.log('branch init complete');
-            initBranchSmartBanner();
+            initBranchSmartBanner($rootScope, tagsForBannerLink);
             $rootScope.$broadcast('BranchInitComplete');
         });
 
@@ -420,8 +420,8 @@
         }
     }
 
-    writeReferrerCookie.$inject = ['$rootScope'];
-    function initBranchSmartBanner($rootScope) {
+    writeReferrerCookie.$inject = ['$rootScope', 'tagsForBannerLink'];
+    function initBranchSmartBanner($rootScope, tagsForBannerLink) {
         branch.banner({
                 icon: 'https://s3.amazonaws.com/otr-assets/img/favicon/favicon.ico',
                 title: 'Off the Record - Fight your traffic tickets',
@@ -458,8 +458,6 @@
                 }
             });
     }
-
-
 
     loadEvents.$inject = ['$state', '$rootScope', '$location', '$cookies'];
     function loadEvents($state, $rootScope, $location, $cookies) {
