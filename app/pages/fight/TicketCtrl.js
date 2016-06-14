@@ -123,7 +123,7 @@
         function findMatchingCourts(userInputString, timeoutPromise) {
             var params = {
                 searchQuery: userInputString
-            }
+            };
 
             vm.isCourtSearchLoading = true;
 
@@ -164,13 +164,13 @@
 
             var court = vm.selectedCourt.originalObject;
             // Set the selected court in the citation
-            vm.newCitation.court = {
+            $rootScope.newCitation.court = {
                 courtId : court.courtId,
                 location: court.address.city + ", " + court.address.stateCode
             };
 
             console.log("court: ", vm.selectedCourt.originalObject);
-            console.log("citation with court: ", vm.newCitation);
+            console.log("citation with court: ", $rootScope.newCitation);
         }
 
 
@@ -197,7 +197,7 @@
                              }
                          );*/
 
-                        vm.newCitation = response.citation;
+                        var citation = response.citation;
 
                         // set some defaults
                         citation.citationIssueDateUTC = new Date();
@@ -205,6 +205,8 @@
                         citation.involvesAccident = false;
                         citation.isPastDue = false;
                         $rootScope.citation = citation;
+
+                        $rootScope.newCitation = citation;
 
                         return citation;
                     },

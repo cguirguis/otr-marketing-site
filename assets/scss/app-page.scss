@@ -52,23 +52,47 @@
                 margin: auto;
 
                 .otr-angucomplete-row {
-                  border: solid 1px #ccc;
+                  padding: 15px;
+                  border: solid 1px #ececec;
                   border-top: none;
                   overflow: auto;
                   cursor: pointer;
+                  text-align: left;
+                  color: #565a5c;
+                  margin-bottom: 0px;
 
+                  &:hover {
+                    background-color: #ccc;
+                    > * {
+                      color: white;
+                    }
+                  }
+
+                  &.otr-angucomplete-selected-row {
+                    background-color: tomato;
+                    > * {
+                      color: white;
+                    }
+                  }
                   .angucomplete-title {
-                    float: left;
                   }
                   .angucomplete-description {
-                    float: right;
+                    line-height: 15px;
                   }
                 }
               }
-              .fa-spinner {
-                position: relative;
-                right: 40px;
-                color: $primaryBlue;
+
+              .angucomplete-holder {
+                span.input-icon {
+                  position: relative;
+
+                  .fa-spinner {
+                    position: absolute;
+                    right: 15px;
+                    top: 0px;
+                    color: $primaryBlue;
+                  }
+                }
               }
             }
           }
