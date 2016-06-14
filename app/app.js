@@ -354,12 +354,6 @@
         $rootScope.branchData = {
             isBranchLink : false
         };
-        // Set defaults for banner click.
-        //var channel = 'Website';
-        //var campaign = '';
-        //var feature = 'smart_banner';
-        //var stage = '';
-        // var tagsForBannerLink = ['smart_banner'];
         var tagsForBannerLink;
 
 
@@ -397,6 +391,9 @@
                 } else if (_.isString(data.data_parsed['~tags'])) {
                     console.log('tags is a string');
                     tagsForBannerLink = data.data_parsed['~tags'] + ',smart_banner';
+                } else {
+                    console.log('tags is not defined');
+                    tagsForBannerLink = 'smart_banner';
                 }
                 console.log('tagsForBannerLink: ', tagsForBannerLink);
             }
