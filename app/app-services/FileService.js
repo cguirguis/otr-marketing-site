@@ -68,24 +68,24 @@
 
             return otrService.createNewCitationUsingPOST(dataObj)
                 .then(
-                    function (response) {
-                        var citation = response.citation;
-                        console.log("unsigned url: ", citation.ticketImageUrl);
+                function (response) {
+                    var citation = response.citation;
+                    console.log("unsigned url: ", citation.ticketImageUrl);
 
-                        // set some defaults
-                        citation.citationIssueDateUTC = new Date();
-                        citation.violationCount = 1;
-                        citation.involvesAccident = false;
-                        citation.isPastDue = false;
-                        $rootScope.citation = citation;
+                    // set some defaults
+                    citation.citationIssueDateUTC = new Date();
+                    citation.violationCount = 1;
+                    citation.involvesAccident = false;
+                    citation.isPastDue = false;
+                    $rootScope.citation = citation;
 
-                        return citation;
-                    },
-                    function (error) {
-                        console.error('ERROR creating citation from image: ', error);
-                        return $q.reject(error);
-                    }
-                );
+                    return citation;
+                },
+                function (error) {
+                    console.error('ERROR creating citation from image: ', error);
+                    return $q.reject(error);
+                }
+            );
         }
 
 
@@ -141,3 +141,4 @@
     }
 
 })();
+

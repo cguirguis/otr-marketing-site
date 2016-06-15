@@ -9,6 +9,7 @@
         'ngMeta',
         'otrBackendService',
         'angucomplete-alt',
+        'ngNumberPicker',
         'flow'
     ])
         .run(initData)
@@ -279,6 +280,21 @@
                 templateUrl: 'app/pages/fight/court.html',
                 controller: 'TicketCtrl as vm'
             })
+            .state('default-template.fight.info', {
+                url: '/fight-your-ticket/ticket-info',
+                templateUrl: 'app/pages/fight/info.html',
+                controller: 'TicketCtrl as vm'
+            })
+            .state('default-template.fight.review', {
+                url: '/fight-your-ticket/review',
+                templateUrl: 'app/pages/fight/review.html',
+                controller: 'TicketCtrl as vm'
+            })
+            .state('default-template.fight.payment', {
+                url: '/fight-your-ticket/payment',
+                templateUrl: 'app/pages/fight/payment.html',
+                controller: 'TicketCtrl as vm'
+            })
             // -------------------------------
             // ----- OTHER PAGES -----
             // -------------------------------
@@ -340,6 +356,17 @@
                 $anchorScroll();
             }
         });
+
+        // Back state up in CacheService on page change/reload
+        $rootScope.$on("$routeChangeStart", function (event, next, current) {
+            if (sessionStorage.restorestate == "true") {
+                $rootScope.$broadcast('restorestate');
+                sessionStorage.restorestate = false;
+            }
+        });
+        window.onbeforeunload = function (event) {
+            $rootScope.$broadcast('savestate');
+        };
     }
 
     function writeReferrerCookie($document, $cookies) {

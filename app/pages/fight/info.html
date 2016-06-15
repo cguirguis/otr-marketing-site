@@ -1,0 +1,195 @@
+
+<div class="step container">
+    <div class="step-body row">
+        <div class="meta col-xs-12 container" ng-show="!vm.isNoLawfirmAvailable ">
+            <h1 class="row text-center">
+                You're almost done!
+            </h1>
+
+            <!-- Number of violations -->
+            <div class="row space-top-5">
+                <div class="col-xs-12 col-md-7">
+                    <div class="row row-condensed">
+                        <div class="col-xs-12 col-md-6 text-right text-center-sm">
+                            <label>
+                                Number of Violations on Ticket
+                            </label>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <h-number value="vm.session.model.citation.violationCount"
+                                      min="1"
+                                      max="10"
+                                      step="1"
+                                      style="text-align:center;"
+                                      change="onChanged()"
+                                      singular="violation"
+                                      plural="violations"></h-number>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-5">
+                    <label>
+                        <!--<i class="fa fa-question-circle" data-behavior="tooltip"></i>-->
+                        <span class="note">These are things like speeding, improper lane change, driving without a
+                            license,
+                            etc.</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Fine amount -->
+            <div class="row space-top-2">
+                <div class="col-xs-12 col-md-7">
+                    <div class="row row-condensed">
+                        <div class="col-xs-12 col-md-6 text-right text-center-sm">
+                            <label>Fine Amount</label>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                <input type="text"
+                                       fcsa-number="{ min: 0, maxDecimals: 2 }"
+                                       ng-model="vm.tempFineAmount"
+                                       ng-change="vm.fineAmountUpdated()"
+                                       class="form-control"
+                                       placeholder="Fine Amount">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-5">
+                    <label>
+                        <span class="note">Optional</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Accident Involved -->
+            <div class="row space-top-2">
+                <div class="col-xs-12 col-md-7">
+                    <div class="row row-condensed">
+                        <div class="col-xs-12 col-md-6 text-right text-center-sm">
+                            <label>Was there an accident involved?</label>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div>
+                                <label class="radio-inline">
+                                    <input type="radio" name="radioBtnInvolvesAccident" ng-value=1
+                                           ng-model="vm.session.model.citation.involvesAccident">
+                                    Yes
+                                </label>
+
+                                <label class="radio-inline">
+                                    <input type="radio" name="radioBtnInvolvesAccident" ng-value=0 checked
+                                           ng-model="vm.session.model.citation.involvesAccident">
+                                    No
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-5">
+                    <label>
+                        <span></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Button -->
+            <div class="row space-top-2">
+                <div class="col-xs-12 col-md-7">
+                    <div class="row row-condensed">
+                        <div class="col-xs-12 col-md-6 text-right text-center-sm">
+
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <button type="submit" tabindex="4"
+                                    class="btn btn-primary btn-large"
+                                    ng-click="vm.submitTicketInfoStep()"
+                                    ng-disabled="vm.dataLoading == true">
+                                <span>Continue &nbsp;</span>
+                                <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- no lawfirm available page -->
+        <div class="meta" ng-show="vm.isNoLawfirmAvailable">
+            <h1 class="show-lg text-left">
+                Sorry, we have no lawyers available for <i>{{vm.session.model.selectedCourt.originalObject.customDescription}}</i>
+            </h1>
+            <div class="text-left">
+                We are working on expanding our coverage across the country. If you would still like to contest this ticket through
+                Off the Record, then please click the "Attempt to find me a lawyer" button, and we'll get back to you within 1-5 days
+                with an <b>exact price</b>
+            </div>
+
+            <div class="row space-top-5 row-space-2 col-7">
+                <div>
+                    <div>
+                        <input type="checkbox"
+                               ng-init="vm.isFindMeLawyerChecked = false"
+                               ng-click="vm.isFindMeLawyerChecked = !vm.isFindMeLawyerChecked"
+                               ng-disabled="vm.dataLoading == true">
+                        <span>Attempt to find me a lawyer &nbsp;</span>
+                        <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
+                        </input>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-show="vm.isFindMeLawyerChecked">
+                <div class="row space-top-2 row-space-1 col-7">
+                    <div class="col-md-6 text-right text-center-sm">
+                        <label>How much are you willing to pay for the attorney?</label>
+                    </div>
+                    <div class="input-group col-md-6">
+                        <span class="input-group-addon">$</span>
+                        <input type="text"
+                               fcsa-number="{ min: 0, maxDecimals: 2 }"
+                               ng-model="vm.offerPrice"
+                               class="form-control"
+                               placeholder="">
+                    </div>
+                </div>
+                <div class="row space-top-2 row-space-1 col-7">
+                    <div class="col-md-6 text-right text-center-sm">
+                        <label>What's a good phone number to reach you?</label>
+                    </div>
+                    <div class="input-group col-md-6">
+                        <span class="input-group-addon">#</span>
+                        <input type="text"
+                               ng-model="vm.phoneNumber"
+                               class="form-control"
+                               placeholder="555-555-5555">
+                    </div>
+                </div>
+
+                <div class="row space-top-2 row-space-5 col-7">
+                    <div>
+                        <button type="submit"
+                                class="btn btn-primary btn-lg"
+                                ng-click="vm.submitFindMeLawyerInfo()"
+                                ng-disabled="vm.isRequestForLawyerLoading == true">
+                            <span>Submit &nbsp;</span>
+                            <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.isRequestForLawyerLoading"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row space-top-2 row-space-5 col-7" ng-show="!vm.isFindMeLawyerChecked">
+                <button type="submit" tabindex="4"
+                        class="btn btn-outline btn-lg"
+                        ng-click="vm.cancelNoLawyers()"
+                        ng-disabled="vm.dataLoading == true">
+                    <span>No thanks, return home &nbsp;</span>
+                    <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -75,7 +75,7 @@
                                       id="courts"
                                       placeholder="Assigned court (e.g. Seattle Municipal Court)"
                                       pause="200"
-                                      selected-object="vm.selectedCourt"
+                                      selected-object="vm.session.model.selectedCourt"
                                       remote-api-handler="vm.findMatchingCourts"
                                       remote-url-response-formatter="vm.formatMatchingCourtsResponse"
                                       remote-url-data-field="courts"
@@ -98,9 +98,9 @@
                                     </div>
                                     <br>
                                     <button type="submit" tabindex="4"
-                                            class="btn btn-primary btn-large" style="padding: 9px 80px;"
+                                            class="btn btn-primary btn-large"
                                             ng-click="vm.submitCourtStep()"
-                                            ng-disabled="!vm.selectedCourt || vm.isCourtFormInError()">
+                                            ng-disabled="!vm.session.model.selectedCourt || vm.isCourtFormInError()">
                                         Continue
                                     </button>
                                 </div>

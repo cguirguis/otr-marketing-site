@@ -40,6 +40,12 @@
               }
             }
 
+            .note {
+              font-weight: 300;
+              font-size: 15px;
+              color: gray;
+            }
+
             angucomplete-alt#courts {
               input {
                 height: 53px;
@@ -93,6 +99,18 @@
                     color: $primaryBlue;
                   }
                 }
+              }
+            }
+
+            ul.whats-included {
+              list-style-type: circle;
+              padding-left: 10px;
+
+              li {
+                font-size: 14px;
+                padding: 0px 0px 12px 0;
+                border-width: 0px 0px 0px 0px;
+                border-style: dashed;
               }
             }
           }
@@ -165,6 +183,27 @@
 .justify-center {
   justify-content: center;
 }
+.space-top-2 {
+  margin-top: 12.50px;
+}
+.space-top-3 {
+  margin-top: 18.75px;
+}
 .space-top-5 {
   margin-top: 31.25px;
+}
+.text-lima, .icon-lima {
+  color: #3fb34f;
+}
+.text-rausch, .icon-rausch {
+  color: #ff5a5f;
+}
+.border-top-gray {
+  border-top: 1px solid lightgray;
+  padding-top: 10px;
+}
+@media (max-width: 767px) {
+  .text-center-sm {
+    text-align: center;
+  }
 }
