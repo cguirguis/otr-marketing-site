@@ -5,8 +5,8 @@
         .module('brochure')
         .controller('TicketCtrl', TicketCtrl);
 
-    TicketCtrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', '$q', 'ENV', 'CacheService'];
-    function TicketCtrl($rootScope, $scope, $state, $stateParams, $q, ENV, CacheService) {
+    TicketCtrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', '$q', '$filter', 'ENV', 'CacheService'];
+    function TicketCtrl($rootScope, $scope, $state, $stateParams, $q, $filter, ENV, CacheService) {
         var vm = this;
 
         // State details
@@ -196,7 +196,7 @@
             // Update the citation
             var dataObj = {
                 citationIdString: vm.session.model.citation.citationId,
-                request: {
+                updateCitationRequest: {
                     citation: vm.session.model.citation
                 }
             };
@@ -204,6 +204,7 @@
             otrService.updateCitationUsingPUT(dataObj)
                 .then(
                     function (response) {
+                        console.log("Update citation response: " + response);
                         // if we haven't yet created a new case, create one now
                         if (vm.session.model.case == null) {
                             return otrService.createCaseUsingPOST(dataObj)
@@ -225,6 +226,7 @@
                 )
                 .then(
                     function(response) {
+                        console.log("Create case response: " + response);
                         var newCase = response.theCase;
                         newCase.chanceOfSuccess = response.chanceOfSuccess;
                         newCase.insuranceCostInCents = response.projectedInsuranceCostInCents;
@@ -238,6 +240,7 @@
                         return otrService.isRefundEligibleUsingGET({caseId: newCase.caseId});
                     },
                     function (error, data, headers) {
+                        debugger;
                         vm.dataLoading = false;
                         if(error.data.error.errorCode === 501) {
                             vm.isNoLawfirmAvailable = true;
@@ -248,6 +251,7 @@
                 )
                 .then(
                     function(response) {
+                        console.log("refundEligibility response: " + response);
                         vm.session.model.refundEligibility = {
                             isEligible: response.refundEligibilityType === 'FULL_REFUND',
                             uiReasonMsg: response.uiReasonMsg

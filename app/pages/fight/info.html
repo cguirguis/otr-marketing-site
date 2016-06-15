@@ -2,7 +2,7 @@
 <div class="step container">
     <div class="step-body row">
         <div class="meta col-xs-12 container" ng-show="!vm.isNoLawfirmAvailable ">
-            <h1 class="row text-center">
+            <h1 class="row text-center" style="float:none;">
                 You're almost done!
             </h1>
 
@@ -10,7 +10,7 @@
             <div class="row space-top-5">
                 <div class="col-xs-12 col-md-7">
                     <div class="row row-condensed">
-                        <div class="col-xs-12 col-md-6 text-right text-center-sm">
+                        <div class="col-xs-12 col-md-6 text-right-md text-center-sm">
                             <label>
                                 Number of Violations on Ticket
                             </label>
@@ -27,21 +27,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-5">
+                <div class="col-xs-12 col-md-5 text-left-md text-center-sm">
                     <label>
-                        <!--<i class="fa fa-question-circle" data-behavior="tooltip"></i>-->
-                        <span class="note">These are things like speeding, improper lane change, driving without a
+                        <div class="note">These are things like speeding, improper lane change, driving without a
                             license,
-                            etc.</span>
+                            etc.</div>
                     </label>
                 </div>
             </div>
 
             <!-- Fine amount -->
-            <div class="row space-top-2">
+            <div class="row space-top-5">
                 <div class="col-xs-12 col-md-7">
                     <div class="row row-condensed">
-                        <div class="col-xs-12 col-md-6 text-right text-center-sm">
+                        <div class="col-xs-12 col-md-6 text-right-md text-center-sm">
                             <label>Fine Amount</label>
                         </div>
                         <div class="col-xs-12 col-md-6">
@@ -57,18 +56,18 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-5">
+                <div class="col-xs-12 col-md-5 text-left-md text-center-sm">
                     <label>
-                        <span class="note">Optional</span>
+                        <div class="note">Optional</div>
                     </label>
                 </div>
             </div>
 
             <!-- Accident Involved -->
-            <div class="row space-top-2">
+            <div class="row space-top-5">
                 <div class="col-xs-12 col-md-7">
                     <div class="row row-condensed">
-                        <div class="col-xs-12 col-md-6 text-right text-center-sm">
+                        <div class="col-xs-12 col-md-6 text-right-md text-center-sm">
                             <label>Was there an accident involved?</label>
                         </div>
                         <div class="col-xs-12 col-md-6">
@@ -78,7 +77,6 @@
                                            ng-model="vm.session.model.citation.involvesAccident">
                                     Yes
                                 </label>
-
                                 <label class="radio-inline">
                                     <input type="radio" name="radioBtnInvolvesAccident" ng-value=0 checked
                                            ng-model="vm.session.model.citation.involvesAccident">
@@ -90,28 +88,21 @@
                 </div>
                 <div class="col-xs-12 col-md-5">
                     <label>
-                        <span></span>
+                        <div></div>
                     </label>
                 </div>
             </div>
 
             <!-- Button -->
-            <div class="row space-top-2">
-                <div class="col-xs-12 col-md-7">
-                    <div class="row row-condensed">
-                        <div class="col-xs-12 col-md-6 text-right text-center-sm">
-
-                        </div>
-                        <div class="col-xs-12 col-md-6">
-                            <button type="submit" tabindex="4"
-                                    class="btn btn-primary btn-large"
-                                    ng-click="vm.submitTicketInfoStep()"
-                                    ng-disabled="vm.dataLoading == true">
-                                <span>Continue &nbsp;</span>
-                                <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
-                            </button>
-                        </div>
-                    </div>
+            <div class="row space-top-5">
+                <div class="col-xs-12">
+                    <button type="submit" tabindex="4"
+                            class="btn btn-primary btn-large"
+                            ng-click="vm.submitTicketInfoStep()"
+                            ng-disabled="vm.dataLoading == true">
+                        <span>Continue</span>
+                        <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -143,7 +134,7 @@
 
             <div ng-show="vm.isFindMeLawyerChecked">
                 <div class="row space-top-2 row-space-1 col-7">
-                    <div class="col-md-6 text-right text-center-sm">
+                    <div class="col-md-6 text-right-md text-center-sm">
                         <label>How much are you willing to pay for the attorney?</label>
                     </div>
                     <div class="input-group col-md-6">
@@ -156,7 +147,7 @@
                     </div>
                 </div>
                 <div class="row space-top-2 row-space-1 col-7">
-                    <div class="col-md-6 text-right text-center-sm">
+                    <div class="col-md-6 text-right-md text-center-sm">
                         <label>What's a good phone number to reach you?</label>
                     </div>
                     <div class="input-group col-md-6">
