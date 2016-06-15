@@ -1104,10 +1104,6 @@ a.fight-my-ticket {
     }
   }
 
-  #content.how-it-works-header {
-    margin-top: 80px;
-  }
-
   #footer #sub-floor .copyright {
     width: 100%;
   }
@@ -1128,6 +1124,12 @@ a.fight-my-ticket {
 @media (max-width: 440px) {
   #content.how-it-works-header {
     margin-top: 130px;
+  }
+}
+
+@media (max-width: 500px) {
+  #content.how-it-works-header {
+    margin-top: 80px;
   }
 }
 
