@@ -126,8 +126,10 @@ gulp.task('copy-src', function() {
         gulp.src('./app/**/*')
             .pipe(gulp.dest('./build/app/'));
 
+    var robotsFile = argv.prod ? 'crawler/prod/robots.txt' : 'crawler/devo/robots.txt';
+
     var seoFiles =
-        gulp.src(['robots.txt', 'sitemap.txt'])
+        gulp.src([robotsFile, 'sitemap.txt'])
             .pipe(gulp.dest('./build/'));
 
     return merge(bower, app, seoFiles);
