@@ -43,6 +43,7 @@
         vm.formatMatchingCourtsResponse = formatMatchingCourtsResponse;
         vm.findMatchingCourts = findMatchingCourts;
         vm.isCourtFormInError = isCourtFormInError;
+        vm.fineAmountUpdated = fineAmountUpdated;
         vm.submitCourtStep = submitCourtStep;
         vm.submitTicketInfoStep = submitTicketInfoStep;
         vm.continueToPayment = continueToPayment;
@@ -226,7 +227,7 @@
                 )
                 .then(
                     function(response) {
-                        console.log("Create case response: " + response);
+                        console.log("Create case response: " + JSON.stringify(response));
                         var newCase = response.theCase;
                         newCase.chanceOfSuccess = response.chanceOfSuccess;
                         newCase.insuranceCostInCents = response.projectedInsuranceCostInCents;
@@ -234,13 +235,9 @@
                         vm.session.model.caseFinancials = newCase.lawfirmCaseDecision.caseFinancials;
                         vm.dataLoading = false;
 
-                        // Go to next step
-                        $state.go('default-template.fight.review', {});
-
                         return otrService.isRefundEligibleUsingGET({caseId: newCase.caseId});
                     },
                     function (error, data, headers) {
-                        debugger;
                         vm.dataLoading = false;
                         if(error.data.error.errorCode === 501) {
                             vm.isNoLawfirmAvailable = true;
@@ -251,11 +248,14 @@
                 )
                 .then(
                     function(response) {
-                        console.log("refundEligibility response: " + response);
+                        console.log("refundEligibility response: " + JSON.stringify(response));
                         vm.session.model.refundEligibility = {
                             isEligible: response.refundEligibilityType === 'FULL_REFUND',
                             uiReasonMsg: response.uiReasonMsg
                         }
+
+                        // Go to next step
+                        $state.go('default-template.fight.review', {});
                     }
                 );
         }

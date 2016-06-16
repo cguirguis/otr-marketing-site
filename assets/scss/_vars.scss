@@ -13,6 +13,12 @@ $primaryBlue: #41A3E3;
 $primaryBlueDarker: #397FAF;
 $gray1: #4d4d4d;
 
+// screen sizes
+$screen-xs-min: 425px;
+$screen-sm-min: 768px;
+$screen-md-min: 992px;
+$screen-lg-min: 1200px;
+
 
 @mixin split-columns($numCols, $columnGap) {
   -moz-column-count: $numCols;

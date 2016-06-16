@@ -7,7 +7,7 @@
 
 <div class="step container">
     <div class="step-body row">
-        <div class="meta col-xs-12 col-md-8 container">
+        <div class="meta col-xs-12 col-md-8 container" style="padding: 20px 40px">
             <div class="title text-center">
                 We can fight your ticket!
             </div>
@@ -26,14 +26,14 @@
                                 Eligible for a refund
                                 <!--<i class="icon icon-question" data-toggle="tooltip" title="Based on historical performance"></i>-->
                             </label>
-                            <div ng-show=vm.session.model.refundEligibility.isEligible class="otr-14-light text-lima">{{vm.session.model.refundEligibility.uiReasonMsg}}</div>
-                            <div ng-show=!vm.session.model.refundEligibility.isEligible class="note">{{vm.session.model.refundEligibility.uiReasonMsg}}</div>
+                            <div ng-show="vm.session.model.refundEligibility.isEligible" class="otr-14-light text-lima">{{vm.session.model.refundEligibility.uiReasonMsg}}</div>
+                            <div ng-show="!vm.session.model.refundEligibility.isEligible" class="note">{{vm.session.model.refundEligibility.uiReasonMsg}}</div>
                         </div>
-                        <div ng-show=vm.session.model.refundEligibility.isEligible
+                        <div ng-show="vm.session.model.refundEligibility.isEligible"
                              class="col-xs-4 text-right otr-18-bold text-lima">
                             <label>{{vm.session.model.refundEligibility.isEligible | yesNo}}</label>
                         </div>
-                        <div ng-show=!vm.session.model.refundEligibility.isEligible
+                        <div ng-show="!vm.session.model.refundEligibility.isEligible"
                              class="col-xs-4 text-right otr-18-bold text-rausch">
                             <label>{{vm.session.model.refundEligibility.isEligible | yesNo}}</label>
                         </div>

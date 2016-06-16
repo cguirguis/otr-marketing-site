@@ -2,8 +2,7 @@
 // (photo/court/date/violations)
 // These styles override default .content-page styling
 // defined in content-page.scss
-
-@import '_vars.scss';
+whats
 
 .content-page.app-page {
   .content-container {
@@ -111,20 +110,21 @@
                 }
               }
             }
+          }
 
-            ul.whats-included {
-              list-style-type: circle;
-              padding-left: 10px;
-              text-align: left;
+          ul.whats-included {
+            list-style-type: circle;
+            padding-left: 10px;
+            text-align: left;
 
-              li {
-                font-size: 14px;
-                padding: 0px 0px 12px 0;
-                border-width: 0px 0px 0px 0px;
-                border-style: dashed;
-              }
+            li {
+              font-size: 14px;
+              padding: 0px 0px 12px 0;
+              border-width: 0px 0px 0px 0px;
+              border-style: dashed;
             }
           }
+
           .flow {
             > div {
               min-height: 200px;

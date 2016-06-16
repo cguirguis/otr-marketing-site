@@ -49,28 +49,14 @@
             <div class="title">
                 Tell us the assigned court
             </div>
-            <div class="subtitle">
+            <div class="subtitle space-top-2">
                 Your ticket should mention which court it is assigned to.
                 If you're not sure, type the name of the city or county in which you received the ticket
                 and pick the court you think best matches.
                 We'll verify all the info on our end.
             </div>
             <div class="space-top-5">
-                <div class="row space-top-5 row-space-1">
-                    <div class="col-8">
-                        <div class="row row-condensed">
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="space-top-3">
-
-                <div class="col-8">
-                    <!--<b>Selected Court:</b> {{ vm.selectedCourt }}<br>-->
-                    <!--<b>Court:</b> {{ vm.selectedCourt.originalObject }}-->
-
+                <div>
                     <angucomplete-alt template-url="/my-custom-template.html"
                                       id="courts"
                                       placeholder="Assigned court (e.g. Seattle Municipal Court)"
@@ -86,25 +72,19 @@
                                       auto-match="true"
                                       text-no-results="No courts found"
                                       text-searching="Searching courts..."/>
-                    <!--remote-url="https://otr-backend-service-us-devo.offtherecord.com/api/v1/courts/traffic/"-->
                 </div>
-                <div class="space-top-5 btn-invite-friends">
-                    <div class="row space-top-5 row-space-1">
-                        <div class="col-8">
-                            <div class="row row-condensed">
-                                <div class="col-md-12 text-center">
-                                    <div class="space-top-2 form-error-message" ng-show="vm.isCourtFormInError()">
-                                        Please specify which court your ticket is assigned to
-                                    </div>
-                                    <br>
-                                    <button type="submit" tabindex="4"
-                                            class="btn btn-primary btn-large"
-                                            ng-click="vm.submitCourtStep()"
-                                            ng-disabled="!vm.session.model.selectedCourt || vm.isCourtFormInError()">
-                                        Continue
-                                    </button>
-                                </div>
+                <div class="space-top-5">
+                    <div class="row row-condensed">
+                        <div class="text-center">
+                            <div class="space-top-2 form-error-message" ng-show="vm.isCourtFormInError()">
+                                Please specify which court your ticket is assigned to
                             </div>
+                            <button type="submit" tabindex="4"
+                                    class="btn btn-primary btn-large"
+                                    ng-click="vm.submitCourtStep()"
+                                    ng-disabled="!vm.session.model.selectedCourt || vm.isCourtFormInError()">
+                                Continue
+                            </button>
                         </div>
                     </div>
                 </div>
