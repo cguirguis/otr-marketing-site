@@ -18,10 +18,10 @@
 
         (function initService() {
 
-            $rootScope.$on('BranchInitComplete', function(event, next, current) {
-                console.log('BranchInitComplete event: ', $rootScope.branchData);
-                buildITunesLink();
-            });
+            //$rootScope.$on('BranchInitComplete', function(event, next, current) {
+            //    console.log('BranchInitComplete event: ', $rootScope.branchData);
+            //    buildITunesLink();
+            //});
 
         })();
 
@@ -29,44 +29,47 @@
 
         // ----- PUBLIC METHODS -------------------------------------------------------
 
-        function buildITunesLink() {
+        function buildITunesLink(channel, campaign, feature, stage, tags) {
 
             console.log('building iTunes link');
-
-            var iTunesBaseLink = 'http://fight.offtherecord.com/iosBadge?';
-            var iTunesLink = iTunesBaseLink + '~channel=website&~feature=iOSBadge&~stage=footer&';
-
             console.log('isBranchLink: ', $rootScope.branchData.isBranchLink);
 
-            if ($rootScope.branchData.isBranchLink) {
-                var link = iTunesBaseLink;
+            var iTunesBaseLink = 'http://fight.offtherecord.com/iosBadge?';
 
+            if ($rootScope.branchData.isBranchLink) {
                 if ($rootScope.branchData.channel) {
-                    link = link + '~channel=' + $rootScope.branchData.channel + '&';
+                    channel = $rootScope.branchData.channel;
                 }
                 if ($rootScope.branchData.campaign) {
-                    link = link + '~campaign=' + $rootScope.branchData.campaign + '&';
+                    campaign = $rootScope.branchData.campaign;
                 }
                 if ($rootScope.branchData.feature) {
-                    link = link + '~feature=' + $rootScope.branchData.feature + '&';
+                    feature = $rootScope.branchData.feature;
                 }
                 if ($rootScope.branchData.stage) {
-                    link = link + '~stage=' + $rootScope.branchData.stage + '&';
+                    stage = $rootScope.branchData.stage;
                 }
                 if ($rootScope.branchData.tags) {
-                    link = link + '~tags=' + $rootScope.branchData.tags + ',iOSBadge,footer' + '&';
+                    tags = $rootScope.branchData.tags + ',iOSBadge,footer';
                 }
-                console.log('new link: ', link);
-                iTunesLink = link;
             }
 
-            var ref1 = $cookies.getObject('otr-referrer');
-            console.log('ref1: ', ref1);
+            var iTunesLink = iTunesBaseLink
+                + '~channel=' + channel
+                + '&~campaign=' + campaign
+                + '&~feature=' + feature
+                + '&~stage=' + stage
+                + '&~tags=' + tags
+                + '&';
 
-            if (ref1) {
-                var ref1clean = $filter('encodeUri')(ref1);
-                console.log('ref1clean', ref1clean);
-                iTunesLink = iTunesLink + 'referrer=' + ref1clean;
+            // If a referrer is present, add it to the link.
+            var httpReferrer = $cookies.getObject('otr-referrer');
+            console.log('httpReferrer: ', httpReferrer);
+
+            if (httpReferrer) {
+                var httpReferrerEncoded = $filter('encodeUri')(httpReferrer);
+                console.log('httpReferrerEncoded', httpReferrerEncoded);
+                iTunesLink = iTunesLink + 'referrer=' + httpReferrerEncoded;
             }
 
             console.log('Final iTunes Link: ', iTunesLink);
