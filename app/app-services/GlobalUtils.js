@@ -5,8 +5,8 @@
         .module('brochure')
         .service('GlobalUtils', GlobalUtils);
 
-    GlobalUtils.$inject = ['$rootScope', '$cookies'];
-    function GlobalUtils($rootScope, $cookies) {
+    GlobalUtils.$inject = ['$rootScope', '$cookies', '$filter'];
+    function GlobalUtils($rootScope, $cookies, $filter) {
 
         var service = {}
 
