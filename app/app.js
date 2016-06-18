@@ -338,8 +338,8 @@
         $cookies.put('otr-referrer', JSON.stringify(referrer), cookieDefaults);
     }
 
-    writeReferrerCookie.$inject = ['$rootScope', '$cookies'];
-    function branchInit($rootScope, $cookies) {
+    branchInit.$inject = ['$rootScope', '$cookies', 'DefaultTemplateCtrl'];
+    function branchInit($rootScope, $cookies, DefaultTemplateCtrl) {
 
         var cookieExpireDate = new Date();
         var numberOfDaysToAdd = 14;
@@ -417,7 +417,7 @@
         }
     }
 
-    writeReferrerCookie.$inject = ['$rootScope', 'tagsForBannerLink'];
+    initBranchSmartBanner.$inject = ['$rootScope', 'tagsForBannerLink'];
     function initBranchSmartBanner($rootScope, tagsForBannerLink) {
         branch.banner({
                 icon: 'https://s3.amazonaws.com/otr-assets/img/favicon/favicon.ico',
