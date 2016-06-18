@@ -334,8 +334,8 @@
         cookieExpireDate.setDate(cookieExpireDate.getDate() + numberOfDaysToAdd);
 
         var cookieDefaults = {
-            // 'domain' : 'offtherecord.com',
-            'domain' : 'localhost',
+            'domain' : 'offtherecord.com',
+            // 'domain' : 'localhost',
             'expires' : cookieExpireDate
         };
 
@@ -352,8 +352,8 @@
         cookieExpireDate.setDate(cookieExpireDate.getDate() + numberOfDaysToAdd);
 
         var cookieDefaults = {
-            // 'domain' : 'offtherecord.com',
-            'domain' : 'localhost',
+            'domain' : 'offtherecord.com',
+            // 'domain' : 'localhost',
             'expires' : cookieExpireDate
         };
 
