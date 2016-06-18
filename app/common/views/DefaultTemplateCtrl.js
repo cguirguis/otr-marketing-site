@@ -100,6 +100,7 @@
         // ----- PUBLIC METHODS -------------------------------------------------------
 
         (function initController() {
+            console.log('----- Initializing DefaultTemplateCtrl -----');
 
             otrService = new OtrService({domain: ENV.apiEndpoint});
             $rootScope.otrService = otrService;
