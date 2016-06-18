@@ -5,8 +5,8 @@
         .module('brochure')
         .service('GlobalUtils', GlobalUtils);
 
-    GlobalUtils.$inject = [];
-    function GlobalUtils() {
+    GlobalUtils.$inject = ['$rootScope', '$cookies'];
+    function GlobalUtils($rootScope, $cookies) {
 
         var service = {}
 
@@ -14,16 +14,64 @@
         service.showMobileWebApp = showMobileWebApp;
         service.isMobileDevice = isMobileDevice;
         service.getAppUrl = getAppUrl;
-        service.numberWithCommas = numberWithCommas;
-        service.parseDollarString = parseDollarString;
+        service.buildITunesLink = buildITunesLink;
 
         (function initService() {
+
+            $rootScope.$on('BranchInitComplete', function(event, next, current) {
+                console.log('BranchInitComplete event: ', $rootScope.branchData);
+                buildITunesLink();
+            });
 
         })();
 
         return service;
 
         // ----- PUBLIC METHODS -------------------------------------------------------
+
+        function buildITunesLink() {
+
+            console.log('building iTunes link');
+
+            var iTunesBaseLink = 'http://fight.offtherecord.com/iosBadge?';
+            var iTunesLink = iTunesBaseLink + '~channel=website&~feature=iOSBadge&~stage=footer&';
+
+            console.log('isBranchLink: ', $rootScope.branchData.isBranchLink);
+
+            if ($rootScope.branchData.isBranchLink) {
+                var link = iTunesBaseLink;
+
+                if ($rootScope.branchData.channel) {
+                    link = link + '~channel=' + $rootScope.branchData.channel + '&';
+                }
+                if ($rootScope.branchData.campaign) {
+                    link = link + '~campaign=' + $rootScope.branchData.campaign + '&';
+                }
+                if ($rootScope.branchData.feature) {
+                    link = link + '~feature=' + $rootScope.branchData.feature + '&';
+                }
+                if ($rootScope.branchData.stage) {
+                    link = link + '~stage=' + $rootScope.branchData.stage + '&';
+                }
+                if ($rootScope.branchData.tags) {
+                    link = link + '~tags=' + $rootScope.branchData.tags + ',iOSBadge,footer' + '&';
+                }
+                console.log('new link: ', link);
+                iTunesLink = link;
+            }
+
+            var ref1 = $cookies.getObject('otr-referrer');
+            console.log('ref1: ', ref1);
+
+            if (ref1) {
+                var ref1clean = $filter('encodeUri')(ref1);
+                console.log('ref1clean', ref1clean);
+                iTunesLink = iTunesLink + 'referrer=' + ref1clean;
+            }
+
+            console.log('Final iTunes Link: ', iTunesLink);
+            return iTunesLink;
+        }
 
         function getAppUrl() {
             return showMobileWebApp() ? "https://m.offtherecord.com" : "https://me.offtherecord.com";
@@ -57,16 +105,5 @@
             return isMobileDevice || window.innerWidth <= 800;
         }
 
-        function numberWithCommas(x) {
-            return parseInt(x).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        }
-
-        function parseDollarString(x) {
-            if (!x.replace) {
-                return x;
-            }
-            var value = x.replace(",", "");
-            return Number(value.replace(",","").replace(/[^0-9\.]+/g,""));
-        }
     }
 })();

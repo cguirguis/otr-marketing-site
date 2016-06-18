@@ -16,10 +16,11 @@
 
         var otrService = null;
         var exitPopupLoaded = false;
-        var iTunesBaseLink = 'http://fight.offtherecord.com/iosBadge?';
-        vm.iTunesLink = iTunesBaseLink + '~channel=website&~feature=iOSBadge&~stage=footer&';
+        //var iTunesBaseLink = 'http://fight.offtherecord.com/iosBadge?';
+        //vm.iTunesLink = iTunesBaseLink + '~channel=website&~feature=iOSBadge&~stage=footer&';
 
         vm.isMobileDevice = GlobalUtils.isMobileDevice();
+        vm.iTunesLinkForFooter = GlobalUtils.buildITunesLink();
 
         $(document).ready(function () {
 
@@ -108,54 +109,54 @@
 
             FileService.initializeFileReaderHandler();
 
-            $rootScope.$on('BranchInitComplete', function(event, next, current) {
-                console.log('BranchInitComplete event: ', $rootScope.branchData);
-                buildITunesLink();
-            });
+            //$rootScope.$on('BranchInitComplete', function(event, next, current) {
+            //    console.log('BranchInitComplete event: ', $rootScope.branchData);
+            //    buildITunesLink();
+            //});
 
         })();
 
-        function buildITunesLink() {
-
-            console.log('isBranchLink: ', $rootScope.branchData.isBranchLink);
-
-            if ($rootScope.branchData.isBranchLink) {
-                var link = iTunesBaseLink;
-
-                if ($rootScope.branchData.channel) {
-                    link = link + '~channel=' + $rootScope.branchData.channel + '&';
-                }
-                if ($rootScope.branchData.campaign) {
-                    link = link + '~campaign=' + $rootScope.branchData.campaign + '&';
-                }
-                if ($rootScope.branchData.feature) {
-                    link = link + '~feature=' + $rootScope.branchData.feature + '&';
-                }
-                if ($rootScope.branchData.stage) {
-                    link = link + '~stage=' + $rootScope.branchData.stage + '&';
-                }
-                if ($rootScope.branchData.tags) {
-                    link = link + '~tags=' + $rootScope.branchData.tags + ',iOSBadge,footer' + '&';
-                }
-                console.log('new link: ', link);
-                vm.iTunesLink = link;
-            }
-
-            var ref2 = $cookies.get('otr-referrer');
-            var ref1 = $cookies.getObject('otr-referrer');
-
-            console.log('ref1: ', ref1);
-            console.log('ref2: ', ref2);
-
-            if (ref1) {
-                var ref1clean = $filter('encodeUri')(ref1);
-                console.log('ref1clean', ref1clean);
-                vm.iTunesLink = vm.iTunesLink + 'referrer=' + ref1clean;
-            }
-
-            console.log('iTunes Link: ', vm.iTunesLink);
-
-        }
+        //function buildITunesLink() {
+        //
+        //    console.log('isBranchLink: ', $rootScope.branchData.isBranchLink);
+        //
+        //    if ($rootScope.branchData.isBranchLink) {
+        //        var link = iTunesBaseLink;
+        //
+        //        if ($rootScope.branchData.channel) {
+        //            link = link + '~channel=' + $rootScope.branchData.channel + '&';
+        //        }
+        //        if ($rootScope.branchData.campaign) {
+        //            link = link + '~campaign=' + $rootScope.branchData.campaign + '&';
+        //        }
+        //        if ($rootScope.branchData.feature) {
+        //            link = link + '~feature=' + $rootScope.branchData.feature + '&';
+        //        }
+        //        if ($rootScope.branchData.stage) {
+        //            link = link + '~stage=' + $rootScope.branchData.stage + '&';
+        //        }
+        //        if ($rootScope.branchData.tags) {
+        //            link = link + '~tags=' + $rootScope.branchData.tags + ',iOSBadge,footer' + '&';
+        //        }
+        //        console.log('new link: ', link);
+        //        vm.iTunesLink = link;
+        //    }
+        //
+        //    var ref2 = $cookies.get('otr-referrer');
+        //    var ref1 = $cookies.getObject('otr-referrer');
+        //
+        //    console.log('ref1: ', ref1);
+        //    console.log('ref2: ', ref2);
+        //
+        //    if (ref1) {
+        //        var ref1clean = $filter('encodeUri')(ref1);
+        //        console.log('ref1clean', ref1clean);
+        //        vm.iTunesLink = vm.iTunesLink + 'referrer=' + ref1clean;
+        //    }
+        //
+        //    console.log('iTunes Link: ', vm.iTunesLink);
+        //
+        //}
 
         function isUploadSupported() {
             if (navigator.userAgent.match(/(Android (1.0|1.1|1.5|1.6|2.0|2.1))|(Windows Phone (OS 7|8.0))|(XBLWP)|(ZuneWP)|(w(eb)?OSBrowser)|(webOS)|(Kindle\/(1.0|2.0|2.5|3.0))/)) {

@@ -295,8 +295,8 @@
         }]);
     }
 
-    init.$inject = ['$document', '$rootScope', '$location', '$anchorScroll', '$cookies', 'ngMeta'];
-    function init($document, $rootScope, $location, $anchorScroll, $cookies, ngMeta) {
+    init.$inject = ['$document', '$rootScope', '$location', '$anchorScroll', '$cookies', 'ngMeta', 'GlobalUtils'];
+    function init($document, $rootScope, $location, $anchorScroll, $cookies, ngMeta, GlobalUtils) {
 
         writeReferrerCookie($document, $cookies);
 
@@ -338,8 +338,8 @@
         $cookies.put('otr-referrer', JSON.stringify(referrer), cookieDefaults);
     }
 
-    branchInit.$inject = ['$rootScope', '$cookies', 'DefaultTemplateCtrl'];
-    function branchInit($rootScope, $cookies, DefaultTemplateCtrl) {
+    branchInit.$inject = ['$rootScope', '$cookies'];
+    function branchInit($rootScope, $cookies) {
 
         var cookieExpireDate = new Date();
         var numberOfDaysToAdd = 14;
