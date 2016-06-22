@@ -295,9 +295,10 @@
         }]);
     }
 
-    init.$inject = ['$document', '$rootScope', '$location', '$anchorScroll', '$cookies', 'ngMeta'];
-    function init($document, $rootScope, $location, $anchorScroll, $cookies, ngMeta) {
+    init.$inject = ['$document', '$rootScope', '$location', '$anchorScroll', '$cookies', 'ngMeta', 'GlobalUtils'];
+    function init($document, $rootScope, $location, $anchorScroll, $cookies, ngMeta, GlobalUtils) {
 
+        console.log('----- app.init() -----');
         writeReferrerCookie($document, $cookies);
 
         // Initialize page title and meta tags
@@ -318,6 +319,8 @@
     writeReferrerCookie.$inject = ['$document', '$cookies'];
     function writeReferrerCookie($document, $cookies) {
 
+        console.log('----- writeReferrerCookie() -----');
+
         var referrer = $document[0].referrer;
         console.log('Referrer is (app.js): ', referrer);
 
@@ -332,14 +335,17 @@
 
         var cookieDefaults = {
             'domain' : 'offtherecord.com',
+            // 'domain' : 'localhost',
             'expires' : cookieExpireDate
         };
 
         $cookies.put('otr-referrer', JSON.stringify(referrer), cookieDefaults);
     }
 
-    writeReferrerCookie.$inject = ['$rootScope', '$cookies'];
+    branchInit.$inject = ['$rootScope', '$cookies'];
     function branchInit($rootScope, $cookies) {
+
+        console.log('----- branchInit() -----');
 
         var cookieExpireDate = new Date();
         var numberOfDaysToAdd = 14;
@@ -347,6 +353,7 @@
 
         var cookieDefaults = {
             'domain' : 'offtherecord.com',
+            // 'domain' : 'localhost',
             'expires' : cookieExpireDate
         };
 
@@ -396,6 +403,40 @@
                     tagsForBannerLink = 'smart_banner';
                 }
                 console.log('tagsForBannerLink: ', tagsForBannerLink);
+
+            } else {
+
+                // Check to see if there's a cookie with branch data and load that in.
+                var branchCookie = $cookies.getObject('branch-link');
+                console.log('branch-cookie: ', branchCookie);
+
+                if (branchCookie) {
+
+                    $rootScope.branchData = {
+                        isBranchLink : branchCookie['+clicked_branch_link'],
+                        channel : branchCookie['~channel'],
+                        campaign : branchCookie['~campaign'],
+                        feature : branchCookie['~feature'],
+                        stage : branchCookie['~stage'],
+                        tags : branchCookie['~tags']
+                    };
+
+                    console.log('rootScope.branchData: ', $rootScope.branchData);
+
+                    if (_.isArray($rootScope.branchData.tags)) {
+                        console.log('tags is an array');
+                        tagsForBannerLink = _.concat($rootScope.branchData.tags, 'smart_banner');
+                    } else if (_.isString($rootScope.branchData.tags)) {
+                        console.log('tags is a string');
+                        tagsForBannerLink = $rootScope.branchData.tags + ',smart_banner';
+                    } else {
+                        console.log('tags is not defined');
+                        tagsForBannerLink = 'smart_banner';
+                    }
+                    console.log('tagsForBannerLink: ', tagsForBannerLink);
+
+                }
+
             }
 
             console.log('branch init complete');
@@ -417,7 +458,7 @@
         }
     }
 
-    writeReferrerCookie.$inject = ['$rootScope', 'tagsForBannerLink'];
+    initBranchSmartBanner.$inject = ['$rootScope', 'tagsForBannerLink'];
     function initBranchSmartBanner($rootScope, tagsForBannerLink) {
         branch.banner({
                 icon: 'https://s3.amazonaws.com/otr-assets/img/favicon/favicon.ico',
