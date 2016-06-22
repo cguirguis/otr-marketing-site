@@ -700,7 +700,7 @@
             {
                 "name": "Texas",
                 "abbreviation": "TX",
-                backgroundImgUrl : 'assets/img/states/TX.jpg',
+                /*backgroundImgUrl : 'assets/img/states/TX.jpg',   // Need to actually add this image */
                 baseFee : 200,
                 successRate : 97,
                 avgFine : 107

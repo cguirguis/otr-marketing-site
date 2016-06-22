@@ -39,13 +39,12 @@
             });
 
             navbarToggle.click(function(event) {
-                event.stopPropagation();
+                $("ul#menu-main-menu").parent().toggle();
 
                 if (window.outerWidth > 768) {
+                    event.stopPropagation();
                     return;
                 }
-                
-                $("ul#menu-main-menu").parent().toggle();
 
                 var getStartedContainer = $(".get-started-container")[0];
                 if (getStartedContainer) {
@@ -53,6 +52,7 @@
                     zIndex = !zIndex ? 1 : zIndex;
                     getStartedContainer.style.zIndex = -1 * zIndex;
                 }
+                event.stopPropagation();
             });
 
             var fightNavItem = $('#menu-item-12');
