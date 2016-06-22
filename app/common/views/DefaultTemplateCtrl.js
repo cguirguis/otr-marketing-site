@@ -83,7 +83,8 @@
                 if (!exitPopupLoaded) {
                     bioEp.init({
                         fonts: ['//fonts.googleapis.com/css?family=Titillium+Web:300,400,600'],
-                        cookieExp: 2
+                        delay: 10,
+                        cookieExp: 1
                     });
                     exitPopupLoaded = true;
                 }

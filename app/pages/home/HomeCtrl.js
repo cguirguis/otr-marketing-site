@@ -7,8 +7,8 @@
         .controller('LawyerFormModalCtrl', LawyerFormModalCtrl);
 
 
-    HomeCtrl.$inject = ['$scope', '$timeout', 'ENV', '$cookies', '$filter', '$rootScope', '$uibModal', '$log', 'GlobalUtils'];
-    function HomeCtrl($scope, $timeout, ENV, $cookies, $filter, $rootScope, $uibModal, $log, GlobalUtils) {
+    HomeCtrl.$inject = ['$scope', '$timeout', 'ENV', '$state', '$rootScope', '$uibModal', '$log', 'GlobalUtils'];
+    function HomeCtrl($scope, $timeout, ENV, $state, $rootScope, $uibModal, $log, GlobalUtils) {
         var vm = this,
             isMobileDevice = GlobalUtils.isMobileDevice(),
 
@@ -16,12 +16,15 @@
                 POST_LAWYER_LEAD: ENV.apiEndpoint + '/api/v1/lawyers/lead'
             };
 
+        vm.errorMessage = "";
+
         // vm.iTunesLink = 'http://fight.offtherecord.com/ios-app-store?channel=website&feature=iOSBadge&stage=homepage&';
 
         // ----- INTERFACE ------------------------------------------------------------
         //vm.saveContactInfo = saveContactInfo;
         vm.openLawyerFormModal = openLawyerFormModal;
         vm.stateSearch = stateSearch;
+        vm.goToState = goToState;
 
         // ----- PUBLIC METHODS -------------------------------------------------------
 
@@ -61,6 +64,16 @@
                 }
             });
             return matches;
+        }
+
+        function goToState(stateCode, stateName) {
+            if (!stateCode || !stateCode.length) {
+                vm.errorMessage = "Please enter a valid state";
+                return;
+            }
+
+            vm.errorMessage = "";
+            $state.go('default-template.state-info.fight', { stateCode: stateCode, stateName: stateName });
         }
 
         //function buildITunesLink() {

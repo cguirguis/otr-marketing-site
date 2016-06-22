@@ -841,6 +841,10 @@ a.fight-my-ticket {
   margin-left: 15px;
   background-color: #ffffff;
 }
+.get-started-container.has-error #state-input-field_value {
+  border: solid 2px red;
+}
+
 .angucomplete-dropdown {
   z-index: 1;
 
@@ -917,27 +921,6 @@ a.fight-my-ticket {
   }
 }
 
-@media (max-width: 550px) {
-  .textwidget .get-started-container {
-    z-index: 1;
-    .overlay {
-      height: 142px;
-    }
-    .state-input {
-      width: 93%;
-      margin-left: 3%;
-    }
-    a.get-started-button {
-      width: 93%;
-      margin: 3px 0 0 3%;
-    }
-  }
-  #state-input-field_dropdown {
-    width: 93%;
-    margin-left: 3%;
-  }
-}
-
 @media (max-width: 640px) {
   body {
     font-size: 6px;
@@ -974,6 +957,25 @@ a.fight-my-ticket {
       height: 40px;
       cursor: pointer;
     }
+  }
+
+  .textwidget .get-started-container {
+    z-index: 1;
+    .overlay {
+      height: 142px;
+    }
+    .state-input {
+      width: 93%;
+      margin-left: 3%;
+    }
+    a.get-started-button {
+      width: 93%;
+      margin: 3px 0 0 3%;
+    }
+  }
+  #state-input-field_dropdown {
+    width: 93%;
+    margin-left: 3%;
   }
 }
 
