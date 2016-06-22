@@ -33,12 +33,18 @@
             });
 
             $("ul#menu-main-menu li#menu-item-12").click(function() {
-                if (vm.isMobileDevice) {
+                if (vm.isMobileDevice || window.outerWidth < 768) {
                     $("#menu-item-12").toggleClass("hover");
                 }
             });
 
             navbarToggle.click(function(event) {
+                event.stopPropagation();
+
+                if (window.outerWidth > 768) {
+                    return;
+                }
+                
                 $("ul#menu-main-menu").parent().toggle();
 
                 var getStartedContainer = $(".get-started-container")[0];
@@ -47,7 +53,6 @@
                     zIndex = !zIndex ? 1 : zIndex;
                     getStartedContainer.style.zIndex = -1 * zIndex;
                 }
-                event.stopPropagation();
             });
 
             var fightNavItem = $('#menu-item-12');
