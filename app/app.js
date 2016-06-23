@@ -478,7 +478,7 @@
                 phonePreviewText: '(999) 999-9999',      // The default phone placeholder is a US format number, localize the placeholder number with a custom placeholder with this option
                 showiOS: true,                          // Should the banner be shown on iOS devices?
                 showAndroid: false,                      // Should the banner be shown on Android devices?
-                showDesktop: true,                      // Should the banner be shown on desktop devices?
+                showDesktop: false,                      // Should the banner be shown on desktop devices?
                 iframe: true,                           // Show banner in an iframe, recomended to isolate Branch banner CSS
                 disableHide: false,                     // Should the user have the ability to hide the banner? (show's X on left side)
                 forgetHide: 1,                          // Should we show the banner after the user closes it? Can
@@ -487,8 +487,8 @@
                 mobileSticky: true,                    // Determines whether the mobile banner will be set `position: fixed;` (sticky) or `position: absolute;`, defaults to false *this property only applies when the banner position is 'top'
                 desktopSticky: true,                    // Determines whether the desktop banner will be set `position: fixed;` (sticky) or `position: absolute;`, defaults to true *this property only applies when the banner position is 'top'
                 make_new_link: false,                   // Should the banner create a new link, even if a link already exists?
-                rating: 5,                              // Number of stars (should be your store rating)
-                reviewCount: 10,                        // Number of reviews that generate the rating (should be your store reviews)
+                rating: 4.5,                              // Number of stars (should be your store rating)
+                reviewCount: 13,                        // Number of reviews that generate the rating (should be your store reviews)
                 theme: 'light'                         // Uses Branch's predetermined color scheme for the banner { 'light' || 'dark' }, default: 'light'
             },
             {
