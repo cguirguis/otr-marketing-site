@@ -299,7 +299,7 @@
     function init($document, $rootScope, $location, $anchorScroll, $cookies, ngMeta, GlobalUtils) {
 
         console.log('----- app.init() -----');
-        writeReferrerCookie($document, $cookies);
+        writeReferrerCookie($document, $cookies, $rootScope);
 
         // Initialize page title and meta tags
         ngMeta.init();
@@ -316,13 +316,21 @@
         });
     }
 
-    writeReferrerCookie.$inject = ['$document', '$cookies'];
-    function writeReferrerCookie($document, $cookies) {
+    writeReferrerCookie.$inject = ['$document', '$cookies', '$rootScope'];
+    function writeReferrerCookie($document, $cookies, $rootScope) {
 
         console.log('----- writeReferrerCookie() -----');
 
         var referrer = $document[0].referrer;
-        console.log('Referrer is (app.js): ', referrer);
+        console.log('Current referrer is (app.js): ', referrer);
+
+        if (!referrer || referrer == '') {
+            // If we previously wrote a referrer cookie, retrieve it.
+            referrer = $cookies.getObject('otr-referrer');
+            console.log('Previously saved referrer: ', referrer);
+        }
+
+        $rootScope.httpReferrer = referrer;
 
         // don't write (or overwrite) a cookie if there's no referrer value
         if (!referrer || referrer == '') {
@@ -330,7 +338,7 @@
         }
 
         var cookieExpireDate = new Date();
-        var numberOfDaysToAdd = 14;
+        var numberOfDaysToAdd = 20;
         cookieExpireDate.setDate(cookieExpireDate.getDate() + numberOfDaysToAdd);
 
         var cookieDefaults = {
@@ -348,7 +356,7 @@
         console.log('----- branchInit() -----');
 
         var cookieExpireDate = new Date();
-        var numberOfDaysToAdd = 14;
+        var numberOfDaysToAdd = 20;
         cookieExpireDate.setDate(cookieExpireDate.getDate() + numberOfDaysToAdd);
 
         var cookieDefaults = {
@@ -470,7 +478,7 @@
                 phonePreviewText: '(999) 999-9999',      // The default phone placeholder is a US format number, localize the placeholder number with a custom placeholder with this option
                 showiOS: true,                          // Should the banner be shown on iOS devices?
                 showAndroid: false,                      // Should the banner be shown on Android devices?
-                showDesktop: false,                      // Should the banner be shown on desktop devices?
+                showDesktop: true,                      // Should the banner be shown on desktop devices?
                 iframe: true,                           // Show banner in an iframe, recomended to isolate Branch banner CSS
                 disableHide: false,                     // Should the user have the ability to hide the banner? (show's X on left side)
                 forgetHide: 1,                          // Should we show the banner after the user closes it? Can
@@ -490,9 +498,8 @@
                 stage: ($rootScope.branchData.stage) ? $rootScope.branchData.stage : '',
                 tags: tagsForBannerLink,
                 data: {
-                    '$deeplink_path': 'content/page/12354'
-                    //deeplink: 'data',
-                    //username: 'Alex'
+                    '$deeplink_path': 'content/page/12354',
+                    referrer : $rootScope.httpReferrer
                 }
             });
     }
