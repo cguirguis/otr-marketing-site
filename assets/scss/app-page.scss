@@ -2,7 +2,8 @@
 // (photo/court/date/violations)
 // These styles override default .content-page styling
 // defined in content-page.scss
-whats
+
+@import '_vars.scss';
 
 .content-page.app-page {
   .content-container {
