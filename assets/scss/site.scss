@@ -1157,3 +1157,9 @@ a.fight-my-ticket {
     position: relative;
   }
 }
+
+// IE interprets media query widths differently than
+// other browsers. This makes sure it uses device width
+@-ms-viewport {
+  width: device-width;
+}
