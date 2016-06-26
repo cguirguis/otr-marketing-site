@@ -52,6 +52,7 @@ h1, h2, h3, h4, h5, h6 {
     background-size: cover;
     background-repeat: no-repeat;
     height: calc(100vh - 1px);
+    min-height: 525px;
     background-color: #337ab7;
   }
   h1 {
@@ -72,7 +73,7 @@ h1, h2, h3, h4, h5, h6 {
   padding-top: 12px;
   position: absolute;
   bottom: 0;
-  height: auto;
+  height: auto!important;
 
   .media-image img {
     max-height: 35px;
@@ -959,6 +960,23 @@ a.fight-my-ticket {
       cursor: pointer;
     }
   }
+}
+
+@media (max-width: 682px) {
+  .homepage-banner.bg-primary {
+    min-height: 555px;
+  }
+  div.signup-section {
+    display: block;
+  }
+  div.signup-form {
+    width: 100%;
+  }
+  .twitter-feed {
+    padding: 0;
+    width: 100%;
+    margin-left:10px;
+  }
 
   .textwidget .get-started-container {
     z-index: 1;
@@ -977,20 +995,6 @@ a.fight-my-ticket {
   #state-input-field_dropdown {
     width: 93%;
     margin-left: 3%;
-  }
-}
-
-@media (max-width: 682px) {
-  div.signup-section {
-    display: block;
-  }
-  div.signup-form {
-    width: 100%;
-  }
-  .twitter-feed {
-    padding: 0;
-    width: 100%;
-    margin-left:10px;
   }
 }
 
