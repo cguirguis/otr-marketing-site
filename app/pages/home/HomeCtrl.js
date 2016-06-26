@@ -19,7 +19,6 @@
         vm.errorMessage = "";
 
         // ----- INTERFACE ------------------------------------------------------------
-        //vm.saveContactInfo = saveContactInfo;
         vm.openLawyerFormModal = openLawyerFormModal;
         vm.stateSearch = stateSearch;
         vm.goToState = goToState;
@@ -59,14 +58,41 @@
             return matches;
         }
 
-        function goToState(stateCode, stateName) {
-            if (!stateCode || !stateCode.length) {
+        function goToState(selectedState) {
+
+            // console.log('selectedState: ', selectedState);
+
+            if (!selectedState || !selectedState.originalObject) {
                 vm.errorMessage = "Please enter a valid state";
                 return;
             }
 
-            vm.errorMessage = "";
-            $state.go('default-template.state-info.fight', { stateCode: stateCode, stateName: stateName });
+            if (selectedState.originalObject.abbreviation) {
+                // console.log('state object already specified');
+                // console.log('stateCode: ', selectedState.originalObject.abbreviation, ', stateName: ', selectedState.originalObject.name);
+                selectedState = selectedState.originalObject;
+
+            } else if (selectedState.originalObject.length == 2) {
+                // A state code was typed in.
+                // console.log('attempting to match with state abbreviation: ', selectedState.originalObject);
+                selectedState = _.find($rootScope.statesList, { 'abbreviation' : selectedState.originalObject.toUpperCase() });
+                // console.log('found matching state: ', selectedState);
+            }
+            else {
+                // console.log('matching by state name: ', selectedState.originalObject);
+                selectedState = _.find($rootScope.statesList, function(o) {
+                    return o.name.toLowerCase() == selectedState.originalObject.toLowerCase();
+                });
+                // console.log('found matching state: ', selectedState);
+            }
+
+            if (selectedState) {
+                vm.errorMessage = "";
+                $state.go('default-template.state-info.fight', { stateCode: selectedState.abbreviation, stateName: selectedState.name });
+            } else {
+                vm.errorMessage = "Please enter a valid state";
+            }
+
         }
 
         function openLawyerFormModal(size) {
@@ -94,33 +120,6 @@
             );
         }
 
-        //function saveContactInfo(isValid) {
-        //    vm.dataLoading = true;
-        //    vm.submitted = true;
-        //    vm.launchFormSuccess = false;
-        //    vm.launchFormResponseReceived = false;
-        //
-        //    // Only continue if the login form is valid
-        //    if (!isValid) {
-        //        vm.dataLoading = false;
-        //        return;
-        //    }
-        //
-        //    // Make the call to save the info
-        //    var dataObj = {
-        //        subscriber : {
-        //            fullName : vm.fullName,
-        //            email : vm.email,
-        //            postalCode : vm.zipcode,
-        //            subscriptionType : 'WEB_BROCHURE_LAUNCH_NOTIFICATION',
-        //            roleType: 'DEFENDANT'
-        //        }
-        //    };
-			//
-			//vm.formName = "contact";
-			//
-			//postSubscriberData(dataObj);
-        //}
     }
 
     /**

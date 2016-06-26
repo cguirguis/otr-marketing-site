@@ -15,9 +15,12 @@
                     <div class="get-started-container"
                          ng-class="{ 'has-error' : vm.errorMessage.length }">
                         <div class="overlay"></div>
+                        <!--<div>Selected: {{ vm.selectedState }}</div>-->
                         <angucomplete-alt id="state-input-field"
-                                          placeholder="Where did you get your ticket?"
+                                          placeholder="In which state did you get your ticket?"
                                           pause="100"
+                                          override-suggestions="true"
+                                          auto-match="true"
                                           selected-object="vm.selectedState"
                                           local-data="statesList"
                                           local-search="vm.stateSearch"
@@ -28,9 +31,10 @@
                                           input-class="state-input"
                                           match-class="highlight"
                                           text-no-results="Please select the state where you received your ticket."
+                                          ng-enter="vm.goToState(vm.selectedState)"
                                 ></angucomplete-alt>
 
-                        <a ng-click="vm.goToState(vm.selectedState.description, vm.selectedState.title)" class="fight-my-ticket get-started-button">Get Started</a></div>
+                        <a ng-click="vm.goToState(vm.selectedState)" class="fight-my-ticket get-started-button">Get Started</a></div>
                 </div>
             </div>
         </div>

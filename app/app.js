@@ -299,7 +299,7 @@
     function init($document, $rootScope, $location, $anchorScroll, $cookies, ngMeta, GlobalUtils) {
 
         console.log('----- app.init() -----');
-        writeReferrerCookie($document, $cookies);
+        writeReferrerCookie($document, $cookies, $rootScope);
 
         // Initialize page title and meta tags
         ngMeta.init();
@@ -316,13 +316,21 @@
         });
     }
 
-    writeReferrerCookie.$inject = ['$document', '$cookies'];
-    function writeReferrerCookie($document, $cookies) {
+    writeReferrerCookie.$inject = ['$document', '$cookies', '$rootScope'];
+    function writeReferrerCookie($document, $cookies, $rootScope) {
 
         console.log('----- writeReferrerCookie() -----');
 
         var referrer = $document[0].referrer;
-        console.log('Referrer is (app.js): ', referrer);
+        console.log('Current referrer is (app.js): ', referrer);
+
+        if (!referrer || referrer == '') {
+            // If we previously wrote a referrer cookie, retrieve it.
+            referrer = $cookies.getObject('otr-referrer');
+            console.log('Previously saved referrer: ', referrer);
+        }
+
+        $rootScope.httpReferrer = referrer;
 
         // don't write (or overwrite) a cookie if there's no referrer value
         if (!referrer || referrer == '') {
@@ -330,7 +338,7 @@
         }
 
         var cookieExpireDate = new Date();
-        var numberOfDaysToAdd = 14;
+        var numberOfDaysToAdd = 20;
         cookieExpireDate.setDate(cookieExpireDate.getDate() + numberOfDaysToAdd);
 
         var cookieDefaults = {
@@ -348,7 +356,7 @@
         console.log('----- branchInit() -----');
 
         var cookieExpireDate = new Date();
-        var numberOfDaysToAdd = 14;
+        var numberOfDaysToAdd = 20;
         cookieExpireDate.setDate(cookieExpireDate.getDate() + numberOfDaysToAdd);
 
         var cookieDefaults = {
@@ -479,8 +487,8 @@
                 mobileSticky: true,                    // Determines whether the mobile banner will be set `position: fixed;` (sticky) or `position: absolute;`, defaults to false *this property only applies when the banner position is 'top'
                 desktopSticky: true,                    // Determines whether the desktop banner will be set `position: fixed;` (sticky) or `position: absolute;`, defaults to true *this property only applies when the banner position is 'top'
                 make_new_link: false,                   // Should the banner create a new link, even if a link already exists?
-                rating: 5,                              // Number of stars (should be your store rating)
-                reviewCount: 10,                        // Number of reviews that generate the rating (should be your store reviews)
+                rating: 4.5,                              // Number of stars (should be your store rating)
+                reviewCount: 13,                        // Number of reviews that generate the rating (should be your store reviews)
                 theme: 'light'                         // Uses Branch's predetermined color scheme for the banner { 'light' || 'dark' }, default: 'light'
             },
             {
@@ -490,9 +498,8 @@
                 stage: ($rootScope.branchData.stage) ? $rootScope.branchData.stage : '',
                 tags: tagsForBannerLink,
                 data: {
-                    '$deeplink_path': 'content/page/12354'
-                    //deeplink: 'data',
-                    //username: 'Alex'
+                    '$deeplink_path': 'content/page/12354',
+                    referrer : $rootScope.httpReferrer
                 }
             });
     }
