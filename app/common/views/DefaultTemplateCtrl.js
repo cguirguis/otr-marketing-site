@@ -104,8 +104,6 @@
         // ----- PUBLIC METHODS -------------------------------------------------------
 
         (function initController() {
-            console.log('----- Initializing DefaultTemplateCtrl -----');
-
             otrService = new OtrService({domain: ENV.apiEndpoint});
             $rootScope.otrService = otrService;
             vm.reviewRequested = false;
@@ -179,7 +177,6 @@
                     function(response) {
                         vm.reviewRequested = true;
                         vm.submitReviewRequestLoading = false;
-                        console.log('success: ', response);
                         // Hide the popup
                         //$timeout(function(){
                         //    bioEp.hidePopup();

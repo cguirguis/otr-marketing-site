@@ -50,7 +50,6 @@
                     (state.abbreviation.toLowerCase().indexOf(str.toString().toLowerCase()) >= 0)) {
                     if (state.name.toLowerCase() === str.toString().toLowerCase()) {
                         vm.selectedState = state;
-                        console.log(vm.selectedState.name);
                     }
                     matches.push(state);
                 }
@@ -60,30 +59,22 @@
 
         function goToState(selectedState) {
 
-            // console.log('selectedState: ', selectedState);
-
             if (!selectedState || !selectedState.originalObject) {
                 vm.errorMessage = "Please enter a valid state";
                 return;
             }
 
             if (selectedState.originalObject.abbreviation) {
-                // console.log('state object already specified');
-                // console.log('stateCode: ', selectedState.originalObject.abbreviation, ', stateName: ', selectedState.originalObject.name);
                 selectedState = selectedState.originalObject;
 
             } else if (selectedState.originalObject.length == 2) {
                 // A state code was typed in.
-                // console.log('attempting to match with state abbreviation: ', selectedState.originalObject);
                 selectedState = _.find($rootScope.statesList, { 'abbreviation' : selectedState.originalObject.toUpperCase() });
-                // console.log('found matching state: ', selectedState);
             }
             else {
-                // console.log('matching by state name: ', selectedState.originalObject);
                 selectedState = _.find($rootScope.statesList, function(o) {
                     return o.name.toLowerCase() == selectedState.originalObject.toLowerCase();
                 });
-                // console.log('found matching state: ', selectedState);
             }
 
             if (selectedState) {
