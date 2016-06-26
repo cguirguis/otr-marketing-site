@@ -19,6 +19,7 @@
 
         // Upload Image Step
         vm.isImgFormSubmitted = false;
+        vm.noTicketOnHand = false;
         vm.isCourtFormSubmitted = false;
         vm.isTicketInfoFormSubmitted = false;
         vm.isPaymentFormSubmitted = false;

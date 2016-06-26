@@ -7,15 +7,60 @@
         </div>
         <div class="content-nav">
             <ul>
-                <li class="nav-item" ui-sref-active="active" ui-sref="default-template.fight.photo">Photo</li>
-                <li class="nav-item" ui-sref-active="active" ui-sref="default-template.fight.court">Court</li>
-                <li class="nav-item" ui-sref-active="active" ui-sref="default-template.fight.date">Date</li>
-                <li class="nav-item" ui-sref-active="active" ui-sref="default-template.fight.violations">Violations</li>
+                <li class="nav-item" ui-sref-active="active" ui-sref="default-template.state-info.overview">Overview</li>
+                <li class="nav-item" ui-sref-active="active" ui-sref="default-template.state-info.fight">Why fight</li>
+                <li class="nav-item" ui-sref-active="active" ui-sref="default-template.fight.photo">Fight your
+                    ticket</li>
             </ul>
         </div>
 
         <div class="content-body">
             <!----- TEMPLATE INSERTED HERE ----->
+            <div class="progress-bar">
+                <ul>
+                    <li ui-sref="default-template.fight.photo">
+                        <a href ng-class="{'selected' : vm.currentStep >= 1, 'done' : vm.currentStep > 1}">
+                            <div class="stepNumber">
+                                1
+                            </div>
+                            <span class="stepDesc text-small"> Photo </span>
+                        </a>
+                    </li>
+                    <li ui-sref="default-template.fight.court">
+                        <a href ng-class="{'selected' : vm.currentStep >= 2, 'done' : vm.currentStep > 2}">
+                            <div class="stepNumber">
+                                2
+                            </div>
+                            <span class="stepDesc text-small"> Court </span>
+                        </a>
+                    </li>
+                    <li ui-sref="default-template.fight.date">
+                        <a href ng-class="{'selected' : vm.currentStep >= 3, 'done' : vm.currentStep > 3}">
+                            <div class="stepNumber">
+                                3
+                            </div>
+                            <span class="stepDesc text-small"> Date </span>
+                        </a>
+                    </li>
+                    <li ui-sref="default-template.fight.violations">
+                        <a href ng-class="{'selected' : vm.currentStep >= 4, 'done' : vm.currentStep > 4}">
+                            <div class="stepNumber">
+                                4
+                            </div>
+                            <span class="stepDesc text-small"> Violations </span>
+                        </a>
+                    </li>
+                    <li ui-sref="default-template.fight.review">
+                        <a href ng-class="{'selected' : vm.currentStep >= 5, 'done' : vm.currentStep > 5}">
+                            <div class="stepNumber">
+                                5
+                            </div>
+                            <span class="stepDesc text-small"> Review & Submit </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
             <ui-view autoscroll="true" />
             <!--------------------------------->
         </div>

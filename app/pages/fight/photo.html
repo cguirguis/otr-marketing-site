@@ -3,66 +3,65 @@
         <div class="step-body row">
             <div class="meta col-xs-12 col-md-8">
                 <div class="title">
-                    Take a photo of your ticket (or court notice)
+                    Take a clear photo of your ticket or court notice
                 </div>
                 <div class="subtitle space-top-2">
-                    This will tell us almost everything we need to know about your ticket.
+                    We'll get most of the information we need right off the ticket.
                 </div>
-                <div class="space-top-5">
-                    <div class="row space-top-5 row-space-1">
-                        <div class="col-8">
-                            <div class="row row-condensed">
-                                <div class="col-md-12 text-center">
-                                    <button type="submit" tabindex="4" class="btn btn-primary btn-large" ng-click="vm.submitPhotoStep()" ng-disabled="vm.dataLoading == true || !vm.imgContent">
-                                        <span>Continue</span>
-                                        <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
-                                    </button>
-                                    <div class="space-top-2 form-error-message" ng-show="vm.isImgFormSubmitted && !vm.imgContent">
-                                        Please upload a picture of your ticket before continuing
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--div>
-                    <a href="#">I don't have a ticket or court appearance notice</a>
-                        <i class="fa fa-angle-right" style="
-                            font-size: 17px;
-                            padding-top: 3px;
-                            position: absolute;
-                            right: 24%;
-                            bottom: 5px;
-                            color: #397FAF;"></i>
-                </div-->
-            </div>
 
-            <div flow-init="{singleFile: true}" class="flow"
-                 flow-name="vm.obj.flow" class="pin"
-                 flow-file-added="vm.flowFileAdded($file)"
-                 flow-files-added="vm.processFile($files)"
-                 flow-files-submitted="vm.flowFilesSubmitted($flow)"
-                 flow-file-success="vm.flowFileSuccess($file, $message)">
+                <div flow-init="{singleFile: true}" class="flow"
+                     flow-name="vm.obj.flow" class="pin"
+                     flow-file-added="vm.flowFileAdded($file)"
+                     flow-files-added="vm.processFile($files)"
+                     flow-files-submitted="vm.flowFilesSubmitted($flow)"
+                     flow-file-success="vm.flowFileSuccess($file, $message)">
 
-                <!-- Drag and drop container -->
-                <!-- When there is no image -->
-                <div class="no-image drop pin justify-center col-xs-12 col-md-4" ng-class="dropClass" flow-drop="" ng-show="vm.imgContent == null" flow-drag-enter="dropClass='drag-over'" flow-drag-leave="dropClass=''">
+                    <!-- Drag and drop container -->
+                    <!-- When there is no image -->
+                    <div class="no-image drop pin justify-center space-top-3" ng-class="dropClass" flow-drop="" ng-show="vm.imgContent == null" flow-drag-enter="dropClass='drag-over'" flow-drag-leave="dropClass=''">
                     <span class="btn btn-default" flow-btn="">
-                        Upload Image
+                        ADD PHOTO
                         <input type="file" multiple="multiple" class="multiple-file-input">
                         <input type="file" class="single-file-input">
                     </span>
-                    <b>&nbsp;&nbsp;or </b>
-                    drag and drop your image here
+                        <b>&nbsp;&nbsp;or </b>
+                        drag and drop your image here
+                    </div>
+
+                    <!-- When there is an image -->
+                    <div class="has-image drop pin justify-center space-top-3" ng-class="dropClass" flow-drop="" ng-show="vm.imgContent != null" flow-drag-enter="dropClass='drag-over'" flow-drag-leave="dropClass = ''">
+                        <div class="remove-image" ng-click="vm.removeTicketPhoto()"
+                             class="intercom-launcher-hovercard-close intercom-launcher-hovercard-close-active">
+                            Remove
+                        </div>
+                        <img flow-img="$flow.files[0]" class="uploaded-image" style="max-width: 300px;width: 100%;margin: auto;">
+                    </div>
                 </div>
 
-                <!-- When there is an image -->
-                <div class="has-image drop pin justify-center col-xs-12 col-md-4" ng-class="dropClass" flow-drop="" ng-show="vm.imgContent != null" flow-drag-enter="dropClass='drag-over'" flow-drag-leave="dropClass = ''">
-                    <div class="remove-image" ng-click="vm.removeTicketPhoto()"
-                         class="intercom-launcher-hovercard-close intercom-launcher-hovercard-close-active">
-                        Remove
+            </div>
+
+            <div class="col-xs-12 col-md-4">
+                <div class="right-col">
+                    If you have already contested your ticket and received a court appearance notice, please provide a
+                    picture of the notice.
+
+                    <div class="space-top-5">
+                        <input type="checkbox" ng-click="vm.noTicketOnHand = !vm.noTicketOnHand"
+                               style="margin-right: 10px;">I don't have a ticket or court appearance notice</input>
                     </div>
-                    <img flow-img="$flow.files[0]" class="uploaded-image" style="max-width: 300px;width: 100%;margin: auto;">
+
+                    <div class="row space-top-3">
+                        <div class="text-center">
+                            <span tabindex="4" class="btn btn-default" ng-click="vm.submitPhotoStep()" ng-disabled="(vm.dataLoading == true || !vm.imgContent) && !vm.noTicketOnHand">
+                                <span>Continue</span>
+                                <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
+                            </span>
+                            <div class="space-top-2 form-error-message"
+                                 ng-show="(vm.isImgFormSubmitted && !vm.imgContent) && !vm.noTicketOnHand">
+                                Please upload a picture of your ticket before continuing
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
