@@ -21,6 +21,7 @@
     }
     .content-body {
       padding-top: 0;
+      overflow: hidden;
 
       .step {
         .step-body {
@@ -167,6 +168,8 @@
                 }
               }
               &.has-image {
+                position: relative;
+
                 .remove-image {
                   cursor: pointer;
                   position: absolute;
@@ -351,6 +354,13 @@ div.progress-bar {
       text-align: center;
       width: 40px;
       z-index: 2;
+
+      i {
+        color: #8e8e93;
+      }
+    }
+    a.selected .stepNumber i {
+      color: #007AFF;
     }
   }
 }

@@ -280,6 +280,11 @@
                 templateUrl: 'app/pages/fight/court.html',
                 controller: 'TicketCtrl as vm'
             })
+            .state('default-template.fight.date', {
+                url: '/fight-your-ticket/date',
+                templateUrl: 'app/pages/fight/date.html',
+                controller: 'TicketCtrl as vm'
+            })
             .state('default-template.fight.info', {
                 url: '/fight-your-ticket/ticket-info',
                 templateUrl: 'app/pages/fight/info.html',

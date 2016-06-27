@@ -52,10 +52,10 @@
 
                     <div class="row space-top-3">
                         <div class="text-center">
-                            <span tabindex="4" class="btn btn-default" ng-click="vm.submitPhotoStep()" ng-disabled="(vm.dataLoading == true || !vm.imgContent) && !vm.noTicketOnHand">
+                            <div tabindex="4" class="btn btn-default" ng-click="vm.submitPhotoStep()" ng-disabled="(vm.dataLoading == true || !vm.imgContent) && !vm.noTicketOnHand">
                                 <span>Continue</span>
                                 <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
-                            </span>
+                            </div>
                             <div class="space-top-2 form-error-message"
                                  ng-show="(vm.isImgFormSubmitted && !vm.imgContent) && !vm.noTicketOnHand">
                                 Please upload a picture of your ticket before continuing

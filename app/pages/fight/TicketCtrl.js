@@ -21,6 +21,7 @@
         vm.isImgFormSubmitted = false;
         vm.noTicketOnHand = false;
         vm.isCourtFormSubmitted = false;
+        vm.isDateFormSubmitted = false;
         vm.isTicketInfoFormSubmitted = false;
         vm.isPaymentFormSubmitted = false;
 
@@ -46,6 +47,7 @@
         vm.isCourtFormInError = isCourtFormInError;
         vm.fineAmountUpdated = fineAmountUpdated;
         vm.submitCourtStep = submitCourtStep;
+        vm.submitDateStep = submitDateStep;
         vm.submitTicketInfoStep = submitTicketInfoStep;
         vm.continueToPayment = continueToPayment;
 
@@ -162,6 +164,15 @@
             return true;
         }
 
+        function submitPhotoStep() {
+            vm.isImgFormSubmitted = true;
+
+            if (vm.imgContent != null) {
+                $state.go('default-template.fight.court', {});
+                vm.session.model.currentStep++;
+            }
+        }
+
         function submitCourtStep() {
             vm.isCourtFormSubmitted = true;
 
@@ -178,17 +189,28 @@
 
             // Go to ticket info step
             $state.go('default-template.fight.info', {});
+            vm.session.model.currentStep++;
 
             console.log("court: ", vm.session.model.selectedCourt.originalObject);
             console.log("citation with court: ", vm.session.model.citation);
         }
 
-        function submitPhotoStep() {
-            vm.isImgFormSubmitted = true;
+        function submitDateStep() {
+            vm.isDateFormSubmitted = true;
 
-            if (vm.imgContent != null) {
-                $state.go('default-template.fight.court', {});
-            }
+            var date = vm.session.model.selectedCourt.originalObject;
+            // Set the selected court in the citation
+            vm.session.model.citation.court = {
+                courtId : court.courtId,
+                location: court.address.city + ", " + court.address.stateCode
+            };
+
+            // Go to ticket info step
+            $state.go('default-template.fight.info', {});
+            vm.session.model.currentStep++;
+
+            console.log("court: ", vm.session.model.selectedCourt.originalObject);
+            console.log("citation with court: ", vm.session.model.citation);
         }
 
         function submitTicketInfoStep() {
@@ -257,12 +279,14 @@
 
                         // Go to next step
                         $state.go('default-template.fight.review', {});
+                        vm.session.model.currentStep++;
                     }
                 );
         }
 
         function continueToPayment() {
             $state.go('default-template.fight.payment', {});
+            vm.session.model.currentStep++;
         }
 
 
