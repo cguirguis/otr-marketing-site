@@ -38,6 +38,7 @@
     "otr-shared-libs": "https://github.com/alexg313/OTRSharedLibs.git#v1.1.9",
     "angucomplete-alt": "^2.4.1",
     "ng-flow": "~2",
-    "angular-number-picker": "*"
+    "angular-number-picker": "*",
+    "kendo-ui-core": "*"
   }
 }

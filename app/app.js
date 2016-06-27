@@ -10,7 +10,8 @@
         'otrBackendService',
         'angucomplete-alt',
         'ngNumberPicker',
-        'flow'
+        'flow',
+        "kendo.directives"
     ])
         .run(initData)
         .run(init)

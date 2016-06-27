@@ -5,13 +5,34 @@
             <h1 class="row text-center" style="float:none;">
                 When was your ticket issued?
             </h1>
-            Calender control
+
+            <div class="ticket-issued-date">
+                <div>
+                    <!--h4>
+                        <span>{{vm.session.model.citation.date | date:"MMM d, yyyy"}}</span>
+                    </h4-->
+                    <kendo-calendar class="calendar" ng-model="vm.session.model.citation.date"></kendo-calendar>
+                </div>
+            </div>
 
 
-            <h1 class="row text-center" style="float:none;">
-                When is your court date?
-            </h1>
-            Calender control
+            <input type="checkbox" class="k-checkboxx space-top-5"
+                   ng-click="vm.isCourtDateScheduled = !vm.isCourtDateScheduled"
+                   style="margin-right: 10px;">I have a scheduled court date</input>
+
+            <div class="float:none;" ng-show="vm.isCourtDateScheduled">
+                <h1 class="space-top-5 row text-center" style="float:none;">
+                    When is your court date?
+                </h1>
+                <div class="court-hearing-date">
+                    <div>
+                        <!--h4>
+                            <span ng-show="vm.isCourtDateScheduled">{{vm.session.model.citation.date | date:"MMM d, yyyy"}}</span>
+                        </h4-->
+                        <kendo-calendar class="calendar" ng-model="vm.session.model.citation.courtDate"></kendo-calendar>
+                    </div>
+                </div>
+            </div>
 
             <!-- Button -->
             <div class="row space-top-5">
@@ -23,8 +44,7 @@
                         <div class="col-xs-12 col-md-6">
                             <button type="submit" tabindex="4"
                                     class="btn btn-primary btn-large"
-                                    ng-click="vm.submitDateStep()"
-                                    ng-disabled="vm.dataLoading == true">
+                                    ng-click="vm.submitDateStep()">
                                 <span>Continue</span>
                                 <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
                             </button>

@@ -58,7 +58,11 @@
 
         (function initController() {
             $scope.$on('$viewContentLoaded', function() {
-
+                if ($state.current.name == "default-template.fight.date") {
+                    // Load calendar dates
+                    vm.session.model.citation.date = new Date();
+                    vm.session.model.citation.courtDate = new Date();
+                }
             });
         })();
 
@@ -188,7 +192,7 @@
             };
 
             // Go to ticket info step
-            $state.go('default-template.fight.info', {});
+            $state.go('default-template.fight.date', {});
             vm.session.model.currentStep++;
 
             console.log("court: ", vm.session.model.selectedCourt.originalObject);
@@ -198,19 +202,9 @@
         function submitDateStep() {
             vm.isDateFormSubmitted = true;
 
-            var date = vm.session.model.selectedCourt.originalObject;
-            // Set the selected court in the citation
-            vm.session.model.citation.court = {
-                courtId : court.courtId,
-                location: court.address.city + ", " + court.address.stateCode
-            };
-
             // Go to ticket info step
             $state.go('default-template.fight.info', {});
             vm.session.model.currentStep++;
-
-            console.log("court: ", vm.session.model.selectedCourt.originalObject);
-            console.log("citation with court: ", vm.session.model.citation);
         }
 
         function submitTicketInfoStep() {
@@ -340,6 +334,12 @@
             var index = location.lastIndexOf('/');
             return location.substring(index + 1, location.length);
         }
+
+        function isTicketPastDue(date) {
+            var timeDiff = Math.abs(today.getTime() - date.getTime());
+            var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+            return diffDays >= 30; // days to respond to ticket
+        };
 
         /*function submitFindMeLawyerInfo() {
 
