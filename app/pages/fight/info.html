@@ -1,118 +1,145 @@
 
 <div class="step container">
-    <div class="step-body row">
+    <form class="step-body row">
         <div class="meta col-xs-12 container" ng-show="!vm.isNoLawfirmAvailable ">
-            <h1 class="row text-center" style="float:none;">
-                You're almost done!
-            </h1>
 
-            <!-- Number of violations -->
-            <div class="row space-top-5">
-                <div class="col-xs-12 col-md-7">
-                    <div class="row row-condensed">
-                        <div class="col-xs-12 col-md-6 text-md-right text-sm-center">
-                            <label>
-                                Number of Violations on Ticket
-                            </label>
-                        </div>
-                        <div class="col-xs-12 col-md-6">
-                            <h-number value="vm.session.model.citation.violationCount"
-                                      min="1"
-                                      max="10"
-                                      step="1"
-                                      style="text-align:center;"
-                                      change="onChanged()"
-                                      singular="violation"
-                                      plural="violations"></h-number>
+            <form name="ticketInfoForm space-top-5">
+                <!-- Number of violations -->
+                <div class="row space-top-5">
+                    <div class="col-xs-12 col-md-7">
+                        <div class="row row-condensed">
+                            <div class="col-xs-12 col-md-6 text-md-right text-sm-center">
+                                <label>
+                                    Number of Violations on Ticket
+                                </label>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <h-number value="vm.session.model.citation.violationCount"
+                                          min="1"
+                                          max="10"
+                                          step="1"
+                                          style="text-align:center;"
+                                          change="onChanged()"
+                                          singular="violation"
+                                          plural="violations"></h-number>
+                            </div>
                         </div>
                     </div>
+                    <div class="col-xs-12 col-md-5 text-md-left text-sm-center">
+                        <label>
+                            <div class="note">These are things like speeding, improper lane change, driving without a
+                                license,
+                                etc.</div>
+                        </label>
+                    </div>
                 </div>
-                <div class="col-xs-12 col-md-5 text-md-left text-sm-center">
-                    <label>
-                        <div class="note">These are things like speeding, improper lane change, driving without a
-                            license,
-                            etc.</div>
-                    </label>
-                </div>
-            </div>
 
-            <!-- Fine amount -->
-            <div class="row space-top-5">
-                <div class="col-xs-12 col-md-7">
-                    <div class="row row-condensed">
-                        <div class="col-xs-12 col-md-6 text-md-right text-sm-center">
-                            <label>Fine Amount</label>
+                <!-- Fine amount -->
+                <div class="row space-top-5">
+                    <div class="col-xs-12 col-md-7">
+                        <div class="row row-condensed">
+                            <div class="col-xs-12 col-md-6 text-md-right text-sm-center">
+                                <label>Fine Amount</label>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <div class="input-group">
+                                    <span class="input-group-addon">$</span>
+                                    <input type="text"
+                                           fcsa-number="{ min: 0, maxDecimals: 2 }"
+                                           ng-model="vm.tempFineAmount"
+                                           ng-change="vm.fineAmountUpdated()"
+                                           class="form-control"
+                                           placeholder="Fine Amount">
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-xs-12 col-md-6">
-                            <div class="input-group">
-                                <span class="input-group-addon">$</span>
-                                <input type="text"
-                                       fcsa-number="{ min: 0, maxDecimals: 2 }"
-                                       ng-model="vm.tempFineAmount"
-                                       ng-change="vm.fineAmountUpdated()"
-                                       class="form-control"
-                                       placeholder="Fine Amount">
+                    </div>
+                    <div class="col-xs-12 col-md-5 text-md-left text-sm-center">
+                        <label>
+                            <div class="note">Optional</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Accident Involved -->
+                <div class="row space-top-5">
+                    <div class="col-xs-12 col-md-7">
+                        <div class="row row-condensed">
+                            <div class="col-xs-12 col-md-6 text-md-right text-sm-center">
+                                <label>Was there an accident involved?</label>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <div>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="radioBtnInvolvesAccident" ng-value=1
+                                               ng-model="vm.session.model.citation.involvesAccident">
+                                        Yes
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="radioBtnInvolvesAccident" ng-value=0 checked
+                                               ng-model="vm.session.model.citation.involvesAccident">
+                                        No
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-5">
+                        <label>
+                            <div></div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="row space-top-5">
+                    <div class="col-xs-12 col-md-7">
+                        <div class="row row-condensed">
+                            <div class="col-xs-12 col-md-6 text-md-right text-sm-center">
+                                <label>Email address</label>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <div class="input-group" style="width: 100%">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-envelope"></i>
+                                    </span>
+                                    <input type="email"
+                                           ng-model="vm.session.model.email"
+                                           class="form-control"
+                                           placeholder="Email address"
+                                           required>
+                                </div>
+                                <div class="has-error" ng-show="ticketInfoForm.input.$error.required">
+                                    Please provide your email address!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-5 text-md-left text-sm-center">
+                        <label>
+                            <div class="note">We'll need a way contact you when there are updates on your case.</div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Button -->
+                <div class="row space-top-5">
+                    <div class="col-xs-12 col-md-7">
+                        <div class="row row-condensed">
+                            <div class="col-xs-12 col-md-6">
+                                <button type="submit" tabindex="4"
+                                        class="btn btn-primary btn-large"
+                                        ng-click="vm.submitTicketInfoStep()"
+                                        ng-disabled="vm.dataLoading == true">
+                                    <span>Continue</span>
+                                    <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-5 text-md-left text-sm-center">
-                    <label>
-                        <div class="note">Optional</div>
-                    </label>
-                </div>
             </div>
-
-            <!-- Accident Involved -->
-            <div class="row space-top-5">
-                <div class="col-xs-12 col-md-7">
-                    <div class="row row-condensed">
-                        <div class="col-xs-12 col-md-6 text-md-right text-sm-center">
-                            <label>Was there an accident involved?</label>
-                        </div>
-                        <div class="col-xs-12 col-md-6">
-                            <div>
-                                <label class="radio-inline">
-                                    <input type="radio" name="radioBtnInvolvesAccident" ng-value=1
-                                           ng-model="vm.session.model.citation.involvesAccident">
-                                    Yes
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="radioBtnInvolvesAccident" ng-value=0 checked
-                                           ng-model="vm.session.model.citation.involvesAccident">
-                                    No
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-md-5">
-                    <label>
-                        <div></div>
-                    </label>
-                </div>
-            </div>
-
-            <!-- Button -->
-            <div class="row space-top-5">
-                <div class="col-xs-12 col-md-7">
-                    <div class="row row-condensed">
-                        <div class="col-xs-12 col-md-6 text-md-right text-sm-center">
-                            &nbsp;
-                        </div>
-                        <div class="col-xs-12 col-md-6">
-                            <button type="submit" tabindex="4"
-                                    class="btn btn-primary btn-large"
-                                    ng-click="vm.submitTicketInfoStep()"
-                                    ng-disabled="vm.dataLoading == true">
-                                <span>Continue</span>
-                                <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </form>
 
         <!-- no lawfirm available page -->
         <div class="meta" ng-show="vm.isNoLawfirmAvailable">

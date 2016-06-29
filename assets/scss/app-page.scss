@@ -131,6 +131,9 @@
           }
 
           .flow {
+            float: none;
+            margin: auto;
+
             > div {
               min-height: 150px;
             }
@@ -201,8 +204,8 @@
           }
 
           .btn.btn-default {
-            width:80%;
             margin: auto;
+            float: none;
             color: #fff;
             background-color: #1976d2;;
             boder-color: #1976d2;

@@ -13,7 +13,8 @@
                 citation: null,
                 case: null,
                 refundEligibility: null,
-                currentStep: 1
+                currentStep: 1,
+                email: null
             },
             SaveState: function () {
                 sessionStorage.CacheService = angular.toJson(service.model);

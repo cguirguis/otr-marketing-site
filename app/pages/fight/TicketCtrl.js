@@ -48,6 +48,7 @@
         vm.fineAmountUpdated = fineAmountUpdated;
         vm.submitCourtStep = submitCourtStep;
         vm.submitDateStep = submitDateStep;
+        vm.showNoTicketFlow = showNoTicketFlow;
         vm.submitTicketInfoStep = submitTicketInfoStep;
         vm.continueToPayment = continueToPayment;
 
@@ -60,8 +61,31 @@
             $scope.$on('$viewContentLoaded', function() {
                 if ($state.current.name == "default-template.fight.date") {
                     // Load calendar dates
-                    vm.session.model.citation.date = new Date();
-                    vm.session.model.citation.courtDate = new Date();
+                    var today = new Date();
+                    vm.session.model.citation.date = today;
+                    vm.session.model.citation.courtDate = today;
+
+                    $("#ticket-datepicker").kendoDatePicker({
+                        depth: "month",
+                        start: "month",
+                        value: today,
+                        max: today,
+                        format: "M/d/yyyy",
+                        change: function() {
+                            vm.session.model.citation.date = this.value();
+                        }
+                    });
+
+                    $("#court-datepicker").kendoDatePicker({
+                        depth: "month",
+                        start: "year",
+                        value: today,
+                        min: today,
+                        format: "MMMM d, yyyy",
+                        change: function() {
+                            vm.session.model.citation.courtDate = this.value();
+                        }
+                    });
                 }
             });
         })();
@@ -172,9 +196,13 @@
             vm.isImgFormSubmitted = true;
 
             if (vm.imgContent != null) {
-                $state.go('default-template.fight.court', {});
+                $state.go('default-template.fight.info', {});
                 vm.session.model.currentStep++;
             }
+        }
+
+        function showNoTicketFlow() {
+            $state.go('default-template.fight.court', {});
         }
 
         function submitCourtStep() {
@@ -210,6 +238,9 @@
         function submitTicketInfoStep() {
             vm.dataLoading = true;
             vm.isTicketInfoFormSubmitted = true;
+
+            // TODO - Add email to citation
+            //
 
             // Update the citation
             var dataObj = {
@@ -272,7 +303,7 @@
                         }
 
                         // Go to next step
-                        $state.go('default-template.fight.review', {});
+                        $state.go('default-template.fight.court', {});
                         vm.session.model.currentStep++;
                     }
                 );

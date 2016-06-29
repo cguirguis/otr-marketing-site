@@ -2,16 +2,16 @@
 <div class="step container">
     <div class="step-body row">
         <div class="meta col-xs-12 container">
-            <h1 class="row text-center" style="float:none;">
+            <div class="title">
                 When was your ticket issued?
-            </h1>
-
+            </div>
             <div class="ticket-issued-date">
                 <div>
                     <!--h4>
                         <span>{{vm.session.model.citation.date | date:"MMM d, yyyy"}}</span>
                     </h4-->
-                    <kendo-calendar class="calendar" ng-model="vm.session.model.citation.date"></kendo-calendar>
+                    <!--kendo-calendar class="calendar" ng-model="vm.session.model.citation.date"></kendo-calendar>-->
+                    <input id="ticket-datepicker" value="{vm.session.model.citation.date}" />
                 </div>
             </div>
 
@@ -29,7 +29,8 @@
                         <!--h4>
                             <span ng-show="vm.isCourtDateScheduled">{{vm.session.model.citation.date | date:"MMM d, yyyy"}}</span>
                         </h4-->
-                        <kendo-calendar class="calendar" ng-model="vm.session.model.citation.courtDate"></kendo-calendar>
+                        <!--kendo-calendar class="calendar" ng-model="vm.session.model.citation.courtDate"></kendo-calendar-->
+                        <input id="court-datepicker" value="{vm.session.model.citation.courtDate}" />
                     </div>
                 </div>
             </div>
