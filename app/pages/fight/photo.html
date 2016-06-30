@@ -41,12 +41,12 @@
 
 
                 <div class="space-top-2" ng-hide="vm.imgContent">
-                    <a class="action-link" ng-click="vm.showNoTiketFlow()">I don't have a ticket or court appearance notice</a>
+                    <a class="action-link" ng-click="vm.showNoTicketFlow()">I don't have a ticket or court appearance notice</a>
                 </div>
             </div>
 
             <div class="col-xs-12 space-top-5">
-                <div class="col-xs-12 col-md-10">
+                <div class="col-xs-12 col-md-10" style="margin: auto; float: none;">
                     <div tabindex="4" class="btn btn-default col-xs-10" ng-click="vm.submitPhotoStep()"
                          ng-disabled="vm.dataLoading == true || !vm.imgContent">
                         <span>Continue</span>

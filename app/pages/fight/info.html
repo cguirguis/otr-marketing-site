@@ -122,24 +122,22 @@
                     </div>
                 </div>
 
-                <!-- Button -->
-                <div class="row space-top-5">
-                    <div class="col-xs-12 col-md-7">
-                        <div class="row row-condensed">
-                            <div class="col-xs-12 col-md-6">
-                                <button type="submit" tabindex="4"
-                                        class="btn btn-primary btn-large"
-                                        ng-click="vm.submitTicketInfoStep()"
-                                        ng-disabled="vm.dataLoading == true">
-                                    <span>Continue</span>
-                                    <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+            </form>
+        </div>
+
+        <!-- Button -->
+        <div class="col-xs-12 space-top-5">
+            <div class="col-xs-12 col-md-10" style="margin: auto; float: none;">
+                <div tabindex="4" class="btn btn-default col-xs-10" ng-click="vm.submitTicketInfoStep()"
+                     ng-disabled="vm.session.model.email != null">
+                    <span>Continue</span>
+                    <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
+                </div>
+                <div class="space-top-2 form-error-message" ng-show="!vm.session.model.email">
+                    Please enter an email address before continuing.
                 </div>
             </div>
-        </form>
+        </div>
 
         <!-- no lawfirm available page -->
         <div class="meta" ng-show="vm.isNoLawfirmAvailable">

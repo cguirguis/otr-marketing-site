@@ -17,8 +17,7 @@
             <!----- TEMPLATE INSERTED HERE ----->
             <div class="progress-bar">
                 <ul>
-                    <li ui-sref="default-template.fight.photo({stateCode: vm.selectedState.abbreviation, stateName: vm.selectedState.name})"
-                        disable-click-if="vm.session.model.currentStep <= 1">
+                    <li ng-click="goToStep('photo', 1)">
                         <a href ng-class="{'selected' : vm.session.model.currentStep >= 1, 'done' : vm.session.model.currentStep > 1}">
                             <div class="stepNumber">
                                 <i class="fa fa-camera"></i>
@@ -26,8 +25,7 @@
                             <span class="stepDesc text-small"> Photo </span>
                         </a>
                     </li>
-                    <li ui-sref="default-template.fight.info({stateCode: vm.selectedState.abbreviation, stateName: vm.selectedState.name})"
-                        disable-click-if="vm.session.model.currentStep <= 2">
+                    <li ng-click="goToStep('info', 2)">
                         <a href ng-class="{'selected' : vm.session.model.currentStep >= 2, 'done' : vm.session.model.currentStep > 2}">
                             <div class="stepNumber">
                                 <i class="fa fa-exclamation-triangle"></i>
@@ -35,8 +33,7 @@
                             <span class="stepDesc text-small"> Violations </span>
                         </a>
                     </li>
-                    <li ui-sref="default-template.fight.court({stateCode: vm.selectedState.abbreviation, stateName: vm.selectedState.name})"
-                        disable-click-if="vm.session.model.currentStep <= 3">
+                    <li ng-click="goToStep('court', 3)">
                         <a href ng-class="{'selected' : vm.session.model.currentStep >= 3, 'done' : vm.session.model.currentStep > 3}">
                             <div class="stepNumber">
                                 <i class="fa fa-university"></i>
@@ -44,7 +41,7 @@
                             <span class="stepDesc text-small"> Court </span>
                         </a>
                     </li>
-                    <li ui-sref="default-template.fight.date({stateCode: vm.selectedState.abbreviation, stateName: vm.selectedState.name})"
+                    <li ng-click="goToStep('date', 4)"
                         disable-click-if="vm.session.model.currentStep <= 4">
                         <a href ng-class="{'selected' : vm.session.model.currentStep >= 4, 'done' : vm.session.model.currentStep > 4}">
                             <div class="stepNumber">
@@ -53,8 +50,7 @@
                             <span class="stepDesc text-small"> Date </span>
                         </a>
                     </li>
-                    <li ui-sref="default-template.fight.review({stateCode: vm.selectedState.abbreviation, stateName: vm.selectedState.name})"
-                        disable-click-if="vm.session.model.currentStep <= 5">
+                    <li ng-click="goToStep('review', 5)">
                         <a href ng-class="{'selected' : vm.session.model.currentStep >= 5, 'done' : vm.session.model.currentStep > 5}">
                             <div class="stepNumber">
                                 <i class="fa fa-check"></i>

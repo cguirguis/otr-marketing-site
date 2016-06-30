@@ -39,6 +39,7 @@
         vm.isNoLawfirmAvailable = false;
         vm.newCard = {};
 
+        vm.goToStep = goToStep;
         vm.verifyImageUpload = verifyImageUpload;
         vm.removeTicketPhoto = removeTicketPhoto;
         vm.submitPhotoStep = submitPhotoStep;
@@ -89,6 +90,18 @@
                 }
             });
         })();
+
+        function goToStep(stepName, stepNumber) {
+            if (vm.session.model.currentStep <= stepNumber) {
+                return;
+            }
+
+            $state.go("default-template.fight." + stepName,
+                {
+                    stateCode: vm.selectedState.abbreviation,
+                    stateName: vm.selectedState.name
+                });
+        }
 
         function flowFilesSubmitted(flow) {
             console.log("Event Kicked Off: flow-files-submitted");
