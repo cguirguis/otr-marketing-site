@@ -215,7 +215,7 @@
         }
 
         function showNoTicketFlow() {
-            $state.go('default-template.fight.court', {});
+            $state.go('default-template.fight.info', {});
         }
 
         function submitCourtStep() {
@@ -254,6 +254,13 @@
 
             // TODO - Add email to citation
             //
+
+            // Court is required to do a citation update
+            // add placeholder court
+            vm.session.model.citation.court = {
+                courtId : 348,
+                location: "Shoreline, WA"
+            };
 
             // Update the citation
             var dataObj = {
@@ -298,11 +305,14 @@
 
                         return otrService.isRefundEligibleUsingGET({caseId: newCase.caseId});
                     },
-                    function (error, data, headers) {
+                    function (error) {
                         vm.dataLoading = false;
-                        if(error.data.error.errorCode === 501) {
+                        if (error.body.error && error.body.error.uiErrorMsg) {
+                            vm.errorMessage = error.body.error.uiErrorMsg;
+
+                        } else if (error.body.error.errorCode === 501) {
                             vm.isNoLawfirmAvailable = true;
-                            vm.caseIdWithNoLawfirm = getCaseIdFromHeader(error.headers);
+                            vm.caseIdWithNoLawfirm = getCaseIdFromHeader(error.config.headers);
                         }
                         return $q.reject(error);
                     }
@@ -313,7 +323,7 @@
                         vm.session.model.refundEligibility = {
                             isEligible: response.refundEligibilityType === 'FULL_REFUND',
                             uiReasonMsg: response.uiReasonMsg
-                        }
+                        };
 
                         // Go to next step
                         $state.go('default-template.fight.court', {});

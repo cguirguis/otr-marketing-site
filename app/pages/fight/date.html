@@ -1,55 +1,49 @@
 
-<div class="step container">
-    <div class="step-body row">
-        <div class="meta col-xs-12 container">
-            <div class="title">
-                When was your ticket issued?
-            </div>
-            <div class="ticket-issued-date">
-                <div>
-                    <!--h4>
-                        <span>{{vm.session.model.citation.date | date:"MMM d, yyyy"}}</span>
-                    </h4-->
-                    <!--kendo-calendar class="calendar" ng-model="vm.session.model.citation.date"></kendo-calendar>-->
-                    <input id="ticket-datepicker" value="{vm.session.model.citation.date}" />
-                </div>
-            </div>
+<div class="row row-centered">
+    <div class="step col-xs-11 col-sm-10 col-md-8 col-lg-7">
+        <div class="step-body">
+            <div class="meta row row-centered">
+                <div class="col-xs-12 col-md-8">
+                    <div class="title">
+                        When was your ticket issued?
+                    </div>
+                    <div class="subtitle space-top-2">
+                        Your ticket should mention which court it is assigned to.
+                        If you're not sure, type the name of the city or county in which you received the ticket
+                        and pick the court you think best matches.
+                        We'll verify all the info on our end.
+                    </div>
+                    <div class="ticket-issued-date space-top-5">
+                        <div style="width:200px;margin:auto;">
+                            <input id="ticket-datepicker" value="{vm.session.model.citation.date}" />
+                        </div>
+                    </div>
 
+                    <input type="checkbox" class="space-top-5" style="margin-right: 10px;"
+                           ng-click="vm.isCourtDateScheduled = !vm.isCourtDateScheduled">I have a scheduled court date</input>
 
-            <input type="checkbox" class="k-checkboxx space-top-5"
-                   ng-click="vm.isCourtDateScheduled = !vm.isCourtDateScheduled"
-                   style="margin-right: 10px;">I have a scheduled court date</input>
-
-            <div class="float:none;" ng-show="vm.isCourtDateScheduled">
-                <h1 class="space-top-5 row text-center" style="float:none;">
-                    When is your court date?
-                </h1>
-                <div class="court-hearing-date">
-                    <div>
-                        <!--h4>
-                            <span ng-show="vm.isCourtDateScheduled">{{vm.session.model.citation.date | date:"MMM d, yyyy"}}</span>
-                        </h4-->
-                        <!--kendo-calendar class="calendar" ng-model="vm.session.model.citation.courtDate"></kendo-calendar-->
-                        <input id="court-datepicker" value="{vm.session.model.citation.courtDate}" />
+                    <div class="float:none;" ng-show="vm.isCourtDateScheduled">
+                        <h1 class="space-top-5 row text-center" style="float:none;">
+                            When is your court date?
+                        </h1>
+                        <div class="court-hearing-date space-top-5">
+                            <div style="width:200px;margin:auto;">
+                                <input id="court-datepicker" value="{vm.session.model.citation.courtDate}" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- Button -->
-            <div class="row space-top-5">
-                <div class="col-xs-12 col-md-7">
-                    <div class="row row-condensed">
-                        <div class="col-xs-12 col-md-6 text-md-right text-sm-center">
-                            &nbsp;
-                        </div>
-                        <div class="col-xs-12 col-md-6">
-                            <button type="submit" tabindex="4"
-                                    class="btn btn-primary btn-large"
-                                    ng-click="vm.submitDateStep()">
-                                <span>Continue</span>
-                                <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
-                            </button>
-                        </div>
+            <div class="space-top-5 row row-centered">
+                <div class="col-xs-10 col-sm-8">
+                    <div tabindex="4" class="btn btn-default" ng-click="vm.submitDateStep()">
+                        <span>Continue</span>
+                        <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
+                    </div>
+                    <div class="space-top-2 form-error-message" ng-show="vm.errorMessage">
+                        {{vm.errorMessage}}
                     </div>
                 </div>
             </div>
