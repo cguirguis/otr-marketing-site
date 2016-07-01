@@ -1,9 +1,9 @@
 
-<div class="row row-centered">
+<div class="row row-centered-lg">
     <div class="step col-xs-11 col-sm-10 col-md-8 col-lg-7">
         <div class="step-body">
-            <div class="meta row row-centered-lg">
-                <div class="col-xs-12 col-md-8">
+            <div class="meta row">
+                <div class="col-xs-12 row row-centered">
                     <div class="title">
                         When was your ticket issued?
                     </div>
@@ -19,14 +19,16 @@
                         </div>
                     </div>
 
-                    <input type="checkbox" class="space-top-5" style="margin-right: 10px;"
-                           ng-click="vm.isCourtDateScheduled = !vm.isCourtDateScheduled">I have a scheduled court date</input>
+                    <div class="ticket-issued-date space-top-3">
+                        <input type="checkbox" class="space-top-5" style="margin-right: 10px;"
+                               ng-click="vm.isCourtDateScheduled = !vm.isCourtDateScheduled">I have a scheduled court date</input>
+                    </div>
 
-                    <div class="float:none;" ng-show="vm.isCourtDateScheduled">
-                        <h1 class="space-top-5 row text-center" style="float:none;">
+                    <div class="space-top-5" ng-show="vm.isCourtDateScheduled">
+                        <h4 class="text-center" style="float:none;">
                             When is your court date?
-                        </h1>
-                        <div class="court-hearing-date space-top-5">
+                        </h4>
+                        <div class="court-hearing-date space-top-2">
                             <div style="width:200px;margin:auto;">
                                 <input id="court-datepicker" value="{vm.session.model.citation.courtDate}" />
                             </div>
