@@ -47,11 +47,11 @@
 
             <div class="space-top-5 row row-centered-lg">
                 <div class="col-xs-10 col-sm-8">
-                    <div tabindex="4" class="btn btn-default" ng-click="vm.submitPhotoStep()"
+                    <button tabindex="4" class="btn btn-default" ng-click="vm.submitPhotoStep()"
                          ng-disabled="vm.dataLoading == true || !vm.imgContent">
                         <span>Continue</span>
                         <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
-                    </div>
+                    </button>
                     <div class="space-top-2 form-error-message"
                          ng-show="(vm.isImgFormSubmitted && !vm.imgContent)">
                         <p class="bg-danger">

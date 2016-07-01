@@ -1,138 +1,372 @@
-<script>
-    $(document).ready(function(){
-        $('[data-toggle="tooltip"]').tooltip();
-    });
-</script>
 
-
-<div class="step container">
-    <div class="step-body row">
-        <div class="meta col-xs-12 col-md-8 container">
-            <div class="title text-center">
-                We can fight your ticket!
-            </div>
-            <div class="space-top-2">
-                Our Smart Match algorithm was able to match you with one of the top traffic attorneys in
-                {{vm.session.model.citation.court.location}}
-            </div>
-
-            <!-- Refund Eligibility -->
-            <div class="row space-top-3">
-                <div class="col-xs-12" style="border-top: 1px solid; border-top-color: lightgray;padding-top:
-                10px;">
-                    <div class="row row-condensed">
-                        <div class="col-xs-8 text-left match-screen-label">
-                            <label style="padding-bottom: 0px;">
-                                Eligible for a refund
-                                <!--<i class="icon icon-question" data-toggle="tooltip" title="Based on historical performance"></i>-->
-                            </label>
-                            <div ng-show=vm.session.model.refundEligibility.isEligible class="otr-14-light text-lima">{{vm.session.model.refundEligibility.uiReasonMsg}}</div>
-                            <div ng-show=!vm.session.model.refundEligibility.isEligible class="note">{{vm.session.model.refundEligibility.uiReasonMsg}}</div>
-                        </div>
-                        <div ng-show=vm.session.model.refundEligibility.isEligible
-                             class="col-xs-4 text-right otr-18-bold text-lima">
-                            <label>{{vm.session.model.refundEligibility.isEligible | yesNo}}</label>
-                        </div>
-                        <div ng-show=!vm.session.model.refundEligibility.isEligible
-                             class="col-xs-4 text-right otr-18-bold text-rausch">
-                            <label>{{vm.session.model.refundEligibility.isEligible | yesNo}}</label>
-                        </div>
+<div class="row row-centered-lg">
+    <div class="row row-centered col-xs-12 col-sm-10">
+        <div class="step col-xs-11 col-sm-8">
+            <div class="step-body">
+                <div class="meta row">
+                    <div class="title text-center">
+                        Book your case
                     </div>
-                </div>
-            </div>
 
-            <!-- Chance of success -->
-            <div class="row space-top-2">
-                <div class="col-xs-12" class="border-top-gray">
-                    <div class="row row-condensed">
-                        <div class="col-xs-8 text-left match-screen-label">
-                            <label style="padding-bottom: 0px;">
-                                Your chance of success
-                                <!--<i class="icon icon-question" data-toggle="tooltip" title="Based on historical performance"></i>-->
-                            </label>
-                            <div class="note">Based on historical performance</div>
-                        </div>
-                        <div class="col-xs-4 text-right otr-18-bold text-lima">
-                            <label>{{ vm.session.model.case.chanceOfSuccess }}%</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Your cost -->
-            <div class="row space-top-2">
-                <div class="col-xs-12" class="border-top-gray">
-                    <div class="row row-condensed">
-                        <div class="col-xs-8 text-left match-screen-label">
-                            <label style="padding-bottom: 0px;">
-                                Your cost
-                            </label>
-                            <div class="note">This includes your legal fee and all service charges</div>
-                        </div>
-                        <div class="col-xs-4 text-right your-cost">
-                            <label>{{ vm.session.model.case.estimatedCost | intToCurrency }}</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Cost of not fighting -->
-            <div class="row space-top-2">
-                <div class="col-xs-12" class="border-top-gray">
-                    <div class="row row-condensed">
-                        <div class="col-xs-8 text-left match-screen-label">
-                            <label style="padding-bottom: 0px;">
-                                Cost of not fighting this ticket
-                            </label>
-                            <div class="note" ng-show="vm.session.model.citation.fineAmount == null">
-                                Based on average insurance premium increases
+                    <div id="payment" class="space-top-3 row checkout-main__section payment">
+                        <div class="payment-section">
+                            <div class="payment-controls">
+                                <label>Payment type</label>
+                                <div class="row space-top-2" id="payment-type-select">
+                                    <div class="col-lg-8">
+                                        <div class="select select-block">
+                                            <select name="payment_type" class="grouped-field" id="payment-method-select"
+                                                    ng-model="vm.selectedPaymentMethod"
+                                                    ng-options="pm.brand + ' xxxxxxxxxxxx' +  pm.last4 + ' (expires ' + pm.expMonth + '/' + pm.expYear + ')'  for pm in vm.paymentMethods">
+                                                <option value="" data-payment-type="payment-method" data-cc-type="visa" data-cc-name="" data-cc-expire="">
+                                                    Add new card
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4" style="margin-top:-3px"
+                                         ng-show="vm.selectedPaymentMethod != '' && vm.selectedPaymentMethod != null">
+                                        <div class="payment-method grouped-field cc active">
+                                            <div id="payment-logo-visa" class="payment-logo visa" ng-show="vm.selectedPaymentMethod.brand == 'Visa'">Credit Card</div>
+                                            <div id="payment-logo-master" class="payment-logo master" ng-show="vm.selectedPaymentMethod.brand == 'MasterCard'"></div>
+                                            <div id="payment-logo-american-express" class="payment-logo american_express" ng-show="vm.selectedPaymentMethod.brand == 'American Express'"></div>
+                                            <div id="payment-logo-discover" class="payment-logo discover" ng-show="vm.selectedPaymentMethod.brand == 'Discover'"></div>
+                                            <div id="payment-logo-jcb" class="payment-logo jcb" ng-show="vm.selectedPaymentMethod.brand == 'JCB'"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <label class="space-top-2">Phone number</label>
+                                <div ng-form name="phoneForm">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                                <span class="input-icon">
+                                                    <i class="fa fa-phone fa-lg" style="padding-top: 2px;"></i>
+                                                    <input format-phone="" name="phoneNumberCheckout" type="text"
+                                                           required ng-model="vm.phoneNumber"
+                                                           ng-keyup="vm.phoneNumberKeyUpListener()"
+                                                           ng-class="{ 'has-error' : vm.isPhoneNumberInvalid && phoneForm.phoneNumberCheckout.$dirty }">
+                                                </span>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div style="padding-top: 5px;">Your lawyer will only contact you if they can't reach you by email.</div>
+                                        </div>
+                                    </div>
+                                    <div class="space-top-1">
+                                        <input type="radio" name="phone-type" ng-model="vm.phoneType" checked="checked" value="MOBILE">
+                                        <span style="padding-right: 10px;">Mobile</span>
+                                        <input type="radio" name="phone-type" ng-model="vm.phoneType" value="HOME">
+                                        <span>Home</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="note" ng-show="vm.session.model.citation.fineAmount != null">
-                                Based on your ticket fine + average insurance premium increases
+
+                            <!-- Flash Service Message -->
+                            <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }"
+                                 ng-if="flash" ng-bind="flash.message" style="margin-bottom: 0px;margin-top: 10px;">
+                            </div>
+
+                            <div id="payment-methods-content">
+                                <form id="credit-card-form" name="paymentForm" class="row row-centered-lg"
+                                      novalidate ng-submit="vm.confirmCaseBooking(paymentForm.$valid)">
+                                    <div class="payment-method cc active" id="payment-method-cc" ng-show="vm.selectedPaymentMethod == '' || vm.selectedPaymentMethod == null">
+                                        <div class="payment-method-container use-existing-card">
+                                            <!-- NEW CARD FORM -->
+                                            <div class="new-card space-top-3">
+                                                <div class="cc-details">
+                                                    <div class="control-group cc-container new-payment-card">
+                                                        <div class="page-container-full">
+                                                            <div
+                                                                    class="cc-number space-top-2">
+                                                                <label for="credit-card-number" data-i18n="cc_number">Card number</label>
+                                                                <div class="inner-addon right-addon">
+                                                                    <a href="" id="tooltip-cc-icon-lock" class="icon icon-lock icon-light-gray h3 link-reset" style="margin-top: 0px; font-size: 22px;"></a>
+                                                                    <input type="text" name="cardNumber" required ng-model="vm.newCard.number"
+                                                                           cc-number cc-format cc-eager-type
+                                                                           data-hook="credit-card-number"
+                                                                           ng-class="{ 'has-error' : paymentForm.cardNumber.$invalid && vm.isPaymentFormSubmitted }">
+                                                                    <!--<p ng-show="paymentForm.cardNumber.$invalid && paymentForm.cardNumber.$ccEagerType">-->
+                                                                    <!--Looks like you're typing a {{paymentForm.cardNumber.$ccEagerType}} number!-->
+                                                                    <!--</p>-->
+                                                                    <!--<p ng-show="paymentForm.cardNumber.$valid">-->
+                                                                    <!--Yes, that looks like a valid {{paymentForm.cardNumber.$ccType}} number!-->
+                                                                    <!--</p>-->
+                                                                </div>
+                                                            </div>
+                                                            <div class="row space-top-2">
+                                                                <div
+                                                                        class="col-md-6 cc-expiration">
+                                                                    <span>
+                                                                        <label for="credit-card-month" data-i18n="expires_on">Expires on</label>
+                                                                            <div class="row row-super-condensed" cc-exp>
+                                                                                <div class="col-md-6">
+                                                                                    <div class="select select-block">
+                                                                                        <div class="select select-block">
+                                                                                            <select name="ccExpMonth" required ng-model="vm.newCard.exp_month" cc-exp-month data-hook="credit-card-month"
+                                                                                                    ng-class="{ 'has-error' : (paymentForm.ccExpMonth.$invalid || paymentForm.$error.ccExp) && vm.isPaymentFormSubmitted }">
+                                                                                                <option value="" selected>mm</option>
+                                                                                                <option value="1">1</option>
+                                                                                                <option value="2">2</option>
+                                                                                                <option value="3">3</option>
+                                                                                                <option value="4">4</option>
+                                                                                                <option value="5">5</option>
+                                                                                                <option value="6">6</option>
+                                                                                                <option value="7">7</option>
+                                                                                                <option value="8">8</option>
+                                                                                                <option value="9">9</option>
+                                                                                                <option value="10">10</option>
+                                                                                                <option value="11">11</option>
+                                                                                                <option value="12">12</option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-6">
+                                                                                    <div class="select select-block">
+                                                                                        <div class="select select-block">
+                                                                                            <select name="ccExpYear" required ng-model="vm.newCard.exp_year" cc-exp-year full-year data-hook="credit-card-year"
+                                                                                                    ng-class="{ 'has-error' : (paymentForm.ccExpYear.$invalid || paymentForm.$error.ccExp) && vm.isPaymentFormSubmitted }">
+                                                                                                <option value="" selected>yyyy</option>
+                                                                                                <option value="2016">2016</option>
+                                                                                                <option value="2017">2017</option>
+                                                                                                <option value="2018">2018</option>
+                                                                                                <option value="2019">2019</option>
+                                                                                                <option value="2020">2020</option>
+                                                                                                <option value="2021">2021</option>
+                                                                                                <option value="2022">2022</option>
+                                                                                                <option value="2023">2023</option>
+                                                                                                <option value="2024">2024</option>
+                                                                                                <option value="2025">2025</option>
+                                                                                                <option value="2026">2026</option>
+                                                                                                <option value="2027">2027</option>
+                                                                                                <option value="2028">2028</option>
+                                                                                                <option value="2029">2029</option>
+                                                                                                <option value="2030">2030</option>
+                                                                                                <option value="2031">2031</option>
+                                                                                                <option value="2032">2032</option>
+                                                                                                <option value="2033">2033</option>
+                                                                                                <option value="2034">2034</option>
+                                                                                                <option value="2035">2035</option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </span>
+                                                                </div>
+                                                                <div class="col-sm-12 col-md-6 cc-security-code">
+                                                                    <label for="credit-card-cvv" data-i18n="security_code">Security code (CVV)</label>
+                                                                    <div class="inner-addon right-addon">
+                                                                        <a href="" id="tooltip-cvv" class="icon icon-question icon-light-gray h3 link-reset" tabindex="-1" style="margin-top: 0px; font-size: 22px;"></a>
+                                                                        <input name="ccCvc" type="text" required ng-model="vm.newCard.cvc" cc-cvc data-hook="credit-card-cvv"
+                                                                               ng-class="{ 'has-error' : paymentForm.ccCvc.$invalid && vm.isPaymentFormSubmitted }">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <hr>
+
+                                                            <div class="row space-top-2">
+                                                                <div class="control-group cc-first-name col-md-6">
+                                                                    <label class="control-label" for="credit-card-first-name">
+                                                                        First name (on card)
+                                                                    </label>
+                                                                    <input type="text" ng-model="vm.newCard.firstName" id="credit-card-first-name">
+                                                                </div>
+
+                                                                <div class="control-group cc-last-name col-md-6">
+                                                                    <label class="control-label" for="credit-card-last-name">
+                                                                        Last name (on card)
+                                                                    </label>
+                                                                    <input type="text" ng-model="vm.newCard.lastName" id="credit-card-last-name">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row row-space-2">
+                                                                <div class="control-group cc-zip cc-zip-new col-md-6 col-lg-3">
+                                                                    <label for="credit-card-zip">
+                                                                        Zip code
+                                                                    </label>
+                                                                    <input type="text" class="cc-short cc-zip-text" ng-model="vm.newCard.address_zip" id="credit-card-zip">
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <!--</form>-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 space-top-2" role="tooltip"
+                                         data-trigger="#tooltip-cc-icon-lock">
+                                        <p class="text-tight">Your credit card information is encrypted via our secure payment system.</p>
+                                    </div>
+
+                                    <section id="policies" class="col-xs-12 policies">
+                                        <strong id="agree-help-text" class="hide text-beach">
+                                            Before booking agree to the Rules and Terms.
+                                        </strong>
+                                        <div class="terms media">
+                                            <div class="media-body">
+                                                <label for="agrees-to-terms" class="va-container">
+                                                    <div class="va-top">
+                                                        By clicking on “Confirm Case Booking”, you agree to pay the
+                                                        total amount shown in the summary on the right, and to the
+                                                        <a href="https://offtherecord.com/terms.html" class="terms_link" target="_blank">Terms of Service</a> and
+                                                        <a href="http://blog.offtherecord.com/post/121486685047/faqs#cancel-policy" class="cancel-policy-link" target="_blank">Cancellation Policy</a>.
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </section>
+
+                                    <!-- Button -->
+                                    <div class="space-top-5 col-xs-12" style="text-align:center;">
+                                        <button type="submit" class="col-xs-12 col-sm-8 btn btn-default btn-primary"
+                                                ng-disabled="vm.dataLoading == true || vm.isPhoneNumberInvalid">
+                                            <span>Fight My Ticket</span>
+                                            <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
+                                        </button>
+                                        <br>
+                                    </div>
+                                </form>
+                                <p></p>
                             </div>
                         </div>
-                        <div class="col-xs-4 text-right otr-18-bold text-rausch"
-                             ng-show="vm.session.model.citation.fineAmount == null">
-                            <label style="padding-bottom: 0px;margin-bottom: 0px;">{{vm.session.model.case.insuranceCostInCents | intToCurrency}}</label>
-                            <div style="color: #565a5c;font-weight: normal;font-size: 16px;">+ ticket fine</div>
-                        </div>
-                        <div class="col-xs-4 text-right otr-18-bold text-rausch"
-                             ng-show="vm.session.model.citation.fineAmount != null">
-                            <label>{{ (vm.session.model.case.insuranceCostInCents + vm.session.model.citation.fineAmount) | intToCurrency }}</label>
-                        </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- Button -->
-            <div class="row space-top-5">
-                <div class="col-xs-12">
-                    <div class="row row-condensed">
-                        <div class="col-xs-12 text-center">
-                            <button type="submit" wz-next tabindex="4" class="btn btn-primary btn-large">
-                                Fight My Ticket
-                            </button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
 
         <!-- What's Included? -->
-        <div class="pin col-xs-12 col-md-4" style="background: #ECEBEB; padding: 20px">
-            <h3>
-                What's Included?
-            </h3>
-            <div>
-                <ul class="whats-included" style="">
-                    <li>Legal services to fight your case in court</li>
-                    <li>Full refund if your ticket is not dismissed, deferred or reduced to a non-moving violation</li>
-                    <li>Cancel anytime within 24 hours</li>
-                    <li>No hidden fees</li>
-                    <li>Peace of mind. We handle everything from here.</li>
+        <div class="right-col" style="background-color: white;">
+            <div class="media-photo media-photo-block text-center payments-listing-image"
+                 style="background-color: inherit;padding: 10px 7px 0px 7px;">
+                <img ng-src="{{ vm.signedImageUrl }}"
+                     class="img-responsive-height" alt="Your traffic ticket to be contested"
+                     style="width:100%;max-height: 250px;">
+            </div>
+
+            <div class="hide-smm space-top-2">
+                <div class="payments-listing-name h4">Summary</div>
+                <ul style="padding-left: 15px">
+                    <li style="font-size: 14px">Legal services to fight your case in court</li>
+                    <li style="font-size: 14px">Full refund if your ticket is not dismissed, deferred or reduced to a non-moving violation</li>
+                    <li style="font-size: 14px">Cancel anytime within 24 hours</li>
+                    <li style="font-size: 14px">No hidden fees</li>
+                    <li style="font-size: 14px">Peace of mind. We handle everything from here.</li>
                 </ul>
+
+                <hr>
+
+                <div>
+                    <table class="reso-info-table">
+                        <tbody>
+                        <tr>
+                            <td>Cancellation Policy</td>
+                            <td>
+                                <a href="http://blog.offtherecord.com/post/121486685047/faqs#cancel-policy" class="draw-attention-link" target="_blank">24 hours</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <hr>
+
+                <div class="tooltip tooltip-top-middle" role="tooltip" data-sticky="true" data-trigger="#airbnb-credit-tooltip" aria-hidden="true">
+                    <div class="panel-body">
+
+                    </div>
+                </div>
+
+                <div>
+                    <table id="billing-table" class="reso-info-table billing-table coupon-applied coupon-section-open">
+                        <tbody>
+                        <tr class="base-price">
+                            <td class="name">Traffic Ticket Defense</td>
+                            <td class="val">{{ vm.caseFinancials.caseBaseCost | intToCurrency }}
+                            </td>
+                        </tr>
+                        <tr class="service-fee"
+                            ng-show="vm.caseFinancials.multipleViolationSurcharge != null && vm.caseFinancials.multipleViolationSurcharge > 0">
+                            <td class="name">
+                                Multiple Violation Surcharge
+                            </td>
+                            <td class="val">
+                                {{ vm.caseFinancials.multipleViolationSurcharge | intToCurrency }}
+                            </td>
+                        </tr>
+                        <tr class="coupon">
+                            <td class="name">
+                                                <span class="without-applied-coupon" ng-click="vm.showCouponInput = true">
+                                                    <a href="" class="draw-attention-link">Referral Code</a>
+                                                </span>
+                            </td>
+                            <td class="val">
+                                <div class="uneditable-fields" ng-show="vm.refCode != null">
+                                    {{ vm.caseFinancials.otrReferralCodeAdjustmentInCents + vm.caseFinancials.lawfirmReferralCodeAdjustmentInCents | intToCurrency }}
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="editable-fields" ng-show="vm.showCouponInput">
+                            <td colspan="2">
+                                <div class="row-condensed clearfix row-space-1">
+                                    <div class="col-sm-7">
+                                        <input type="text" name="coupon_code" autocomplete="off"
+                                               ng-model="vm.userInputRefCode"
+                                               class="coupon-code-field" style="margin-top: 8px;">
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <button type="submit"
+                                                class="btn btn-block apply-coupon" style="margin-top: 8px;"
+                                                ng-show="vm.refCode == null"
+                                                ng-click="vm.applyRefCode()" ng-disabled="vm.refCodeDataLoading == true">
+                                            <span ng-hide="vm.refCodeDataLoading">Apply</span>
+                                            <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.refCodeDataLoading"></i>
+                                        </button>
+                                        <button type="submit"
+                                                class="btn btn-block apply-coupon" ng-show="vm.refCode != null"
+                                                ng-click="vm.removeRefCode()" ng-disabled="vm.refCodeDataLoading == true">
+                                            <span ng-hide="vm.refCodeDataLoading">Remove</span>
+                                            <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.refCodeDataLoading"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- refcode error message -->
+                                <div class="row-condensed clearfix row-space-1" ng-show="vm.refCodeError != null">
+                                    <div class="col-sm-12" style="color: tomato;font-style: italic;background-color: oldlace;">
+                                        {{ vm.refCodeError }}
+                                    </div>
+                                </div>
+                                <a href="" class="draw-attention-link" ng-click="vm.hideRefCodeInput()">Cancel</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <hr>
+
+                <div>
+                    <table id="payment-total-table" class="reso-info-table billing-table">
+                        <tbody>
+                        <tr class="total">
+                            <td class="name"><span class="h3">Total</span></td>
+                            <td class="text-special icon-dark-gray">
+                                <span class="h3 total-guest-payment">
+                                    {{ vm.caseFinancials.clientTotalCost | intToCurrency }}
+                                </span>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
     </div>
-</div>\
+</div>

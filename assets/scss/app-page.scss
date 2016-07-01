@@ -34,7 +34,6 @@
           position: relative;
 
           .meta {
-            //width: calc(100% - 300px);
             padding: 0 20px;
             float: inherit;
 
@@ -42,6 +41,7 @@
               font-size: 32px;
               line-height: 35px;
               font-weight: bold;
+              color: #444;
             }
             .subtitle {
               font-size: 16px;
@@ -144,6 +144,19 @@
             }
           }
 
+          #payment {
+            text-align: left;
+          }
+
+          .new-payment-card {
+            background-color: aliceblue;
+            padding: 0px 15px 15px 15px;
+            border: 1px solid;
+            border-color: cornflowerblue;
+            border-radius: 3px;
+            margin: 10px;
+          }
+
           .flow {
             float: none;
             margin: auto;
@@ -209,26 +222,24 @@
             }
           }
 
-          .right-col {
-            float: left;
-            background-color: #F9F9F9;
-            min-height: 200px;
-            border-radius: 3px;
-            padding: 20px;
-          }
-
           .btn.btn-default {
             width: 100%;
             margin: auto;
             float: none;
             color: #fff;
-            background-color: #1976d2;;
-            border-color: #1976d2;
+            background-color: #2196F3;;
+            border-color: #2196F3;
 
             &:hover {
               background-color: #1164BF;
               border-color: #1164BF;
             }
+          }
+
+          [disabled].btn {
+            opacity: 0.35;
+            filter: alpha(opacity=35);
+            cursor: default;
           }
 
           .calendar {
@@ -244,6 +255,16 @@
             }
           }
         }
+      }
+
+      .right-col {
+        background-color: #d9f9e1; //#ECEBEB;
+        margin-top: 5px;
+        border: solid 1px #ddd;
+        border-left: none;
+        min-height: 200px;
+        text-align: left;
+        padding: 10px 25px;
       }
     }
   }
@@ -264,7 +285,7 @@
 .text-lima, .icon-lima {
   color: #3fb34f;
 }
-.text-rausch, .icon-rausch {
+.text-rausch, .icon-rausch, .draw-attention-link {
   color: #ff5a5f;
 }
 .otr-14 {

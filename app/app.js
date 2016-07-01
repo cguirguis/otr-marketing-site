@@ -11,7 +11,9 @@
         'angucomplete-alt',
         'ngNumberPicker',
         'flow',
-        "kendo.directives"
+        "kendo.directives",
+        "credit-cards",
+        "angular-stripe"
     ])
         .run(initData)
         .run(init)

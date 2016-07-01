@@ -5,8 +5,8 @@
         .module('brochure')
         .controller('TicketCtrl', TicketCtrl);
 
-    TicketCtrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', '$q', '$filter', 'ENV', 'CacheService'];
-    function TicketCtrl($rootScope, $scope, $state, $stateParams, $q, $filter, ENV, CacheService) {
+    TicketCtrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', '$q', '$filter', 'ENV', 'CacheService', 'StripeService'];
+    function TicketCtrl($rootScope, $scope, $state, $stateParams, $q, $filter, ENV, CacheService, StripService) {
         var vm = this;
 
         // State details
@@ -34,10 +34,13 @@
         // Used alongside uploading files
         vm.imgContent = null;
 
-        vm.isCouponApplied = false;
-        vm.showCouponInput = false;
+        // checkout
         vm.isNoLawfirmAvailable = false;
         vm.newCard = {};
+        vm.isPhoneNumberInvalid = true;
+        vm.phoneType = 'MOBILE';
+        vm.isCouponApplied = false;
+        vm.showCouponInput = false;
 
         vm.goToStep = goToStep;
         vm.verifyImageUpload = verifyImageUpload;
@@ -52,6 +55,10 @@
         vm.showNoTicketFlow = showNoTicketFlow;
         vm.submitTicketInfoStep = submitTicketInfoStep;
         vm.continueToPayment = continueToPayment;
+        vm.hideRefCodeInput = hideRefCodeInput;
+        vm.removeRefCode = removeRefCode;
+        vm.confirmCaseBooking = confirmCaseBooking;
+        vm.phoneNumberKeyUpListener = phoneNumberKeyUpListener;
 
         var otrService = $rootScope.otrService || new OtrService({domain: ENV.apiEndpoint});
 
@@ -87,6 +94,21 @@
                             vm.session.model.citation.courtDate = this.value();
                         }
                     });
+                } else if ($state.current.name == "default-template.fight.payment") {
+                    // get the user's payment methods, if any
+                    var currentUser = vm.session.model.currentUser;
+                    console.log("Attempting to retrieve payment methods for user: ", currentUser.userId);
+
+                    StripeService.getPaymentMethodsForUser(currentUser.userId)
+                        .then(
+                        function(paymentMethods) {
+                            vm.paymentMethods = paymentMethods;
+                            vm.selectedPaymentMethod = _.find(vm.paymentMethods, { isDefault : true });
+                        }
+                    );
+
+                    vm.newCard.firstName = currentUser.firstName;
+                    vm.newCard.lastName = currentUser.lastName;
                 }
             });
         })();
@@ -335,6 +357,219 @@
         function continueToPayment() {
             $state.go('default-template.fight.payment', {});
             vm.session.model.currentStep++;
+        }
+
+        function hideRefCodeInput() {
+
+            vm.showCouponInput = false;
+
+            if (vm.refCode != null) {
+                vm.userInputRefCode = vm.refCode;
+            }
+        }
+
+        function removeRefCode() {
+            /* TODO - hook this up
+
+            if (vm.refCode != null) {
+
+                vm.refCodeDataLoading = true;
+
+                CasesService.rematchCase(vm.newCase.caseId)
+                    .then(
+                    function(response) {
+                        vm.newCase = response.theCase;
+                        vm.newCase.chanceOfSuccess = response.chanceOfSuccess;
+                        vm.caseFinancials = vm.newCase.lawfirmCaseDecision.caseFinancials;
+                        vm.refCode = null;
+                        vm.showCouponInput = false;
+                        vm.userInputRefCode = null;
+                        vm.refCodeDataLoading = false;
+                    },
+                    function (response) {
+                        vm.refCodeDataLoading = false;
+                        if(response.data.error.errorCode === 501) {
+                            vm.isNoLawfirmAvailable = true;
+                            vm.caseIdWithNoLawfirm = getCaseIdFromHeader(response.headers);
+                        }
+                        return $q.reject(response);
+                    }
+                )
+            }
+            */
+        }
+
+        function applyRefCode() {
+            /* TODO - hook this up
+
+            if (vm.userInputRefCode == null || vm.userInputRefCode == '') {
+                //vm.refCodeError = 'Please enter a referral or discount code';
+                return false;
+            }
+
+            vm.refCodeDataLoading = true;
+
+            RefCodeService.applyRefCode(vm.newCase.caseId, vm.userInputRefCode)
+                .then(
+                function(response) {
+                    console.log('newCase with refcode applied: ', response);
+                    vm.newCase = response.theCase;
+                    vm.newCase.chanceOfSuccess = response.chanceOfSuccess;
+                    vm.caseFinancials = vm.newCase.lawfirmCaseDecision.caseFinancials;
+                    vm.refCode = vm.userInputRefCode;
+                    vm.showCouponInput = false;
+                    vm.refCodeDataLoading = false;
+                },
+                function(error) {
+                    console.log('ERROR: Could not apply RefCode: ', error);
+                    vm.refCodeDataLoading = false;
+                    vm.refCodeError = error.data.error.uiErrorMsg;
+                    return $q.reject(error);
+                }
+            );
+            */
+        }
+
+        function phoneNumberKeyUpListener() {
+            // TODO - implement this function
+        }
+
+        function confirmCaseBooking(isValid) {
+
+            vm.isPaymentFormSubmitted = true;
+            vm.dataLoading = true;
+
+            if (vm.selectedPaymentMethod == null || vm.selectedPaymentMethod == '') {
+
+                // Only continue if the form is valid
+                if (!isValid) {
+                    console.log('errors on form');
+                    vm.dataLoading = false;
+                    return;
+                }
+
+                vm.newCard.name = vm.newCard.firstName + " " + vm.newCard.lastName;
+
+                stripe.card.createToken(vm.newCard)
+                    .then(
+                        // Persist the card to the user's account
+                        function(response) {
+                            console.log('token created for card ending in ', response.card.last4);
+                            console.log('full response from stripe: ', response);
+                            return StripeService.addNewPaymentMethodForUser(vm.session.model.currentUser.userId, response.id);
+                        },
+                        function(error) {
+                            console.log('ERROR: Failed to create Stripe token: ', error);
+                            console.log('Error Msg: ', error.message + ', Error code: ', error.code);
+                            FlashService.Error(error.message);
+                            vm.dataLoading = false;
+                            return $q.reject(error);
+                        }
+                    )
+                    .then(
+                        // confirm the case
+                        function() {
+                            console.log('attempting to confirm the case');
+
+                            // TODO - update case using otrService
+                            var params = {
+                                caseId: vm.session.model.case.caseId,
+                            };
+
+                            return otrService.confirmBookingUsingPOST(params);
+                            //return CasesService.confirmCaseAsBooked(vm.newCase.caseId)
+                        }
+                    )
+                    .then(
+                        // authorize payment for the case
+                        function() {
+                            var params = {
+                                request: {
+                                    user: {
+                                        userId: vm.session.model.currentUser.userId,
+                                        phoneNumbers: [{phoneNumber: vm.phoneNumber, type: vm.phoneType}]
+                                    }
+                                }
+                            };
+                            return otrService.updateUserDetailsUsingPUT(params);
+                        }
+                    )
+                    .then(
+                        function() {
+                            console.log('attempting to authorize case payment');
+                            return CasePaymentService.authorizeCasePayment(vm.session.model.case.caseId, null);
+                        }
+                    )
+                    .then(
+                        function() {
+                            console.log('Running recordGoogleAdwordsConversion()...');
+                            // TODO - hook this up
+                            //return vm.recordGoogleAdwordsConversion();
+                        }
+                    )
+                    .then(
+                        function() {
+                            vm.dataLoading = false;
+                            $rootScope.$broadcast('NewCaseEvent');
+
+                            // TODO - navigate to appropriate view
+                            //$state.go('topnav.case-details', {caseId: vm.session.model.case.caseId, isNew: true})
+                        }
+                    )
+                    .catch(
+                        function (error) {
+                            console.log('ERROR: Failed to process payment form: ', error);
+                            if (error.data != null && error.data.error != null) {
+                                FlashService.Error(error.data.error.uiErrorMsg);
+                            }
+                            vm.dataLoading = false;
+                            return $q.reject(error);
+                        }
+                    );
+            } else {
+                console.log('attempting to confirm the case');
+                CasesService.confirmCaseAsBooked(vm.session.model.case.caseId)
+                    .then(
+                        // authorize payment for the case
+                        function() {
+                            var params = {
+                                request: {
+                                    user: {
+                                        userId: vm.session.model.currentUser.userId,
+                                        phoneNumbers: [{phoneNumber: vm.phoneNumber, type: vm.phoneType}]
+                                    }
+                                }
+                            };
+                            return otrService.updateUserDetailsUsingPUT(params);
+                        }
+                    )
+                    .then(
+                        function() {
+                            console.log('attempting to authorize case payment');
+                            return CasePaymentService.authorizeCasePayment(vm.session.model.case.caseId, vm.selectedPaymentMethod.cardId);
+                        }
+                    )
+                    .then(
+                        function() {
+                            console.log('Running recordGoogleAdwordsConversion()...');
+                            return vm.recordGoogleAdwordsConversion();
+                        }
+                    )
+                    .then(
+                        function() {
+                            vm.dataLoading = false;
+                            $rootScope.$broadcast('NewCaseEvent');
+                            $state.go('topnav.case-details', {caseId: vm.session.model.case.caseId, isNew: true})
+                        }
+                    )
+                    .catch(
+                        function (error) {
+                            console.log('ERROR: Failed to process payment form: ', error);
+                            vm.dataLoading = false;
+                            return $q.reject(error);
+                        }
+                    );
+            }
         }
 
 
