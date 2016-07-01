@@ -240,14 +240,6 @@
             console.log("citation with court: ", vm.session.model.citation);
         }
 
-        function submitDateStep() {
-            vm.isDateFormSubmitted = true;
-
-            // Go to ticket info step
-            $state.go('default-template.fight.info', {});
-            vm.session.model.currentStep++;
-        }
-
         function submitTicketInfoStep() {
             vm.dataLoading = true;
             vm.isTicketInfoFormSubmitted = true;
@@ -330,6 +322,14 @@
                         vm.session.model.currentStep++;
                     }
                 );
+        }
+
+        function submitDateStep() {
+            vm.isDateFormSubmitted = true;
+
+            // Go to ticket info step
+            $state.go('default-template.fight.review', {});
+            vm.session.model.currentStep++;
         }
 
         function continueToPayment() {

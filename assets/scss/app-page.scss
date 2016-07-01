@@ -261,6 +261,19 @@
 .text-rausch, .icon-rausch {
   color: #ff5a5f;
 }
+.otr-14 {
+  font-size: 14px;
+}
+.otr-20 {
+  font-size: 20px;
+}
+.light {
+  font-weight: lighter;
+}
+.bold {
+  font-weight: bolder;
+}
+
 .border-top-gray {
   border-top: 1px solid lightgray;
   padding-top: 10px;
@@ -292,11 +305,14 @@ div.progress-bar {
         max-width: 51%;
       }
 
-      &:last-child > a.selected .stepNumber {
-        border-color: rgba(0, 122, 255, 0.67);
-        background-color: rgba(0, 122, 255, 0.67);
-        color: #fff;
-        text-indent: -9999px;
+      &:last-child > a.selected {
+        .stepNumber {
+          background-color: rgba(0, 122, 255, 1);
+
+          i {
+            color: white;
+          }
+        }
       }
       li > a.done .stepNumber:before, li:last-child > a.selected .stepNumber:before {
         content: "\f00c";
