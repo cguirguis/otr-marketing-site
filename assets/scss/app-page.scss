@@ -125,16 +125,22 @@
             }
           }
 
-          ul.whats-included {
-            list-style-type: circle;
-            padding-left: 10px;
-            text-align: left;
+          .whats-included {
+            background: #d7d7d7;
+            padding: 10px 35px;
 
-            li {
-              font-size: 14px;
-              padding: 0px 0px 12px 0;
-              border-width: 0px 0px 0px 0px;
-              border-style: dashed;
+            ul {
+              padding-left: 10px;
+              text-align: left;
+              margin-top: 20px;
+              margin-bottom: 20px;
+
+              li {
+                font-size: 16px;
+                padding: 0 0 8px;
+                border-width: 0;
+                border-style: dashed;
+              }
             }
           }
 
@@ -264,8 +270,8 @@
 .otr-14 {
   font-size: 14px;
 }
-.otr-20 {
-  font-size: 20px;
+.otr-18 {
+  font-size: 18px;
 }
 .light {
   font-weight: lighter;
