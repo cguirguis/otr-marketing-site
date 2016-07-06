@@ -48,6 +48,17 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+
+@media (max-width: 992px) {
+  /* This centers the row content row; we only want this if content does
+     need to be floated, so prevent for contents with smaller widths.
+  */
+  .row-centered-md > * {
+    float: none;
+    margin: auto;
+  }
+}
+
 #page {
   padding-top: 0px !important;
   background-color: white;

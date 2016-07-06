@@ -12,7 +12,7 @@
                         <div class="payment-section">
                             <div class="payment-controls">
                                 <label>Payment type</label>
-                                <div class="row space-top-2" id="payment-type-select">
+                                <div class="row" id="payment-type-select">
                                     <div class="col-lg-8">
                                         <div class="select select-block">
                                             <select name="payment_type" class="grouped-field" id="payment-method-select"
@@ -40,11 +40,13 @@
                                     <div class="row">
                                         <div class="col-lg-4">
                                                 <span class="input-icon">
-                                                    <i class="fa fa-phone fa-lg" style="padding-top: 2px;"></i>
+                                                    <i class="fa fa-phone fa-lg"
+                                                       style="padding-top: 2px;height:40px;"></i>
                                                     <input format-phone="" name="phoneNumberCheckout" type="text"
                                                            required ng-model="vm.phoneNumber"
                                                            ng-keyup="vm.phoneNumberKeyUpListener()"
-                                                           ng-class="{ 'has-error' : vm.isPhoneNumberInvalid && phoneForm.phoneNumberCheckout.$dirty }">
+                                                           ng-class="{ 'has-error' : vm.isPhoneNumberInvalid && phoneForm.phoneNumberCheckout.$dirty }"
+                                                           style="padding-left:30px;">
                                                 </span>
                                         </div>
                                         <div class="col-lg-8">
@@ -80,7 +82,9 @@
                                                                     class="cc-number space-top-2">
                                                                 <label for="credit-card-number" data-i18n="cc_number">Card number</label>
                                                                 <div class="inner-addon right-addon">
-                                                                    <a href="" id="tooltip-cc-icon-lock" class="icon icon-lock icon-light-gray h3 link-reset" style="margin-top: 0px; font-size: 22px;"></a>
+                                                                    <a href="" id="tooltip-cc-icon-lock" class="icon icon-lock icon-light-gray h3 link-reset" style="margin-top: 0px; font-size: 22px;">
+                                                                        <i class="fa fa-lock" style="margin-top: 5px;"></i>
+                                                                    </a>
                                                                     <input type="text" name="cardNumber" required ng-model="vm.newCard.number"
                                                                            cc-number cc-format cc-eager-type
                                                                            data-hook="credit-card-number"
@@ -93,68 +97,60 @@
                                                                     <!--</p>-->
                                                                 </div>
                                                             </div>
-                                                            <div class="row space-top-2">
+                                                            <div class="row">
                                                                 <div
-                                                                        class="col-md-6 cc-expiration">
+                                                                        class="col-md-6 space-top-2 cc-expiration">
                                                                     <span>
                                                                         <label for="credit-card-month" data-i18n="expires_on">Expires on</label>
                                                                             <div class="row row-super-condensed" cc-exp>
                                                                                 <div class="col-md-6">
-                                                                                    <div class="select select-block">
-                                                                                        <div class="select select-block">
-                                                                                            <select name="ccExpMonth" required ng-model="vm.newCard.exp_month" cc-exp-month data-hook="credit-card-month"
-                                                                                                    ng-class="{ 'has-error' : (paymentForm.ccExpMonth.$invalid || paymentForm.$error.ccExp) && vm.isPaymentFormSubmitted }">
-                                                                                                <option value="" selected>mm</option>
-                                                                                                <option value="1">1</option>
-                                                                                                <option value="2">2</option>
-                                                                                                <option value="3">3</option>
-                                                                                                <option value="4">4</option>
-                                                                                                <option value="5">5</option>
-                                                                                                <option value="6">6</option>
-                                                                                                <option value="7">7</option>
-                                                                                                <option value="8">8</option>
-                                                                                                <option value="9">9</option>
-                                                                                                <option value="10">10</option>
-                                                                                                <option value="11">11</option>
-                                                                                                <option value="12">12</option>
-                                                                                            </select>
-                                                                                        </div>
-                                                                                    </div>
+                                                                                    <select name="ccExpMonth" required ng-model="vm.newCard.exp_month" cc-exp-month data-hook="credit-card-month"
+                                                                                            ng-class="{ 'has-error' : (paymentForm.ccExpMonth.$invalid || paymentForm.$error.ccExp) && vm.isPaymentFormSubmitted }">
+                                                                                        <option value="" selected>mm</option>
+                                                                                        <option value="1">1</option>
+                                                                                        <option value="2">2</option>
+                                                                                        <option value="3">3</option>
+                                                                                        <option value="4">4</option>
+                                                                                        <option value="5">5</option>
+                                                                                        <option value="6">6</option>
+                                                                                        <option value="7">7</option>
+                                                                                        <option value="8">8</option>
+                                                                                        <option value="9">9</option>
+                                                                                        <option value="10">10</option>
+                                                                                        <option value="11">11</option>
+                                                                                        <option value="12">12</option>
+                                                                                    </select>
                                                                                 </div>
                                                                                 <div class="col-md-6">
-                                                                                    <div class="select select-block">
-                                                                                        <div class="select select-block">
-                                                                                            <select name="ccExpYear" required ng-model="vm.newCard.exp_year" cc-exp-year full-year data-hook="credit-card-year"
-                                                                                                    ng-class="{ 'has-error' : (paymentForm.ccExpYear.$invalid || paymentForm.$error.ccExp) && vm.isPaymentFormSubmitted }">
-                                                                                                <option value="" selected>yyyy</option>
-                                                                                                <option value="2016">2016</option>
-                                                                                                <option value="2017">2017</option>
-                                                                                                <option value="2018">2018</option>
-                                                                                                <option value="2019">2019</option>
-                                                                                                <option value="2020">2020</option>
-                                                                                                <option value="2021">2021</option>
-                                                                                                <option value="2022">2022</option>
-                                                                                                <option value="2023">2023</option>
-                                                                                                <option value="2024">2024</option>
-                                                                                                <option value="2025">2025</option>
-                                                                                                <option value="2026">2026</option>
-                                                                                                <option value="2027">2027</option>
-                                                                                                <option value="2028">2028</option>
-                                                                                                <option value="2029">2029</option>
-                                                                                                <option value="2030">2030</option>
-                                                                                                <option value="2031">2031</option>
-                                                                                                <option value="2032">2032</option>
-                                                                                                <option value="2033">2033</option>
-                                                                                                <option value="2034">2034</option>
-                                                                                                <option value="2035">2035</option>
-                                                                                            </select>
-                                                                                        </div>
-                                                                                    </div>
+                                                                                    <select name="ccExpYear" required ng-model="vm.newCard.exp_year" cc-exp-year full-year data-hook="credit-card-year"
+                                                                                            ng-class="{ 'has-error' : (paymentForm.ccExpYear.$invalid || paymentForm.$error.ccExp) && vm.isPaymentFormSubmitted }">
+                                                                                        <option value="" selected>yyyy</option>
+                                                                                        <option value="2016">2016</option>
+                                                                                        <option value="2017">2017</option>
+                                                                                        <option value="2018">2018</option>
+                                                                                        <option value="2019">2019</option>
+                                                                                        <option value="2020">2020</option>
+                                                                                        <option value="2021">2021</option>
+                                                                                        <option value="2022">2022</option>
+                                                                                        <option value="2023">2023</option>
+                                                                                        <option value="2024">2024</option>
+                                                                                        <option value="2025">2025</option>
+                                                                                        <option value="2026">2026</option>
+                                                                                        <option value="2027">2027</option>
+                                                                                        <option value="2028">2028</option>
+                                                                                        <option value="2029">2029</option>
+                                                                                        <option value="2030">2030</option>
+                                                                                        <option value="2031">2031</option>
+                                                                                        <option value="2032">2032</option>
+                                                                                        <option value="2033">2033</option>
+                                                                                        <option value="2034">2034</option>
+                                                                                        <option value="2035">2035</option>
+                                                                                    </select>
                                                                                 </div>
                                                                             </div>
                                                                         </span>
                                                                 </div>
-                                                                <div class="col-sm-12 col-md-6 cc-security-code">
+                                                                <div class="col-sm-12 col-md-6 space-top-2 cc-security-code">
                                                                     <label for="credit-card-cvv" data-i18n="security_code">Security code (CVV)</label>
                                                                     <div class="inner-addon right-addon">
                                                                         <a href="" id="tooltip-cvv" class="icon icon-question icon-light-gray h3 link-reset" tabindex="-1" style="margin-top: 0px; font-size: 22px;"></a>
@@ -166,15 +162,15 @@
 
                                                             <hr>
 
-                                                            <div class="row space-top-2">
-                                                                <div class="control-group cc-first-name col-md-6">
+                                                            <div class="row">
+                                                                <div class="control-group cc-first-name col-md-6 space-top-2">
                                                                     <label class="control-label" for="credit-card-first-name">
                                                                         First name (on card)
                                                                     </label>
                                                                     <input type="text" ng-model="vm.newCard.firstName" id="credit-card-first-name">
                                                                 </div>
 
-                                                                <div class="control-group cc-last-name col-md-6">
+                                                                <div class="control-group cc-last-name col-md-6 space-top-2">
                                                                     <label class="control-label" for="credit-card-last-name">
                                                                         Last name (on card)
                                                                     </label>
@@ -182,7 +178,7 @@
                                                                 </div>
                                                             </div>
 
-                                                            <div class="row row-space-2">
+                                                            <div class="row space-top-2">
                                                                 <div class="control-group cc-zip cc-zip-new col-md-6 col-lg-3">
                                                                     <label for="credit-card-zip">
                                                                         Zip code
@@ -211,7 +207,7 @@
                                         <div class="terms media">
                                             <div class="media-body">
                                                 <label for="agrees-to-terms" class="va-container">
-                                                    <div class="va-top">
+                                                    <div class="va-top default-line-height">
                                                         By clicking on “Confirm Case Booking”, you agree to pay the
                                                         total amount shown in the summary on the right, and to the
                                                         <a href="https://offtherecord.com/terms.html" class="terms_link" target="_blank">Terms of Service</a> and
@@ -230,7 +226,7 @@
             </div>
         </div>
 
-        <!-- What's Included? -->
+        <!-- Right column -->
         <div class="right-col col-xs-11 col-sm-4" style="background-color: white;">
             <div class="media-photo media-photo-block text-center payments-listing-image"
                  style="background-color: inherit;padding: 10px 7px 0px 7px;">
@@ -239,14 +235,14 @@
                      style="width:100%;max-height: 250px;">
             </div>
 
-            <div class="hide-smm space-top-2">
-                <div class="payments-listing-name h4">Summary</div>
-                <ul style="padding-left: 15px">
-                    <li style="font-size: 14px">Legal services to fight your case in court</li>
-                    <li style="font-size: 14px">Full refund if your ticket is not dismissed, deferred or reduced to a non-moving violation</li>
-                    <li style="font-size: 14px">Cancel anytime within 24 hours</li>
-                    <li style="font-size: 14px">No hidden fees</li>
-                    <li style="font-size: 14px">Peace of mind. We handle everything from here.</li>
+            <div class="space-top-2 payments-listing">
+                <div class="h4">Summary</div>
+                <ul>
+                    <li>Legal services to fight your case in court</li>
+                    <li>Full refund if your ticket is not dismissed, deferred or reduced to a non-moving violation</li>
+                    <li>Cancel anytime within 24 hours</li>
+                    <li>No hidden fees</li>
+                    <li>Peace of mind. We handle everything from here.</li>
                 </ul>
 
                 <hr>
@@ -303,7 +299,7 @@
                         </tr>
                         <tr class="editable-fields" ng-show="vm.showCouponInput">
                             <td colspan="2">
-                                <div class="row-condensed clearfix row-space-1">
+                                <div class="row-condensed clearfix space-top-1">
                                     <div class="col-sm-7">
                                         <input type="text" name="coupon_code" autocomplete="off"
                                                ng-model="vm.userInputRefCode"
@@ -326,7 +322,7 @@
                                     </div>
                                 </div>
                                 <!-- refcode error message -->
-                                <div class="row-condensed clearfix row-space-1" ng-show="vm.refCodeError != null">
+                                <div class="row-condensed clearfix space-top-1" ng-show="vm.refCodeError != null">
                                     <div class="col-sm-12" style="color: tomato;font-style: italic;background-color: oldlace;">
                                         {{ vm.refCodeError }}
                                     </div>
@@ -357,15 +353,15 @@
                 </div>
 
                 <!-- Button -->
-                <div class="space-top-5" style="text-align:center;">
-                    <button type="submit" class=" btn btn-default btn-primary"
-                            ng-disabled="vm.dataLoading == true || vm.isPhoneNumberInvalid">
-                        <span>Fight My Ticket</span>
+                <div class="space-top-5 row row-centered-lg" style="text-align:center;">
+                    <button type="submit" class="col-xs-12 col-sm-8 btn btn-default btn-primary"
+                            ng-disabled="vm.dataLoading == true || vm.isPhoneNumberInvalid"
+                            ng-click="vm.continueToPayment()">
+                        <span>Confirm Case Booking</span>
                         <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
                     </button>
                     <br>
                 </div>
-
             </div>
         </div>
 
