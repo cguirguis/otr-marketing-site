@@ -78,7 +78,7 @@ h1, h2, h3, h4, h5, h6 {
     background-position: top;
     background-size: cover;
     background-repeat: no-repeat;
-    height: 575px;
+    height: calc(100vh - 1px);
     background-color: #337ab7;
   }
   h1 {
@@ -89,6 +89,19 @@ h1, h2, h3, h4, h5, h6 {
     background-color: rgba(0,0,0,0.3);
     height: 100%;
     padding: 10px 40px;
+  }
+}
+
+.media-container {
+  width: 100%;
+  background-color: rgba(255,255,255,0.9);
+  padding-bottom: 8px;
+  padding-top: 12px;
+  position: absolute;
+  bottom: 0;
+
+  .media-image img {
+    max-height: 35px;
   }
 }
 
@@ -106,6 +119,7 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: none;
   border: none;
   height: 70px;
+  z-index: 2;
 
   .navbar-toggle {
     border: solid 1px white;
@@ -405,6 +419,7 @@ ul#menu-main-menu {
       margin-top: -1px;
       position: relative;
       border-radius: 2px;
+      min-width: inherit;
     }
   }
 }
@@ -445,11 +460,7 @@ ul#menu-main-menu {
   font-size: 16px;
 
   .bg .container .row .home-widget {
-    padding: 20px 0;
-
-    #woocommerce_products-2 {
-      margin: 0 0 2em;
-    }
+    padding: 0 0 20px 0;
   }
   .woocommerce ul.product_list_widget {
     margin: 0 -15px 0px -15px;
@@ -857,6 +868,10 @@ a.fight-my-ticket {
   margin-left: 15px;
   background-color: #ffffff;
 }
+.get-started-container.has-error #state-input-field_value {
+  border: solid 2px red;
+}
+
 .angucomplete-dropdown {
   z-index: 1;
 
@@ -923,32 +938,13 @@ a.fight-my-ticket {
       margin-top: 15px;
     }
   }
-
+  .homepage-banner #text-3.widget {
+    margin-top: 70px;
+  }
   button.fight-my-ticket, a.fight-my-ticket {
     margin-top: 10px;
     margin-bottom: 30px;
     display: block;
-  }
-}
-
-@media (max-width: 550px) {
-  .textwidget .get-started-container {
-    z-index: 1;
-    .overlay {
-      height: 142px;
-    }
-    .state-input {
-      width: 93%;
-      margin-left: 3%;
-    }
-    a.get-started-button {
-      width: 93%;
-      margin: 3px 0 0 3%;
-    }
-  }
-  #state-input-field_dropdown {
-    width: 93%;
-    margin-left: 3%;
   }
 }
 
@@ -988,6 +984,25 @@ a.fight-my-ticket {
       height: 40px;
       cursor: pointer;
     }
+  }
+
+  .textwidget .get-started-container {
+    z-index: 1;
+    .overlay {
+      height: 142px;
+    }
+    .state-input {
+      width: 93%;
+      margin-left: 3%;
+    }
+    a.get-started-button {
+      width: 93%;
+      margin: 3px 0 0 3%;
+    }
+  }
+  #state-input-field_dropdown {
+    width: 93%;
+    margin-left: 3%;
   }
 }
 
@@ -1135,6 +1150,18 @@ a.fight-my-ticket {
   }
 }
 
+@media (max-width: 500px) {
+  #content.how-it-works-header {
+    margin-top: 80px;
+  }
+}
+
+@media (max-width: 440px) {
+  #content.how-it-works-header {
+    margin-top: 130px;
+  }
+}
+
 @media (min-width: 768px) {
   .navbar-collapse.collapsing {
     overflow: visible!important;
@@ -1149,5 +1176,11 @@ a.fight-my-ticket {
 @media (min-width: 1200px) {
   #footer #footer-widgets .container {
     width: 1170px;
+  }
+}
+
+@media (max-height: 650px) and (max-width: 500px) {
+  .media-container {
+    position: relative;
   }
 }

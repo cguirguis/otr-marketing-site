@@ -15,6 +15,7 @@ var runSequence = require('run-sequence');
 var merge = require('merge-stream');
 var connect = require('gulp-connect-multi')();
 var rename = require('gulp-rename');
+var preprocess = require('gulp-preprocess');
 var argv = require('yargs').argv;
 
 gulp.task('minify-sass', function () {
@@ -70,6 +71,7 @@ gulp.task('replace-vars', function() {
                 }
             ]
         }))
+        .pipe(preprocess({context: { IS_PROD: argv.prod ? true : false}})) // see @if or @ifdef statements
         .pipe(gulp.dest('build'));
 
     var domain = {
@@ -126,8 +128,10 @@ gulp.task('copy-src', function() {
         gulp.src('./app/**/*')
             .pipe(gulp.dest('./build/app/'));
 
+    var robotsFile = argv.prod ? 'crawler/prod/robots.txt' : 'crawler/devo/robots.txt';
+
     var seoFiles =
-        gulp.src(['robots.txt', 'sitemap.txt'])
+        gulp.src([robotsFile, 'sitemap.txt'])
             .pipe(gulp.dest('./build/'));
 
     return merge(bower, app, seoFiles);

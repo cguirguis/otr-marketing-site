@@ -1,7 +1,7 @@
 <div id="page" class="home-page">
 
     <!--<div ui-view></div>-->
-    <div class="homepage-banner bg-primary" role="" style="background-color: #f4f4f4;">
+    <div class="homepage-banner bg-primary" role="" style="background-color: #f4f4f4;position:relative">
         <div class="container">
             <div id="text-3" class="widget widget_text">
                 <div class="textwidget">
@@ -12,11 +12,15 @@
                         A single speeding ticket could raise your insurance rates by a whopping $790 over the next 3 years.</h1>
                     <br>
 
-                    <div class="get-started-container">
+                    <div class="get-started-container"
+                         ng-class="{ 'has-error' : vm.errorMessage.length }">
                         <div class="overlay"></div>
+                        <!--<div>Selected: {{ vm.selectedState }}</div>-->
                         <angucomplete-alt id="state-input-field"
-                                          placeholder="Where did you get your ticket?"
+                                          placeholder="In which state did you get your ticket?"
                                           pause="100"
+                                          override-suggestions="true"
+                                          auto-match="true"
                                           selected-object="vm.selectedState"
                                           local-data="statesList"
                                           local-search="vm.stateSearch"
@@ -26,34 +30,47 @@
                                           minlength="0"
                                           input-class="state-input"
                                           match-class="highlight"
-                                          text-no-results="Please select the state where you received your ticket."></angucomplete-alt>
+                                          text-no-results="Please select the state where you received your ticket."
+                                          ng-enter="vm.goToState(vm.selectedState)"
+                                ></angucomplete-alt>
 
-                        <a ui-sref="default-template.state-info.fight({stateCode: vm.selectedState.description, stateName: vm.selectedState.title})" class="fight-my-ticket get-started-button">Get Started</a></div>
+                        <a ng-click="vm.goToState(vm.selectedState)" class="fight-my-ticket get-started-button">Get Started</a></div>
                 </div>
             </div>
         </div>
+
+    <!--</div>-->
+
+    <!--&lt;!&ndash; FEATURED IN &ndash;&gt;-->
+    <!--<div class="container text-center" style="width: 100%!important;background-color: #f4f4f4;padding-bottom: 10px;padding-top: 10px;">-->
+        <!--<a href="http://usatoday30.usatoday.com/video/new-app-fights-traffic-tickets-for-you/4594279255001" target="_blank">-->
+            <!--<img src="assets/img/logos/usa-today-logo-bw.png" width="200" class="wp-post-image padding-right-30"-->
+                 <!--alt="USA Today">-->
+        <!--</a>-->
+        <!--<a href="http://www.cbs19.tv/story/30428480/new-app-helps-drivers-fight-traffic-tickets" target="_blank">-->
+            <!--<img src="assets/img/logos/cbs-logo-bw.png" width="150" class="wp-post-image padding-right-30"-->
+                 <!--alt="CBS logo">-->
+        <!--</a>-->
+
+        <!-- FEATURED IN -->
+        <div class="container text-center media-container"
+             style="height:initial;width: 100%!important;background-color: #f4f4f4;padding-bottom: 10px;padding-top:
+             10px;">
+            <a href="http://usatoday30.usatoday.com/video/new-app-fights-traffic-tickets-for-you/4594279255001" target="_blank"  class="col-sm-3 media-image">
+                <img src="assets/img/logos/usa-today-logo-bw.png" alt="USA Today" style="max-height: 40px;">
+            </a>
+            <a href="http://www.cbs19.tv/story/30428480/new-app-helps-drivers-fight-traffic-tickets" target="_blank" class="col-sm-3 media-image">
+                <img src="assets/img/logos/cbs-logo-bw.png" alt="CBS logo">
+            </a>
+            <a href="http://www.fox10phoenix.com/news/hot-topics/45565415-story" target="_blank" class="col-sm-3 media-image">
+                <img src="assets/img/logos/fox-news-logo-bw.png" alt="Fox logo">
+            </a>
+            <a href="http://www.king5.com/story/news/local/2015/11/03/ticketapp/75078094/" target="_blank" class="col-sm-3 media-image">
+                <img src="assets/img/logos/nbc-logo-bw.png" alt="NBC logo">
+            </a>
+        </div>
     </div>
 
-    <!-- FEATURED IN -->
-    <div class="container text-center" style="width: 100%!important;background-color: #f4f4f4;padding-bottom: 10px;padding-top: 10px;">
-        <a href="http://usatoday30.usatoday.com/video/new-app-fights-traffic-tickets-for-you/4594279255001" target="_blank">
-            <img src="assets/img/logos/usa-today-logo-bw.png" width="200" class="wp-post-image padding-right-30"
-                 alt="USA Today">
-        </a>
-        <a href="http://www.cbs19.tv/story/30428480/new-app-helps-drivers-fight-traffic-tickets" target="_blank">
-            <img src="assets/img/logos/cbs-logo-bw.png" width="150" class="wp-post-image padding-right-30"
-                 alt="CBS logo">
-        </a>
-
-        <a href="http://www.fox10phoenix.com/news/hot-topics/45565415-story" target="_blank">
-            <img src="assets/img/logos/fox-news-logo-bw.png" width="200" class="wp-post-image padding-right-30"
-                 alt="Fox logo">
-        </a>
-        <a href="http://www.king5.com/story/news/local/2015/11/03/ticketapp/75078094/" target="_blank">
-            <img src="assets/img/logos/nbc-logo-bw.png" width="200" class="wp-post-image"
-                 alt="NBC logo">
-        </a>
-    </div>
     <div id="content" class="site-content container text-center how-it-works-header">
         <div id="primary" class="content-area col-sm-12 col-md-12">
             <main id="main" class="site-main" role="main">

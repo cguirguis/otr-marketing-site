@@ -6,8 +6,8 @@
         .controller('DefaultTemplateCtrl', DefaultTemplateCtrl);
 
 
-    DefaultTemplateCtrl.$inject = ['ENV', '$rootScope', '$timeout', '$http', '$q', 'GlobalUtils', 'OtrService', 'FileService'];
-    function DefaultTemplateCtrl(ENV, $rootScope, $timeout, $http, $q, GlobalUtils, OtrService, FileService) {
+    DefaultTemplateCtrl.$inject = ['ENV', '$rootScope', '$cookies', '$filter', '$timeout', '$http', '$q', 'GlobalUtils', 'OtrService', 'FileService'];
+    function DefaultTemplateCtrl(ENV, $rootScope, $cookies, $filter, $timeout, $http, $q, GlobalUtils, OtrService, FileService) {
         var vm = this,
 
             URLS = {
@@ -33,13 +33,18 @@
             });
 
             $("ul#menu-main-menu li#menu-item-12").click(function() {
-                if (vm.isMobileDevice) {
+                if (vm.isMobileDevice || window.outerWidth < 768) {
                     $("#menu-item-12").toggleClass("hover");
                 }
             });
 
             navbarToggle.click(function(event) {
                 $("ul#menu-main-menu").parent().toggle();
+
+                if (window.outerWidth > 768) {
+                    event.stopPropagation();
+                    return;
+                }
 
                 var getStartedContainer = $(".get-started-container")[0];
                 if (getStartedContainer) {
@@ -81,7 +86,8 @@
                 if (!exitPopupLoaded) {
                     bioEp.init({
                         fonts: ['//fonts.googleapis.com/css?family=Titillium+Web:300,400,600'],
-                        cookieExp: 2
+                        delay: 10,
+                        cookieExp: 1
                     });
                     exitPopupLoaded = true;
                 }
@@ -98,12 +104,21 @@
         // ----- PUBLIC METHODS -------------------------------------------------------
 
         (function initController() {
+            console.log('----- Initializing DefaultTemplateCtrl -----');
 
             otrService = new OtrService({domain: ENV.apiEndpoint});
             $rootScope.otrService = otrService;
             vm.reviewRequested = false;
 
             FileService.initializeFileReaderHandler();
+
+            vm.iTunesLinkForFooter = GlobalUtils.buildITunesLink('website', null, 'iOSBadge', 'footer', null);
+
+            $rootScope.$on('BranchInitComplete', function(event, next, current) {
+                console.log('BranchInitComplete event in DefaultTemplateCtrl.js: ', $rootScope.branchData);
+                vm.iTunesLinkForFooter = GlobalUtils.buildITunesLink('website', '', 'iOSBadge', 'footer', '');
+            });
+
         })();
 
         function isUploadSupported() {

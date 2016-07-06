@@ -7,29 +7,38 @@
         .controller('LawyerFormModalCtrl', LawyerFormModalCtrl);
 
 
-    HomeCtrl.$inject = ['ENV', '$cookies', '$filter', '$rootScope', '$uibModal', '$log'];
-    function HomeCtrl(ENV, $cookies, $filter, $rootScope, $uibModal, $log) {
+    HomeCtrl.$inject = ['$scope', '$timeout', 'ENV', '$state', '$rootScope', '$uibModal', '$log', 'GlobalUtils'];
+    function HomeCtrl($scope, $timeout, ENV, $state, $rootScope, $uibModal, $log, GlobalUtils) {
         var vm = this,
-            //isMobileDevice = GlobalUtils.isMobileDevice(),
+            isMobileDevice = GlobalUtils.isMobileDevice(),
 
             URLS = {
                 POST_LAWYER_LEAD: ENV.apiEndpoint + '/api/v1/lawyers/lead'
             };
 
-        vm.iTunesLink = 'http://fight.offtherecord.com/ios-app-store?channel=website&feature=iOSBadge&stage=homepage&';
+        vm.errorMessage = "";
 
         // ----- INTERFACE ------------------------------------------------------------
-        //vm.saveContactInfo = saveContactInfo;
         vm.openLawyerFormModal = openLawyerFormModal;
         vm.stateSearch = stateSearch;
+        vm.goToState = goToState;
 
         // ----- PUBLIC METHODS -------------------------------------------------------
 
         (function init() {
 
-            $rootScope.$on('BranchInitComplete', function(event, next, current) {
-                console.log('BranchInitComplete event: ', $rootScope.branchData);
-                buildITunesLink();
+            $scope.$on('$viewContentLoaded', function() {
+                $timeout(function() {
+                    var stateInput = angular.element("#state-input-field_value");
+                    stateInput.on('click', function () {
+                        if (isMobileDevice
+                            && !stateInput.val().length
+                            && window.innerHeight < 750) {
+                            console.log("scroll down.");
+                            window.scrollTo(0, $(".get-started-container").position().top - 5);
+                        }
+                    });
+                });
             });
 
         })();
@@ -49,45 +58,40 @@
             return matches;
         }
 
-        function buildITunesLink() {
+        function goToState(selectedState) {
 
-            console.log('isBranchLink: ', $rootScope.branchData.isBranchLink);
+            // console.log('selectedState: ', selectedState);
 
-            if ($rootScope.branchData.isBranchLink) {
-                var link = 'http://fight.offtherecord.com/ios-app-store?';
-
-                if ($rootScope.branchData.channel) {
-                    link = link + 'channel=' + $rootScope.branchData.channel + '&';
-                }
-                if ($rootScope.branchData.campaign) {
-                    link = link + 'campaign=' + $rootScope.branchData.campaign + '&';
-                }
-                if ($rootScope.branchData.feature) {
-                    link = link + 'feature=' + $rootScope.branchData.feature + '&';
-                }
-                if ($rootScope.branchData.stage) {
-                    link = link + 'stage=' + $rootScope.branchData.stage + '&';
-                }
-                if ($rootScope.branchData.tags) {
-                    link = link + 'tags=' + $rootScope.branchData.tags + ',iOSBadge,homepage' + '&';
-                }
-                console.log('new link: ', link);
-                vm.iTunesLink = link;
+            if (!selectedState || !selectedState.originalObject) {
+                vm.errorMessage = "Please enter a valid state";
+                return;
             }
 
-            var ref1 = $cookies.get('otr-referrer');
-            var ref2 = $cookies.getObject('otr-referrer');
+            if (selectedState.originalObject.abbreviation) {
+                // console.log('state object already specified');
+                // console.log('stateCode: ', selectedState.originalObject.abbreviation, ', stateName: ', selectedState.originalObject.name);
+                selectedState = selectedState.originalObject;
 
-            console.log('ref1: ', ref1);
-            console.log('ref2: ', ref2);
-
-            if (ref1) {
-                var ref1clean = $filter('encodeUri')(ref1);
-                console.log('ref1clean', ref1clean);
-                vm.iTunesLink = vm.iTunesLink + 'referrer=' + ref1clean;
+            } else if (selectedState.originalObject.length == 2) {
+                // A state code was typed in.
+                // console.log('attempting to match with state abbreviation: ', selectedState.originalObject);
+                selectedState = _.find($rootScope.statesList, { 'abbreviation' : selectedState.originalObject.toUpperCase() });
+                // console.log('found matching state: ', selectedState);
+            }
+            else {
+                // console.log('matching by state name: ', selectedState.originalObject);
+                selectedState = _.find($rootScope.statesList, function(o) {
+                    return o.name.toLowerCase() == selectedState.originalObject.toLowerCase();
+                });
+                // console.log('found matching state: ', selectedState);
             }
 
-            console.log('iTunes Link: ', vm.iTunesLink);
+            if (selectedState) {
+                vm.errorMessage = "";
+                $state.go('default-template.state-info.fight', { stateCode: selectedState.abbreviation, stateName: selectedState.name });
+            } else {
+                vm.errorMessage = "Please enter a valid state";
+            }
 
         }
 
@@ -116,33 +120,6 @@
             );
         }
 
-        //function saveContactInfo(isValid) {
-        //    vm.dataLoading = true;
-        //    vm.submitted = true;
-        //    vm.launchFormSuccess = false;
-        //    vm.launchFormResponseReceived = false;
-        //
-        //    // Only continue if the login form is valid
-        //    if (!isValid) {
-        //        vm.dataLoading = false;
-        //        return;
-        //    }
-        //
-        //    // Make the call to save the info
-        //    var dataObj = {
-        //        subscriber : {
-        //            fullName : vm.fullName,
-        //            email : vm.email,
-        //            postalCode : vm.zipcode,
-        //            subscriptionType : 'WEB_BROCHURE_LAUNCH_NOTIFICATION',
-        //            roleType: 'DEFENDANT'
-        //        }
-        //    };
-			//
-			//vm.formName = "contact";
-			//
-			//postSubscriberData(dataObj);
-        //}
     }
 
     /**

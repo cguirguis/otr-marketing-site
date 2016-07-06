@@ -346,10 +346,11 @@
         }]);
     }
 
-    init.$inject = ['$document', '$rootScope', '$location', '$anchorScroll', '$cookies', 'ngMeta'];
-    function init($document, $rootScope, $location, $anchorScroll, $cookies, ngMeta) {
+    init.$inject = ['$document', '$rootScope', '$location', '$anchorScroll', '$cookies', 'ngMeta', 'GlobalUtils'];
+    function init($document, $rootScope, $location, $anchorScroll, $cookies, ngMeta, GlobalUtils) {
 
-        writeReferrerCookie($document, $cookies);
+        console.log('----- app.init() -----');
+        writeReferrerCookie($document, $cookies, $rootScope);
 
         // Initialize page title and meta tags
         ngMeta.init();
@@ -377,10 +378,21 @@
         };
     }
 
-    function writeReferrerCookie($document, $cookies) {
+    writeReferrerCookie.$inject = ['$document', '$cookies', '$rootScope'];
+    function writeReferrerCookie($document, $cookies, $rootScope) {
+
+        console.log('----- writeReferrerCookie() -----');
 
         var referrer = $document[0].referrer;
-        console.log('Referrer is (app.js): ', referrer);
+        console.log('Current referrer is (app.js): ', referrer);
+
+        if (!referrer || referrer == '') {
+            // If we previously wrote a referrer cookie, retrieve it.
+            referrer = $cookies.getObject('otr-referrer');
+            console.log('Previously saved referrer: ', referrer);
+        }
+
+        $rootScope.httpReferrer = referrer;
 
         // don't write (or overwrite) a cookie if there's no referrer value
         if (!referrer || referrer == '') {
@@ -388,25 +400,30 @@
         }
 
         var cookieExpireDate = new Date();
-        var numberOfDaysToAdd = 14;
+        var numberOfDaysToAdd = 20;
         cookieExpireDate.setDate(cookieExpireDate.getDate() + numberOfDaysToAdd);
 
         var cookieDefaults = {
             'domain' : 'offtherecord.com',
+            // 'domain' : 'localhost',
             'expires' : cookieExpireDate
         };
 
         $cookies.put('otr-referrer', JSON.stringify(referrer), cookieDefaults);
     }
 
+    branchInit.$inject = ['$rootScope', '$cookies'];
     function branchInit($rootScope, $cookies) {
 
+        console.log('----- branchInit() -----');
+
         var cookieExpireDate = new Date();
-        var numberOfDaysToAdd = 14;
+        var numberOfDaysToAdd = 20;
         cookieExpireDate.setDate(cookieExpireDate.getDate() + numberOfDaysToAdd);
 
         var cookieDefaults = {
             'domain' : 'offtherecord.com',
+            // 'domain' : 'localhost',
             'expires' : cookieExpireDate
         };
 
@@ -414,12 +431,7 @@
         $rootScope.branchData = {
             isBranchLink : false
         };
-        // Set defaults for banner click.
-        var channel = 'Website';
-        var campaign = '';
-        var feature = 'smart_banner';
-        var stage = '';
-        var tags = ['some-random-tag', 'other-random-tag'];
+        var tagsForBannerLink;
 
 
         (function(b,r,a,n,c,h,_,s,d,k) {
@@ -448,14 +460,76 @@
                     tags : data.data_parsed['~tags']
                 };
 
-                console.log('finished writing branch data to rootscope');
+                console.log('rootScope.branchData: ', $rootScope.branchData);
+
+                if (_.isArray(data.data_parsed['~tags'])) {
+                    console.log('tags is an array');
+                    tagsForBannerLink = _.concat(data.data_parsed['~tags'], 'smart_banner');
+                } else if (_.isString(data.data_parsed['~tags'])) {
+                    console.log('tags is a string');
+                    tagsForBannerLink = data.data_parsed['~tags'] + ',smart_banner';
+                } else {
+                    console.log('tags is not defined');
+                    tagsForBannerLink = 'smart_banner';
+                }
+                console.log('tagsForBannerLink: ', tagsForBannerLink);
+
+            } else {
+
+                // Check to see if there's a cookie with branch data and load that in.
+                var branchCookie = $cookies.getObject('branch-link');
+                console.log('branch-cookie: ', branchCookie);
+
+                if (branchCookie) {
+
+                    $rootScope.branchData = {
+                        isBranchLink : branchCookie['+clicked_branch_link'],
+                        channel : branchCookie['~channel'],
+                        campaign : branchCookie['~campaign'],
+                        feature : branchCookie['~feature'],
+                        stage : branchCookie['~stage'],
+                        tags : branchCookie['~tags']
+                    };
+
+                    console.log('rootScope.branchData: ', $rootScope.branchData);
+
+                    if (_.isArray($rootScope.branchData.tags)) {
+                        console.log('tags is an array');
+                        tagsForBannerLink = _.concat($rootScope.branchData.tags, 'smart_banner');
+                    } else if (_.isString($rootScope.branchData.tags)) {
+                        console.log('tags is a string');
+                        tagsForBannerLink = $rootScope.branchData.tags + ',smart_banner';
+                    } else {
+                        console.log('tags is not defined');
+                        tagsForBannerLink = 'smart_banner';
+                    }
+                    console.log('tagsForBannerLink: ', tagsForBannerLink);
+
+                }
+
             }
 
             console.log('branch init complete');
-            $rootScope.branchInitComplete = true;
+            initBranchSmartBanner($rootScope, tagsForBannerLink);
             $rootScope.$broadcast('BranchInitComplete');
         });
 
+        branch.addListener('willShowBanner', onShowBranchBanner);
+        branch.addListener('willCloseBanner', onCloseBranchBanner);
+
+        function onShowBranchBanner() {
+            // Push top navbar down the height of the branch banner
+            $(".navbar.navbar-fixed-top").css("top", "76px");
+        }
+
+        function onCloseBranchBanner() {
+            // Reset navbar's top property to 0
+            $(".navbar.navbar-fixed-top").css("top", "0");
+        }
+    }
+
+    initBranchSmartBanner.$inject = ['$rootScope', 'tagsForBannerLink'];
+    function initBranchSmartBanner($rootScope, tagsForBannerLink) {
         branch.banner({
                 icon: 'https://s3.amazonaws.com/otr-assets/img/favicon/favicon.ico',
                 title: 'Off the Record - Fight your traffic tickets',
@@ -475,35 +549,21 @@
                 mobileSticky: true,                    // Determines whether the mobile banner will be set `position: fixed;` (sticky) or `position: absolute;`, defaults to false *this property only applies when the banner position is 'top'
                 desktopSticky: true,                    // Determines whether the desktop banner will be set `position: fixed;` (sticky) or `position: absolute;`, defaults to true *this property only applies when the banner position is 'top'
                 make_new_link: false,                   // Should the banner create a new link, even if a link already exists?
-                rating: 5,                              // Number of stars (should be your store rating)
-                reviewCount: 10,                        // Number of reviews that generate the rating (should be your store reviews)
+                rating: 4.5,                              // Number of stars (should be your store rating)
+                reviewCount: 13,                        // Number of reviews that generate the rating (should be your store reviews)
                 theme: 'light'                         // Uses Branch's predetermined color scheme for the banner { 'light' || 'dark' }, default: 'light'
             },
             {
-                channel: ($rootScope.branchData.channel) ? $rootScope.branchData.channel : channel,
-                campaign: ($rootScope.branchData.campaign) ? $rootScope.branchData.campaign : campaign,
-                feature: ($rootScope.branchData.feature) ? $rootScope.branchData.feature : feature,
-                stage: ($rootScope.branchData.stage) ? $rootScope.branchData.stage : stage,
-                tags: ($rootScope.branchData.tags) ? $rootScope.branchData.tags + ',smart_banner' : tags,
+                channel: ($rootScope.branchData.channel) ? $rootScope.branchData.channel : 'website',
+                campaign: ($rootScope.branchData.campaign) ? $rootScope.branchData.campaign : '',
+                feature: ($rootScope.branchData.feature) ? $rootScope.branchData.feature : 'smart_banner',
+                stage: ($rootScope.branchData.stage) ? $rootScope.branchData.stage : '',
+                tags: tagsForBannerLink,
                 data: {
-                    '$deeplink_path': 'content/page/12354'
-                    //deeplink: 'data',
-                    //username: 'Alex'
+                    '$deeplink_path': 'content/page/12354',
+                    referrer : $rootScope.httpReferrer
                 }
             });
-
-        branch.addListener('willShowBanner', onShowBranchBanner);
-        branch.addListener('willCloseBanner', onCloseBranchBanner);
-
-        function onShowBranchBanner() {
-            // Push top navbar down the height of the branch banner
-            $(".navbar.navbar-fixed-top").css("top", "76px");
-        }
-
-        function onCloseBranchBanner() {
-            // Reset navbar's top property to 0
-            $(".navbar.navbar-fixed-top").css("top", "0");
-        }
     }
 
     loadEvents.$inject = ['$state', '$rootScope', '$location', '$cookies'];
@@ -655,7 +715,7 @@
                 "abbreviation": "NY",
                 backgroundImgUrl : 'assets/img/states/NY.jpg',
                 baseFee : 200,
-                successRate : 95,
+                successRate : 85,
                 avgFine : 180
             },
             {
@@ -709,7 +769,7 @@
             {
                 "name": "Texas",
                 "abbreviation": "TX",
-                backgroundImgUrl : 'assets/img/states/TX.jpg',
+                /*backgroundImgUrl : 'assets/img/states/TX.jpg',   // Need to actually add this image */
                 baseFee : 200,
                 successRate : 97,
                 avgFine : 107
