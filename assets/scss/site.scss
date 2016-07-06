@@ -32,6 +32,22 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
 }
 
+
+.row-centered-lg > * {
+  float: none;
+  margin: auto;
+}
+
+@media (max-width: 768px) {
+  /* This centers the row content row; we only want this if content does
+     need to be floated, so prevent for contents with smaller widths.
+  */
+  .row-centered > * {
+    float: none;
+    margin: auto;
+  }
+}
+
 #page {
   padding-top: 0px !important;
   background-color: white;
@@ -243,7 +259,7 @@ ul#menu-main-menu {
   margin-left: 5px;
   width: 185px;
   cursor: pointer;
-  z-index: 2;
+  z-index: 3;
 
   a {
    -webkit-transition: none;

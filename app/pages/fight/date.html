@@ -1,0 +1,54 @@
+
+<div class="row row-centered-lg">
+    <div class="step col-xs-11 col-sm-10 col-md-8 col-lg-7">
+        <div class="step-body">
+            <div class="meta row">
+                <div class="col-xs-12 row row-centered">
+                    <div class="title">
+                        When was your ticket issued?
+                    </div>
+                    <div class="subtitle space-top-2">
+                        Your ticket should mention which court it is assigned to.
+                        If you're not sure, type the name of the city or county in which you received the ticket
+                        and pick the court you think best matches.
+                        We'll verify all the info on our end.
+                    </div>
+                    <div class="ticket-issued-date space-top-5">
+                        <div style="width:200px;margin:auto;">
+                            <input id="ticket-datepicker" value="{vm.session.model.citation.date}" />
+                        </div>
+                    </div>
+
+                    <div class="ticket-issued-date space-top-3">
+                        <input type="checkbox" class="space-top-5" style="margin-right: 10px;"
+                               ng-click="vm.isCourtDateScheduled = !vm.isCourtDateScheduled">I have a scheduled court date</input>
+                    </div>
+
+                    <div class="space-top-5" ng-show="vm.isCourtDateScheduled">
+                        <h4 class="text-center" style="float:none;">
+                            When is your court date?
+                        </h4>
+                        <div class="court-hearing-date space-top-2">
+                            <div style="width:200px;margin:auto;">
+                                <input id="court-datepicker" value="{vm.session.model.citation.courtDate}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Button -->
+            <div class="space-top-5 row row-centered-lg">
+                <div class="col-xs-10 col-sm-8">
+                    <div tabindex="4" class="btn btn-default" ng-click="vm.submitDateStep()">
+                        <span>Continue</span>
+                        <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
+                    </div>
+                    <div class="space-top-2 form-error-message" ng-show="vm.errorMessage">
+                        {{vm.errorMessage}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

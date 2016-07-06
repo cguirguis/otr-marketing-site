@@ -1,0 +1,65 @@
+<div class="row row-centered-lg">
+    <div class="step col-xs-11 col-sm-10 col-md-8 col-lg-7">
+        <div class="step-body">
+            <div class="meta row">
+                <div class="title">
+                    Take a clear photo of your ticket
+                </div>
+                <div class="subtitle space-top-2">
+                    If you have already contested your ticket and received a court appearance notice, please provide
+                    a picture of the notice.
+                </div>
+
+                <div flow-init="{singleFile: true}" class="flow col-xs-12 col-md-10"
+                     flow-name="vm.obj.flow" class="pin"
+                     flow-file-added="vm.flowFileAdded($file)"
+                     flow-files-added="vm.processFile($files)"
+                     flow-files-submitted="vm.flowFilesSubmitted($flow)"
+                     flow-file-success="vm.flowFileSuccess($file, $message)">
+
+                    <!-- Drag and drop container -->
+                    <!-- When there is no image -->
+                    <div class="no-image drop pin justify-center space-top-3" ng-class="dropClass" flow-drop="" ng-show="vm.imgContent == null" flow-drag-enter="dropClass='drag-over'" flow-drag-leave="dropClass=''">
+                    <span class="btn btn-default col-xs-10" flow-btn="">
+                        ADD PHOTO
+                        <input type="file" multiple="multiple" class="multiple-file-input">
+                        <input type="file" class="single-file-input">
+                    </span>
+                        <b>&nbsp;&nbsp;or </b>
+                        drag and drop your image here
+                    </div>
+
+                    <!-- When there is an image -->
+                    <div class="has-image drop pin justify-center space-top-3" ng-class="dropClass" flow-drop="" ng-show="vm.imgContent != null" flow-drag-enter="dropClass='drag-over'" flow-drag-leave="dropClass = ''">
+                        <div class="remove-image" ng-click="vm.removeTicketPhoto()"
+                             class="intercom-launcher-hovercard-close intercom-launcher-hovercard-close-active">
+                            Remove
+                        </div>
+                        <img flow-img="$flow.files[0]" class="uploaded-image" style="max-width: 300px;width: 100%;margin: auto;">
+                    </div>
+                </div>
+
+
+                <div class="space-top-2" ng-hide="vm.imgContent">
+                    <a class="action-link" ng-click="vm.showNoTicketFlow()">I don't have a ticket or court appearance notice</a>
+                </div>
+            </div>
+
+            <div class="space-top-5 row row-centered-lg">
+                <div class="col-xs-10 col-sm-8">
+                    <button tabindex="4" class="btn btn-default" ng-click="vm.submitPhotoStep()"
+                         ng-disabled="vm.dataLoading == true || !vm.imgContent">
+                        <span>Continue</span>
+                        <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
+                    </button>
+                    <div class="space-top-2 form-error-message"
+                         ng-show="(vm.isImgFormSubmitted && !vm.imgContent)">
+                        <p class="bg-danger">
+                            Please upload a picture of your ticket before continuing
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
