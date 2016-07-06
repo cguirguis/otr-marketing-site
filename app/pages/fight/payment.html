@@ -48,7 +48,8 @@
                                                 </span>
                                         </div>
                                         <div class="col-lg-8">
-                                            <div style="padding-top: 5px;">Your lawyer will only contact you if they can't reach you by email.</div>
+                                            <div style="padding-top: 5px;line-height:15px;">Your lawyer will only
+                                                contact you if they can't reach you by email.</div>
                                         </div>
                                     </div>
                                     <div class="space-top-1">
@@ -220,18 +221,7 @@
                                             </div>
                                         </div>
                                     </section>
-
-                                    <!-- Button -->
-                                    <div class="space-top-5 col-xs-12" style="text-align:center;">
-                                        <button type="submit" class="col-xs-12 col-sm-8 btn btn-default btn-primary"
-                                                ng-disabled="vm.dataLoading == true || vm.isPhoneNumberInvalid">
-                                            <span>Fight My Ticket</span>
-                                            <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
-                                        </button>
-                                        <br>
-                                    </div>
                                 </form>
-                                <p></p>
                             </div>
                         </div>
                     </div>
@@ -241,7 +231,7 @@
         </div>
 
         <!-- What's Included? -->
-        <div class="right-col" style="background-color: white;">
+        <div class="right-col col-xs-11 col-sm-4" style="background-color: white;">
             <div class="media-photo media-photo-block text-center payments-listing-image"
                  style="background-color: inherit;padding: 10px 7px 0px 7px;">
                 <img ng-src="{{ vm.signedImageUrl }}"
@@ -301,9 +291,9 @@
                         </tr>
                         <tr class="coupon">
                             <td class="name">
-                                                <span class="without-applied-coupon" ng-click="vm.showCouponInput = true">
-                                                    <a href="" class="draw-attention-link">Referral Code</a>
-                                                </span>
+                                <span class="without-applied-coupon" ng-click="vm.showCouponInput = true">
+                                    <a href="" class="draw-attention-link">Referral Code</a>
+                                </span>
                             </td>
                             <td class="val">
                                 <div class="uneditable-fields" ng-show="vm.refCode != null">
@@ -365,6 +355,17 @@
                         </tbody>
                     </table>
                 </div>
+
+                <!-- Button -->
+                <div class="space-top-5" style="text-align:center;">
+                    <button type="submit" class=" btn btn-default btn-primary"
+                            ng-disabled="vm.dataLoading == true || vm.isPhoneNumberInvalid">
+                        <span>Fight My Ticket</span>
+                        <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
+                    </button>
+                    <br>
+                </div>
+
             </div>
         </div>
 

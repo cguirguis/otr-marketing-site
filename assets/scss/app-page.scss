@@ -127,13 +127,13 @@
 
           .whats-included {
             background: #d7d7d7;
-            padding: 10px 35px;
 
             ul {
               padding-left: 10px;
               text-align: left;
               margin-top: 20px;
               margin-bottom: 20px;
+              margin-left: -25px;
 
               li {
                 font-size: 16px;
@@ -146,6 +146,95 @@
 
           #payment {
             text-align: left;
+
+            span.input-icon, span.input-help {
+              display: block;
+              position: relative;
+
+              .input-icon > [class*="fa-"], .input-icon > [class*="ti-"] {
+                bottom: 0;
+                color: #007AFF;
+                left: 5px;
+                line-height: 35px;
+                padding: 0 3px;
+                position: absolute;
+                z-index: 2;
+                font-size: 1.33333333em;
+              }
+              .input-icon > input {
+                padding-left: 30px !important;
+                padding-right: 6px;
+              }
+              input[type="radio"] {
+                border-radius: 1.25em;
+              }
+              input[type="radio"], input[type="checkbox"] {
+                position: relative;
+                -webkit-appearance: none;
+                height: 1.25em;
+                width: 1.25em;
+                margin-top: 0px;
+                margin-bottom: -0.25em;
+                margin-right: 5px;
+                vertical-align: baseline;
+              }
+              [type="text"] {
+                display: block;
+                padding: 8px 10px;
+                width: 100%;
+              }
+              .inner-addon .icon {
+                position: absolute;
+                padding: 4px;
+              }
+              .right-addon .icon {
+                right: 14px;
+              }
+              .icon {
+                font-style: normal;
+                font-weight: normal;
+                line-height: 1;
+              }
+              .text-light-gray, .icon-light-gray {
+                color: #cacccd;
+              }
+              .icon:before {
+                line-height: 1;
+              }
+              .icon-lock:before {
+                content: '\f19d';
+              }
+              hr {
+                display: block;
+                width: 100%;
+                max-width: inherit;
+                margin-top: 20px;
+                border-top: 1px solid #dce0e0;
+              }
+              .tooltip {
+                position: absolute;
+                z-index: 1070;
+                display: block;
+                font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+                font-size: 12px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 1.42857143;
+                text-align: left;
+                text-align: start;
+                text-decoration: none;
+                text-shadow: none;
+                text-transform: none;
+                letter-spacing: normal;
+                word-break: normal;
+                word-spacing: normal;
+                word-wrap: normal;
+                white-space: normal;
+                filter: alpha(opacity=0);
+                opacity: 0;
+                line-break: auto;
+              }
+            }
           }
 
           .new-payment-card {
@@ -264,7 +353,22 @@
         border-left: none;
         min-height: 200px;
         text-align: left;
-        padding: 10px 25px;
+        padding: 10px 25px 30px 25px;
+
+        .media-photo {
+          float: left;
+          width: 100%;
+          margin: auto;
+          margin-top: 10px;
+          margin-bottom: 20px;
+        }
+        .table {
+          min-width: inherit;
+          td {
+            background-color: white!important;
+            font-size: inherit!important;
+          }
+        }
       }
     }
   }
