@@ -151,18 +151,20 @@
                         fileType: flowFile.file.type,
                         base64Data: base64result
                     };
+                    vm.session.model.citation.imgContent = vm.imgContent;
                     vm.dataLoading = true;
+
                     createNewCitationWithFile(vm.imgContent.base64Data)
                         .then(
-                        function(response) {
-                            vm.dataLoading = false;
-                        },
-                        function(error) {
-                            vm.dataLoading = false;
-                            console.log('ERROR: ', error);
-                            return $q.reject(error);
-                        }
-                    );
+                            function(response) {
+                                vm.dataLoading = false;
+                            },
+                            function(error) {
+                                vm.dataLoading = false;
+                                console.log('ERROR: ', error);
+                                return $q.reject(error);
+                            }
+                        );
                 };
 
                 fileReader.readAsDataURL(flowFile.file);
@@ -171,6 +173,7 @@
 
         function removeTicketPhoto() {
             vm.imgContent = null;
+            vm.session.model.citation.imgContent = null;
             vm.obj.flow.files = [];
         }
 
@@ -603,6 +606,7 @@
                         citation.violationCount = 1;
                         citation.involvesAccident = false;
                         citation.isPastDue = false;
+                        citation.imgContent = vm.session.model.citation.imgContent;
                         vm.session.model.citation = citation;
 
                         return citation;

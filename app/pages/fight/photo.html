@@ -19,7 +19,7 @@
 
                     <!-- Drag and drop container -->
                     <!-- When there is no image -->
-                    <div class="no-image drop pin justify-center space-top-3" ng-class="dropClass" flow-drop="" ng-show="vm.imgContent == null" flow-drag-enter="dropClass='drag-over'" flow-drag-leave="dropClass=''">
+                    <div class="no-image drop pin justify-center space-top-3" ng-class="dropClass" flow-drop="" ng-show="vm.session.model.citation.imgContent == null" flow-drag-enter="dropClass='drag-over'" flow-drag-leave="dropClass=''">
                     <span class="btn btn-default col-xs-9 col-sm-6 add-photo-btn" flow-btn="">
                         ADD PHOTO
                         <input type="file" multiple="multiple" class="multiple-file-input">
@@ -30,7 +30,7 @@
                     </div>
 
                     <!-- When there is an image -->
-                    <div class="has-image drop pin justify-center space-top-3" ng-class="dropClass" flow-drop="" ng-show="vm.imgContent != null" flow-drag-enter="dropClass='drag-over'" flow-drag-leave="dropClass = ''">
+                    <div class="has-image drop pin justify-center space-top-3" ng-class="dropClass" flow-drop="" ng-show="vm.session.model.citation.imgContent != null" flow-drag-enter="dropClass='drag-over'" flow-drag-leave="dropClass = ''">
                         <div class="remove-image" ng-click="vm.removeTicketPhoto()"
                              class="intercom-launcher-hovercard-close intercom-launcher-hovercard-close-active">
                             Remove
@@ -40,7 +40,7 @@
                 </div>
 
 
-                <div class="space-top-2" ng-hide="vm.imgContent">
+                <div class="space-top-2" ng-hide="vm.session.model.citation.imgContent">
                     <a class="action-link" ng-click="vm.showNoTicketFlow()">I don't have a ticket or court appearance notice</a>
                 </div>
             </div>
@@ -48,12 +48,12 @@
             <div class="space-top-5 row row-centered-lg">
                 <div class="col-xs-10 col-sm-8">
                     <button tabindex="4" class="btn btn-default" ng-click="vm.submitPhotoStep()"
-                         ng-disabled="vm.dataLoading == true || !vm.imgContent">
+                         ng-disabled="vm.dataLoading == true || !vm.session.model.citation.imgContent">
                         <span>Continue</span>
                         <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
                     </button>
                     <div class="space-top-2 form-error-message"
-                         ng-show="(vm.isImgFormSubmitted && !vm.imgContent)">
+                         ng-show="(vm.isImgFormSubmitted && !vm.session.model.citation.imgContent)">
                         <p class="bg-danger">
                             Please upload a picture of your ticket before continuing
                         </p>

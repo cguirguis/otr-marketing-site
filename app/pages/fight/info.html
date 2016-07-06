@@ -18,7 +18,8 @@
                                     <h-number value="vm.session.model.citation.violationCount"
                                               min="1" max="10" step="1" style="text-align:center;" change="onChanged()"
                                               singular="violation"
-                                              plural="violations"></h-number>
+                                              plural="violations"
+                                              class="row-centered-md"></h-number>
                                 </div>
                             </div>
                         </div>
@@ -37,16 +38,15 @@
                                 <div class="col-xs-12 col-md-6 text-md-right text-sm-center">
                                     <label>Fine amount</label>
                                 </div>
-                                <div class="col-xs-12 col-md-6">
-                                    <div class="input-group">
+                                <div class="col-xs-12 col-md-6 row-centered-md">
+                                    <div class="input-group" style="max-width:200px;">
                                         <span class="input-group-addon">$</span>
                                         <input type="text"
                                                fcsa-number="{ min: 0, maxDecimals: 2 }"
                                                ng-model="vm.tempFineAmount"
                                                ng-change="vm.fineAmountUpdated()"
                                                class="form-control"
-                                               placeholder="Fine amount"
-                                               style="max-width:200px">
+                                               placeholder="Fine amount">
                                     </div>
                                 </div>
                             </div>
@@ -90,7 +90,7 @@
                                 <div class="col-xs-12 col-md-6 text-md-right text-sm-center">
                                     <label>Email address</label>
                                 </div>
-                                <div class="col-xs-12 col-md-6">
+                                <div class="col-xs-12 col-md-6 row-centered-md">
                                     <div class="input-group" style="width: 100%">
                                         <span class="input-group-addon">
                                             <i class="fa fa-envelope"></i>

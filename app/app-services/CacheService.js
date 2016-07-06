@@ -10,7 +10,7 @@
         var service = {
             model: {
                 state: null,
-                citation: null,
+                citation: {},
                 case: null,
                 refundEligibility: null,
                 currentStep: 1,
