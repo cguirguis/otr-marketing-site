@@ -3,7 +3,7 @@
     <div class="step col-xs-11 col-sm-10 col-md-8 col-lg-7">
         <div class="step-body">
             <div class="meta row">
-                <div class="col-xs-12 row row-centered">
+                <div class="col-xs-12 row row-centered-sm">
                     <div class="title">
                         When was your ticket issued?
                     </div>
@@ -13,7 +13,7 @@
                         and pick the court you think best matches.
                         We'll verify all the info on our end.
                     </div>
-                    <div class="ticket-issued-date space-top-5">
+                    <div class="ticket-issued-date space-top-3">
                         <div style="width:200px;margin:auto;">
                             <input id="ticket-datepicker" value="{vm.session.model.citation.date}" />
                         </div>
@@ -26,7 +26,7 @@
 
                     <div class="space-top-5" ng-show="vm.isCourtDateScheduled">
                         <h4 class="text-center" style="float:none;">
-                            When is your court date?
+                            <span class="otr-16">When is your court date?</span>
                         </h4>
                         <div class="court-hearing-date space-top-2">
                             <div style="width:200px;margin:auto;">

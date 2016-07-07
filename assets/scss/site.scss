@@ -32,7 +32,13 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
 }
 
-
+.no-padding {
+  padding-left: 0;
+  padding-right: 0;
+}
+.auto-margin {
+  margin: auto;
+}
 .row-centered-lg > * {
   float: none;
   margin: auto;

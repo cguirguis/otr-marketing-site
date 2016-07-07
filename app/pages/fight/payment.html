@@ -83,7 +83,8 @@
                                                                 <label for="credit-card-number" data-i18n="cc_number">Card number</label>
                                                                 <div class="inner-addon right-addon">
                                                                     <a href="" id="tooltip-cc-icon-lock" class="icon icon-lock icon-light-gray h3 link-reset" style="margin-top: 0px; font-size: 22px;">
-                                                                        <i class="fa fa-lock" style="margin-top: 5px;"></i>
+                                                                        <i class="fa fa-lock"
+                                                                           style="margin-top: 5px;margin-right:10px;"></i>
                                                                     </a>
                                                                     <input type="text" name="cardNumber" required ng-model="vm.newCard.number"
                                                                            cc-number cc-format cc-eager-type
@@ -340,7 +341,7 @@
                     <table id="payment-total-table" class="reso-info-table billing-table">
                         <tbody>
                         <tr class="total">
-                            <td class="name"><span class="h3">Total</span></td>
+                            <td class="name"><span class="h5">Total</span></td>
                             <td class="text-special icon-dark-gray">
                                 <span class="h3 total-guest-payment">
                                     {{ vm.caseFinancials.clientTotalCost | intToCurrency }}

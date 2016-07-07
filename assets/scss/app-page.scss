@@ -82,7 +82,7 @@
               }
               label.form-control, input {
                 height: 40px;
-                font-size: 18px;
+                font-size: 16px;
                 line-height: inherit;
               }
             }
@@ -146,6 +146,7 @@
 
           #payment {
             text-align: left;
+            margin: auto;
 
             span.input-icon, span.input-help {
               display: block;
@@ -163,6 +164,10 @@
               }
             }
 
+            .label {
+              margin-bottom: 1px;
+              margin-left: 2px;
+            }
             > input {
               padding-left: 30px !important;
               padding-right: 6px;
@@ -182,6 +187,7 @@
               margin-bottom: -0.25em;
               margin-right: 5px;
               vertical-align: baseline;
+              font-size: 20px;
             }
             [type="text"] {
               display: block;
@@ -345,19 +351,6 @@
             padding: 0;
           }
         }
-
-        table {
-          min-width: inherit;
-
-          td {
-            text-align: left!important;
-            width: initial!important;
-            padding: 10px 0!important;
-            background-color: initial!important;
-            font-size: 15px!important;
-            border: none!important;
-          }
-        }
       }
 
       .right-col {
@@ -367,7 +360,7 @@
         border-left: none;
         min-height: 200px;
         text-align: left;
-        padding: 10px 25px 30px 25px;
+        padding: 20px 25px 30px 25px;
 
         &.whats-included {
           ul {
@@ -382,6 +375,27 @@
               border-width: 0;
               border-style: dashed;
             }
+          }
+        }
+
+        hr {
+          width: 100%;
+          display: block;
+        }
+
+        table {
+          min-width: inherit;
+
+          td {
+            text-align: left!important;
+            width: initial!important;
+            padding: 0!important;
+            background-color: initial!important;
+            font-size: 15px!important;
+          }
+
+          .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+            color: #333;
           }
         }
 
@@ -405,13 +419,6 @@
           margin-top: 10px;
           margin-bottom: 20px;
         }
-        .table {
-          min-width: inherit;
-          td {
-            background-color: white!important;
-            font-size: inherit!important;
-          }
-        }
       }
     }
   }
@@ -424,16 +431,19 @@
   justify-content: center;
 }
 .space-top-1 {
-  margin-top: 6.25px;
+  margin-top: 6.25px!important;
 }
 .space-top-2 {
-  margin-top: 12.50px;
+  margin-top: 12.50px!important;
 }
 .space-top-3 {
-  margin-top: 18.75px;
+  margin-top: 18.75px!important;
+}
+.space-top-4 {
+  margin-top: 25px!important;
 }
 .space-top-5 {
-  margin-top: 31.25px;
+  margin-top: 31.25px!important;
 }
 .text-lima, .icon-lima {
   color: #3fb34f;
@@ -443,6 +453,9 @@
 }
 .otr-14 {
   font-size: 14px;
+}
+.otr-16 {
+  font-size: 16px;
 }
 .otr-18 {
   font-size: 18px;

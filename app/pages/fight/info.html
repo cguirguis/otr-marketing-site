@@ -14,7 +14,7 @@
                                         Number of violations on your ticket
                                     </label>
                                 </div>
-                                <div class="col-xs-12 col-md-6">
+                                <div class="col-xs-12 col-md-6 no-padding">
                                     <h-number value="vm.session.model.citation.violationCount"
                                               min="1" max="10" step="1" style="text-align:center;" change="onChanged()"
                                               singular="violation"
@@ -38,7 +38,7 @@
                                 <div class="col-xs-12 col-md-6 text-md-right text-sm-center">
                                     <label>Fine amount</label>
                                 </div>
-                                <div class="col-xs-12 col-md-6 row-centered-md">
+                                <div class="col-xs-12 col-md-6 no-padding row-centered-md">
                                     <div class="input-group" style="max-width:200px;">
                                         <span class="input-group-addon">$</span>
                                         <input type="text"
@@ -90,15 +90,14 @@
                                 <div class="col-xs-12 col-md-6 text-md-right text-sm-center">
                                     <label>Email address</label>
                                 </div>
-                                <div class="col-xs-12 col-md-6 row-centered-md">
-                                    <div class="input-group" style="width: 100%">
+                                <div class="col-xs-12 col-md-6 no-padding row-centered-md">
+                                    <div class="input-group" style="max-width:300px">
                                         <span class="input-group-addon">
                                             <i class="fa fa-envelope"></i>
                                         </span>
                                         <input type="email"
                                                ng-model="vm.session.model.email"
                                                class="form-control"
-                                               style="max-width:300px"
                                                placeholder="Email address"
                                                required>
                                     </div>
