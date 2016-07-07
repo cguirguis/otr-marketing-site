@@ -53,6 +53,25 @@
               }
             }
 
+            #ticket-datepicker, #court-datepicker {
+              padding-top: 0px;
+              padding-bottom: 0px;
+              
+              .k-calendar td {
+                text-align: center!important;
+                padding-left: 9px!important;
+              }
+              td.k-state-focused.k-state-selected {
+                -webkit-box-shadow: none!important;
+                box-shadow: none;
+                border: solid 1px #dedede!important;
+
+                .k-state-selected>.k-link {
+                  color: #333!important;
+                }
+              }
+            }
+
             .match-screen-label {
               label {
                 margin-bottom: 0px;
@@ -246,6 +265,32 @@
               opacity: 0;
               line-break: auto;
             }
+
+            .payment-logo {
+              width: 50px;
+              height: 30px;
+              margin-right: 5px;
+              margin-top: 5px;
+              float: left;
+              text-indent: -99999px;
+              background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA%2BgAAAAeCAYAAAC%2FgDR9AAAAB…EaQxiwg08C%2BmeQ%2BsPEIKTciOjwzzps8Xh14wJf8PNVDzGIbDKxQAAAAASUVORK5CYII%3D) no-repeat;
+
+              &.visa {
+                background-position: 0px 0px;
+              }
+              &.master {
+                background-position: -50px 0px;
+              }
+              &.american_express {
+                background-position: -100px 0px;
+              }
+              &.discover {
+                background-position: -150px 0px;
+              }
+              &.jcb {
+                background-position: -650px 0px;
+              }
+            }
           }
 
           .new-payment-card {
@@ -324,11 +369,14 @@
 
           .btn.btn-default {
             width: 100%;
+            height:45px;
+            line-height: 33px;
             margin: auto;
             float: none;
             color: #fff;
             background-color: #2196F3;;
             border-color: #2196F3;
+            border-radius: 3px;
 
             &:hover {
               background-color: #1164BF;
@@ -381,6 +429,7 @@
         hr {
           width: 100%;
           display: block;
+          margin: 10px 0;
         }
 
         table {
@@ -446,10 +495,10 @@
   margin-top: 31.25px!important;
 }
 .text-lima, .icon-lima {
-  color: #3fb34f;
+  color: #3fb34f!important;
 }
 .text-rausch, .icon-rausch, .draw-attention-link {
-  color: #ff5a5f;
+  color: #ff5a5f!important;
 }
 .otr-14 {
   font-size: 14px;

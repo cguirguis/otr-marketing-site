@@ -434,7 +434,11 @@
         }
 
         function phoneNumberKeyUpListener() {
-            // TODO - implement this function
+            if(vm.phoneNumber) {
+                vm.isPhoneNumberInvalid = vm.phoneNumber.length < 10;
+            } else {
+                vm.isPhoneNumberInvalid = true;
+            }
         }
 
         function confirmCaseBooking(isValid) {
@@ -627,12 +631,6 @@
             var index = location.lastIndexOf('/');
             return location.substring(index + 1, location.length);
         }
-
-        function isTicketPastDue(date) {
-            var timeDiff = Math.abs(today.getTime() - date.getTime());
-            var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-            return diffDays >= 30; // days to respond to ticket
-        };
 
         /*function submitFindMeLawyerInfo() {
 
