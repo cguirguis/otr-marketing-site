@@ -53,11 +53,13 @@
               }
             }
 
-            #ticket-datepicker, #court-datepicker {
+            .k-datepicker {
               padding-top: 0px;
               padding-bottom: 0px;
-
-              .k-calendar td {
+            }
+            
+            .k-calendar {
+              td {
                 text-align: center!important;
                 padding-left: 9px!important;
               }
@@ -93,6 +95,8 @@
               }
             }
             .input-group {
+              display:table;
+
               .input-group-addon {
                 cursor: pointer;
               }
@@ -408,7 +412,7 @@
         border-left: none;
         min-height: 200px;
         text-align: left;
-        padding: 20px 25px 30px 25px;
+        padding: 20px 25px;
 
         &.whats-included {
           ul {
@@ -605,11 +609,16 @@ div.progress-bar {
             color: #2B3D53;
           }
           .stepNumber {
-            li:last-child > a.selected .stepNumber {
-              border-color: rgba(0, 122, 255, 0.67);
-              background-color: rgba(0, 122, 255, 0.67);
-              color: #fff;
-              text-indent: -9999px;
+            li:last-child > a.selected {
+              .stepNumber {
+                border-color: rgba(0, 122, 255, 0.67);
+                background-color: rgba(0, 122, 255, 0.67);
+                color: #fff;
+                text-indent: -9999px;
+              }
+              &:not(.done) .stepDesc {
+                font-weight: bold;
+              }
             }
           }
         }

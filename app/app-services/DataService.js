@@ -12,7 +12,7 @@
         var getCourtsUrl = baseUrl + "courts/traffic";
         var loginUrl = baseUrl + "authentication/login";
         var signupUrl = baseUrl + 'signup';
-        var userUrl = ENV.apiEndpoint + 'user';
+        var userUrl = baseUrl + 'user';
         var referralSourceUrl = baseUrl + 'referrals/sources';
 
         var login = function(username, password) {

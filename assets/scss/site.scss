@@ -46,7 +46,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: auto;
 }
 
-%row-centered{
+@mixin row-centered() {
   float: none;
   display: block;
   margin-left: auto;
@@ -54,7 +54,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .row-centered-lg > * {
-  @extend %row-centered;
+  @include row-centered();
 }
 
 @media (max-width: 992px) {
@@ -62,7 +62,7 @@ h1, h2, h3, h4, h5, h6 {
      need to be floated, so prevent for contents with smaller widths.
   */
   .row-centered-md > * {
-    @extend %row-centered;
+    @include row-centered();
   }
 }
 
@@ -71,7 +71,7 @@ h1, h2, h3, h4, h5, h6 {
      need to be floated, so prevent for contents with smaller widths.
   */
   .row-centered > * {
-    @extend %row-centered;
+    @include row-centered();
   }
 }
 
@@ -700,16 +700,20 @@ div.signup-form {
   }
 }
 
-.modal-content .modal-header {
-  border-botom: none;
+.modal-content {
+  border-radius: 0;
 
-  p.signup-text {
-    color: $primaryBlueDarker;
-    font-size: 2em;
-    font-weight: 100;
-    font-family: Roboto;
-    padding-top: 10px;
-    text-align: center;
+  .modal-header {
+    border-botom: none;
+
+    p.signup-text {
+      color: $primaryBlueDarker;
+      font-size: 2em;
+      font-weight: 100;
+      font-family: Roboto;
+      padding-top: 10px;
+      text-align: center;
+    }
   }
 }
 

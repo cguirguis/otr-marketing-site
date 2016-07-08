@@ -7,9 +7,9 @@
             <h3 class="title">Please login to continue</h3>
         </div>
 
-        <div class="body container-fluid">
+        <div class="body container-fluid space-top-3">
             <div class="login-options row row-centered-lg" ng-if="vm.showLoginOptions">
-                <button class="facebook-login-button col-xs-12 col-sm-10 space-top-3"
+                <button class="facebook-login-button col-xs-12 col-sm-10"
                         ng-click="vm.loginWithFacebook()">
                     <i class="fa button-icon fa-facebook"></i>
                                 <span>{{ !vm.session.model.currentUser || !vm.session.model.currentUser.isFbAuthed
@@ -21,12 +21,12 @@
                     <i class="fa button-icon fa-envelope"></i>
                     <span>Login with Email</span>
                 </button>
-                <div class="separator-or">
+                <div class="separator-or col-xs-12 col-sm-10">
                     <hr>
                     <div>OR</div>
                     <hr>
                 </div>
-                <button class="signup-button col-xs-12 col-sm-10 space-top-1" ng-click="vm.signup()">
+                <button class="signup-button col-xs-12 col-sm-10" ng-click="vm.signup()">
                     <i class="fa button-icon fa-user" style="right:5px;"></i>
                     <span>Sign up</span>
                 </button>
@@ -34,81 +34,79 @@
 
             <div class="email-login-form row row-centered-lg"
                  ng-if="vm.showEmailLogin">
-                <div class="col-xs-12 col-md-10 space-top-1 no-padding-left no-padding-right">
+                <div class="col-xs-12 col-sm-10 space-top-1 no-padding-left no-padding-right">
                     <input type="text" name="email"
                            ng-model="vm.email"
                            placeholder="Email"
                            focus-me="true" />
                 </div>
-                <div class="col-xs-12 col-md-10 space-top-1 no-padding-left no-padding-right">
+                <div class="col-xs-12 col-sm-10 space-top-1 no-padding-left no-padding-right">
                     <input type="password"
                            name="password"
                            ng-model="vm.password"
                            ng-enter="vm.submitEmailLoginForm(vm.email, vm.password)" placeholder="Password" />
                 </div>
-                <div class="form-errors col-xs-12 col-md-10 space-top-1 no-padding-left no-padding-right"
-                     ng-bind-html="vm.errorMessage"
-                     ng-if="vm.errorMessage.length"></div>
+                <div class="form-errors col-xs-12 col-sm-10 space-top-1 no-padding-left no-padding-right"
+                     ng-if="vm.errorMessage.length">{{vm.errorMessage}}</div>
                 <button
-                        class="btn btn-primary col-xs-12 col-md-10 space-top-1"
+                        class="btn btn-primary col-xs-12 col-sm-10 space-top-1"
                         ng-disabled="vm.dataLoading"
                         ng-click="vm.submitEmailLoginForm(vm.email, vm.password)">
                     Login
                     <ion-spinner icon="spiral" class="button-spinner spinner-light" ng-if="vm.dataLoading"></ion-spinner>
                 </button>
-                <button class="btn btn-default col-xs-12 col-md-10 space-top-1"
+                <button class="btn btn-default col-xs-12 col-sm-10 space-top-1"
                         ng-click="vm.cancelEmailLogin()">Cancel</button>
             </div>
 
             <div id="signup-form" class="row row-centered-lg" ng-if="vm.showSignup">
-                <div class="col-xs-12 col-md-10 space-top-1">
+                <div class="col-xs-12 col-sm-10 space-top-1">
                     <input type="text"
                            ng-model="vm.newUser.firstname"
                            placeholder="First name"
                            focus-me="true" />
                 </div>
-                <div class="col-xs-12 col-md-10 space-top-1">
+                <div class="col-xs-12 col-sm-10 space-top-1">
                     <input type="text"
                            ng-model="vm.newUser.lastname"
                            placeholder="Last name" />
                 </div>
-                <div class="col-xs-12 col-md-10 space-top-1">
+                <div class="col-xs-12 col-sm-10 space-top-1">
                     <input type="text"
                            ng-model="vm.newUser.emailAddress"
                            placeholder="Email" />
                 </div>
-                <div class="col-xs-12 col-md-10 space-top-1">
+                <div class="col-xs-12 col-sm-10 space-top-1">
                     <input type="password"
                            ng-model="vm.newUser.password"
                            placeholder="Choose a password"
                            ng-enter="vm.submitSignupForm(newUser)" />
                 </div>
-                <div class="col-xs-12 col-md-10 space-top-1">
+                <div class="col-xs-12 col-sm-10 space-top-1">
                     <dropdown placeholder="How did you find us?"
                               list="referralSources"
                               selected="selectedSource"
                               property="uiDisplayText"></dropdown>
                 </div>
 
-                <div class="col-xs-12 col-md-10 space-top-1" ng-if="showReferralCode">
+                <div class="col-xs-12 col-sm-10 space-top-1" ng-if="showReferralCode">
                     <input type="text"
-                           ng-model="newUser.referralCode"
+                           ng-model="vm.newUser.referralCode"
                            placeholder="Do you have a referral code?" />
                 </div>
 
-                <div class="form-errors col-xs-12 col-md-10 space-top-1"
-                     ng-bind-html="vm.errorMessage"
-                     ng-if="vm.errorMessage.length"></div>
+                <div class="form-errors col-xs-12 col-sm-10 space-top-1"
+                     ng-if="vm.errorMessage.length">{{vm.errorMessage}}</div>
 
                 <button type="submit"
-                        class="btn btn-primary col-xs-12 col-md-10 space-top-1"
+                        class="btn btn-primary col-xs-12 col-sm-10 space-top-1"
                         ng-disabled="vm.dataLoading"
                         ng-click="vm.submitSignupForm(vm.newUser)">
                     Signup
                     <ion-spinner icon="spiral" class="button-spinner spinner-light" ng-if="vm.dataLoading"></ion-spinner>
                 </button>
 
-                <button class="btn btn-default col-xs-12 col-md-10 space-top-1" ng-click="vm.cancelSignup()">Cancel</button>
+                <button class="btn btn-default col-xs-12 col-sm-10 space-top-1" ng-click="vm.cancelSignup()">Cancel</button>
             </div>
         </div>
     </div>

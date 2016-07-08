@@ -111,7 +111,9 @@
 
         vm.submitSignupForm = function(newUser) {
 
-            var metaData = {}, newUser = newUser || {};
+            var metaData = {},
+                newUser = newUser || {};
+
             if (vm.selectedSource && vm.selectedSource.sourceTypeId) {
                 metaData.sourceTypeId = vm.selectedSource.sourceTypeId;
             }
@@ -172,7 +174,6 @@
 
         var signupResponseHandler = function(response) {
             $rootScope.user = response.data.user;
-            $rootScope.$apply();
 
             vm.ok();
         };

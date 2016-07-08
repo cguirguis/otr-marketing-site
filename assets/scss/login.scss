@@ -48,28 +48,33 @@
       color: #6f6f6f;
       font-size: 20px;
       font-family: Helvetica;
+      padding-left: 0;
+      padding-right: 0;
 
       hr {
+        display: block;
         color: #6f6f6f;
         margin: 0 auto 0 0;
-        width: 40%;
+        width: 45%;
         border: solid #e5e5e5;
         border-width: 1px 0 0;
         clear: both;
         height: 0;
       }
       div {
-        width: 20%;
+        padding: 0 5%;
       }
     }
   }
 
   .email-login-form, #signup-form {
-    overflow: auto;
+    > div {
+      padding-left: 0;
+      padding-right: 0;
+    }
 
     input {
       width: 100%!important;
-      max-width: 600px;
       height: 60px;
       line-height: 30px;
       border: solid 1px #dedede;
@@ -83,6 +88,25 @@
     button {
       height: 55px;
       font-size: 18px;
+
+      &.btn-default{
+        background-color: #fefefe;
+        color: #333;
+        border-color: #adadad;
+
+        &:hover {
+          background-color: #fff;
+          border-color: #1976d2;
+          color: #1976d2;
+        }
+      }
+    }
+
+    .form-errors {
+      font-size: 16px;
+      color: red;
+      text-align: center;
+      padding: 5px 0;
     }
   }
 }
