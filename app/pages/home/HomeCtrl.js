@@ -170,6 +170,6 @@
         lawyerFormCtrl.cancel = function () {
             $uibModalInstance.dismiss('cancel');
         };
-    };
+    }
 
 })();

@@ -5,8 +5,8 @@
         .module('brochure')
         .controller('TicketCtrl', TicketCtrl);
 
-    TicketCtrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', '$q', '$filter', 'ENV', 'CacheService', 'StripeService'];
-    function TicketCtrl($rootScope, $scope, $state, $stateParams, $q, $filter, ENV, CacheService, StripService) {
+    TicketCtrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', '$q', '$filter', 'ENV', 'CacheService', 'StripeService', '$uibModal'];
+    function TicketCtrl($rootScope, $scope, $state, $stateParams, $q, $filter, ENV, CacheService, StripeService, $uibModal) {
         var vm = this;
 
         // State details
@@ -59,6 +59,7 @@
         vm.removeRefCode = removeRefCode;
         vm.confirmCaseBooking = confirmCaseBooking;
         vm.phoneNumberKeyUpListener = phoneNumberKeyUpListener;
+        vm.showLoginModal = showLoginModal;
 
         var otrService = $rootScope.otrService || new OtrService({domain: ENV.apiEndpoint});
 
@@ -109,6 +110,14 @@
 
                     vm.newCard.firstName = currentUser.firstName;
                     vm.newCard.lastName = currentUser.lastName;
+                }
+            });
+
+            $rootScope.$on("user:logged-in", function() {
+                // If on review step, proceed to payment
+                // view after user signs in
+                if ($state.current.name == "default-template.fight.review") {
+                    vm.continueToPayment();
                 }
             });
         })();
@@ -358,6 +367,13 @@
         }
 
         function continueToPayment() {
+
+            // If user not logged in, show login modal
+            if (!vm.session.model.currentUser) {
+                vm.showLoginModal();
+                return;
+            }
+
             $state.go('default-template.fight.payment', {});
             vm.session.model.currentStep++;
         }
@@ -577,6 +593,30 @@
                         }
                     );
             }
+        }
+
+        function showLoginModal() {
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: '/login.html',
+                controller: 'LoginCtrl as vm',
+                size: 'md',
+                resolve: {
+                    user: function () {
+                        return $scope.user;
+                    }
+                }
+            });
+
+            modalInstance.result.then(
+                function (selectedItem) {
+                    $scope.selected = selectedItem;
+                },
+                function () {
+                    console.log('Modal dismissed at: ' + new Date());
+                }
+            );
         }
 
 

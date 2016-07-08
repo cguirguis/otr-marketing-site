@@ -45,9 +45,16 @@ h1, h2, h3, h4, h5, h6 {
 .auto-margin {
   margin: auto;
 }
-.row-centered-lg > * {
+
+%row-centered{
   float: none;
-  margin: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.row-centered-lg > * {
+  @extend %row-centered;
 }
 
 @media (max-width: 992px) {
@@ -55,8 +62,7 @@ h1, h2, h3, h4, h5, h6 {
      need to be floated, so prevent for contents with smaller widths.
   */
   .row-centered-md > * {
-    float: none;
-    margin: auto;
+    @extend %row-centered;
   }
 }
 
@@ -65,8 +71,7 @@ h1, h2, h3, h4, h5, h6 {
      need to be floated, so prevent for contents with smaller widths.
   */
   .row-centered > * {
-    float: none;
-    margin: auto;
+    @extend %row-centered;
   }
 }
 

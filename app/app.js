@@ -18,6 +18,7 @@
         .run(initData)
         .run(init)
         .run(loadEvents)
+        .run(loadFBSdk)
         .config(config);
 
 
@@ -569,6 +570,55 @@
     loadEvents.$inject = ['$state', '$rootScope', '$location', '$cookies'];
     function loadEvents($state, $rootScope, $location, $cookies) {
 
+    }
+
+    loadFBSdk.$inject = ['$rootScope', 'FacebookService'];
+    function loadFBSdk($rootScope, FacebookService) {
+        window.fbAsyncInit = function() {
+            // Executed when the SDK is loaded
+            FB.init({
+                appId       : '545669822241752', //'680228325452567',
+                //channelUrl  : 'views/channel.html',
+                //status      : true, // Set if you want to check the authentication status at the start up of the app
+                cookie      : true, // Enable cookies to allow the server to access the session
+                xfbml       : true,  // parses DOM to find/initialize any social plugins that have been added using XFBML
+                version     : 'v2.5'
+            });
+
+            // Now that we've initialized the JavaScript SDK, we call
+            // FB.getLoginStatus().  This function gets the state of the
+            // person visiting this page and can return one of three states to
+            // the callback you provide.  They can be:
+            //
+            // 1. Logged into your app ('connected')
+            // 2. Logged into Facebook, but not your app ('not_authorized')
+            // 3. Not logged into Facebook and can't tell if they are logged into
+            //    your app or not.
+            //
+            // These three cases are handled in the callback function.
+            FB.getLoginStatus(function(response) {
+                FacebookService.statusChangeCallback(response);
+            }, {scope: 'public_profile,email'});
+        };
+
+        // Load the SDK asynchronously
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        window.fbCompleteLogin = function() {
+            FB.getLoginStatus(function(response) {
+                // Calling this with the extra setting "true" forces
+                // a non-cached request and updates the FB cache.
+                // Since the auth login elsewhere validated the user
+                // this update will now asyncronously mark the user as authed
+                FacebookService.statusChangeCallback(response);
+            });
+        };
     }
 
     initData.$inject = ['$rootScope'];

@@ -11,12 +11,39 @@
 
         var getCourtsUrl = baseUrl + "courts/traffic";
         var loginUrl = baseUrl + "authentication/login";
+        var signupUrl = baseUrl + 'signup';
+        var userUrl = ENV.apiEndpoint + 'user';
+        var referralSourceUrl = baseUrl + 'referrals/sources';
 
         var login = function(username, password) {
             var url = loginUrl +
                 "?username=" + encodeURIComponent(username) +
                 "&password=" + encodeURIComponent(password);
             return $http.post(url);
+        };
+
+        var signup = function(newUser, metaData) {
+            var headers = {
+                'Content-Type': "application/json"
+            };
+            var data = {
+                user : newUser,
+                roleType: 'DEFENDANT',
+                userReferralSourceTypeId: metaData.sourceTypeId,
+                referralCode: metaData.referralCode,
+                referralSourceData : metaData.referralSourceData
+            };
+
+            return $http.post(signupUrl, data, { headers: headers });
+        };
+
+        var getUser = function() {
+            $http.get(userUrl);
+        };
+
+        var getReferralSources = function() {
+            var getReferralSourcesUrl =  referralSourceUrl;
+            return $http.get(getReferralSourcesUrl);
         };
 
         var getCourts = function (searchQuery) {
@@ -58,6 +85,9 @@
 
         return {
             login: login,
+            signup: signup,
+            getUser: getUser,
+            getReferralSources: getReferralSources,
             getCourts: getCourts,
             sendExitFeedback: sendExitFeedback
         }
