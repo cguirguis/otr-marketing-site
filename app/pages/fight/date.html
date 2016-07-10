@@ -40,10 +40,13 @@
             <!-- Button -->
             <div class="space-top-5 row row-centered-lg">
                 <div class="col-xs-10 col-sm-8">
-                    <div tabindex="4" class="btn btn-default" ng-click="vm.submitDateStep()">
+
+                    <button tabindex="4"
+                            class="btn btn-default"
+                            ng-click="vm.submitDateStep()">
                         <span>Continue</span>
                         <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
-                    </div>
+                    </button>
                     <div class="space-top-2 form-error-message" ng-show="vm.errorMessage">
                         {{vm.errorMessage}}
                     </div>

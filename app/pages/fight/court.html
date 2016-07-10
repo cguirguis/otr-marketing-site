@@ -80,12 +80,13 @@
                                 <div class="space-top-2 form-error-message" ng-show="vm.isCourtFormInError()">
                                     Please specify which court your ticket is assigned to
                                 </div>
-                                <button type="submit" tabindex="4"
-                                        class="btn btn-primary btn-large"
+                                <button tabindex="4"
+                                        class="btn btn-default"
                                         style="margin-bottom: 30px;"
                                         ng-click="vm.submitCourtStep()"
                                         ng-disabled="!vm.session.model.selectedCourt || vm.isCourtFormInError()">
-                                    Continue
+                                    <span>Continue</span>
+                                    <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
                                 </button>
                             </div>
                         </div>
