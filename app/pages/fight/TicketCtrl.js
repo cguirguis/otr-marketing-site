@@ -5,8 +5,8 @@
         .module('brochure')
         .controller('TicketCtrl', TicketCtrl);
 
-    TicketCtrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', '$q', '$filter', 'ENV', 'CacheService', 'StripeService'];
-    function TicketCtrl($rootScope, $scope, $state, $stateParams, $q, $filter, ENV, CacheService, StripeService) {
+    TicketCtrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', '$q', '$filter', 'ENV', 'CacheService', 'StripeService', 'stripe', 'FlashService', 'CaseService'];
+    function TicketCtrl($rootScope, $scope, $state, $stateParams, $q, $filter, ENV, CacheService, StripeService, stripe, FlashService, CaseService) {
         var vm = this;
 
         // State details
@@ -143,6 +143,7 @@
                 return;
             }
 
+            vm.session.model.currentStep = stepNumber;
             $state.go("default-template.fight." + stepName,
                 {
                     stateCode: vm.selectedState.abbreviation,
@@ -420,6 +421,7 @@
                 }
 
                 vm.newCard.name = vm.newCard.firstName + " " + vm.newCard.lastName;
+                vm.newCard.number = vm.newCard.number || $("[name='cardNumber']").val();
 
                 stripe.card.createToken(vm.newCard)
                     .then(
@@ -440,15 +442,10 @@
                     .then(
                         // confirm the case
                         function() {
-                            console.log('attempting to confirm the case');
-
-                            // TODO - update case using otrService
                             var params = {
                                 caseId: vm.session.model.case.caseId,
                             };
-
                             return otrService.confirmBookingUsingPOST(params);
-                            //return CasesService.confirmCaseAsBooked(vm.newCase.caseId)
                         }
                     )
                     .then(
@@ -468,7 +465,7 @@
                     .then(
                         function() {
                             console.log('attempting to authorize case payment');
-                            return CasePaymentService.authorizeCasePayment(vm.session.model.case.caseId, null);
+                            return CaseService.authorizeCasePayment(vm.session.model.case.caseId, null);
                         }
                     )
                     .then(
@@ -499,7 +496,7 @@
                     );
             } else {
                 console.log('attempting to confirm the case');
-                CasesService.confirmCaseAsBooked(vm.session.model.case.caseId)
+                CaseService.confirmCaseAsBooked(vm.session.model.case.caseId)
                     .then(
                         // authorize payment for the case
                         function() {
@@ -517,7 +514,7 @@
                     .then(
                         function() {
                             console.log('attempting to authorize case payment');
-                            return CasePaymentService.authorizeCasePayment(vm.session.model.case.caseId, vm.selectedPaymentMethod.cardId);
+                            return CaseService.authorizeCasePayment(vm.session.model.case.caseId, vm.selectedPaymentMethod.cardId);
                         }
                     )
                     .then(
@@ -529,8 +526,9 @@
                     .then(
                         function() {
                             vm.dataLoading = false;
-                            $rootScope.$broadcast('NewCaseEvent');
-                            $state.go('topnav.case-details', {caseId: vm.session.model.case.caseId, isNew: true})
+
+                            // Go to 'New case' view
+                            vm.goToStep('new-case', vm.session.model.currentStep++);
                         }
                     )
                     .catch(
@@ -665,23 +663,5 @@
                     }
                 );
         }
-
-        /*function submitFindMeLawyerInfo() {
-
-            vm.isRequestForLawyerLoading = true;
-            console.log('this is ', vm.caseIdWithNoLawfirm);
-            CasesService.requestLawyer({
-                caseId: vm.caseIdWithNoLawfirm,
-                phoneNumber: vm.phoneNumber,
-                offerPrice: vm.offerPrice})
-                .then(
-                function(response) {
-                    vm.isRequestForLawyerLoading = false;
-                    vm.isRequestForLawyerSuccess = true;
-                    $state.go('topnav.dashboard', {hasRequestedForLawyer: true});
-                }
-            );
-        }*/
-
     }
 })();

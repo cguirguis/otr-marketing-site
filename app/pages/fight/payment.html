@@ -78,8 +78,7 @@
                                                 <div class="cc-details">
                                                     <div class="control-group cc-container new-payment-card">
                                                         <div class="page-container-full">
-                                                            <div
-                                                                    class="cc-number space-top-2">
+                                                            <div class="cc-number space-top-2">
                                                                 <label for="credit-card-number" data-i18n="cc_number">Card number</label>
                                                                 <div class="inner-addon right-addon">
                                                                     <a href="" id="tooltip-cc-icon-lock" class="icon icon-lock icon-light-gray h3 link-reset" style="margin-top: 0px; font-size: 22px;">
@@ -89,13 +88,8 @@
                                                                     <input type="text" name="cardNumber" required ng-model="vm.newCard.number"
                                                                            cc-number cc-format cc-eager-type
                                                                            data-hook="credit-card-number"
+                                                                           id="credit-card-number"
                                                                            ng-class="{ 'has-error' : paymentForm.cardNumber.$invalid && vm.isPaymentFormSubmitted }">
-                                                                    <!--<p ng-show="paymentForm.cardNumber.$invalid && paymentForm.cardNumber.$ccEagerType">-->
-                                                                    <!--Looks like you're typing a {{paymentForm.cardNumber.$ccEagerType}} number!-->
-                                                                    <!--</p>-->
-                                                                    <!--<p ng-show="paymentForm.cardNumber.$valid">-->
-                                                                    <!--Yes, that looks like a valid {{paymentForm.cardNumber.$ccType}} number!-->
-                                                                    <!--</p>-->
                                                                 </div>
                                                             </div>
                                                             <div class="row">
@@ -360,7 +354,7 @@
                 <div class="space-top-5 row row-centered-lg" style="text-align:center;">
                     <button type="submit" class="col-xs-12 col-sm-10 btn btn-default btn-primary"
                             ng-disabled="vm.dataLoading == true || vm.isPhoneNumberInvalid"
-                            ng-click="vm.continueToPayment()">
+                            ng-click="vm.confirmCaseBooking(true)">
                         <span>Confirm Case Booking</span>
                         <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
                     </button>

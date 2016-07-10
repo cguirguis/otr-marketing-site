@@ -15,6 +15,8 @@
         var signupUrl = baseUrl + 'signup';
         var userUrl = baseUrl + 'user';
         var referralSourceUrl = baseUrl + 'referrals/sources';
+        var authorizePaymentUrl = baseUrl + 'cases/{caseId}/payment';
+        var confirmCaseUrl = baseUrl + 'cases/{caseId}';
 
         var login = function(username, password) {
             var url = loginUrl +
@@ -88,6 +90,17 @@
             $http.post(url, email, { headers: headers });
         };
 
+        var authorizeCasePayment = function(caseId, dataObj) {
+            var url = authorizePaymentUrl.replace('{caseId}', caseId);
+            return $http.post(url, dataObj, {withCredentials: true});
+        };
+
+        var confirmCase = function(caseId) {
+            var url = confirmCaseUrl.replace('{caseId}', caseId);
+
+            return $http.post(url, {withCredentials: true});
+        };
+
         return {
             login: login,
             logout: logout,
@@ -95,7 +108,9 @@
             getUser: getUser,
             getReferralSources: getReferralSources,
             getCourts: getCourts,
-            sendExitFeedback: sendExitFeedback
+            sendExitFeedback: sendExitFeedback,
+            authorizeCasePayment: authorizeCasePayment,
+            confirmCase: confirmCase
         }
     }
 })();

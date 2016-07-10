@@ -304,6 +304,11 @@
                 templateUrl: 'app/pages/fight/payment.html',
                 controller: 'TicketCtrl as vm'
             })
+            .state('default-template.fight.new-case', {
+                url: '/fight-your-ticket/new-case',
+                templateUrl: 'app/pages/fight/new-case.html',
+                controller: 'TicketCtrl as vm'
+            })
             // -------------------------------
             // ----- OTHER PAGES -----
             // -------------------------------
