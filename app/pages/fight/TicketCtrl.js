@@ -68,7 +68,7 @@
             $scope.$on('$viewContentLoaded', function() {
 
                 if ($state.current.name == "default-template.fight.photo") {
-                    if (vm.obj.flow) {
+                    if (vm.obj) {
                         vm.obj.flow.files = vm.session.model.citation.imgFiles || [];
                         processFile(vm.obj.flow.files);
                     }
@@ -118,9 +118,21 @@
             });
 
             $rootScope.$on("user:logged-in", function() {
-                // If on review step, proceed to payment
-                // view after user signs in
+                // If on review step, proceed to payment view after
+                // user is logged in. Also need to assign case to user.
                 if ($state.current.name == "default-template.fight.review") {
+                    var dataObj = {
+                        caseId: vm.session.model.case.caseId
+                    };
+                    otrService.assignOwnerUsingPOST(dataObj).then(
+                        function(response) {
+                            console.log("Case assigned successfully: " + response);
+                        },
+                        function(error) {
+                            console.log("Failed to assign case to user: " + error);
+                        }
+                    );
+
                     vm.continueToPayment();
                 }
             });
@@ -191,10 +203,7 @@
         }
 
         function verifyImageUpload() {
-            if (vm.imgContent == null) {
-                return false;
-            }
-            return true;
+            return vm.imgContent != null;
         }
 
         function formatMatchingCourtsResponse(courtsResponse) {
@@ -262,23 +271,22 @@
         function submitCourtStep() {
             vm.isCourtFormSubmitted = true;
 
-            if (vm.session.model.selectedCourt == null || vm.session.model.selectedCourt.originalObject == null || vm.session.model.selectedCourt.originalObject.courtId == null) {
+            if (vm.session.model.selectedCourt == null
+                || vm.session.model.selectedCourt.originalObject == null
+                || vm.session.model.selectedCourt.originalObject.courtId == null) {
                 return false;
             }
 
             var court = vm.session.model.selectedCourt.originalObject;
+
             // Set the selected court in the citation
             vm.session.model.citation.court = {
                 courtId : court.courtId,
                 location: court.address.city + ", " + court.address.stateCode
             };
 
-            // Go to ticket info step
-            $state.go('default-template.fight.date', {});
-            vm.session.model.currentStep++;
-
-            console.log("court: ", vm.session.model.selectedCourt.originalObject);
-            console.log("citation with court: ", vm.session.model.citation);
+            // Update the citation (pass in next step)
+            updateCitation('default-template.fight.date');
         }
 
         function submitTicketInfoStep() {
@@ -295,82 +303,15 @@
                 location: "Shoreline, WA"
             };
 
-            // Update the citation
-            var dataObj = {
-                citationIdString: vm.session.model.citation.citationId,
-                updateCitationRequest: {
-                    citation: vm.session.model.citation
-                }
-            };
-
-            otrService.updateCitationUsingPUT(dataObj)
-                .then(
-                    function (response) {
-                        console.log("Update citation response: " + response);
-                        // if we haven't yet created a new case, create one now
-                        if (vm.session.model.case == null) {
-                            return otrService.createCaseUsingPOST(dataObj)
-                        } else {
-                            var params = {
-                                caseId: vm.session.model.case.caseId,
-                                request: {
-                                    case: vm.session.model.case
-                                }
-                            };
-                            return otrService.findLawfirmMatchForCaseUsingPOST(params);
-                            //return CasesService.rematchCase(vm.session.model.case.caseId);
-                        }
-                    },
-                    function (error) {
-                        console.log("ERROR: Failed to create or rematch case: ", error);
-                        return $q.reject(error);
-                    }
-                )
-                .then(
-                    function(response) {
-                        console.log("Create case response: " + JSON.stringify(response));
-                        var newCase = response.theCase;
-                        newCase.chanceOfSuccess = response.chanceOfSuccess;
-                        newCase.insuranceCostInCents = response.projectedInsuranceCostInCents;
-                        vm.session.model.case = newCase;
-                        vm.session.model.caseFinancials = newCase.lawfirmCaseDecision.caseFinancials;
-                        vm.dataLoading = false;
-
-                        return otrService.isRefundEligibleUsingGET({caseId: newCase.caseId});
-                    },
-                    function (error) {
-                        vm.dataLoading = false;
-                        if (error.body.error && error.body.error.uiErrorMsg) {
-                            vm.errorMessage = error.body.error.uiErrorMsg;
-
-                        } else if (error.body.error.errorCode === 501) {
-                            vm.isNoLawfirmAvailable = true;
-                            vm.caseIdWithNoLawfirm = getCaseIdFromHeader(error.config.headers);
-                        }
-                        return $q.reject(error);
-                    }
-                )
-                .then(
-                    function(response) {
-                        console.log("refundEligibility response: " + JSON.stringify(response));
-                        vm.session.model.refundEligibility = {
-                            isEligible: response.refundEligibilityType === 'FULL_REFUND',
-                            uiReasonMsg: response.uiReasonMsg
-                        };
-
-                        // Go to next step
-                        $state.go('default-template.fight.court', {});
-                        vm.session.model.currentStep++;
-                    }
-                );
+            // Update the citation (pass in next step)
+            updateCitation('default-template.fight.court');
         }
 
         function submitDateStep() {
             vm.isDateFormSubmitted = true;
 
-            // Go to ticket info step
-            $state.go('default-template.fight.review', {});
-            vm.session.model.currentStep++;
+            // Update the citation (pass in next step)
+            updateCitation('default-template.fight.review');
         }
 
         function continueToPayment() {
@@ -653,6 +594,76 @@
             var location = headers('Location');
             var index = location.lastIndexOf('/');
             return location.substring(index + 1, location.length);
+        }
+
+        function updateCitation(nextStep) {
+
+            var dataObj = {
+                citationIdString: vm.session.model.citation.citationId,
+                updateCitationRequest: {
+                    citation: vm.session.model.citation
+                }
+            };
+
+            otrService.updateCitationUsingPUT(dataObj)
+                .then(
+                    function (response) {
+                        console.log("Update citation response: " + response);
+                        // if we haven't yet created a new case, create one now
+                        if (vm.session.model.case == null) {
+                            return otrService.createCaseUsingPOST(dataObj)
+                        } else {
+                            var params = {
+                                caseId: vm.session.model.case.caseId,
+                                request: {
+                                    case: vm.session.model.case
+                                }
+                            };
+                            return otrService.findLawfirmMatchForCaseUsingPOST(params);
+                        }
+                    },
+                    function (error) {
+                        console.log("ERROR: Failed to create or rematch case: ", error);
+                        return $q.reject(error);
+                    }
+                )
+                .then(
+                    function(response) {
+                        console.log("Create case response: " + JSON.stringify(response));
+                        var newCase = response.theCase;
+                        newCase.chanceOfSuccess = response.chanceOfSuccess;
+                        newCase.insuranceCostInCents = response.projectedInsuranceCostInCents;
+                        vm.session.model.case = newCase;
+                        vm.session.model.case.caseFinancials = newCase.lawfirmCaseDecision.caseFinancials;
+                        vm.dataLoading = false;
+
+                        return otrService.isRefundEligibleUsingGET({caseId: newCase.caseId});
+                    },
+                    function (error) {
+                        vm.dataLoading = false;
+                        if (error.body.error && error.body.error.uiErrorMsg) {
+                            vm.errorMessage = error.body.error.uiErrorMsg;
+
+                        } else if (error.body.error.errorCode === 501) {
+                            vm.isNoLawfirmAvailable = true;
+                            vm.caseIdWithNoLawfirm = getCaseIdFromHeader(error.config.headers);
+                        }
+                        return $q.reject(error);
+                    }
+                )
+                .then(
+                    function(response) {
+                        console.log("refundEligibility response: " + JSON.stringify(response));
+                        vm.session.model.refundEligibility = {
+                            isEligible: response.refundEligibilityType === 'FULL_REFUND',
+                            uiReasonMsg: response.uiReasonMsg
+                        };
+
+                        // Go to next step
+                        $state.go(nextState, {});
+                        vm.session.model.currentStep++;
+                    }
+                );
         }
 
         /*function submitFindMeLawyerInfo() {

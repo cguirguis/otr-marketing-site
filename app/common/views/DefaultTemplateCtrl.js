@@ -209,7 +209,7 @@
                 .then(function(response) {
                     if (vm.session.model.fbAuth) {
                         FB.logout(function(response) {
-                            // Person is now logged out
+                            // User is now logged out
                             vm.session.model.fbAuth = null;
                             console.log("Logged out of Facebook");
                         });

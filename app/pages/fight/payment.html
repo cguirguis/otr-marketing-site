@@ -51,7 +51,7 @@
                                         </div>
                                         <div class="col-lg-8">
                                             <div style="padding-top: 5px;line-height:15px;">Your lawyer will only
-                                                contact you if they can't reach you by email.</div>
+                                                call you if they can't reach you by email.</div>
                                         </div>
                                     </div>
                                     <div class="space-top-1">
@@ -276,16 +276,16 @@
                         <tbody>
                         <tr class="base-price">
                             <td class="name">Traffic Ticket Defense</td>
-                            <td class="val">{{ vm.caseFinancials.caseBaseCost | intToCurrency }}
+                            <td class="val">{{ vm.session.model.case.caseFinancials.caseBaseCost | intToCurrency }}
                             </td>
                         </tr>
                         <tr class="service-fee"
-                            ng-show="vm.caseFinancials.multipleViolationSurcharge != null && vm.caseFinancials.multipleViolationSurcharge > 0">
+                            ng-show="vm.session.model.case.caseFinancials.multipleViolationSurcharge != null && vm.session.model.case.caseFinancials.multipleViolationSurcharge > 0">
                             <td class="name">
                                 Multiple Violation Surcharge
                             </td>
                             <td class="val">
-                                {{ vm.caseFinancials.multipleViolationSurcharge | intToCurrency }}
+                                {{ vm.session.model.case.caseFinancials.multipleViolationSurcharge | intToCurrency }}
                             </td>
                         </tr>
                         <tr class="coupon">
@@ -296,7 +296,7 @@
                             </td>
                             <td class="val">
                                 <div class="uneditable-fields" ng-show="vm.refCode != null">
-                                    {{ vm.caseFinancials.otrReferralCodeAdjustmentInCents + vm.caseFinancials.lawfirmReferralCodeAdjustmentInCents | intToCurrency }}
+                                    {{ vm.session.model.case.caseFinancials.otrReferralCodeAdjustmentInCents + vm.session.model.case.caseFinancials.lawfirmReferralCodeAdjustmentInCents | intToCurrency }}
                                 </div>
                             </td>
                         </tr>
@@ -347,7 +347,7 @@
                             <td class="name"><span class="h5">Total</span></td>
                             <td class="text-special icon-dark-gray">
                                 <span class="h5 total-guest-payment">
-                                    {{ vm.caseFinancials.clientTotalCost | intToCurrency }}
+                                    {{ vm.session.model.case.caseFinancials.clientTotalCost | intToCurrency }}
                                 </span>
                             </td>
                         </tr>
