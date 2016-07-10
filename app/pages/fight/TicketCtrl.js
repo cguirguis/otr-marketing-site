@@ -68,7 +68,10 @@
             $scope.$on('$viewContentLoaded', function() {
 
                 if ($state.current.name == "default-template.fight.photo") {
-                    vm.obj.flow.files = vm.session.model.citation.imgFiles || [];
+                    if (vm.obj.flow) {
+                        vm.obj.flow.files = vm.session.model.citation.imgFiles || [];
+                        processFile(vm.obj.flow.files);
+                    }
                 } if ($state.current.name == "default-template.fight.date") {
                     // Load calendar dates
                     var today = new Date();
