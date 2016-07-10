@@ -76,7 +76,10 @@
                 </li>
                 <li class="nav-item" style="text-align: center;">
                     <a class="login-button" ng-href="{{mobileAppUrl}}">Sign Up</a>
-                    <a class="login-button" ng-href="{{mobileAppUrl}}">Login</a>
+                    <a class="login-button" href ng-click="showLoginModal()" ng-hide="vm.session.model.currentUser">
+                        Login</a>
+                    <a class="login-button" href ng-click="vm.logout()" ng-show="vm.session.model.currentUser">Logout
+                    </a>
                 </li>
             </ul>
         </div>

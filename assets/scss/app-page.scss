@@ -57,7 +57,7 @@
               padding-top: 0px;
               padding-bottom: 0px;
             }
-            
+
             .k-calendar {
               td {
                 text-align: center!important;
@@ -237,7 +237,7 @@
               line-height: 1;
             }
             .icon-lock:before {
-              content: '\f19d';
+              content: none;
             }
             hr {
               display: block;
@@ -445,6 +445,7 @@
             padding: 0!important;
             background-color: initial!important;
             font-size: 15px!important;
+            border: none!important;
           }
 
           .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
@@ -649,7 +650,7 @@ div.progress-bar {
       position: relative;
       text-align: center;
       width: 40px;
-      z-index: 2;
+      z-index: 1;
 
       i {
         color: #8e8e93;

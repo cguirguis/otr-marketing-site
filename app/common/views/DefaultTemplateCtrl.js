@@ -6,8 +6,8 @@
         .controller('DefaultTemplateCtrl', DefaultTemplateCtrl);
 
 
-    DefaultTemplateCtrl.$inject = ['ENV', '$rootScope', '$cookies', '$filter', '$timeout', '$http', '$q', 'GlobalUtils', 'OtrService', 'FileService'];
-    function DefaultTemplateCtrl(ENV, $rootScope, $cookies, $filter, $timeout, $http, $q, GlobalUtils, OtrService, FileService) {
+    DefaultTemplateCtrl.$inject = ['ENV', '$rootScope', '$timeout', '$http', '$q', 'GlobalUtils', 'OtrService', 'FileService', 'DataService', 'CacheService', '$uibModal'];
+    function DefaultTemplateCtrl(ENV, $rootScope, $timeout, $http, $q, GlobalUtils, OtrService, FileService, DataService, CacheService, $uibModal) {
         var vm = this,
 
             URLS = {
@@ -18,6 +18,7 @@
         var exitPopupLoaded = false;
 
         vm.isMobileDevice = GlobalUtils.isMobileDevice();
+        vm.session = CacheService;
 
         $(document).ready(function () {
 
@@ -92,10 +93,14 @@
                     exitPopupLoaded = true;
                 }
             }, 3000);
+
+            // Attempt to get current user info
+            getUserInfo();
         });
 
         // ----- INTERFACE ------------------------------------------------------------
         vm.login = login;
+        vm.logout = logout;
         vm.submitSubscribeForm = submitSubscribeForm;
         vm.formatStateName = formatStateName;
         vm.submitReviewRequest = submitReviewRequest;
@@ -118,7 +123,6 @@
                 console.log('BranchInitComplete event in DefaultTemplateCtrl.js: ', $rootScope.branchData);
                 vm.iTunesLinkForFooter = GlobalUtils.buildITunesLink('website', '', 'iOSBadge', 'footer', '');
             });
-
         })();
 
         function isUploadSupported() {
@@ -194,10 +198,71 @@
                 );
         }
 
+        // TODO - think about moving these inside a service
         function login() {
             $rootScope.trackFBButtonConversion('SignUp', 'MenuBar');
             vm.fightTicketRedirect();
         }
+
+        function logout(callback) {
+            DataService.logout()
+                .then(function(response) {
+                    if (vm.session.model.fbAuth) {
+                        FB.logout(function(response) {
+                            // Person is now logged out
+                            vm.session.model.fbAuth = null;
+                            console.log("Logged out of Facebook");
+                        });
+                    }
+
+                    vm.session.model.currentUser = null;
+                    vm.session.model.citation = null;
+                    vm.session.model.case = null;
+
+                    if (callback) {
+                        callback();
+                    }
+
+                    console.log("Logged out of app.");
+                });
+        }
+
+        function getUserInfo() {
+            // Attempt to get user info
+            DataService.getUser().then(
+                function(response) {
+                    vm.session.model.currentUser = response.data.user;
+                },
+                function () {
+                    // User is not logged in
+                    vm.session.model.currentUser = null;
+                }
+            );
+        }
+
+        // TODO - Find a better place to put this
+        $rootScope.showLoginModal = function() {
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: '/login.html',
+                controller: 'LoginCtrl as vm',
+                size: 'md',
+                resolve: {
+                    user: function () {
+                        return null;
+                    }
+                }
+            });
+
+            modalInstance.result.then(
+                function (currentUser) {
+                    vm.session.model.currentUser = currentUser;
+                },
+                function () {
+                    console.log('Modal dismissed at: ' + new Date());
+                }
+            );
+        };
 
         function submitSubscribeForm(isValid) {
             vm.subscribeFormDataLoading = true;

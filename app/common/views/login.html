@@ -52,6 +52,7 @@
                         class="btn btn-primary col-xs-12 col-sm-10 space-top-1"
                         ng-disabled="vm.dataLoading"
                         ng-click="vm.submitEmailLoginForm(vm.email, vm.password)">
+                    <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
                     Login
                     <ion-spinner icon="spiral" class="button-spinner spinner-light" ng-if="vm.dataLoading"></ion-spinner>
                 </button>
@@ -103,6 +104,7 @@
                         ng-disabled="vm.dataLoading"
                         ng-click="vm.submitSignupForm(vm.newUser)">
                     Signup
+                    <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
                     <ion-spinner icon="spiral" class="button-spinner spinner-light" ng-if="vm.dataLoading"></ion-spinner>
                 </button>
 

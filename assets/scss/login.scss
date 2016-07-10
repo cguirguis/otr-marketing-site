@@ -16,6 +16,9 @@
       height: 60px;
       font-size: 18px;
       border-radius: 3px;
+      &:hover {
+        opacity: 1;
+      }
     }
     button.facebook-login-button {
       background-color: #1262be;

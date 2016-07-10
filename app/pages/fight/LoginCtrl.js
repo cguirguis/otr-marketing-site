@@ -45,13 +45,11 @@
         vm.loginWithEmail = function() {
             vm.showLoginOptions = false;
             vm.showEmailLogin = true;
-            vm.loginModalTitle = "Log in";
         };
 
         vm.signup = function() {
             vm.showLoginOptions = false;
             vm.showSignup = true;
-            vm.loginModalTitle = "Sign up";
         };
 
         vm.cancelEmailLogin = function() {
@@ -152,7 +150,7 @@
                     }
                     vm.dataLoading = false;
                 })
-                .then(signupResponseHandler);
+                .then(loginResponseHandler);
         };
 
         vm.submitEmailLoginForm = function(email, password) {
@@ -162,7 +160,6 @@
                 vm.errorMessage = "Please provide a valid email and password.";
             } else {
                 vm.dataLoading = true;
-                $rootScope.preventLoadingModal = true;
                 DataService.login(email, password)
                     .error(function(data, status, headers, config) {
                         vm.errorMessage = data && data.error ? data.error.uiErrorMsg : "Unable to log in.";
@@ -172,29 +169,26 @@
             }
         };
 
-        var signupResponseHandler = function(response) {
-            $rootScope.user = response.data.user;
-
-            vm.ok();
-        };
-
-        var loginResponseHandler = function(response) {
-            // Logged in successfully
-            vm.session.model.currentUser = {}; // (user info doesn't come back in this response)
-
-            // Now get user info
-            DataService.getUser()
-                .then(function(response) {
-                    vm.session.model.currentUser = response.data.user;
-                });
-
-            vm.ok();
-        };
-
         vm.updateSelectedSource = function(value) {
             vm.selectedSource = value;
             vm.showReferralCode = value.sourceTypeId == 3 ? true : false;
         };
+
+        function loginResponseHandler(response) {
+            // Logged in successfully
+            vm.session.model.currentUser = null; // (user info doesn't come back in this response)
+
+            // Now get user info
+            DataService.getUser()
+                .then(
+                function(response) {
+                    vm.session.model.currentUser = response.data.user;
+                },
+                function () { alert('login failed'); }
+            );
+
+            vm.ok();
+        }
 
         function getReferralSources() {
             DataService.getReferralSources().then(

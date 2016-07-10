@@ -11,6 +11,7 @@
 
         var getCourtsUrl = baseUrl + "courts/traffic";
         var loginUrl = baseUrl + "authentication/login";
+        var logoutUrl = baseUrl + "authentication/logout";
         var signupUrl = baseUrl + 'signup';
         var userUrl = baseUrl + 'user';
         var referralSourceUrl = baseUrl + 'referrals/sources';
@@ -20,6 +21,10 @@
                 "?username=" + encodeURIComponent(username) +
                 "&password=" + encodeURIComponent(password);
             return $http.post(url);
+        };
+
+        var logout = function() {
+
         };
 
         var signup = function(newUser, metaData) {
@@ -38,7 +43,7 @@
         };
 
         var getUser = function() {
-            $http.get(userUrl);
+            return $http.get(userUrl);
         };
 
         var getReferralSources = function() {
@@ -85,6 +90,7 @@
 
         return {
             login: login,
+            logout: logout,
             signup: signup,
             getUser: getUser,
             getReferralSources: getReferralSources,
