@@ -69,7 +69,7 @@
 
                 if ($state.current.name == "default-template.fight.photo") {
                     if (vm.obj) {
-                        vm.obj.flow.files = vm.session.model.citation.imgFiles || [];
+                        vm.obj.flow.files = vm.session.model.citationImgFiles || [];
                         processFile(vm.obj.flow.files);
                     }
                 } if ($state.current.name == "default-template.fight.date") {
@@ -106,11 +106,11 @@
 
                     StripeService.getPaymentMethodsForUser(currentUser.userId)
                         .then(
-                        function(paymentMethods) {
-                            vm.paymentMethods = paymentMethods;
-                            vm.selectedPaymentMethod = _.find(vm.paymentMethods, { isDefault : true });
-                        }
-                    );
+                            function(paymentMethods) {
+                                vm.paymentMethods = paymentMethods;
+                                vm.selectedPaymentMethod = _.find(vm.paymentMethods, { isDefault : true });
+                            }
+                        );
 
                     vm.newCard.firstName = currentUser.firstName;
                     vm.newCard.lastName = currentUser.lastName;
@@ -256,7 +256,7 @@
             vm.isImgFormSubmitted = true;
 
             // Save image to cache
-            vm.session.model.citation.imgFiles = vm.obj.flow.files;
+            vm.session.model.citationImgFiles = vm.obj.flow.files;
 
             if (vm.imgContent != null) {
                 $state.go('default-template.fight.info', {});
@@ -660,7 +660,7 @@
                         };
 
                         // Go to next step
-                        $state.go(nextState, {});
+                        $state.go(nextStep, {});
                         vm.session.model.currentStep++;
                     }
                 );
