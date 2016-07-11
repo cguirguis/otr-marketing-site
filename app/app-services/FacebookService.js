@@ -11,75 +11,58 @@
         var statusChangeCallback = function(response, metaData) {
             // This is called with the results from from FB.getLoginStatus().
 
-            // The response object is returned with a status field that lets the
-            // app know the current login status of the person.
-            // Full docs on the response object can be found in the documentation
-            // for FB.getLoginStatus().
             if (response.status === 'connected') {
-                // Logged into Facebook and authorized for app
+                // User is logged into Facebook and authorized for app
                 return getUserInfo()
                     .then(function(userResponse) {
-                        //$rootScope.user = userResponse;
-                        $rootScope.user = $rootScope.user || {};
-                        $rootScope.user.firstname = userResponse.first_name;
-                        $rootScope.user.lastname = userResponse.last_name;
-                        $rootScope.fbAuth = {
-                            "accessToken": response.authResponse.accessToken,
-                            "expiresIn" : response.authResponse.expiresIn,
-                            "userID": response.authResponse.userID
-                        };
-
-                        //console.log("logged into fb: " + JSON.stringify($rootScope.fbAuth));
-
-                        getProfilePhoto();
-                        getUserNavPhoto();
-
-                        var branchData = { referralSourceData: $rootScope.branchData };
+                        vm.session.model.currentUser = vm.session.model.currentUser || {};
+                        vm.session.model.currentUser.firstname = userResponse.first_name;
+                        vm.session.model.currentUser.lastname = userResponse.last_name;
 
                         // Authenticate user to our service
-                        return DataService.loginWithFacebook($rootScope.fbAuth, branchData)
+                        var data = {
+                            "userAccessToken": response.authResponse.accessToken,
+                            "expirationDate" : new Date(new Date().getTime() + (response.authResponse.expiresIn * 1000)),
+                            "userID": response.authResponse.userID,
+                            "referralSourceData": metaData.referralSourceData,
+                            "httpReferrer": metaData.httpReferrer
+                        };
+                        return DataService.loginWithFacebook(data)
                             .then(function(response) {
                                 // Now get user info
+                                getProfilePhoto();
+                                getUserNavPhoto();
+
                                 DataService.getUser()
                                     .then(function(response) {
-                                        $rootScope.user = response.data.user;
-                                        //call into Android's native code. TODO: Make a delegate class for this.
-                                        if(!(typeof Android === 'undefined')) {
-                                            Android.registerDeviceToken(JSON.stringify(response));
-                                        }
+                                        vm.session.model.currentUser = response.data.user;
                                     });
                                 $rootScope.$broadcast('user:logged-in');
                                 return response;
                             });
                     })
                     .then(
-                    function(otrResponse){
-                        console.log("\n\nLogged in to OTR via Facebook.");
-                        $rootScope.hideLoader();
-                        $rootScope.preventLoadingModal = false;
-                        return otrResponse;
-                    },
-                    function(response) {
-                        console.log(JSON.stringify(response.data.error.uiErrorMsg));
-                        $rootScope.errorMessage = response.data.error.uiErrorMsg;
-                        $rootScope.hideLoader();
-                        $rootScope.preventLoadingModal = false;
-                        return $q.reject(response);
-                    });
+                        function(otrResponse){
+                            console.log("\n\nLogged in to OTR via Facebook.");
+                            return otrResponse;
+                        },
+                        function(response) {
+                            console.log(JSON.stringify(response.data.error.uiErrorMsg));
+                            return $q.reject(response);
+                        }
+                    );
             }
             else if (response.status === 'not_authorized') {
                 // The person is logged into Facebook, but not your app.
                 //document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
                 //FB.login()
                 console.log("FB AUTH STATUS: not_authorized");
-                $rootScope.preventLoadingModal = false;
                 return $q.reject("not_authorized");
             }
             else {
                 // The person is not logged into Facebook, prompt them to login
                 //FB.login();
                 console.log("FB AUTH STATUS: not_connected");
-                $rootScope.preventLoadingModal = false;
                 return $q.reject("not_connected");
             }
         };
@@ -134,10 +117,8 @@
 
         var logout = function() {
             FB.logout(function(response) {
-                $rootScope.$apply(function() {
-                    $rootScope.user = {};
-                    $rootScope.user.isFbAuthed = false;
-                });
+                vm.session.model.currentUser = {};
+                vm.session.model.currentUser.isFbAuthed = false;
             });
         };
 
@@ -150,9 +131,9 @@
                     if (response && !response.error) {
                         /* handle the result */
                         if (width == 30) {
-                            $rootScope.userNavPhoto = response.data.url;
+                            vm.session.model.currentUser.userNavPhoto = response.data.url;
                         } else {
-                            $rootScope.userPhoto = response.data.url;
+                            vm.session.model.currentUser.userPhoto = response.data.url;
                         }
                     }
                 }
@@ -161,6 +142,16 @@
 
         function getUserNavPhoto() {
             getProfilePhoto(30, 30);
+        }
+
+        /* Fire off conversion tracking for the "Case Bookings from Web Clients" conversion action */
+        function recordRegistrationConversionInAdwords() {
+            window.google_trackConversion({
+                google_conversion_id : 937085283,
+                google_conversion_label : "cjfeCI3jrmUQ45LrvgM",
+                google_remarketing_only : false,
+                google_conversion_format : "3"
+            });
         }
 
         return {

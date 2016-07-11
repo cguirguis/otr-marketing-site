@@ -5,8 +5,8 @@
         .module('brochure')
         .controller('TicketCtrl', TicketCtrl);
 
-    TicketCtrl.$inject = ['$rootScope', '$scope', '$state', '$stateParams', '$q', '$filter', 'ENV', 'CacheService', 'StripeService', 'stripe', 'FlashService', 'CaseService'];
-    function TicketCtrl($rootScope, $scope, $state, $stateParams, $q, $filter, ENV, CacheService, StripeService, stripe, FlashService, CaseService) {
+    TicketCtrl.$inject = ['$rootScope', '$scope', '$window', '$state', '$stateParams', '$q', '$filter', 'CacheService', 'StripeService', 'stripe', 'FlashService', 'CaseService'];
+    function TicketCtrl($rootScope, $scope, $window, $state, $stateParams, $q, $filter, CacheService, StripeService, stripe, FlashService, CaseService) {
         var vm = this;
 
         // State details
@@ -56,11 +56,13 @@
         vm.submitTicketInfoStep = submitTicketInfoStep;
         vm.continueToPayment = continueToPayment;
         vm.hideRefCodeInput = hideRefCodeInput;
+        vm.applyRefCode = applyRefCode;
         vm.removeRefCode = removeRefCode;
         vm.confirmCaseBooking = confirmCaseBooking;
         vm.phoneNumberKeyUpListener = phoneNumberKeyUpListener;
+        vm.viewCase = viewCase;
 
-        var otrService = $rootScope.otrService || new OtrService({domain: ENV.apiEndpoint});
+        var otrService = $rootScope.otrService || new OtrService({domain: DataService.apiEndpoint});
 
         // ----- PUBLIC METHODS -------------------------------------------------------
 
@@ -102,7 +104,6 @@
                 } else if ($state.current.name == "default-template.fight.payment") {
                     // get the user's payment methods, if any
                     var currentUser = vm.session.model.currentUser;
-                    console.log("Attempting to retrieve payment methods for user: ", currentUser.userId);
 
                     StripeService.getPaymentMethodsForUser(currentUser.userId)
                         .then(
@@ -125,9 +126,7 @@
                         caseId: vm.session.model.case.caseId
                     };
                     otrService.assignOwnerUsingPOST(dataObj).then(
-                        function(response) {
-                            console.log("Case assigned successfully: " + response);
-                        },
+                        function(response) {},
                         function(error) {
                             console.log("Failed to assign case to user: " + error);
                         }
@@ -151,22 +150,18 @@
                 });
         }
 
-        function flowFilesSubmitted(flow) {
-            console.log("Event Kicked Off: flow-files-submitted");
-            // flow.upload();
-        }
+        function flowFilesSubmitted(flow) { }
 
         function flowFileSuccess(file, message) {
-            console.log("Event Kicked Off: flow-file-success: ", message);
             file.msg = message
         }
 
         function flowFileAdded(file) {
-            console.log("Event Kicked Off: flow-file-added");
             !!{png: 1, gif: 1, jpg: 1, jpeg: 1}[file.getExtension()];
         }
 
         function processFile(files) {
+            vm.dataLoading = true;
             var fileReader = new FileReader();
 
             angular.forEach(files, function (flowFile, i) {
@@ -178,7 +173,6 @@
                         base64Data: base64result
                     };
                     vm.session.model.citation.imgContent = vm.imgContent;
-                    vm.dataLoading = true;
 
                     createNewCitationWithFile(vm.imgContent.base64Data)
                         .then(
@@ -209,8 +203,6 @@
 
         function formatMatchingCourtsResponse(courtsResponse) {
 
-            console.log('formatting response: ', courtsResponse);
-
             _.forEach(courtsResponse.courts, function(elem, key) {
                 elem.customDescription = elem.address.city + ', ' + elem.address.stateCode + ' - ' + elem.county + ' County';
             });
@@ -227,15 +219,15 @@
 
             return otrService.getCourtsByQueryUsingGET(params)
                 .then(
-                function(response) {
-                    vm.isCourtSearchLoading = false;
-                    return response;
-                },
-                function(error) {
-                    vm.isCourtSearchLoading = false;
-                    return $q.reject(error);
-                }
-            );
+                    function(response) {
+                        vm.isCourtSearchLoading = false;
+                        return response;
+                    },
+                    function(error) {
+                        vm.isCourtSearchLoading = false;
+                        return $q.reject(error);
+                    }
+                );
         }
 
         function isCourtFormInError() {
@@ -337,65 +329,58 @@
         }
 
         function removeRefCode() {
-            /* TODO - hook this up
 
             if (vm.refCode != null) {
-
                 vm.refCodeDataLoading = true;
 
                 CasesService.rematchCase(vm.newCase.caseId)
                     .then(
-                    function(response) {
-                        vm.newCase = response.theCase;
-                        vm.newCase.chanceOfSuccess = response.chanceOfSuccess;
-                        vm.caseFinancials = vm.newCase.lawfirmCaseDecision.caseFinancials;
-                        vm.refCode = null;
-                        vm.showCouponInput = false;
-                        vm.userInputRefCode = null;
-                        vm.refCodeDataLoading = false;
-                    },
-                    function (response) {
-                        vm.refCodeDataLoading = false;
-                        if(response.data.error.errorCode === 501) {
-                            vm.isNoLawfirmAvailable = true;
-                            vm.caseIdWithNoLawfirm = getCaseIdFromHeader(response.headers);
+                        function(response) {
+                            vm.session.model.case = response.theCase;
+                            vm.session.model.case.chanceOfSuccess = response.chanceOfSuccess;
+                            vm.session.model.case.caseFinancials = vm.newCase.lawfirmCaseDecision.caseFinancials;
+                            vm.refCode = null;
+                            vm.showCouponInput = false;
+                            vm.userInputRefCode = null;
+                            vm.refCodeDataLoading = false;
+                        },
+                        function (response) {
+                            vm.refCodeDataLoading = false;
+                            if(response.data.error.errorCode === 501) {
+                                vm.isNoLawfirmAvailable = true;
+                                vm.caseIdWithNoLawfirm = getCaseIdFromHeader(response.headers);
+                            }
+                            return $q.reject(response);
                         }
-                        return $q.reject(response);
-                    }
-                )
+                    );
             }
-            */
         }
 
         function applyRefCode() {
-            /* TODO - hook this up
-
             if (vm.userInputRefCode == null || vm.userInputRefCode == '') {
-                //vm.refCodeError = 'Please enter a referral or discount code';
+                vm.refCodeError = 'Please enter a referral or discount code';
                 return false;
             }
 
             vm.refCodeDataLoading = true;
 
-            RefCodeService.applyRefCode(vm.newCase.caseId, vm.userInputRefCode)
+            CaseService.applyRefCode(vm.session.model.case.caseId, vm.userInputRefCode)
                 .then(
-                function(response) {
-                    console.log('newCase with refcode applied: ', response);
-                    vm.newCase = response.theCase;
-                    vm.newCase.chanceOfSuccess = response.chanceOfSuccess;
-                    vm.caseFinancials = vm.newCase.lawfirmCaseDecision.caseFinancials;
-                    vm.refCode = vm.userInputRefCode;
-                    vm.showCouponInput = false;
-                    vm.refCodeDataLoading = false;
-                },
-                function(error) {
-                    console.log('ERROR: Could not apply RefCode: ', error);
-                    vm.refCodeDataLoading = false;
-                    vm.refCodeError = error.data.error.uiErrorMsg;
-                    return $q.reject(error);
-                }
-            );
-            */
+                    function(response) {
+                        vm.session.model.case = response.theCase;
+                        vm.session.model.case.chanceOfSuccess = response.chanceOfSuccess;
+                        vm.session.model.case.caseFinancials = vm.newCase.lawfirmCaseDecision.caseFinancials;
+                        vm.refCode = vm.userInputRefCode;
+                        vm.showCouponInput = false;
+                        vm.refCodeDataLoading = false;
+                    },
+                    function(error) {
+                        console.log('ERROR: Could not apply RefCode: ', error);
+                        vm.refCodeDataLoading = false;
+                        vm.refCodeError = error.data.error.uiErrorMsg;
+                        return $q.reject(error);
+                    }
+                );
         }
 
         function phoneNumberKeyUpListener() {
@@ -427,8 +412,6 @@
                     .then(
                         // Persist the card to the user's account
                         function(response) {
-                            console.log('token created for card ending in ', response.card.last4);
-                            console.log('full response from stripe: ', response);
                             return StripeService.addNewPaymentMethodForUser(vm.session.model.currentUser.userId, response.id);
                         },
                         function(error) {
@@ -464,24 +447,20 @@
                     )
                     .then(
                         function() {
-                            console.log('attempting to authorize case payment');
                             return CaseService.authorizeCasePayment(vm.session.model.case.caseId, null);
                         }
                     )
                     .then(
                         function() {
-                            console.log('Running recordGoogleAdwordsConversion()...');
-                            // TODO - hook this up
-                            //return vm.recordGoogleAdwordsConversion();
+                            return recordGoogleAdwordsConversion();
                         }
                     )
                     .then(
                         function() {
                             vm.dataLoading = false;
-                            $rootScope.$broadcast('NewCaseEvent');
 
-                            // TODO - navigate to appropriate view
-                            //$state.go('topnav.case-details', {caseId: vm.session.model.case.caseId, isNew: true})
+                            // Go to 'New case' view
+                            vm.goToStep('new-case', vm.session.model.currentStep++);
                         }
                     )
                     .catch(
@@ -495,7 +474,6 @@
                         }
                     );
             } else {
-                console.log('attempting to confirm the case');
                 CaseService.confirmCaseAsBooked(vm.session.model.case.caseId)
                     .then(
                         // authorize payment for the case
@@ -513,14 +491,12 @@
                     )
                     .then(
                         function() {
-                            console.log('attempting to authorize case payment');
                             return CaseService.authorizeCasePayment(vm.session.model.case.caseId, vm.selectedPaymentMethod.cardId);
                         }
                     )
                     .then(
                         function() {
-                            console.log('Running recordGoogleAdwordsConversion()...');
-                            return vm.recordGoogleAdwordsConversion();
+                            return recordGoogleAdwordsConversion();
                         }
                     )
                     .then(
@@ -541,6 +517,9 @@
             }
         }
 
+        var viewCase = function() {
+            $window.location.href = $rootScope.mobileAppUrl;
+        };
 
         // ----- PRIVATE METHODS -------------------------------------------------------
 
@@ -555,16 +534,6 @@
             return otrService.createNewCitationUsingPOST(dataObj)
                 .then(
                     function (response) {
-                        /*AWSS3Service.getSignedUrl(
-                             {
-                             imageUrl: citation.ticketImageUrl,
-                             success: function(signedUrl) {
-                                 vm.signedImageUrl = signedUrl;
-                                 console.log("signed image url: ", vm.signedImageUrl);
-                                 }
-                             }
-                         );*/
-
                         var citation = response.citation;
 
                         // set some defaults
@@ -606,7 +575,6 @@
             otrService.updateCitationUsingPUT(dataObj)
                 .then(
                     function (response) {
-                        console.log("Update citation response: " + response);
                         // if we haven't yet created a new case, create one now
                         if (vm.session.model.case == null) {
                             return otrService.createCaseUsingPOST(dataObj)
@@ -627,7 +595,6 @@
                 )
                 .then(
                     function(response) {
-                        console.log("Create case response: " + JSON.stringify(response));
                         var newCase = response.theCase;
                         newCase.chanceOfSuccess = response.chanceOfSuccess;
                         newCase.insuranceCostInCents = response.projectedInsuranceCostInCents;
@@ -651,7 +618,6 @@
                 )
                 .then(
                     function(response) {
-                        console.log("refundEligibility response: " + JSON.stringify(response));
                         vm.session.model.refundEligibility = {
                             isEligible: response.refundEligibilityType === 'FULL_REFUND',
                             uiReasonMsg: response.uiReasonMsg
@@ -662,6 +628,26 @@
                         vm.session.model.currentStep++;
                     }
                 );
+        }
+
+        /* Fire off conversion tracking for the
+         "Case Bookings from Web Clients" conversion action */
+        function recordGoogleAdwordsConversion() {
+            var conversionValue = 37.50;
+            if (vm.session.model.case.caseFinancials.otrEarnings != null) {
+                conversionValue = $filter('centsToDollars')(vm.session.model.case.caseFinancials.otrEarnings)
+            }
+
+            window.google_trackConversion({
+                google_conversion_id : 937085283,
+                google_conversion_label : "fZevCLL7nGUQ45LrvgM",
+                google_conversion_value : conversionValue,
+                google_conversion_currency : "USD",
+                google_remarketing_only : false,
+                google_conversion_format : "3"
+            });
+
+            return conversionValue;
         }
     }
 })();

@@ -5,14 +5,9 @@
         .module('brochure')
         .controller('LoginCtrl', LoginCtrl);
 
-    LoginCtrl.$inject = ['$rootScope', '$scope', 'ENV', 'DataService', 'OtrService', 'CacheService', 'FacebookService', '$uibModalInstance'];
-    function LoginCtrl($rootScope, $scope, ENV, DataService, OtrService, CacheService, FacebookService, $uibModalInstance) {
+    LoginCtrl.$inject = ['$rootScope', '$scope', '$cookies', 'ENV', 'DataService', 'OtrService', 'CacheService', 'FacebookService', '$uibModalInstance'];
+    function LoginCtrl($rootScope, $scope, $cookies, ENV, DataService, OtrService, CacheService, FacebookService, $uibModalInstance) {
         var vm = this;
-
-        vm.dataLoading = false;
-        vm.showLoginOptions = true;
-        vm.extraInfo = {};
-        vm.session = CacheService;
 
         (function initController() {
             $scope.$on('$viewContentLoaded', function() {
@@ -22,10 +17,15 @@
                 vm.showEmailLogin = false;
                 vm.showSignup = false;
                 vm.dataLoading = false;
+                vm.extraInfo = {};
+                vm.isNewAccountWithFB = false;
+
+                vm.session = CacheService;
+
                 $("#signup-form input").val("");
                 $(".email-login-form input").val("");
 
-                getReferralSources();
+                vm.fetchUserReferralSources();
             });
         })();
 
@@ -64,17 +64,28 @@
             vm.errorMessage = "";
         };
 
-        vm.submitReferralInfo = function() {
-            if(vm.selectedSource.sourceTypeId) {
+        vm.fetchUserReferralSources = function() {
+            vm.sources = [];
+            vm.otrService.getUserReferralSourceTypesUsingGET()
+                .then(function(response) {
+                    vm.sources = _.filter(response.sources, function(element) {
+                        return element.isDisplayed;
+                    });
+                });
+        };
+
+        vm.submitSourceInfo = function() {
+            if (vm.selectedSource && vm.selectedSource.sourceTypeId) {
                 var params = {
                     request : {
                         referralCode: vm.extraInfo.referralCode,
                         referralSourceData: $rootScope.branchData,
-                        userId: $rootScope.user.userId,
+                        userId: vm.session.model.currentUser.userId,
                         userReferralSourceTypeId: vm.selectedSource.sourceTypeId
                     }
                 };
 
+                vm.dataLoading = true;
                 vm.otrService.setReferralSourceUsingPOST(params)
                     .then(function(response) {
                         // TODO - hide referral modal/options
@@ -84,28 +95,39 @@
             }
         };
 
-        vm.loginWithFacebook = function() {
-            FacebookService.login(function(response) {
-                FacebookService.statusChangeCallback(response)
-                    .then(function(response) {
-                        console.log('FB login response, ', response);
+        vm.initiateFacebookLogin = function() {
+            return FB.login(
+                facebookAuthCallback,
+                { scope: 'public_profile, email' }
+            );
+        };
+
+        function facebookAuthCallback() {
+
+            // Read Branch link data from cookie, if one is present.
+            var newUserMeta = {};
+            newUserMeta.referralSourceData = getBranchDataFromCookie();
+            newUserMeta.httpReferrer = getReferrerFromCookie();
+
+            FacebookService.statusChangeCallback(response, newUserMeta)
+                .then(
+                    function onLoginSuccess(response) {
+                        console.log('Facebook login was successful, ', response);
 
                         vm.ok();
 
-                        if(response.newAccount) {
-                            getReferralSources()
-                                .then(function(response) {
-                                    vm.referralSources = _.filter(response.data.sources, function(obj) {
-                                        return obj.isDisplayed;
-                                    });
-                                    // TODO - show referral modal/options
-                                });
+                        if (response.newAccount) {
+                            fetchUserReferralSources();
                         }
-                    }, function(error) {
+
+                        // If this registration came from AdWords, Google will keep track of it
+                        recordRegistrationConversionInAdwords();
+
+                    }, function onLoginFailure(error) {
                         vm.cancel();
-                    });
-            });
-        };
+                    }
+                );
+        }
 
         vm.submitSignupForm = function(newUser) {
 
@@ -140,7 +162,8 @@
                 return;
             }
 
-            metaData.referralSourceData = $rootScope.branchData;
+            metaData.referralSourceData = getBranchDataFromCookie();
+            metaData.httpReferrer = getReferrerFromCookie();
 
             DataService.signup(newUser, metaData)
                 .error(function(data, status, headers, config) {
@@ -175,30 +198,51 @@
         };
 
         function loginResponseHandler(response) {
+
+            // If this registration came from AdWords, Google will keep track of it
+            recordRegistrationConversionInAdwords();
+
             // Logged in successfully
-            vm.session.model.currentUser = null; // (user info doesn't come back in this response)
+            vm.session.model.currentUser = null;
 
             // Now get user info
             DataService.getUser()
                 .then(
-                function(response) {
-                    vm.session.model.currentUser = response.data.user;
-                },
-                function () { alert('login failed'); }
-            );
+                    function(response) {
+                        vm.session.model.currentUser = response.data.user;
+                    },
+                    function (error) {
+                        console.log('Error getting user info: ' + error);
+                    }
+                );
 
             vm.ok();
         }
 
-        function getReferralSources() {
-            DataService.getReferralSources().then(
-                function(response) {
-                    vm.selectedSource = {};
-                    vm.referralSources = response.data.sources.filter(function(e) {
-                        return e.isDisplayed == true;
-                    });
-                }
-            );
+        function getBranchDataFromCookie() {
+            var branchData = JSON.parse($cookies.get('branch-link') || "{}");
+            console.log('branchData: ', branchData);
+            return branchData;
+        }
+
+        function getReferrerFromCookie() {
+            var httpReferrer = '';
+            if ($cookies.get('otr-referrer')) {
+                httpReferrer = JSON.parse($cookies.get('otr-referrer'));
+            }
+
+            console.log('httpReferrer: ', httpReferrer);
+            return httpReferrer;
+        }
+
+        /* Fire off conversion tracking for the "Case Bookings from Web Clients" conversion action */
+        function recordRegistrationConversionInAdwords() {
+            window.google_trackConversion({
+                google_conversion_id : 937085283,
+                google_conversion_label : "cjfeCI3jrmUQ45LrvgM",
+                google_remarketing_only : false,
+                google_conversion_format : "3"
+            });
         }
     }
 })();

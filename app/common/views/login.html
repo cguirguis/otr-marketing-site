@@ -1,7 +1,7 @@
 
 <script type="text/ng-template" id="/login.html">
 
-    <div class="page login-view">
+    <div class="page login-view" ng-hide="vm.isNewAccountWithFB">
 
         <div class="header">
             <h3 class="title">Please login to continue</h3>
@@ -10,7 +10,7 @@
         <div class="body container-fluid space-top-3">
             <div class="login-options row row-centered-lg" ng-if="vm.showLoginOptions">
                 <button class="facebook-login-button col-xs-12 col-sm-10"
-                        ng-click="vm.loginWithFacebook()">
+                        ng-click="vm.initiateFacebookLogin()">
                     <i class="fa button-icon fa-facebook"></i>
                                 <span>{{ !vm.session.model.currentUser || !vm.session.model.currentUser.isFbAuthed
                                     ? 'Login with Facebook' :
@@ -109,6 +109,44 @@
                 </button>
 
                 <button class="btn btn-default col-xs-12 col-sm-10 space-top-1" ng-click="vm.cancelSignup()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- how did you hear about us for initial FB login -->
+    <div class="" ng-show="vm.isNewAccountWithFB">
+        <div class="page login-view">
+            <div class="panel-body">
+                <div class="control-group row-space-top-3 row-space-1">
+                    <strong>How did you hear about us?</strong>
+                </div>
+                <div class="control-group row-space-2 select" style="width: 100%;">
+                    <select ng-model="vm.selectedSource"
+                            ng-options="source.uiDisplayText for source in vm.sources">
+                        <option value="" disabled="">-- Please choose one --</option>
+                    </select>
+                </div>
+                <div class="control-group row-space-2" ng-show="vm.selectedSource.sourceTypeId == 3">
+                    <input type="text" ng-model="vm.extraCode" placeholder="Do you have a referral code?">
+                </div>
+                <div class="control-group row-space-2">
+                    <button type="submit"
+                            class="btn btn-block btn-outline"
+                            ng-click="vm.submitSourceInfo()">
+                        <span ng-if="!vm.selectedSource.sourceTypeId">
+                            Skip
+                        </span>
+                        <span ng-if="vm.selectedSource.sourceTypeId">
+                            Next
+                            <span ng-if="vm.dataLoading">
+                                <i class="fa fa-lg fa-spinner fa-spin"></i>
+                            </span>
+                        </span>
+                        <span ng-if="!vm.dataLoading">
+                            <i class="fa fa-arrow-circle-right"></i>
+                        </span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>

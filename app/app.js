@@ -488,7 +488,7 @@
 
                 if (branchCookie) {
 
-                    $rootScope.branchData = {
+                    $rootScope.branch = {
                         isBranchLink : branchCookie['+clicked_branch_link'],
                         channel : branchCookie['~channel'],
                         campaign : branchCookie['~campaign'],

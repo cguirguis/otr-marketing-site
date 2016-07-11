@@ -41,7 +41,7 @@
                                         <div class="col-lg-4">
                                                 <span class="input-icon">
                                                     <i class="fa fa-phone fa-lg"
-                                                       style="padding-top: 2px;height:40px;"></i>
+                                                       style="padding-top: 3px;padding-left:4px;height:40px;"></i>
                                                     <input format-phone="" name="phoneNumberCheckout" type="text"
                                                            required ng-model="vm.phoneNumber"
                                                            ng-keyup="vm.phoneNumberKeyUpListener()"
@@ -300,7 +300,8 @@
                                     <div class="col-sm-7 no-padding-right">
                                         <input type="text" name="coupon_code" autocomplete="off"
                                                ng-model="vm.userInputRefCode"
-                                               class="coupon-code-field" style="width:100%;height:40px;">
+                                               class="coupon-code-field"
+                                               style="width:100%;height:40px;padding-left:4px">
                                     </div>
                                     <div class="col-sm-5">
                                         <button type="submit"
@@ -308,7 +309,8 @@
                                                 style="width:100%;height:40px;"
                                                 ng-show="vm.refCode == null"
                                                 ng-click="vm.applyRefCode()" ng-disabled="vm.refCodeDataLoading == true">
-                                            <span ng-hide="vm.refCodeDataLoading">Apply</span>
+                                            <span ng-hide="vm.refCodeDataLoading" style="line-height:initial">Apply
+                                            </span>
                                             <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.refCodeDataLoading"></i>
                                         </button>
                                         <button type="submit"
@@ -352,13 +354,14 @@
 
                 <!-- Button -->
                 <div class="space-top-5 row row-centered-lg" style="text-align:center;">
-                    <button type="submit" class="col-xs-12 col-sm-10 btn btn-default btn-primary"
-                            ng-disabled="vm.dataLoading == true || vm.isPhoneNumberInvalid"
-                            ng-click="vm.confirmCaseBooking(true)">
-                        <span>Confirm Case Booking</span>
-                        <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
-                    </button>
-                    <br>
+                    <div class="col-xs-12 col-sm-10">
+                        <button type="submit" class="btn btn-default btn-primary"
+                                ng-disabled="vm.dataLoading == true || vm.isPhoneNumberInvalid"
+                                ng-click="vm.confirmCaseBooking(true)">
+                            <span>Confirm Case Booking</span>
+                            <i class="fa fa-spinner fa-spin fa-lg" ng-show="vm.dataLoading"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

@@ -11,12 +11,15 @@
 
         var getCourtsUrl = baseUrl + "courts/traffic";
         var loginUrl = baseUrl + "authentication/login";
+        var loginWithFacebookUrl = baseUrl + 'connect/facebook/';
         var logoutUrl = baseUrl + "authentication/logout";
         var signupUrl = baseUrl + 'signup';
         var userUrl = baseUrl + 'user';
         var referralSourceUrl = baseUrl + 'referrals/sources';
         var authorizePaymentUrl = baseUrl + 'cases/{caseId}/payment';
         var confirmCaseUrl = baseUrl + 'cases/{caseId}';
+        var rematchCaseUrl = baseUrl + 'cases/{caseId}/match';
+        var applyRefCodeUrl = baseUrl + 'cases/{caseId}/referralcode/{refCode}';
 
         var login = function(username, password) {
             var url = loginUrl +
@@ -25,8 +28,15 @@
             return $http.post(url);
         };
 
-        var logout = function() {
+        var loginWithFacebook = function(data) {
+            return $http.post(loginWithFacebookUrl, data)
+                .then(function(response) {
+                    return response.data;
+                });
+        };
 
+        var logout = function() {
+            return $http.post(logoutUrl);
         };
 
         var signup = function(newUser, metaData) {
@@ -101,8 +111,24 @@
             return $http.post(url, {withCredentials: true});
         };
 
+        var rematchCase = function(caseId) {
+            var url = rematchCaseUrl.replace('{caseId}', caseId);
+
+            return $http.post(url, {withCredentials: true});
+        };
+
+        var applyRefCode = function(caseId, refCode) {
+            var url = applyRefCodeUrl
+                .replace('{caseId}', caseId)
+                .replace('{refCode}', refCode);
+
+            return $http.post(url, {withCredentials: true});
+        };
+
         return {
+            apiEndpoint: ENV.apiEndpoint,
             login: login,
+            loginWithFacebook: loginWithFacebook,
             logout: logout,
             signup: signup,
             getUser: getUser,
@@ -110,7 +136,9 @@
             getCourts: getCourts,
             sendExitFeedback: sendExitFeedback,
             authorizeCasePayment: authorizeCasePayment,
-            confirmCase: confirmCase
+            confirmCase: confirmCase,
+            rematchCase: rematchCase,
+            applyRefCode: applyRefCode
         }
     }
 })();
